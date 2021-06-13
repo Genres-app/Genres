@@ -1,0 +1,7 @@
+.hash-link {
+  color: black;
+  text-decoration: none;
+}
+.hash-link:hover {
+  text-decoration: underline;
+}

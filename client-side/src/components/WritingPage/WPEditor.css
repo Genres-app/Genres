@@ -1,0 +1,23 @@
+.editorBar {
+  padding: 1em;
+  margin-top: 65px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  max-height: 40px;
+  justify-content: center;
+}
+.buttonsContainer {
+  max-height: 25px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.editors {
+  background-color: white;
+  filter: drop-shadow(2px 3px 3px #113a2f);
+  max-width: 720px;
+  min-height: 1080px;
+  padding: 5em;
+  margin: 125px auto;
+  font-family: 'Open Sans';
+  font-size: 90%;
+}
