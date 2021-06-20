@@ -53,8 +53,8 @@ export const ListItems = [
   cName: 'nav-text'
   },
   {
-  title: 'FANDOM',
-  path: '/fandom',
+  title: 'Publit',
+  path: '/publit',
   icon: <ChatIcon/>,
   cName: 'nav-text'
   },
