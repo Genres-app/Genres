@@ -11,6 +11,7 @@ import ReadingPage from './ReadingPage';
 import ProfilePage from './ProfilePage';
 import WritingPage from './WritingPage';
 import BrowsingPage from './BrowsingPage';
+import RankingPage from './RankingPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route exact path = '/novel' component = {NovelLandingPage} />
               <Route exact path = '/profile' component = {ProfilePage}/>
               <Route exact path = '/browse' component = {BrowsingPage}/>
+              <Route exact path = '/rankings' component = {RankingPage}/>
               <Footer/>
             </div>
           </Switch>
