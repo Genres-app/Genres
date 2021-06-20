@@ -29,8 +29,8 @@ export const ListItems = [
   cName: 'nav-text'
   },
   {
-  title: 'Library',
-  path: '/library',
+  title: 'Contest',
+  path: '/Contest',
   icon: <LibraryBooksIcon/>,
   cName: 'nav-text'
   },
