@@ -133,7 +133,17 @@ const Dashboard = () => {
             <SidebarWrap>
             <CloseIcon>
                 <ClosePageIcon onClick = {showSidebar}/>
-            </CloseIcon>
+            </CloseIcon>     
+            <Link to= "/profile">
+                        <AccountCircle style={{marginLeft: "75px"}} fontSize = "large" className= {classes.accountCircle}/>
+                        </Link>
+                        <Link to="/writing">
+                        <CreateIcon fontSize ="large" className = {classes.accountCircle}/>
+                        </Link>
+                        <div><br/></div>
+                        <Button style={{marginBottom: "30px" ,marginLeft: "70px"}} variant = "contained" className={classes.buttonOutline} onClick ={logout}>Logout</Button>
+                        <div></div>
+                        
 
             {ListItems.map((item, index) => {
               return (
