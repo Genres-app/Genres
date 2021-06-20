@@ -131,11 +131,11 @@ const Dashboard = () => {
 
           <SidebarNav sidebar = {sidebar}>
             <SidebarWrap>
-            <CloseIcon>
-                <ClosePageIcon onClick = {showSidebar}/>
-            </CloseIcon>     
+            <NavIcon>
+            <MenuIcon style={{marginLeft: "25px"}} onClick = {showSidebar}/>
+            </NavIcon>     
             <Link to= "/profile">
-            <AccountCircle style={{marginLeft: "100px"}} fontSize = "large" className= {classes.accountCircle}/>
+            <AccountCircle style={{fontSize : "100px", marginLeft: "65px"}}  className= {classes.accountCircle}/>
             </Link>
                         
                         
@@ -152,7 +152,7 @@ const Dashboard = () => {
               );
             })}
             
-            <Button style={{marginBottom: "30px" ,marginLeft: "70px", marginTop: "650px"}} variant = "contained" className={classes.buttonOutline} onClick ={logout}>Logout</Button>
+            <Button style={{marginBottom: "30px" ,marginLeft: "70px", marginTop: "600px"}} variant = "contained" className={classes.buttonOutline} onClick ={logout}>Logout</Button>
             
           </SidebarWrap>
         </SidebarNav>
@@ -161,7 +161,6 @@ const Dashboard = () => {
                     <></>
                 )
           }
-
 
           
           <Link to = "/">
