@@ -30,7 +30,7 @@ export const ListItems = [
   },
   {
   title: 'Contest',
-  path: '/Contest',
+  path: '/contest',
   icon: <LibraryBooksIcon/>,
   cName: 'nav-text'
   },
