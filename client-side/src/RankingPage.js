@@ -136,7 +136,7 @@ export default function RankingPage() {
     
     <div className={classes.root}  style={{marginTop:'64px'}}>
       <AppBar position="static">
-        <Tabs style={{marginLeft:'1000px'}} value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs style={{margin:'auto'}} value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Item One" {...a11yProps(0)} />
           <Tab label="Item Two" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
@@ -145,7 +145,7 @@ export default function RankingPage() {
     </div>
     
     
-    <div className={listclasses.root} style={{marginTop:"200px", marginLeft:"250px"}} > 
+    <div className={listclasses.root} style={{position:'fixed', marginTop:"10vw", marginLeft:"20vw"}} > 
       <List component="nav" aria-label="main mailbox folders">
         <ListItem button>
           <ListItemIcon>
@@ -163,8 +163,8 @@ export default function RankingPage() {
       
     </div>
 
-    <div className={classes2.root} style={{position:'absolute', bottom:"20px"}} >
-    <AppBar position="static" style={{marginRight: "-1000px", marginLeft: "1000px"}} >
+    <div className={classes2.root} style={{position:'fixed', bottom:"20px"}} >
+    <AppBar position="static" style={{marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)"}} >
         <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
           <Tab label="Item One" {...a11yProps(0)} />
           <Tab label="Item Two" {...a11yProps(1)} />
