@@ -145,7 +145,7 @@ export default function RankingPage() {
     </div>
     
     
-    <div className={listclasses.root} style={{position:'fixed', marginTop:"10vw", marginLeft:"20vw"}} > 
+    <div className={listclasses.root} style={{position:'fixed', marginTop:"10vw"}} > 
       <List component="nav" aria-label="main mailbox folders">
         <ListItem button>
           <ListItemIcon>
