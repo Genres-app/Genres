@@ -41,7 +41,7 @@ import decode from 'jwt-decode';
 import styled from 'styled-components';
 import Popup from '../Auth/Popup';
 import Auth from '../Auth/Auth';
-// import Searchbar from '../Searchbar/Searchbar'
+import Searchbar from '../Searchbar/Searchbar'
 
 /* */
 // const SidebarLink = styled(Link)`
@@ -212,7 +212,7 @@ const Dashboard = () => {
             {
               user ? (
                 <>
-                  <div className={classes.search}>
+                  {/* <div className={classes.search}>
                     <div className={classes.searchIcon}>
                       <SearchIcon />
                     </div>
@@ -224,7 +224,8 @@ const Dashboard = () => {
                       }}
                       inputProps={{ 'aria-label': 'search' }}
                     />
-                  </div>
+                  </div> */}
+                  <Searchbar items = {genres}/>
                 </>
               ) : (
                 <Typography></Typography>
@@ -237,7 +238,7 @@ const Dashboard = () => {
               user ? (
                 <>
                   <Button
-                    href="/writing"
+                    onClick={() => routeChange("/writing")}
                     variant="contain"
                     color="inherit"
                     endIcon={<CreateOutlinedIcon />}
@@ -274,11 +275,11 @@ const Dashboard = () => {
             onClick={handleDrawerClose}
             onKeyDown={handleDrawerClose}
           ></div>
-          <Avatar alt="Remy Sharp" src="/static/media/corgi.bcb4248a.jpg" className={classes.avatarOfDrawer} />
-          <Typography className={classes.userName} variant="subtitle1">User Name</Typography>
-          <Typography className={classes.userEmail} variant="subtitle2">example@email.com</Typography>
+          <Avatar alt ={user.result.username} className={classes.avatarOfDrawer} src = {user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
+          <Typography className={classes.userName} variant="subtitle1">{user.result.username}</Typography>
+          <Typography className={classes.userEmail} variant="subtitle2">{user.result.email}</Typography>
           <div className={classes.profileBtnsOfDrawer}>
-            <Button className={classes.profileBtnOfDrawer} variant="contained" color="secondary" disableElevation>Profile</Button>
+            <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="secondary" disableElevation>Profile</Button>
             <Button className={classes.signOutBtnOfDrawer} onClick={logout} variant="outlined">Sign out</Button>
           </div>
           <Divider />
