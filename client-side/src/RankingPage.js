@@ -12,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-
+import Paper from '@material-ui/core/Paper';
 
 //List
 const ListStyles = makeStyles((theme) => ({
@@ -23,11 +23,7 @@ const ListStyles = makeStyles((theme) => ({
   },
 }));
 
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
-
-//Tab
+//Tab for genre
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -69,7 +65,53 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
+//tab for time
+function TabPanel2(props) {
+  const { children, value2, index2, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value2 !== index2}
+      id={`simple-tabpanel-${index2}`}
+      aria-labelledby={`simple-tab-${index2}`}
+      {...other}
+    >
+      {value2 === index2 && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel2.propTypes = {
+  children: PropTypes.node,
+  index2: PropTypes.any.isRequired,
+  value2: PropTypes.any.isRequired,
+};
+
+function a11yProps2(index2) {
+  return {
+    id: `simple-tab-${index2}`,
+    'aria-controls': `simple-tabpanel-${index2}`,
+  };
+}
+
+const useStyles2 = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+
+
+
+
 export default function RankingPage() {
+  //tab1
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -78,12 +120,21 @@ export default function RankingPage() {
   };
 
 
+  //tab2
+  const classes2 = useStyles2();
+  const [value2, setValue2] = React.useState(0);
+
+  const handleChange2 = (event, newValue2) => {
+    setValue2(newValue2);
+  };
+
+  //list
   const listclasses = ListStyles();
   return (
     
     <>
     
-    <div className={classes.root}  >
+    <div className={classes.root}  style={{marginTop:'4vw'}}>
       <AppBar position="static">
         <Tabs style={{marginLeft:'41vw'}} value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Item One" {...a11yProps(0)} />
@@ -94,7 +145,7 @@ export default function RankingPage() {
     </div>
     
     
-    <div className={listclasses.root} style={{marginTop:"5vw"}} > 
+    <div className={listclasses.root} style={{marginTop:"5vw", marginLeft:"10vw"}} > 
       <List component="nav" aria-label="main mailbox folders">
         <ListItem button>
           <ListItemIcon>
@@ -112,18 +163,16 @@ export default function RankingPage() {
       
     </div>
 
-    <div className={classes.root} style={{marginTop:"30vw"}} >
-      <AppBar position="static">
-        <Tabs style={{marginLeft:'41vw'}} value={value} onChange={handleChange} aria-label="simple tabs example">
+    <div className={classes2.root} style={{marginTop:"30vw"}} >
+    <AppBar position="static">
+        <Tabs style={{marginLeft:'41vw'}} value={value2} onChange={handleChange2} aria-label="simple tabs example">
           <Tab label="Item One" {...a11yProps(0)} />
           <Tab label="Item Two" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
     </div>
-
-
-    
+  
     </>
     
   )
