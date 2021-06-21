@@ -225,10 +225,10 @@ const Dashboard = () => {
                       inputProps={{ 'aria-label': 'search' }}
                     />
                   </div> */}
-                  <Searchbar items = {genres}/>
+                  <Searchbar items={genres} />
                 </>
               ) : (
-                <Typography></Typography>
+                <></>
               )
             }
 
@@ -275,14 +275,22 @@ const Dashboard = () => {
             onClick={handleDrawerClose}
             onKeyDown={handleDrawerClose}
           ></div>
-          <Avatar alt ={user.result.username} className={classes.avatarOfDrawer} src = {user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
-          <Typography className={classes.userName} variant="subtitle1">{user.result.username}</Typography>
-          <Typography className={classes.userEmail} variant="subtitle2">{user.result.email}</Typography>
-          <div className={classes.profileBtnsOfDrawer}>
-            <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="secondary" disableElevation>Profile</Button>
-            <Button className={classes.signOutBtnOfDrawer} onClick={logout} variant="outlined">Sign out</Button>
-          </div>
-          <Divider />
+          {
+            user ? (
+              <>
+                <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
+                <Typography className={classes.userName} variant="subtitle1">{user.result.username}</Typography>
+                <Typography className={classes.userEmail} variant="subtitle2">{user.result.email}</Typography>
+                <div className={classes.profileBtnsOfDrawer}>
+                  <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="secondary" disableElevation>Profile</Button>
+                  <Button className={classes.logoutBtnOfDrawer} onClick={logout} variant="outlined">Logout</Button>
+                </div>
+                <Divider />
+              </>
+            ) : (
+              <></>
+            )
+          }
           <List>
             {ListItems.map((item, index) => (
               <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>

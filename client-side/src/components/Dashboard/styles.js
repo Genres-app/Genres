@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 
-  signOutBtnOfDrawer: {
+  logoutBtnOfDrawer: {
     flex: 1,
     margin: theme.spacing(1),
     color: 'rgb(255, 23, 68)',
