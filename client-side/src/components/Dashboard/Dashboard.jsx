@@ -171,7 +171,7 @@ const Dashboard = () => {
   return (
     <ThemeProvider theme={theme}>
     <div className = {classes.root}>
-      <CssBaseline />
+      
       <AppBar
         position = "fixed"
         className = {clsx(classes.appBar, {
