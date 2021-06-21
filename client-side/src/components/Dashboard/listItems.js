@@ -1,61 +1,61 @@
 import React from 'react';
-import HomeIcon from '@material-ui/icons/Home';
-import ExploreIcon from '@material-ui/icons/Explore';
-import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
-import HistoryIcon from '@material-ui/icons/History';
-import CreateIcon from '@material-ui/icons/Create';
-import BookIcon from '@material-ui/icons/Book';
-import ChatIcon from '@material-ui/icons/Chat';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
+import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
+import TrendingUpOutlinedIcon from '@material-ui/icons/TrendingUpOutlined';
+import PollOutlinedIcon from '@material-ui/icons/PollOutlined';
+import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import ClassOutlinedIcon from '@material-ui/icons/ClassOutlined';
+import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 
 
 export const ListItems = [
   {
   title: 'Home',
   path: '/',
-  icon: <HomeIcon/>,
+  icon: <HomeOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Browse',
   path : '/browse',
-  icon: <ExploreIcon/>,
+  icon: <ExploreOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Rankings',
   path : '/rankings',
-  icon: <TrendingUpIcon/>,
+  icon: <TrendingUpOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Contest',
   path: '/contest',
-  icon: <LibraryBooksIcon/>,
+  icon: <PollOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'History',
   path: '/history',
-  icon: <HistoryIcon/>,
+  icon: <HistoryOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Write',
   path: '/writing',
-  icon: <CreateIcon/>,
+  icon: <CreateOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Masterclass',
   path: '/masterclass',
-  icon: <BookIcon/>,
+  icon: <ClassOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Publit',
   path: '/publit',
-  icon: <ChatIcon/>,
+  icon: <ForumOutlinedIcon/>,
   cName: 'nav-text'
   },
 ];

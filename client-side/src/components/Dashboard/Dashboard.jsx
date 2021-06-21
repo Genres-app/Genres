@@ -33,8 +33,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import CreateIcon from '@material-ui/icons/Create';
-import AddIcon from '@material-ui/icons/Add';
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 
 import GenresLogo from '../Assets/logo-svg2.svg';
 import { Link, useHistory, useLocation } from 'react-router-dom';
@@ -168,129 +167,131 @@ const Dashboard = () => {
     },
   });
 
+  const routeChange = (path) => { // Route to render new content
+    history.push(path);
+  }
+
   return (
     <ThemeProvider theme={theme}>
-    <div className = {classes.root}>
-      
-      <AppBar
-        position = "fixed"
-        className = {clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          {
-            user ? (
-              <>
-                <IconButton
-                  color = "inherit"
-                  aria-label = "open drawer"
-                  onClick = {handleDrawerOpen}
-                  edge = "start"
-                  className = {clsx(classes.menuButton, open && classes.hide)}
-                >
-                  <MenuIcon />
-                </IconButton>
-              </>
-            ) : (
-              <></>
-            )
-          }
+      <div className={classes.root}>
 
-          {/* <Typography variant = "h6" className = {classes.title}>
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            {
+              user ? (
+                <>
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={handleDrawerOpen}
+                    edge="start"
+                    className={clsx(classes.menuButton, open && classes.hide)}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                </>
+              ) : (
+                <></>
+              )
+            }
+
+            {/* <Typography variant = "h6" className = {classes.title}>
             Genres
           </Typography> */}
-          <Link to = "/">
-            <img src = {GenresLogo} height = '50px' alt = ""></img>
-          </Link>
-
-          <div className = {classes.grow} />
-
-          {
-            user ? (
-              <>
-                <div className = {classes.search}>
-                  <div className = {classes.searchIcon}>
-                    <SearchIcon />
-                  </div>
-                  <InputBase
-                    placeholder = "Search…"
-                    classes = {{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps = {{ 'aria-label': 'search' }}
-                  />
-                </div>
-              </>
-            ) : (
-              <Typography></Typography>
-            )
-          }
-
-          <div className = {classes.grow} />
-
-          {
-            user ? (
-              <>
-                <Button
-                  href = "/writing"
-                  variant = "contain"
-                  color = "inherit"
-                  endIcon = {<AddIcon />}
-                  className = {classes.button}
-                >
-                  Create
-                </Button>
-              </>
-            ) : (
-              <Button onClick = {() => setOpenPopup(true)} color = "inherit">Login</Button>
-            )
-          }
-
-          <Popup openPopup = {openPopup} setOpenPopup = {setOpenPopup}>
-            <Auth value = {openPopup} onChange = {switchPopup} />
-          </Popup>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer
-        variant = "temporary"
-        anchor = "left"
-        open = {open} onClose = {handleDrawerClose}
-        className = {classes.drawer}
-        classes = {{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div
-          className = {clsx(classes.list, {
-            [classes.fullList]: false,
-          })}
-          role = "presentation"
-          onClick = {handleDrawerClose}
-          onKeyDown = {handleDrawerClose}
-        ></div>
-        <Avatar alt = "Remy Sharp" src = "/static/media/corgi.bcb4248a.jpg" className = {classes.avatarOfDrawer} />
-          <Typography className = {classes.userName} variant = "subtitle1">User Name</Typography>
-          <Typography className = {classes.userEmail} variant = "subtitle2">example@email.com</Typography>
-        <div className = {classes.profileBtnsOfDrawer}>
-          <Button className = {classes.profileBtnOfDrawer} variant="contained" color = "secondary" disableElevation>Profile</Button>
-          <Button className = {classes.signOutBtnOfDrawer} onClick ={logout} variant="outlined">Sign out</Button>
-        </div>
-        <Divider />
-        <List>
-          {ListItems.map((item, index) => (
-          <Link to = {item.path}>
-            <ListItem button key = {index}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary = {item.title}/>
-            </ListItem>
+            <Link to="/">
+              <img src={GenresLogo} height='50px' alt=""></img>
             </Link>
-          ))}
-        </List>
-      </Drawer>
-    </div>
+
+            <div className={classes.grow} />
+
+            {
+              user ? (
+                <>
+                  <div className={classes.search}>
+                    <div className={classes.searchIcon}>
+                      <SearchIcon />
+                    </div>
+                    <InputBase
+                      placeholder="Search…"
+                      classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                      }}
+                      inputProps={{ 'aria-label': 'search' }}
+                    />
+                  </div>
+                </>
+              ) : (
+                <Typography></Typography>
+              )
+            }
+
+            <div className={classes.grow} />
+
+            {
+              user ? (
+                <>
+                  <Button
+                    href="/writing"
+                    variant="contain"
+                    color="inherit"
+                    endIcon={<CreateOutlinedIcon />}
+                    className={classes.button}
+                  >
+                    Write
+                  </Button>
+                </>
+              ) : (
+                <Button onClick={() => setOpenPopup(true)} color="inherit">Login</Button>
+              )
+            }
+
+            <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
+              <Auth value={openPopup} onChange={switchPopup} />
+            </Popup>
+          </Toolbar>
+        </AppBar>
+
+        <Drawer
+          variant="temporary"
+          anchor="left"
+          open={open} onClose={handleDrawerClose}
+          className={classes.drawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div
+            className={clsx(classes.list, {
+              [classes.fullList]: false,
+            })}
+            role="presentation"
+            onClick={handleDrawerClose}
+            onKeyDown={handleDrawerClose}
+          ></div>
+          <Avatar alt="Remy Sharp" src="/static/media/corgi.bcb4248a.jpg" className={classes.avatarOfDrawer} />
+          <Typography className={classes.userName} variant="subtitle1">User Name</Typography>
+          <Typography className={classes.userEmail} variant="subtitle2">example@email.com</Typography>
+          <div className={classes.profileBtnsOfDrawer}>
+            <Button className={classes.profileBtnOfDrawer} variant="contained" color="secondary" disableElevation>Profile</Button>
+            <Button className={classes.signOutBtnOfDrawer} onClick={logout} variant="outlined">Sign out</Button>
+          </div>
+          <Divider />
+          <List>
+            {ListItems.map((item, index) => (
+              <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
+                <ListItemIcon className={classes.listItemIcon}>{item.icon}</ListItemIcon>
+                <ListItemText className={classes.listItemText} primary={item.title} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+      </div>
     </ThemeProvider>
   );
 }
