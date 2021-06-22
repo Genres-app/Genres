@@ -17,6 +17,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListGenres } from './components/Ranking/genre';
+import { CenterFocusStrong } from '@material-ui/icons';
 
 
 //List
@@ -125,6 +126,8 @@ const useStyles3 = makeStyles((theme) => ({
         height: 240,
         width: 160,
         borderRadius: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
     },
 }));
 
@@ -183,7 +186,7 @@ export default function RankingPage() {
                     {ListAllTime.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
-                                <Avatar className={classes3.allTime}>{item.image}</Avatar>
+                                <div className={classes3.allTime} style={{backgroundImage:`url(${item.image})`}}/>
                             </ListItemAvatar>
                             <ListItemText
                                 className={classes3.listItemText} primary={item.title}

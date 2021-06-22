@@ -23,7 +23,7 @@ import cover7 from '../Assets/bookcover7.jpg';
 export const ListAllTime = [
     {
     title: 'The Arrivals',
-    image: `url(${cover1})`,
+    image: cover1,
     cName: 'nav-text',
     secondarytext: "one"
     },
