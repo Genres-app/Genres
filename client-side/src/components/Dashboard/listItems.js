@@ -10,52 +10,53 @@ import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 
 
 export const ListItems = [
+  
   {
   title: 'Home',
   path: '/',
-  icon: <HomeOutlinedIcon/>,
+  icon: <HomeOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'Browse',
   path : '/browse',
-  icon: <ExploreOutlinedIcon/>,
+  icon: <ExploreOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'Rankings',
   path : '/rankings',
-  icon: <TrendingUpOutlinedIcon/>,
+  icon: <TrendingUpOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'Contest',
   path: '/contest',
-  icon: <PollOutlinedIcon/>,
+  icon: <PollOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'History',
   path: '/history',
-  icon: <HistoryOutlinedIcon/>,
+  icon: <HistoryOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'Write',
   path: '/writing',
-  icon: <CreateOutlinedIcon/>,
+  icon: <CreateOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'Masterclass',
   path: '/masterclass',
-  icon: <ClassOutlinedIcon/>,
+  icon: <ClassOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
   {
   title: 'Publit',
   path: '/publit',
-  icon: <ForumOutlinedIcon/>,
+  icon: <ForumOutlinedIcon sytle={{fontSize: '50px'}} />,
   cName: 'nav-text'
   },
 ];

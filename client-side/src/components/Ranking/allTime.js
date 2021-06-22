@@ -7,6 +7,7 @@ import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ClassOutlinedIcon from '@material-ui/icons/ClassOutlined';
 import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
+import { ListItemSecondaryAction } from '@material-ui/core';
 
 
 
@@ -15,42 +16,50 @@ import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 export const ListAllTime = [
     {
     title: 'Home',
-    icon: <HomeOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <HomeOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "one"
     },
     {
     title: 'Browse',
-    icon: <ExploreOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <ExploreOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "two"
     },
     {
     title: 'Rankings',
-    icon: <TrendingUpOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <TrendingUpOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "three"
     },
     {
     title: 'Contest',
-    icon: <PollOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <PollOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "four"
     },
     {
     title: 'History',
-    icon: <HistoryOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <HistoryOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "five"
     },
     {
     title: 'Write',
-    icon: <CreateOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <CreateOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "six"
     },
     {
     title: 'Masterclass',
-    icon: <ClassOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <ClassOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "seven"
     },
     {
     title: 'Publit',
-    icon: <ForumOutlinedIcon/>,
-    cName: 'nav-text'
+    Image: <ForumOutlinedIcon/>,
+    cName: 'nav-text',
+    Secondarytext: "eight"
     },
   ];

@@ -16,7 +16,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { ListAllTime } from './components/Ranking/allTime';
-
+import { ListGenres } from './components/Ranking/genre';
 
 
 //List
@@ -154,38 +154,31 @@ export default function RankingPage() {
     <div className={classes.root}  style={{marginTop:'64px'}}>
       <AppBar position="static">
         <Tabs style={{margin:'auto'}} value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="Novels" {...a11yProps(0)} />
+          <Tab label="Fan-fic" {...a11yProps(1)} />
+          <Tab label="Comics" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
     </div>
     
     
-    <div className={listclasses.root} style={{position:'fixed', marginTop:"10vw"}} > 
-      <List component="nav" aria-label="main mailbox folders">
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
+    <div className={listclasses.root} style={{position:'fixed', marginTop:"10vw"}} >    
+      <List component="nav">
+      {ListGenres.map((item, index) => (
+        <ListItem button key={index}>
+          <ListItemIcon className={listclasses.listItemIcon}>{item.icon}</ListItemIcon>
+          <ListItemText className={listclasses.listItemText} primary={item.title} />
         </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </ListItem>
-      </List>
-      
+        ))}
+      </List>   
     </div>
 
     <div>
     <List style={{marginRight: "-50vw", marginLeft: "50vw", marginTop: "2vw", transform: "translateX(-50%)"}} className={classes3.root}>
     {ListAllTime.map((item, index) => (
       <ListItem alignItems="flex-start" key={index}>
-        <ListItemAvatar>
-          <Avatar className={classes3.allTime}>{item.icon}</Avatar>
+        <ListItemAvatar >
+          <Avatar className={classes3.allTime}>{item.Image}</Avatar>
         </ListItemAvatar>
         <ListItemText
           className={classes3.listItemText} primary={item.title}
@@ -194,26 +187,31 @@ export default function RankingPage() {
               <Typography
                 component="span"
                 variant="body2"
-                className={classes.inline}
-                color="textPrimary"
+                className={classes3.inline}
+                color="textSecondary"
               >
-                Ali Connors
               </Typography>
-              {" — I'll be in your neighborhood doing errands this…"}
+              <ListItemText className={classes3.listItemText} secondary={item.secondarytext} />
             </React.Fragment>
+
           }
+          
         />    
+        
       </ListItem>
       ))}
     </List>
     </div>
-    
+
+
     <div className={classes2.root} style={{position:'fixed', bottom:"20px"}} >
     <AppBar position="static" style={{marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)"}} >
         <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="All-time" {...a11yProps(0)} />
+          <Tab label="Annual" {...a11yProps(1)} />
+          <Tab label="Bi-annual" {...a11yProps(2)} />
+          <Tab label="Season" {...a11yProps(3)} />
+          <Tab label="Monthly" {...a11yProps(4)} />
         </Tabs>
       </AppBar>
     </div>
