@@ -15,7 +15,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListGenres } from './components/Ranking/genre';
 import { ListAnnual } from './components/Ranking/annual';
-import { display } from '@material-ui/system';
+import { ListBiAnnual } from './components/Ranking/biAnnual';
+import { ListSeason } from './components/Ranking/season';
+import { ListMonthly } from './components/Ranking/monthly';
 <link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
 
 //List
@@ -254,6 +256,88 @@ export default function RankingPage() {
                 </List>
             </div>
 
+            <div style={{ display: 'none' }} className="C3">
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                    {ListBiAnnual.map((item, index) => (
+                        <ListItem alignItems="flex-start" key={index}>
+                            <ListItemAvatar >
+                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            </ListItemAvatar>
+                            <ListItemText style={{ marginLeft: "1vw" }}
+                                className={classes3.listItemText} primary={item.title}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes3.inline}
+                                            color="textSecondary"
+                                        >
+                                            {item.secondarytext}
+                                        </Typography>
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+
+            <div style={{ display: 'none' }} className="C4">
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                    {ListSeason.map((item, index) => (
+                        <ListItem alignItems="flex-start" key={index}>
+                            <ListItemAvatar >
+                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            </ListItemAvatar>
+                            <ListItemText style={{ marginLeft: "1vw" }}
+                                className={classes3.listItemText} primary={item.title}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes3.inline}
+                                            color="textSecondary"
+                                        >
+                                            {item.secondarytext}
+                                        </Typography>
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+
+            <div style={{ display: 'none' }} className="C5">
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                    {ListMonthly.map((item, index) => (
+                        <ListItem alignItems="flex-start" key={index}>
+                            <ListItemAvatar >
+                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            </ListItemAvatar>
+                            <ListItemText style={{ marginLeft: "1vw" }}
+                                className={classes3.listItemText} primary={item.title}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes3.inline}
+                                            color="textSecondary"
+                                        >
+                                            {item.secondarytext}
+                                        </Typography>
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+
+
 
             <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
                 <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
@@ -278,26 +362,45 @@ export default function RankingPage() {
     )
 }
 
-var list1 = document.getElementsByClassName("C1");
-var list2 = document.getElementsByClassName("C2");
+
 //var list3 = document.getElementsByClassName("hstext3");
 function switchTime(t) {
     if (t == 1) {
-        for (let i = 0; i < list2.length; i++) {
-            document.getElementsByClassName('C2')[i].style.display = 'none';
-        }
-        for (let i = 0; i < list1.length; i++) {
-            document.getElementsByClassName('C1')[i].style.display = 'block';
-        }
+      document.getElementsByClassName('C2')[0].style.display = 'none';
+      document.getElementsByClassName('C3')[0].style.display = 'none';
+      document.getElementsByClassName('C4')[0].style.display = 'none';
+      document.getElementsByClassName('C5')[0].style.display = 'none';
+      document.getElementsByClassName('C1')[0].style.display = 'block';
     }
     else if (t == 2) {
-        for (let i = 0; i < list2.length; i++) {
-            document.getElementsByClassName('C1')[i].style.display = 'none';
-        }
-        for (let i = 0; i < list1.length; i++) {
-            document.getElementsByClassName('C2')[i].style.display = 'block';
-        }
+      document.getElementsByClassName('C2')[0].style.display = 'none';
+      document.getElementsByClassName('C3')[0].style.display = 'none';
+      document.getElementsByClassName('C4')[0].style.display = 'none';
+      document.getElementsByClassName('C1')[0].style.display = 'none';
+      document.getElementsByClassName('C2')[0].style.display = 'block';
     }
+    else if (t == 3) {
+      document.getElementsByClassName('C1')[0].style.display = 'none';
+      document.getElementsByClassName('C2')[0].style.display = 'none';
+      document.getElementsByClassName('C4')[0].style.display = 'none';
+      document.getElementsByClassName('C5')[0].style.display = 'none';
+      document.getElementsByClassName('C3')[0].style.display = 'block';
+    }
+    else if (t == 4) {
+      document.getElementsByClassName('C1')[0].style.display = 'none';
+      document.getElementsByClassName('C2')[0].style.display = 'none';
+      document.getElementsByClassName('C3')[0].style.display = 'none';
+      document.getElementsByClassName('C5')[0].style.display = 'none';
+      document.getElementsByClassName('C4')[0].style.display = 'block';
+    }
+    else if (t == 5) {
+      document.getElementsByClassName('C2')[0].style.display = 'none';
+      document.getElementsByClassName('C3')[0].style.display = 'none';
+      document.getElementsByClassName('C4')[0].style.display = 'none';
+      document.getElementsByClassName('C1')[0].style.display = 'none';
+      document.getElementsByClassName('C5')[0].style.display = 'block';
+    }
+
     else {
         console.log("Undefined!");
     }

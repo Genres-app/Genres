@@ -40,7 +40,7 @@ export const ListAnnual = [
     secondarytext: "five"
     },
     {
-    title: 'Annual!!',
+    title: 'Gieo',
     image: cover6,
     cName: 'nav-text',
     secondarytext: "six"
