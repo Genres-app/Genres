@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -64,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
+        width: '100%',
     },
 }));
 
@@ -153,16 +155,35 @@ export default function RankingPage() {
     //list for ranking
     const classes3 = useStyles3();
 
+    // Theme
+    const theme = createMuiTheme({
+        palette: {
+            primary: {
+                main: '#ffffff',
+            },
+            secondary: deepPurple,
+            alert: '#ff1744',
+        },
+    });
+
+
     return (
 
-        <>
+        <ThemeProvider theme={theme}>
 
-            <div className={classes.root} style={{ position: 'fixed',zIndex: 999,justifyContent: 'center',flexDirection: 'row'}} >
-                <AppBar position="static" >
-                    <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                        <Tab style={{marginLeft: '41vw'}}  label="Novels" {...a11yProps(0)} />
+            <div className={classes.root} style={{ position: 'fixed', zIndex: 999 }} >
+                <AppBar position="relative">
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="simple tabs example"
+                        centered
+                        indicatorColor="secondary"
+                        textColor="secondary"
+                    >
+                        <Tab label="Novels" {...a11yProps(0)} />
                         <Tab label="Fan-fic" {...a11yProps(1)} />
-                        <Tab style={{marginRight: "41vw"}} label="Comics" {...a11yProps(2)} />
+                        <Tab label="Comics" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
             </div>
@@ -206,7 +227,7 @@ export default function RankingPage() {
                 </List>
             </div>
 
-            <div style = {{display: 'none'}} className="C2">
+            <div style={{ display: 'none' }} className="C2">
                 <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAnnual.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
@@ -236,7 +257,13 @@ export default function RankingPage() {
 
             <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
                 <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
-                    <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
+                    <Tabs
+                        value={value2}
+                        onChange={handleChange2}
+                        aria-label="simple tabs example"
+                        indicatorColor="secondary"
+                        textColor="secondary"
+                    >
                         <Tab onClick={() => switchTime(1)} label="All-time" {...a11yProps(0)} />
                         <Tab onClick={() => switchTime(2)} label="Annual" {...a11yProps(1)} />
                         <Tab onClick={() => switchTime(3)} label="Bi-annual" {...a11yProps(2)} />
@@ -246,7 +273,7 @@ export default function RankingPage() {
                 </AppBar>
             </div>
 
-        </>
+        </ThemeProvider>
 
     )
 }
