@@ -12,12 +12,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
 
 
 //List
@@ -112,13 +109,18 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-
-//card
-const useStyles3 = makeStyles({
+//list for ranking
+const useStyles3 = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: '100%',
+    maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
   },
-});
+  inline: {
+    display: 'inline',
+  },
+}));
+
 
 export default function RankingPage() {
   //tab1
@@ -141,7 +143,7 @@ export default function RankingPage() {
   //list
   const listclasses = ListStyles();
 
-  //card
+  //list for ranking
   const classes3 = useStyles3();
   return (
     
@@ -177,36 +179,74 @@ export default function RankingPage() {
     </div>
 
     <div>
-    <Card  style={{marginRight: "-50vw", marginTop: '5vw', marginLeft: "50vw", transform: "translateX(-50%)"}}  className={classes3.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
+    <List style={{marginRight: "-50vw", marginLeft: "50vw", marginTop: "2vw", transform: "translateX(-50%)"}} className={classes3.root}>
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Brunch this weekend?"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                Ali Connors
+              </Typography>
+              {" — I'll be in your neighborhood doing errands this…"}
+            </React.Fragment>
+          }
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
-      </CardActions>
-    </Card>
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Summer BBQ"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                to Scott, Alex, Jennifer
+              </Typography>
+              {" — Wish I could come, but I'm out of town this…"}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+      <Divider variant="inset" component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Oui Oui"
+          secondary={
+            <React.Fragment>
+              <Typography
+                component="span"
+                variant="body2"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                Sandra Adams
+              </Typography>
+              {' — Do you have Paris recommendations? Have you ever…'}
+            </React.Fragment>
+          }
+        />
+      </ListItem>
+    </List>
     </div>
-
 
     <div className={classes2.root} style={{position:'fixed', bottom:"20px"}} >
     <AppBar position="static" style={{marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)"}} >
