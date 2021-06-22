@@ -10,15 +10,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import Divider from '@material-ui/core/Divider';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListGenres } from './components/Ranking/genre';
-import { CenterFocusStrong } from '@material-ui/icons';
-
+import { ListAnnual } from './components/Ranking/annual';
+<link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet"/>
 
 //List
 const ListStyles = makeStyles((theme) => ({
@@ -112,7 +108,7 @@ const useStyles2 = makeStyles((theme) => ({
     },
 }));
 
-//list for ranking
+//list for ranking(all time)
 const useStyles3 = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -129,8 +125,8 @@ const useStyles3 = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
     },
+    display: "block",
 }));
-
 
 export default function RankingPage() {
     //tab1
@@ -155,6 +151,7 @@ export default function RankingPage() {
 
     //list for ranking
     const classes3 = useStyles3();
+
     return (
 
         <>
@@ -181,14 +178,14 @@ export default function RankingPage() {
                 </List>
             </div>
 
-            <div>
+            <div className="C1">
                 <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAllTime.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
                                 <div className={classes3.allTime} style={{backgroundImage:`url(${item.image})`}}/>
                             </ListItemAvatar>
-                            <ListItemText
+                            <ListItemText style={{marginLeft: "1vw"}}
                                 className={classes3.listItemText} primary={item.title}
                                 secondary={
                                     <React.Fragment>
@@ -208,11 +205,39 @@ export default function RankingPage() {
                 </List>
             </div>
 
+            <div className="C2">
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                    {ListAnnual.map((item, index) => (
+                        <ListItem alignItems="flex-start" key={index}>
+                            <ListItemAvatar >
+                                <div className={classes3.allTime} style={{backgroundImage:`url(${item.image})`}}/>
+                            </ListItemAvatar>
+                            <ListItemText style={{marginLeft: "1vw"}}
+                                className={classes3.listItemText} primary={item.title}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes3.inline}
+                                            color="textSecondary"
+                                        >
+                                            {item.secondarytext}
+                                        </Typography>
+                                    </React.Fragment>
+                                }
+                            />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+
+
             <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
                 <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
                     <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
-                        <Tab label="All-time" {...a11yProps(0)} />
-                        <Tab label="Annual" {...a11yProps(1)} />
+                        <Tab onclick = {switchTime(1)} label="All-time" {...a11yProps(0)} />
+                        <Tab onclick = {switchTime(2)} label="Annual" {...a11yProps(1)} />
                         <Tab label="Bi-annual" {...a11yProps(2)} />
                         <Tab label="Season" {...a11yProps(3)} />
                         <Tab label="Monthly" {...a11yProps(4)} />
@@ -223,4 +248,22 @@ export default function RankingPage() {
         </>
 
     )
+}
+
+var list1 = document.getElementsByClassName("C1");
+var list2 = document.getElementsByClassName("C2");
+//var list3 = document.getElementsByClassName("hstext3");
+function switchTime (t) {
+      if(t == 1){
+        for (let i = 0; i < list2.length; i++) {
+            document.getElementsByClassName('C2')[i].style.display = 'none';}
+        for (let i = 0; i < list1.length; i++) {
+            document.getElementsByClassName('C1')[i].style.display = 'block';}
+      }
+      else if(t == 2){
+        for (let i = 0; i < list2.length; i++) {
+          document.getElementsByClassName('C1')[i].style.display = 'none';}
+        for (let i = 0; i < list1.length; i++) {
+            document.getElementsByClassName('C2')[i].style.display = 'block';}
+        }
 }
