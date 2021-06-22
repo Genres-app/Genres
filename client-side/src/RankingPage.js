@@ -24,7 +24,7 @@ import { ListMonthly } from './components/Ranking/monthly';
 const ListStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        maxWidth: 360,
+        maxWidth: 280,
         backgroundColor: theme.palette.background.paper,
     },
 }));
@@ -133,6 +133,9 @@ const useStyles3 = makeStyles((theme) => ({
     display: "block",
 }));
 
+
+
+
 export default function RankingPage() {
     //tab1
     const classes = useStyles();
@@ -168,7 +171,31 @@ export default function RankingPage() {
         },
     });
 
-
+    /*function concise(){
+      return(
+        <ListItem alignItems="flex-start" key={index}>
+          <ListItemAvatar >
+              <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+          </ListItemAvatar>
+          <ListItemText style={{ marginLeft: "1vw" }}
+              className={classes3.listItemText} primary={item.title}
+              secondary={
+                  <React.Fragment>
+                      <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes3.inline}
+                          color="textSecondary"
+                      >
+                          {item.secondarytext}
+                      </Typography>
+                  </React.Fragment>
+              }
+          />
+      </ListItem>
+    )
+    }*/
+    
     return (
 
         <ThemeProvider theme={theme}>
@@ -191,7 +218,7 @@ export default function RankingPage() {
             </div>
 
 
-            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "10vw" }} >
+            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "10vw",marginLeft: "10vw" }} >
                 <List component="nav">
                     {ListGenres.map((item, index) => (
                         <ListItem button key={index}>
@@ -205,26 +232,26 @@ export default function RankingPage() {
             <div className="C1">
                 <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAllTime.map((item, index) => (
-                        <ListItem alignItems="flex-start" key={index}>
-                            <ListItemAvatar >
-                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            </ListItemAvatar>
-                            <ListItemText style={{ marginLeft: "1vw" }}
-                                className={classes3.listItemText} primary={item.title}
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            className={classes3.inline}
-                                            color="textSecondary"
-                                        >
-                                            {item.secondarytext}
-                                        </Typography>
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
+                <ListItem alignItems="flex-start" key={index}>
+                <ListItemAvatar >
+                  <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                </ListItemAvatar>
+                <ListItemText style={{ marginLeft: "1vw" }}
+                  className={classes3.listItemText} primary={item.title}
+                  secondary={
+                      <React.Fragment>
+                          <Typography
+                              component="span"
+                              variant="body2"
+                              className={classes3.inline}
+                              color="textSecondary"
+                          >
+                              {item.secondarytext}
+                          </Typography>
+                      </React.Fragment>
+                  }
+                />
+                </ListItem>
                     ))}
                 </List>
             </div>
