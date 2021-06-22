@@ -14,7 +14,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListGenres } from './components/Ranking/genre';
 import { ListAnnual } from './components/Ranking/annual';
-<link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet"/>
+<link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
 
 //List
 const ListStyles = makeStyles((theme) => ({
@@ -183,9 +183,9 @@ export default function RankingPage() {
                     {ListAllTime.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
-                                <div className={classes3.allTime} style={{backgroundImage:`url(${item.image})`}}/>
+                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
                             </ListItemAvatar>
-                            <ListItemText style={{marginLeft: "1vw"}}
+                            <ListItemText style={{ marginLeft: "1vw" }}
                                 className={classes3.listItemText} primary={item.title}
                                 secondary={
                                     <React.Fragment>
@@ -210,9 +210,9 @@ export default function RankingPage() {
                     {ListAnnual.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
-                                <div className={classes3.allTime} style={{backgroundImage:`url(${item.image})`}}/>
+                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
                             </ListItemAvatar>
-                            <ListItemText style={{marginLeft: "1vw"}}
+                            <ListItemText style={{ marginLeft: "1vw" }}
                                 className={classes3.listItemText} primary={item.title}
                                 secondary={
                                     <React.Fragment>
@@ -236,11 +236,11 @@ export default function RankingPage() {
             <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
                 <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
                     <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
-                        <Tab onclick = {switchTime(1)} label="All-time" {...a11yProps(0)} />
-                        <Tab onclick = {switchTime(2)} label="Annual" {...a11yProps(1)} />
-                        <Tab label="Bi-annual" {...a11yProps(2)} />
-                        <Tab label="Season" {...a11yProps(3)} />
-                        <Tab label="Monthly" {...a11yProps(4)} />
+                        <Tab onClick={() => switchTime(1)} label="All-time" {...a11yProps(0)} />
+                        <Tab onClick={() => switchTime(2)} label="Annual" {...a11yProps(1)} />
+                        <Tab onClick={() => switchTime(3)} label="Bi-annual" {...a11yProps(2)} />
+                        <Tab onClick={() => switchTime(4)} label="Season" {...a11yProps(3)} />
+                        <Tab onClick={() => switchTime(5)} label="Monthly" {...a11yProps(4)} />
                     </Tabs>
                 </AppBar>
             </div>
@@ -253,17 +253,24 @@ export default function RankingPage() {
 var list1 = document.getElementsByClassName("C1");
 var list2 = document.getElementsByClassName("C2");
 //var list3 = document.getElementsByClassName("hstext3");
-function switchTime (t) {
-      if(t == 1){
+function switchTime(t) {
+    if (t == 1) {
         for (let i = 0; i < list2.length; i++) {
-            document.getElementsByClassName('C2')[i].style.display = 'none';}
-        for (let i = 0; i < list1.length; i++) {
-            document.getElementsByClassName('C1')[i].style.display = 'block';}
-      }
-      else if(t == 2){
-        for (let i = 0; i < list2.length; i++) {
-          document.getElementsByClassName('C1')[i].style.display = 'none';}
-        for (let i = 0; i < list1.length; i++) {
-            document.getElementsByClassName('C2')[i].style.display = 'block';}
+            document.getElementsByClassName('C2')[i].style.display = 'none';
         }
+        for (let i = 0; i < list1.length; i++) {
+            document.getElementsByClassName('C1')[i].style.display = 'block';
+        }
+    }
+    else if (t == 2) {
+        for (let i = 0; i < list2.length; i++) {
+            document.getElementsByClassName('C1')[i].style.display = 'none';
+        }
+        for (let i = 0; i < list1.length; i++) {
+            document.getElementsByClassName('C2')[i].style.display = 'block';
+        }
+    }
+    else {
+        console.log("Undefined!");
+    }
 }
