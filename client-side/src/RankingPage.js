@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,202 +21,208 @@ import { ListGenres } from './components/Ranking/genre';
 
 //List
 const ListStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
+    root: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: theme.palette.background.paper,
+    },
 }));
 
 //Tab for genre
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+    const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box p={3}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
 }
 
 TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
 }
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+    },
 }));
 
 
 //tab for time
 function TabPanel2(props) {
-  const { children, value2, index2, ...other } = props;
+    const { children, value2, index2, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value2 !== index2}
-      id={`simple-tabpanel-${index2}`}
-      aria-labelledby={`simple-tab-${index2}`}
-      {...other}
-    >
-      {value2 === index2 && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
+    return (
+        <div
+            role="tabpanel"
+            hidden={value2 !== index2}
+            id={`simple-tabpanel-${index2}`}
+            aria-labelledby={`simple-tab-${index2}`}
+            {...other}
+        >
+            {value2 === index2 && (
+                <Box p={3}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
 }
 
 TabPanel2.propTypes = {
-  children: PropTypes.node,
-  index2: PropTypes.any.isRequired,
-  value2: PropTypes.any.isRequired,
+    children: PropTypes.node,
+    index2: PropTypes.any.isRequired,
+    value2: PropTypes.any.isRequired,
 };
 
 function a11yProps2(index2) {
-  return {
-    id: `simple-tab-${index2}`,
-    'aria-controls': `simple-tabpanel-${index2}`,
-  };
+    return {
+        id: `simple-tab-${index2}`,
+        'aria-controls': `simple-tabpanel-${index2}`,
+    };
 }
 
 const useStyles2 = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+    },
 }));
 
 //list for ranking
 const useStyles3 = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: '36ch',
-    backgroundColor: theme.palette.background.paper,
-  },
-  inline: {
-    display: 'inline',
-  },
+    root: {
+        width: '100%',
+        maxWidth: '36ch',
+        backgroundColor: theme.palette.background.paper,
+    },
+    inline: {
+        display: 'inline',
+    },
+    allTime: {
+        height: 160,
+        width: 90,
+        borderRadius: 0,
+    },
 }));
 
 
 export default function RankingPage() {
-  //tab1
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+    //tab1
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-
-  //tab2
-  const classes2 = useStyles2();
-  const [value2, setValue2] = React.useState(0);
-
-  const handleChange2 = (event, newValue2) => {
-    setValue2(newValue2);
-  };
-
-  //list
-  const listclasses = ListStyles();
-
-  //list for ranking
-  const classes3 = useStyles3();
-  return (
-    
-    <>
-    
-    <div className={classes.root}  style={{marginTop:'64px'}}>
-      <AppBar position="static">
-        <Tabs style={{margin:'auto'}} value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Novels" {...a11yProps(0)} />
-          <Tab label="Fan-fic" {...a11yProps(1)} />
-          <Tab label="Comics" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-    </div>
-    
-    
-    <div className={listclasses.root} style={{position:'fixed', marginTop:"10vw"}} >    
-      <List component="nav">
-      {ListGenres.map((item, index) => (
-        <ListItem button key={index}>
-          <ListItemIcon className={listclasses.listItemIcon}>{item.icon}</ListItemIcon>
-          <ListItemText className={listclasses.listItemText} primary={item.title} />
-        </ListItem>
-        ))}
-      </List>   
-    </div>
-
-    <div>
-    <List style={{marginRight: "-50vw", marginLeft: "50vw", marginTop: "2vw", transform: "translateX(-50%)"}} className={classes3.root}>
-    {ListAllTime.map((item, index) => (
-      <ListItem alignItems="flex-start" key={index}>
-        <ListItemAvatar >
-          <Avatar className={classes3.allTime}>{item.Image}</Avatar>
-        </ListItemAvatar>
-        <ListItemText
-          className={classes3.listItemText} primary={item.title}
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes3.inline}
-                color="textSecondary"
-              >
-              </Typography>
-              <ListItemText className={classes3.listItemText} secondary={item.secondarytext} />
-            </React.Fragment>
-
-          }
-          
-        />    
-        
-      </ListItem>
-      ))}
-    </List>
-    </div>
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
 
-    <div className={classes2.root} style={{position:'fixed', bottom:"20px"}} >
-    <AppBar position="static" style={{marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)"}} >
-        <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
-          <Tab label="All-time" {...a11yProps(0)} />
-          <Tab label="Annual" {...a11yProps(1)} />
-          <Tab label="Bi-annual" {...a11yProps(2)} />
-          <Tab label="Season" {...a11yProps(3)} />
-          <Tab label="Monthly" {...a11yProps(4)} />
-        </Tabs>
-      </AppBar>
-    </div>
-  
-    </>
-    
-  )
+    //tab2
+    const classes2 = useStyles2();
+    const [value2, setValue2] = React.useState(0);
+
+    const handleChange2 = (event, newValue2) => {
+        setValue2(newValue2);
+    };
+
+    //list
+    const listclasses = ListStyles();
+
+    //list for ranking
+    const classes3 = useStyles3();
+    return (
+
+        <>
+
+            <div className={classes.root} style={{ marginTop: '64px' }}>
+                <AppBar position="static">
+                    <Tabs style={{ margin: 'auto' }} value={value} onChange={handleChange} aria-label="simple tabs example">
+                        <Tab label="Novels" {...a11yProps(0)} />
+                        <Tab label="Fan-fic" {...a11yProps(1)} />
+                        <Tab label="Comics" {...a11yProps(2)} />
+                    </Tabs>
+                </AppBar>
+            </div>
+
+
+            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "10vw" }} >
+                <List component="nav">
+                    {ListGenres.map((item, index) => (
+                        <ListItem button key={index}>
+                            <ListItemIcon className={listclasses.listItemIcon}>{item.icon}</ListItemIcon>
+                            <ListItemText className={listclasses.listItemText} primary={item.title} />
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+
+            <div>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "2vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                    {ListAllTime.map((item, index) => (
+                        <ListItem alignItems="flex-start" key={index}>
+                            <ListItemAvatar >
+                                <Avatar className={classes3.allTime}>{item.Image}</Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                className={classes3.listItemText} primary={item.title}
+                                secondary={
+                                    <React.Fragment>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            className={classes3.inline}
+                                            color="textSecondary"
+                                        >
+
+                                            {item.Secondarytext}
+                                        </Typography>
+                                    </React.Fragment>
+
+                                }
+
+                            />
+
+                        </ListItem>
+                    ))}
+                </List>
+            </div>
+
+
+            <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
+                <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
+                    <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
+                        <Tab label="All-time" {...a11yProps(0)} />
+                        <Tab label="Annual" {...a11yProps(1)} />
+                        <Tab label="Bi-annual" {...a11yProps(2)} />
+                        <Tab label="Season" {...a11yProps(3)} />
+                        <Tab label="Monthly" {...a11yProps(4)} />
+                    </Tabs>
+                </AppBar>
+            </div>
+
+        </>
+
+    )
 }
