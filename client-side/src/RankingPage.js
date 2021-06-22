@@ -156,8 +156,8 @@ export default function RankingPage() {
 
         <>
 
-            <div className={classes.root} style={{ position: 'fixed' }}>
-                <AppBar position="static">
+            <div className={classes.root} style={{ position: 'fixed'}} >
+                <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
                     <Tabs style={{ margin: 'auto' }} value={value} onChange={handleChange} aria-label="simple tabs example">
                         <Tab label="Novels" {...a11yProps(0)} />
                         <Tab label="Fan-fic" {...a11yProps(1)} />
