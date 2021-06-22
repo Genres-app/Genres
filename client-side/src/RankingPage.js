@@ -188,7 +188,7 @@ export default function RankingPage() {
           <Avatar className={classes3.allTime}>{item.icon}</Avatar>
         </ListItemAvatar>
         <ListItemText
-          className={classes.listItemText} primary={item.title}
+          className={classes3.listItemText} primary={item.title}
           secondary={
             <React.Fragment>
               <Typography
