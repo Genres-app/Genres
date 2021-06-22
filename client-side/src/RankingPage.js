@@ -203,7 +203,7 @@ export default function RankingPage() {
             </div>
 
             <div className="C1">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAllTime.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
@@ -230,7 +230,7 @@ export default function RankingPage() {
             </div>
 
             <div style={{ display: 'none' }} className="C2">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAnnual.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
@@ -257,7 +257,7 @@ export default function RankingPage() {
             </div>
 
             <div style={{ display: 'none' }} className="C3">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListBiAnnual.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
@@ -284,7 +284,7 @@ export default function RankingPage() {
             </div>
 
             <div style={{ display: 'none' }} className="C4">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListSeason.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
@@ -311,7 +311,7 @@ export default function RankingPage() {
             </div>
 
             <div style={{ display: 'none' }} className="C5">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListMonthly.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
