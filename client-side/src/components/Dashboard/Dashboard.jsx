@@ -145,7 +145,31 @@ const Dashboard = () => {
     setOpenPopup(false);
   }, [location]);
 
-  document.body.style.margin = "0";
+
+  document.body.style.margin = "64px 0 0 0";
+  
+  const setStyleOfAppbar = makeStyles(() => ({
+    appBar: {
+      // boxShadow: 'none',
+    }}));
+ 
+    
+  //   () => {
+    
+  //   // if (window.location.pathname == "/rankings") {
+  //   //   makeStyles(() => ({
+  //   //     appBar: {
+  //   //       boxShadow: 'none',
+  //   //     }}));
+  //   // }
+  // }
+  // if (window.location.pathname == "/rankings") {
+  //   car 
+  // } else {
+
+  // }
+
+  const classOfAppbar = setStyleOfAppbar();
 
   const [open, setOpen] = React.useState(false);
 
@@ -177,9 +201,7 @@ const Dashboard = () => {
 
         <AppBar
           position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
+          className={classOfAppbar.appBar}
         >
           <Toolbar>
             {
