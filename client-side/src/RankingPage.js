@@ -14,6 +14,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListGenres } from './components/Ranking/genre';
 import { ListAnnual } from './components/Ranking/annual';
+import { display } from '@material-ui/system';
 <link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
 
 //List
@@ -205,7 +206,7 @@ export default function RankingPage() {
                 </List>
             </div>
 
-            <div className="C2">
+            <div style = {{display: 'none'}} className="C2">
                 <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAnnual.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
