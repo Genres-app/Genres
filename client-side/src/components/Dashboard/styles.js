@@ -78,6 +78,10 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 
+  listItemIcon: {
+    color: '#651fff',
+  },
+
 
   menuButton: {
     marginRight: theme.spacing(2),
