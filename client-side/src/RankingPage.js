@@ -15,6 +15,8 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import Divider from '@material-ui/core/Divider';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import { ListAllTime } from './components/Ranking/allTime';
+
 
 
 //List
@@ -180,12 +182,13 @@ export default function RankingPage() {
 
     <div>
     <List style={{marginRight: "-50vw", marginLeft: "50vw", marginTop: "2vw", transform: "translateX(-50%)"}} className={classes3.root}>
-      <ListItem alignItems="flex-start">
+    {ListAllTime.map((item, index) => (
+      <ListItem alignItems="flex-start" key={index}>
         <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar className={classes3.allTime}>{item.icon}</Avatar>
         </ListItemAvatar>
         <ListItemText
-          primary="Brunch this weekend?"
+          className={classes.listItemText} primary={item.title}
           secondary={
             <React.Fragment>
               <Typography
@@ -199,55 +202,12 @@ export default function RankingPage() {
               {" — I'll be in your neighborhood doing errands this…"}
             </React.Fragment>
           }
-        />
+        />    
       </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Summer BBQ"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                to Scott, Alex, Jennifer
-              </Typography>
-              {" — Wish I could come, but I'm out of town this…"}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Oui Oui"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Sandra Adams
-              </Typography>
-              {' — Do you have Paris recommendations? Have you ever…'}
-            </React.Fragment>
-          }
-        />
-      </ListItem>
+      ))}
     </List>
     </div>
-
+    
     <div className={classes2.root} style={{position:'fixed', bottom:"20px"}} >
     <AppBar position="static" style={{marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)"}} >
         <Tabs value={value2} onChange={handleChange2} aria-label="simple tabs example">
