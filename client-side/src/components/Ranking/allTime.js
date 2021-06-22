@@ -16,50 +16,50 @@ import { ListItemSecondaryAction } from '@material-ui/core';
 export const ListAllTime = [
     {
     title: 'Home',
-    Image: <HomeOutlinedIcon/>,
+    image: <HomeOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "one"
+    secondarytext: "one"
     },
     {
     title: 'Browse',
-    Image: <ExploreOutlinedIcon/>,
+    image: <ExploreOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "two"
+    secondarytext: "two"
     },
     {
     title: 'Rankings',
-    Image: <TrendingUpOutlinedIcon/>,
+    image: <TrendingUpOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "three"
+    secondarytext: "three"
     },
     {
     title: 'Contest',
-    Image: <PollOutlinedIcon/>,
+    image: <PollOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "four"
+    secondarytext: "four"
     },
     {
     title: 'History',
-    Image: <HistoryOutlinedIcon/>,
+    image: <HistoryOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "five"
+    secondarytext: "five"
     },
     {
     title: 'Write',
-    Image: <CreateOutlinedIcon/>,
+    image: <CreateOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "six"
+    secondarytext: "six"
     },
     {
     title: 'Masterclass',
-    Image: <ClassOutlinedIcon/>,
+    image: <ClassOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "seven"
+    secondarytext: "seven"
     },
     {
     title: 'Publit',
-    Image: <ForumOutlinedIcon/>,
+    image: <ForumOutlinedIcon/>,
     cName: 'nav-text',
-    Secondarytext: "eight"
+    secondarytext: "eight"
     },
   ];

@@ -14,49 +14,49 @@ export const ListItems = [
   {
   title: 'Home',
   path: '/',
-  icon: <HomeOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <HomeOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Browse',
   path : '/browse',
-  icon: <ExploreOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <ExploreOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Rankings',
   path : '/rankings',
-  icon: <TrendingUpOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <TrendingUpOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Contest',
   path: '/contest',
-  icon: <PollOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <PollOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'History',
   path: '/history',
-  icon: <HistoryOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <HistoryOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Write',
   path: '/writing',
-  icon: <CreateOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <CreateOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Masterclass',
   path: '/masterclass',
-  icon: <ClassOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <ClassOutlinedIcon/>,
   cName: 'nav-text'
   },
   {
   title: 'Publit',
   path: '/publit',
-  icon: <ForumOutlinedIcon sytle={{fontSize: '50px'}} />,
+  icon: <ForumOutlinedIcon/>,
   cName: 'nav-text'
   },
 ];

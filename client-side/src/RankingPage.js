@@ -179,11 +179,11 @@ export default function RankingPage() {
             </div>
 
             <div>
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "2vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "1vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAllTime.map((item, index) => (
                         <ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar >
-                                <Avatar className={classes3.allTime}>{item.Image}</Avatar>
+                                <Avatar className={classes3.allTime}>{item.image}</Avatar>
                             </ListItemAvatar>
                             <ListItemText
                                 className={classes3.listItemText} primary={item.title}
@@ -195,20 +195,15 @@ export default function RankingPage() {
                                             className={classes3.inline}
                                             color="textSecondary"
                                         >
-
-                                            {item.Secondarytext}
+                                            {item.secondarytext}
                                         </Typography>
                                     </React.Fragment>
-
                                 }
-
                             />
-
                         </ListItem>
                     ))}
                 </List>
             </div>
-
 
             <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
                 <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
