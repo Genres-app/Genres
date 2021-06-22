@@ -147,12 +147,19 @@ const Dashboard = () => {
 
 
   document.body.style.margin = "64px 0 0 0";
+
   
-  const setStyleOfAppbar = makeStyles(() => ({
-    appBar: {
-      // boxShadow: 'none',
+  //if (window.location.pathname == "/rankings") {
+  var setStyleOfAppbar1 = makeStyles(() => ({
+    appBar: { 
+       boxShadow: 'none',
     }}));
- 
+  var setStyleOfAppbar2 = makeStyles(() => ({
+    appBar: { 
+        //boxShadow: 'none',
+    }}));
+  //}
+  
     
   //   () => {
     
@@ -169,7 +176,12 @@ const Dashboard = () => {
 
   // }
 
-  const classOfAppbar = setStyleOfAppbar();
+  if (window.location.pathname == "/rankings"){
+  var classOfAppbar = setStyleOfAppbar1();
+  }
+  else{
+  var classOfAppbar = setStyleOfAppbar2();
+  }
 
   const [open, setOpen] = React.useState(false);
 
