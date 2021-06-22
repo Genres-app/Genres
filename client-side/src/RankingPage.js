@@ -122,8 +122,8 @@ const useStyles3 = makeStyles((theme) => ({
         display: 'inline',
     },
     allTime: {
-        height: 160,
-        width: 90,
+        height: 240,
+        width: 160,
         borderRadius: 0,
     },
 }));

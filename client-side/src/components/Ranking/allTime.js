@@ -10,13 +10,20 @@ import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
 import { ListItemSecondaryAction } from '@material-ui/core';
 
 
+import cover1 from '../Assets/bookcover1.jpg';
+import cover2 from '../Assets/bookcover2.jpg';
+import cover3 from '../Assets/bookcover3.jpg';
+import cover4 from '../Assets/bookcover4.jpg';
+import cover5 from '../Assets/bookcover5.jpg';
+import cover6 from '../Assets/bookcover6.jpg';
+import cover7 from '../Assets/bookcover7.jpg';
 
 
 
 export const ListAllTime = [
     {
-    title: 'Home',
-    image: <HomeOutlinedIcon/>,
+    title: 'The Arrivals',
+    image: `url(${cover1})`,
     cName: 'nav-text',
     secondarytext: "one"
     },
