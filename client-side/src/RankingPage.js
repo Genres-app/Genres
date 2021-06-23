@@ -151,7 +151,7 @@ export default function RankingPage() {
                 </AppBar>
             </div>
 
-            <div className={listclasses.root} style={{ position: 'fixed', marginLeft: '80vw', marginTop: '15vw' }}>
+            <div className={listclasses.root} style={{ position: 'fixed', marginLeft: '88vw', marginTop: '30vh' }}>
                 <List component="nav">
                     <ListItem button onClick={() => switchTime(1)} >
                         <ListItemIcon>
@@ -187,7 +187,7 @@ export default function RankingPage() {
             </div>
 
 
-            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "15vw", marginLeft: "10vw" }} >
+            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "30vh"}} >
                 <List component="nav">
                     {ListGenres.map((item, index) => (
                         <ListItem button key={index}>
@@ -198,63 +198,66 @@ export default function RankingPage() {
                 </List>
             </div>
 
-            <div className="C1">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
+            <div style={{ display: 'none' }} className="C1">
+                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
                     {ListAllTime.map((item, index) => (
-                        <ListItem alignItems="flex-start" key={index}>
-                            <ListItemAvatar >
-                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            </ListItemAvatar>
-                            <ListItemText style={{ marginLeft: "1vw" }}
-                                className={classes3.listItemText} primary={item.title}
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            className={classes3.inline}
-                                            color="textSecondary"
-                                        >
-                                            {item.secondarytext}
-                                        </Typography>
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
+                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
+
+                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            <CardContent>
+                                <ListItemText style={{ marginLeft: "1vw" }}
+                                    className={classes3.listItemText} primary={item.title}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                className={classes3.inline}
+                                                color="textSecondary"
+                                            >
+                                                {item.secondarytext}
+                                            </Typography>
+                                        </React.Fragment>
+                                    }
+                                />
+                            </CardContent>
+                        </Card>
                     ))}
-                </List>
+                    <ListItem style={{ clear: 'both' }}>
+
+                    </ListItem>
+                </Container>
             </div>
 
             <div style={{ display: 'none' }} className="C2">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
                     {ListAnnual.map((item, index) => (
+                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
 
-                        <ListItem alignItems="flex-start" key={index}>
-
-                            <ListItemAvatar >
-
-                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-
-                            </ListItemAvatar>
-                            <ListItemText style={{ marginLeft: "1vw" }}
-                                className={classes3.listItemText} primary={item.title}
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            className={classes3.inline}
-                                            color="textSecondary"
-                                        >
-                                            {item.secondarytext}
-                                        </Typography>
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
-
+                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            <CardContent>
+                                <ListItemText style={{ marginLeft: "1vw" }}
+                                    className={classes3.listItemText} primary={item.title}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                className={classes3.inline}
+                                                color="textSecondary"
+                                            >
+                                                {item.secondarytext}
+                                            </Typography>
+                                        </React.Fragment>
+                                    }
+                                />
+                            </CardContent>
+                        </Card>
                     ))}
-                </List>
+                    <ListItem style={{ clear: 'both' }}>
+
+                    </ListItem>
+                </Container>
             </div>
 
             <div style={{ display: 'none' }} className="C3">
@@ -289,58 +292,68 @@ export default function RankingPage() {
             </div>
 
             <div style={{ display: 'none' }} className="C4">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
                     {ListSeason.map((item, index) => (
-                        <ListItem alignItems="flex-start" key={index}>
-                            <ListItemAvatar >
-                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            </ListItemAvatar>
-                            <ListItemText style={{ marginLeft: "1vw" }}
-                                className={classes3.listItemText} primary={item.title}
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            className={classes3.inline}
-                                            color="textSecondary"
-                                        >
-                                            {item.secondarytext}
-                                        </Typography>
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
+                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
+
+                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            <CardContent>
+                                <ListItemText style={{ marginLeft: "1vw" }}
+                                    className={classes3.listItemText} primary={item.title}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                className={classes3.inline}
+                                                color="textSecondary"
+                                            >
+                                                {item.secondarytext}
+                                            </Typography>
+                                        </React.Fragment>
+                                    }
+                                />
+                            </CardContent>
+                        </Card>
                     ))}
-                </List>
+                    <ListItem style={{ clear: 'both' }}>
+
+                    </ListItem>
+                </Container>
             </div>
 
             <div style={{ display: 'none' }} className="C5">
-                <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
+                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
                     {ListMonthly.map((item, index) => (
-                        <ListItem alignItems="flex-start" key={index}>
-                            <ListItemAvatar >
-                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            </ListItemAvatar>
-                            <ListItemText style={{ marginLeft: "1vw" }}
-                                className={classes3.listItemText} primary={item.title}
-                                secondary={
-                                    <React.Fragment>
-                                        <Typography
-                                            component="span"
-                                            variant="body2"
-                                            className={classes3.inline}
-                                            color="textSecondary"
-                                        >
-                                            {item.secondarytext}
-                                        </Typography>
-                                    </React.Fragment>
-                                }
-                            />
-                        </ListItem>
+                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
+
+                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                            <CardContent>
+                                <ListItemText style={{ marginLeft: "1vw" }}
+                                    className={classes3.listItemText} primary={item.title}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                className={classes3.inline}
+                                                color="textSecondary"
+                                            >
+                                                {item.secondarytext}
+                                            </Typography>
+                                        </React.Fragment>
+                                    }
+                                />
+                            </CardContent>
+                        </Card>
                     ))}
-                </List>
+                    <ListItem style={{ clear: 'both' }}>
+
+                    </ListItem>
+                </Container>
             </div>
+
+            
 
         </ThemeProvider>
 

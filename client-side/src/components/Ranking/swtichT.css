@@ -30,3 +30,8 @@
  .C8{
     display: none;
  }
+
+ .C1:hover{
+   opacity:  0.5;
+   transition-duration: 0.5s;
+ }
