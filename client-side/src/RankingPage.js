@@ -250,7 +250,7 @@ export default function RankingPage() {
                           </Typography>
                       </React.Fragment>
                   }
-                />
+                />               
                 </ListItem>
                     ))}
                 </List>
