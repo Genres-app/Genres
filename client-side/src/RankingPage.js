@@ -73,48 +73,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-//tab for time
-function TabPanel2(props) {
-    const { children, value2, index2, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value2 !== index2}
-            id={`simple-tabpanel-${index2}`}
-            aria-labelledby={`simple-tab-${index2}`}
-            {...other}
-        >
-            {value2 === index2 && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
-
-TabPanel2.propTypes = {
-    children: PropTypes.node,
-    index2: PropTypes.any.isRequired,
-    value2: PropTypes.any.isRequired,
-};
-
-function a11yProps2(index2) {
-    return {
-        id: `simple-tab-${index2}`,
-        'aria-controls': `simple-tabpanel-${index2}`,
-    };
-}
-
-const useStyles2 = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-    },
-}));
-
 //list for ranking(all time)
 const useStyles3 = makeStyles((theme) => ({
     root: {
@@ -135,9 +93,6 @@ const useStyles3 = makeStyles((theme) => ({
     display: "block",
 }));
 
-
-
-
 export default function RankingPage() {
     //tab1
     const classes = useStyles();
@@ -145,15 +100,6 @@ export default function RankingPage() {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-    };
-
-
-    //tab2
-    const classes2 = useStyles2();
-    const [value2, setValue2] = React.useState(0);
-
-    const handleChange2 = (event, newValue2) => {
-        setValue2(newValue2);
     };
 
     //list
@@ -172,31 +118,6 @@ export default function RankingPage() {
             alert: '#ff1744',
         },
     });
-
-    /*function concise(){
-      return(
-        <ListItem alignItems="flex-start" key={index}>
-          <ListItemAvatar >
-              <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-          </ListItemAvatar>
-          <ListItemText style={{ marginLeft: "1vw" }}
-              className={classes3.listItemText} primary={item.title}
-              secondary={
-                  <React.Fragment>
-                      <Typography
-                          component="span"
-                          variant="body2"
-                          className={classes3.inline}
-                          color="textSecondary"
-                      >
-                          {item.secondarytext}
-                      </Typography>
-                  </React.Fragment>
-              }
-          />
-      </ListItem>
-    )
-    }*/
 
     return (
 
@@ -404,11 +325,7 @@ export default function RankingPage() {
                         </ListItem>
                     ))}
                 </List>
-            </div>
-
-                  
-
-            
+            </div>         
 
         </ThemeProvider>
 
