@@ -12,12 +12,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import { ListAllTime } from './components/Ranking/allTime';
 import { ListGenres } from './components/Ranking/genre';
+import { ListAllTime } from './components/Ranking/allTime';
 import { ListAnnual } from './components/Ranking/annual';
 import { ListBiAnnual } from './components/Ranking/biAnnual';
 import { ListSeason } from './components/Ranking/season';
 import { ListMonthly } from './components/Ranking/monthly';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
 <link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
 
 //List
@@ -195,7 +197,7 @@ export default function RankingPage() {
       </ListItem>
     )
     }*/
-    
+
     return (
 
         <ThemeProvider theme={theme}>
@@ -217,8 +219,43 @@ export default function RankingPage() {
                 </AppBar>
             </div>
 
+            <div className={listclasses.root} style={{position: 'fixed', marginLeft:'80vw', marginTop:'15vw'}}>
+            <List component="nav">
+              <ListItem button onClick={() => switchTime(1)} >
+                <ListItemIcon>
+                <InboxIcon/>
+                </ListItemIcon>
+                <ListItemText primary="All-time"/>
+              </ListItem>
+              <ListItem button onClick={() => switchTime(2)} >
+                <ListItemIcon>
+                <DraftsIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Annual"/>
+              </ListItem>
+              <ListItem button onClick={() => switchTime(3)} >
+                <ListItemIcon>
+                <InboxIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Bi-annual"/>
+              </ListItem>
+              <ListItem button onClick={() => switchTime(4)} >
+                <ListItemIcon>
+                <DraftsIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Season"/>
+              </ListItem>
+              <ListItem button onClick={() => switchTime(5)} >
+                <ListItemIcon>
+                <InboxIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Monthly"/>
+              </ListItem>
+            </List>
+            </div>             
 
-            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "10vw",marginLeft: "10vw" }} >
+
+            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "15vw",marginLeft: "10vw" }} >
                 <List component="nav">
                     {ListGenres.map((item, index) => (
                         <ListItem button key={index}>
@@ -259,9 +296,13 @@ export default function RankingPage() {
             <div style={{ display: 'none' }} className="C2">
                 <List style={{ marginRight: "-50vw", marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)" }} className={classes3.root}>
                     {ListAnnual.map((item, index) => (
+                    
                         <ListItem alignItems="flex-start" key={index}>
+                            
                             <ListItemAvatar >
-                                <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                                
+                                  <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
+                                
                             </ListItemAvatar>
                             <ListItemText style={{ marginLeft: "1vw" }}
                                 className={classes3.listItemText} primary={item.title}
@@ -279,6 +320,7 @@ export default function RankingPage() {
                                 }
                             />
                         </ListItem>
+                              
                     ))}
                 </List>
             </div>
@@ -364,25 +406,9 @@ export default function RankingPage() {
                 </List>
             </div>
 
+                  
 
-
-            <div className={classes2.root} style={{ position: 'fixed', bottom: "20px" }} >
-                <AppBar position="static" style={{ marginRight: "-50vw", marginLeft: "50vw", transform: "translateX(-50%)" }} >
-                    <Tabs
-                        value={value2}
-                        onChange={handleChange2}
-                        aria-label="simple tabs example"
-                        indicatorColor="secondary"
-                        textColor="secondary"
-                    >
-                        <Tab onClick={() => switchTime(1)} label="All-time" {...a11yProps(0)} />
-                        <Tab onClick={() => switchTime(2)} label="Annual" {...a11yProps(1)} />
-                        <Tab onClick={() => switchTime(3)} label="Bi-annual" {...a11yProps(2)} />
-                        <Tab onClick={() => switchTime(4)} label="Season" {...a11yProps(3)} />
-                        <Tab onClick={() => switchTime(5)} label="Monthly" {...a11yProps(4)} />
-                    </Tabs>
-                </AppBar>
-            </div>
+            
 
         </ThemeProvider>
 
