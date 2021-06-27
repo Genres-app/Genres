@@ -37,7 +37,7 @@ import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
 // Styles
 const useStyles = makeStyles((theme) => ({
     tabForGenres: {
-        position: 'fixed', 
+        position: 'fixed',
         flexGrow: 1,
         width: '100%',
         backgroundColor: theme.palette.background.paper,
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         position: 'fixed',
         maxWidth: 280,
         top: '30vh',
-        right: '24px',
+        right: 0,
         backgroundColor: theme.palette.background.paper,
     },
     sortByData: {
@@ -55,6 +55,60 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 280,
         top: "30vh",
         backgroundColor: theme.palette.background.paper,
+    },
+    // Ranking List
+    RankingContainer: {
+        width: '75vw',
+        marginTop: "48px",
+        padding: '0',
+        backgroundColor: 'transparent',
+    },
+    RankingCards: {
+        display: 'flex',
+        float: 'left',
+        width: 'calc(37vw - 32px - 2px)',
+        maxWidth: 606,
+        margin: 16,
+        border: '1px solid #dfe1e5',
+        boxShadow: 'none',
+
+        "&:hover": {
+            boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 1px 18px 0px rgb(0 0 0 / 12%)",
+        }
+    },
+    bookCover: {
+        height: '9.6vw',
+        width: '6vw',
+        maxHeight: 184.31,
+        maxWidth: 115.19,
+        margin: '24px 24px 24px 48px',
+        borderRadius: 0,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        flexShrink: 0,
+    },
+    bookInfo: {
+    },
+    bookTitle: {
+        marginLeft: 0,
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+
+        "&:hover": {
+            textDecoration: 'underline',
+        }
+    },
+    bookAuthor: {
+        color: '#651fff',
+        cursor: 'pointer',
+        
+        "&:hover": {
+            textDecoration: 'underline',
+        }
+    },
+    bookDescrip: {
+        display: 'inline',
     },
 }));
 
@@ -92,34 +146,8 @@ function a11yProps(index) {
     };
 }
 
-//list for ranking(all time)
-const useStyles3 = makeStyles((theme) => ({
-    root: {
-        width: '75vw',
-        padding: '0',
-        backgroundColor: 'transparent',
-    },
-    listItem: {
-        float: 'left',
-        width: 'calc(37vw - 32px)',
-        margin: '16px',
-        maxWidth: 608,
-    },
-    inline: {
-        display: 'inline',
-    },
-    allTime: {
-        height: 240,
-        width: 160,
-        borderRadius: 0,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    },
-    display: "block",
-}));
-
 export default function RankingPage() {
-    
+
     const classes = useStyles();
 
     //tab1
@@ -128,10 +156,6 @@ export default function RankingPage() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-
-    //list for ranking
-    const classes3 = useStyles3();
 
     // Theme
     const theme = createMuiTheme({
@@ -143,6 +167,38 @@ export default function RankingPage() {
             alert: '#ff1744',
         },
     });
+
+    // Function for creating ranking list
+    const createRankingList = (sortedList) => (
+
+        <Container className={classes.RankingContainer}>
+            {sortedList.map((item, index) => (
+                <Card className={classes.RankingCards} alignItems="flex-start" key={index}>
+
+                    <div className={classes.bookCover} style={{ backgroundImage: `url(${item.image})` }} />
+                    <CardContent className={classes.bookInfo}>
+                        <Typography className={classes.bookTitle}>
+                            {item.title}
+                        </Typography>
+                        <Typography className={classes.bookAuthor}>
+                            Author Name
+                        </Typography>
+                        <Typography
+                            component="span"
+                            variant="body2"
+                            className={classes.bookDescrip}
+                            color="textSecondary"
+                        >
+                            {/* {item.secondarytext} */}
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et sagittis tortor. Nam efficitur vel lacus a commodo.
+                        </Typography>
+                    </CardContent>
+                </Card>
+            ))}
+            <ListItem style={{ clear: 'both' }}></ListItem>
+        </Container>
+    )
+
 
     return (
 
@@ -213,161 +269,24 @@ export default function RankingPage() {
             </div>
 
             <div style={{ display: 'none' }} className="C1">
-                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
-                    {ListAllTime.map((item, index) => (
-                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
-
-                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            <CardContent>
-                                <ListItemText style={{ marginLeft: "1vw" }}
-                                    className={classes3.listItemText} primary={item.title}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes3.inline}
-                                                color="textSecondary"
-                                            >
-                                                {item.secondarytext}
-                                            </Typography>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </CardContent>
-                        </Card>
-                    ))}
-                    <ListItem style={{ clear: 'both' }}>
-
-                    </ListItem>
-                </Container>
+                {createRankingList(ListAllTime)}
             </div>
 
             <div style={{ display: 'none' }} className="C2">
-                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
-                    {ListAnnual.map((item, index) => (
-                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
-
-                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            <CardContent>
-                                <ListItemText style={{ marginLeft: "1vw" }}
-                                    className={classes3.listItemText} primary={item.title}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes3.inline}
-                                                color="textSecondary"
-                                            >
-                                                {item.secondarytext}
-                                            </Typography>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </CardContent>
-                        </Card>
-                    ))}
-                    <ListItem style={{ clear: 'both' }}>
-
-                    </ListItem>
-                </Container>
+                {createRankingList(ListAnnual)}
             </div>
 
             <div style={{ display: 'none' }} className="C3">
-                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
-                    {ListBiAnnual.map((item, index) => (
-                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
-
-                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            <CardContent>
-                                <ListItemText style={{ marginLeft: "1vw" }}
-                                    className={classes3.listItemText} primary={item.title}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes3.inline}
-                                                color="textSecondary"
-                                            >
-                                                {item.secondarytext}
-                                            </Typography>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </CardContent>
-                        </Card>
-                    ))}
-                    <ListItem style={{ clear: 'both' }}>
-
-                    </ListItem>
-                </Container>
+                {createRankingList(ListBiAnnual)}
             </div>
 
             <div style={{ display: 'none' }} className="C4">
-                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
-                    {ListSeason.map((item, index) => (
-                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
-
-                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            <CardContent>
-                                <ListItemText style={{ marginLeft: "1vw" }}
-                                    className={classes3.listItemText} primary={item.title}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes3.inline}
-                                                color="textSecondary"
-                                            >
-                                                {item.secondarytext}
-                                            </Typography>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </CardContent>
-                        </Card>
-                    ))}
-                    <ListItem style={{ clear: 'both' }}>
-
-                    </ListItem>
-                </Container>
+                {createRankingList(ListSeason)}
             </div>
 
             <div style={{ display: 'none' }} className="C5">
-                <Container style={{ marginLeft: "50vw", marginTop: "3vw", transform: "translateX(-50%)"}} className={classes3.root}>
-                    {ListMonthly.map((item, index) => (
-                        <Card className={classes3.listItem} alignItems="flex-start" key={index}>
-
-                            <div className={classes3.allTime} style={{ backgroundImage: `url(${item.image})` }} />
-                            <CardContent>
-                                <ListItemText style={{ marginLeft: "1vw" }}
-                                    className={classes3.listItemText} primary={item.title}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes3.inline}
-                                                color="textSecondary"
-                                            >
-                                                {item.secondarytext}
-                                            </Typography>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </CardContent>
-                        </Card>
-                    ))}
-                    <ListItem style={{ clear: 'both' }}>
-
-                    </ListItem>
-                </Container>
+                {createRankingList(ListMonthly)}
             </div>
-
-            
 
         </ThemeProvider>
 
