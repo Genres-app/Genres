@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
@@ -10,7 +11,8 @@ import Box from '@material-ui/core/Box';
 import {
     Container,
     Card,
-    CardContent
+    CardContent,
+    withTheme
 } from '@material-ui/core';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -70,18 +72,67 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: 606,
         margin: 16,
         border: '1px solid #dfe1e5',
+        borderRadius: 8,
         boxShadow: 'none',
 
         "&:hover": {
             boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 1px 18px 0px rgb(0 0 0 / 12%)",
         }
     },
+    Rank1: {
+        margin: 13,
+        border: '4px solid #6030fe',
+    },
+    Rank2: {
+        margin: 13,
+        border: '4px solid #5581ff',
+    },
+    Rank3: {
+        margin: 13,
+        border: '4px solid #6fcffb',
+    },
+    //
+    RankingDecorator: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: 32,
+        backgroundColor: theme.palette.background.paper,
+        flexShrink: 0,
+
+        "& p": {
+            height: 'min-content',
+            transform: 'translateX(-2px)',
+            textAlign: 'center',
+            color: '#fff',
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            flexGrow: 2,
+        },
+        "& div": {
+            backgroundColor: theme.palette.background.paper,
+            width: 8,
+            height: '100%',
+            borderRadius: '8px 0 0 8px',
+        },
+    },
+    RankingDeco1: {
+        backgroundColor: '#6030fe',
+    },
+    RankingDeco2: {
+        backgroundColor: '#5581ff',
+    },
+    RankingDeco3: {
+        backgroundColor: '#6fcffb',
+    },
+    //
     bookCover: {
         height: '9.6vw',
         width: '6vw',
         maxHeight: 184.31,
         maxWidth: 115.19,
-        margin: '24px 24px 24px 48px',
+        margin: 24,
+        marginLeft: 16,
         borderRadius: 0,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -102,7 +153,7 @@ const useStyles = makeStyles((theme) => ({
     bookAuthor: {
         color: '#651fff',
         cursor: 'pointer',
-        
+
         "&:hover": {
             textDecoration: 'underline',
         }
@@ -172,29 +223,62 @@ export default function RankingPage() {
     const createRankingList = (sortedList) => (
 
         <Container className={classes.RankingContainer}>
-            {sortedList.map((item, index) => (
-                <Card className={classes.RankingCards} alignItems="flex-start" key={index}>
-
-                    <div className={classes.bookCover} style={{ backgroundImage: `url(${item.image})` }} />
-                    <CardContent className={classes.bookInfo}>
-                        <Typography className={classes.bookTitle}>
-                            {item.title}
-                        </Typography>
-                        <Typography className={classes.bookAuthor}>
-                            Author Name
-                        </Typography>
-                        <Typography
-                            component="span"
-                            variant="body2"
-                            className={classes.bookDescrip}
-                            color="textSecondary"
-                        >
-                            {/* {item.secondarytext} */}
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et sagittis tortor. Nam efficitur vel lacus a commodo.
-                        </Typography>
-                    </CardContent>
-                </Card>
-            ))}
+            {
+                sortedList.map((item, index) => {
+                    let decorator;
+                    let cardClasses;
+                    if (index == 0) {
+                        cardClasses = clsx(classes.RankingCards, classes.Rank1);
+                        decorator = (
+                        <div className={clsx(classes.RankingDecorator, classes.RankingDeco1)}>
+                            <Typography className={classes.RankingNum}>1</Typography>
+                            <div></div>
+                        </div>
+                        );
+                    } else if (index == 1) {
+                        cardClasses = clsx(classes.RankingCards, classes.Rank2);
+                        decorator = (
+                        <div className={clsx(classes.RankingDecorator, classes.RankingDeco2)}>
+                            <Typography className={classes.RankingNum}>2</Typography>
+                            <div></div>
+                        </div>
+                        );
+                    } else if (index == 2) {
+                        cardClasses = clsx(classes.RankingCards, classes.Rank3);
+                        decorator = (
+                        <div className={clsx(classes.RankingDecorator, classes.RankingDeco3)}>
+                            <Typography className={classes.RankingNum}>3</Typography>
+                            <div></div>
+                        </div>
+                        );
+                    } else {
+                        cardClasses = classes.RankingCards;
+                        decorator = <div className={classes.RankingDecorator}></div>;
+                    }
+                    return (
+                        <Card className={cardClasses} alignItems="flex-start" key={index}>
+                            {decorator}
+                            <div className={classes.bookCover} style={{ backgroundImage: `url(${item.image})` }} />
+                            <CardContent className={classes.bookInfo}>
+                                <Typography className={classes.bookTitle}>
+                                    {item.title}
+                                </Typography>
+                                <Typography className={classes.bookAuthor}>
+                                    Author Name
+                                </Typography>
+                                <Typography
+                                    component="span"
+                                    variant="body2"
+                                    className={classes.bookDescrip}
+                                    color="textSecondary"
+                                >
+                                    {/* {item.secondarytext} */}
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et sagittis tortor. Nam efficitur vel lacus a commodo.
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
             <ListItem style={{ clear: 'both' }}></ListItem>
         </Container>
     )
