@@ -17,14 +17,20 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import { ListGenres } from './components/Ranking/genre';
+import { itemsSortData } from './components/Ranking/itemsSortData';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListAnnual } from './components/Ranking/annual';
 import { ListBiAnnual } from './components/Ranking/biAnnual';
 import { ListSeason } from './components/Ranking/season';
 import { ListMonthly } from './components/Ranking/monthly';
+
+// Material UI Icons
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
+import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
+import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';
+import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
+
 <link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
 
 
@@ -165,31 +171,31 @@ export default function RankingPage() {
                 <List component="nav">
                     <ListItem button onClick={() => switchTime(1)} >
                         <ListItemIcon>
-                            <InboxIcon />
+                            <AllInclusiveOutlinedIcon />
                         </ListItemIcon>
                         <ListItemText primary="All-time" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(2)} >
                         <ListItemIcon>
-                            <DraftsIcon />
+                            <ScheduleOutlinedIcon />
                         </ListItemIcon>
                         <ListItemText primary="Annual" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(3)} >
                         <ListItemIcon>
-                            <InboxIcon />
+                            <ScheduleOutlinedIcon />
                         </ListItemIcon>
                         <ListItemText primary="Bi-annual" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(4)} >
                         <ListItemIcon>
-                            <DraftsIcon />
+                            <ScheduleOutlinedIcon />
                         </ListItemIcon>
                         <ListItemText primary="Season" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(5)} >
                         <ListItemIcon>
-                            <InboxIcon />
+                            <DateRangeOutlinedIcon />
                         </ListItemIcon>
                         <ListItemText primary="Monthly" />
                     </ListItem>
@@ -199,7 +205,7 @@ export default function RankingPage() {
 
             <div className={classes.sortByData}>
                 <List component="nav">
-                    {ListGenres.map((item, index) => (
+                    {itemsSortData.map((item, index) => (
                         <ListItem button key={index}>
                             <ListItemIcon className={classes.sortByDataIcon}>{item.icon}</ListItemIcon>
                             <ListItemText className={classes.sortByDataText} primary={item.title} />
