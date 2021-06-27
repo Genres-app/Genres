@@ -27,11 +27,29 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 <link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
 
-//List
-const ListStyles = makeStyles((theme) => ({
-    root: {
+
+// Styles
+const useStyles = makeStyles((theme) => ({
+    tabForGenres: {
+        position: 'fixed', 
+        flexGrow: 1,
+        width: '100%',
+        backgroundColor: theme.palette.background.paper,
+        zIndex: 999,
+    },
+    sortByTime: {
+        position: 'fixed',
         width: '100%',
         maxWidth: 280,
+        marginTop: '30vh',
+        marginLeft: '88vw',
+        backgroundColor: theme.palette.background.paper,
+    },
+    sortByData: {
+        position: 'fixed',
+        width: '100%',
+        maxWidth: 280,
+        marginTop: "30vh",
         backgroundColor: theme.palette.background.paper,
     },
 }));
@@ -70,14 +88,6 @@ function a11yProps(index) {
     };
 }
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-        backgroundColor: theme.palette.background.paper,
-        width: '100%',
-    },
-}));
-
 //list for ranking(all time)
 const useStyles3 = makeStyles((theme) => ({
     root: {
@@ -105,16 +115,16 @@ const useStyles3 = makeStyles((theme) => ({
 }));
 
 export default function RankingPage() {
-    //tab1
+    
     const classes = useStyles();
+
+    //tab1
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    //list
-    const listclasses = ListStyles();
 
     //list for ranking
     const classes3 = useStyles3();
@@ -134,7 +144,7 @@ export default function RankingPage() {
 
         <ThemeProvider theme={theme}>
 
-            <div className={classes.root} style={{ position: 'fixed', zIndex: 999 }} >
+            <div className={classes.tabForGenres}>
                 <AppBar position="relative">
                     <Tabs
                         value={value}
@@ -151,7 +161,7 @@ export default function RankingPage() {
                 </AppBar>
             </div>
 
-            <div className={listclasses.root} style={{ position: 'fixed', marginLeft: '88vw', marginTop: '30vh' }}>
+            <div className={classes.sortByTime}>
                 <List component="nav">
                     <ListItem button onClick={() => switchTime(1)} >
                         <ListItemIcon>
@@ -187,12 +197,12 @@ export default function RankingPage() {
             </div>
 
 
-            <div className={listclasses.root} style={{ position: 'fixed', marginTop: "30vh"}} >
+            <div className={classes.sortByData}>
                 <List component="nav">
                     {ListGenres.map((item, index) => (
                         <ListItem button key={index}>
-                            <ListItemIcon className={listclasses.listItemIcon}>{item.icon}</ListItemIcon>
-                            <ListItemText className={listclasses.listItemText} primary={item.title} />
+                            <ListItemIcon className={classes.sortByDataIcon}>{item.icon}</ListItemIcon>
+                            <ListItemText className={classes.sortByDataText} primary={item.title} />
                         </ListItem>
                     ))}
                 </List>
