@@ -45,17 +45,15 @@ const useStyles = makeStyles((theme) => ({
     },
     sortByTime: {
         position: 'fixed',
-        width: '100%',
         maxWidth: 280,
-        marginTop: '30vh',
-        marginLeft: '88vw',
+        top: '30vh',
+        right: '24px',
         backgroundColor: theme.palette.background.paper,
     },
     sortByData: {
         position: 'fixed',
-        width: '100%',
         maxWidth: 280,
-        marginTop: "30vh",
+        top: "30vh",
         backgroundColor: theme.palette.background.paper,
     },
 }));
