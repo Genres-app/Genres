@@ -19,6 +19,10 @@ import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
+import clsx from 'clsx';
+
+<link href="blur.css" type="text/css" rel="stylesheet" />
+
 
 const useStyles = theme => ({
     root: {
@@ -27,7 +31,7 @@ const useStyles = theme => ({
     media: {
         height: '400px',
         width: '275px', 
-        padding: '20px'
+        padding: '20px',
     },
 });
 
@@ -42,6 +46,10 @@ class BookCarousel extends React.Component {
         )
     }
 
+    state = {
+        showBox: false
+      };
+    handleBoxToggle = () => this.setState({ showBox: !this.state.showBox });
     render() {
         const {classes} = this.props;
         const breakpoints = [
@@ -55,20 +63,22 @@ class BookCarousel extends React.Component {
         ];
 
         const handleDragStart = (e) => e.preventDefault();
-
-        const items = [
-            <a title="Hello World1!!!!" href='/novel'><img src={cover2} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a title="Hello World2!!!!" href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a title="Hello World3!!!!" href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a title="Hello World4!!!!" href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a title="Hello World5!!!!" href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a title="Hello World6!!!!" href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a title="Hello World7!!!!" href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>,
-    ];
-            
+         
         return (
         <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
-            {items}
+            <div
+            onMouseEnter={this.handleBoxToggle}
+            className={`container${this.state.showBox ? " show" : ""}`}
+      >     <div className="wrapper">
+            <a title="Hello World1!!!!" href='/novel'><img src={cover2} className={clsx(classes.media, "innerBox")} onDragStart={handleDragStart} /></a>
+            </div>
+            </div>
+            <a title="Hello World2!!!!" href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>
+            <a title="Hello World3!!!!" href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>
+            <a title="Hello World4!!!!" href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>
+            <a title="Hello World5!!!!" href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>
+            <a title="Hello World6!!!!" href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>
+            <a title="Hello World7!!!!" href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>
         </Carousel>
         )
     }
