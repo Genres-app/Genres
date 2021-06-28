@@ -13,6 +13,12 @@ import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
 
+import { makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = theme => ({
     root: {
@@ -22,7 +28,7 @@ const useStyles = theme => ({
         height: '400px',
         width: '275px', 
         padding: '20px'
-    }
+    },
 });
 
 
@@ -51,13 +57,13 @@ class BookCarousel extends React.Component {
         const handleDragStart = (e) => e.preventDefault();
 
         const items = [
-            <a href='/novel'><img src={cover2} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World1!!!!" href='/novel'><img src={cover2} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World2!!!!" href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World3!!!!" href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World4!!!!" href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World5!!!!" href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World6!!!!" href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a title="Hello World7!!!!" href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>,
     ];
             
         return (
