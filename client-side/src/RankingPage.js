@@ -359,7 +359,7 @@ export default function RankingPage() {
                 </List>
             </div>
 
-            <div style={{ display: 'none' }} className="C1">
+            <div style={{ display: 'block' }} className="C1">
                 {createRankingList(ListAllTime)}
             </div>
 
@@ -427,3 +427,4 @@ function switchTime(t) {
         console.log("Undefined!");
     }
 }
+
