@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component  } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import Icon from '@mdi/react';
+import {
+    mdiCircleSlice8,
+    mdiCircleSlice4,
+    mdiCircleSlice2,
+    mdiCircleSlice1,
+} from '@mdi/js';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import AppBar from '@material-ui/core/AppBar';
@@ -315,25 +322,25 @@ export default function RankingPage() {
                     </ListItem>
                     <ListItem button onClick={() => switchTime(2)} >
                         <ListItemIcon>
-                            <ScheduleOutlinedIcon />
+                            <Icon path={mdiCircleSlice8} size={1}/>
                         </ListItemIcon>
                         <ListItemText primary="Annual" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(3)} >
                         <ListItemIcon>
-                            <ScheduleOutlinedIcon />
+                            <Icon path={mdiCircleSlice4} size={1}/>
                         </ListItemIcon>
                         <ListItemText primary="Bi-annual" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(4)} >
                         <ListItemIcon>
-                            <ScheduleOutlinedIcon />
+                            <Icon path={mdiCircleSlice2} size={1}/>
                         </ListItemIcon>
                         <ListItemText primary="Season" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(5)} >
                         <ListItemIcon>
-                            <DateRangeOutlinedIcon />
+                            <Icon path={mdiCircleSlice1} size={1}/>
                         </ListItemIcon>
                         <ListItemText primary="Monthly" />
                     </ListItem>
