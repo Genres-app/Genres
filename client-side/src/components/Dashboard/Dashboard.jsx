@@ -205,6 +205,7 @@ const Dashboard = () => {
 
   const routeChange = (path) => { // Route to render new content
     history.push(path);
+    handleDrawerClose();
   }
 
   return (
@@ -313,8 +314,7 @@ const Dashboard = () => {
             user ? (
               <>
                 <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
-                <Typography className={classes.userName} variant="subtitle1">{user.result.username}</Typography>
-                <Typography className={classes.userEmail} variant="subtitle2">{user.result.email}</Typography>
+                <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
                 <div className={classes.profileBtnsOfDrawer}>
                   <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="secondary" disableElevation>Profile</Button>
                   <Button className={classes.logoutBtnOfDrawer} onClick={logout} variant="outlined">Logout</Button>

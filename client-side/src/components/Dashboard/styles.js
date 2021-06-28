@@ -44,13 +44,17 @@ const useStyles = makeStyles((theme) => ({
   },
 
   avatarOfDrawer: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
-    margin: theme.spacing(2),
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+    margin: 'auto',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(1),
+    fontSize: '3rem',
   },
 
   userName: {
-    marginLeft: theme.spacing(2),
+    margin: '0 auto',
+    marginBottom: theme.spacing(2),
   },
   userEmail: {
     marginLeft: theme.spacing(2),
