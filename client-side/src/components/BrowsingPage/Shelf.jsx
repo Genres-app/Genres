@@ -12,22 +12,28 @@ import cover4 from '../Assets/bookcover4.jpg';
 import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
-import Blur from 'react-css-blur'
+
 
 const useStyles = theme => ({
     root: {
         margin: 'auto',
     },
+    mediaContainer: {
+        overflow: 'hidden',
+        margin: '20px',
+    },
     media: {
         height: '300px',
         width: '200px', 
-        padding: '20px',
         display: 'block',
-        filter: 'drop-shadow(0 3px 7px #a1b4bf)',
+        transition: 'filter .2s',
+
+        "&:hover": {
+            filter: 'blur(10px)',
+        }
     },
 
 });
-
 
 
 class Shelf extends React.Component {
@@ -39,15 +45,6 @@ class Shelf extends React.Component {
         </Button>
         )
     }
-
-    state = {
-        blurOn: false
-    };
-
-    blurOn = (blurOn) => {
-        this.setState({ blurOn });
-    }
-    
 
     render() {
         const {classes} = this.props;
@@ -63,21 +60,20 @@ class Shelf extends React.Component {
 
         const handleDragStart = (e) => e.preventDefault();
 
-
+        const items = [
+            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>,
+    ];
             
-        return (   
-        <Blur breakPoints={breakpoints} renderArrow={this.myArrow} radius={ this.state.blurOn ? '5px' : '0' } transition="400ms">
-        <div onMouseEnter={ () => this.blurOn(true) } onMouseLeave={ () => this.blurOn(false) }> 
-        <a href='/novel'><img src={cover2} className={classes.media} onDragStart={handleDragStart} /></a>,
-        <a href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>,
-        <a href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>,
-        <a href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>,
-        <a href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>,
-        <a href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>,
-        <a href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>,
-        </div>
-        </Blur>
-        
+        return (
+        <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
+            {items}
+        </Carousel>
         )
     }
 }

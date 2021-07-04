@@ -5,37 +5,65 @@ import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import UpdateOutlinedIcon from '@material-ui/icons/UpdateOutlined';
 import WhatshotOutlinedIcon from '@material-ui/icons/WhatshotOutlined';
 
-import React, {useState,useEffect} from 'react'
+import React, { useState, useEffect, Component  } from 'react';
+import Icon from '@mdi/react';
+import {
+  mdiRun,
+  mdiDeathlyHallows,
+  mdiDeathStar,
+  mdiHeartOutline,
+  mdiHelpBox,
+  mdiGhostOutline,
+  mdiEmoticonFrown,
+  mdiCassette,
+  mdiEye,
+} from '@mdi/js';
+
 
 export const itemsSortData = [
     {
-    title: 'Liked',
-    icon: <ThumbUpOutlinedIcon/>,
+    title: 'Action',
+    icon: <Icon path={mdiRun} size={1}/>,
     cName: 'nav-text'
     },
     {
-    title: 'Trending',
-    icon: <TrendingUpOutlinedIcon/>,
+    title: 'Fantasy',
+    icon: <Icon path={mdiDeathlyHallows} size={1}/>,
     cName: 'nav-text'
     },
     {
-    title: 'Star',
-    icon: <StarBorderOutlinedIcon/>,
+    title: 'Sci-Fi',
+    icon: <Icon path={mdiDeathStar} size={1}/>,
     cName: 'nav-text'
     },
     {
-    title: 'Popular',
-    icon: <PeopleAltOutlinedIcon/>,
+    title: 'Romance',
+    icon: <Icon path={mdiHeartOutline} size={1}/>,
     cName: 'nav-text'
     },
     {
-    title: 'Update',
-    icon: <UpdateOutlinedIcon/>,
+    title: 'Mystery',
+    icon: <Icon path={mdiHelpBox} size={1}/>,
     cName: 'nav-text'
     },
     {
-    title: 'Active',
-    icon: <WhatshotOutlinedIcon/>,
+    title: 'Horror',
+    icon: <Icon path={mdiGhostOutline} size={1}/>,
+    cName: 'nav-text'
+    },
+    {
+    title: 'Thriller',
+    icon: <Icon path={mdiEmoticonFrown} size={1}/>,
+    cName: 'nav-text'
+    },
+    {
+    title: 'Non-fiction',
+    icon: <Icon path={mdiCassette} size={1}/>,
+    cName: 'nav-text'
+    },
+    {
+    title: 'Dystopian',
+    icon: <Icon path={mdiEye} size={1}/>,
     cName: 'nav-text'
     },
   ];
