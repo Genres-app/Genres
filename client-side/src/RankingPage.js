@@ -96,15 +96,26 @@ export default function RankingPage() {
         },
     });
 
-    const [open, setOpen] = React.useState(false);
+    // Left side bar control
+    const [leftOpen, setOpenL] = React.useState(false);
 
     const ToggleLeftSideBar = () => {
-        if (open) {
-            setOpen(false);
+        if (leftOpen) {
+            setOpenL(false);
         } else {
-            setOpen(true);
+            setOpenL(true);
         }
-        console.log(open);
+    }
+
+    // Right side bar control
+    const [rightOpen, setOpenR] = React.useState(false);
+
+    const ToggleRightSideBar = () => {
+        if (rightOpen) {
+            setOpenR(false);
+        } else {
+            setOpenR(true);
+        }
     }
 
 
@@ -194,7 +205,10 @@ export default function RankingPage() {
                 </AppBar>
             </div>
 
-            <div className={classes.sortByGenre}>
+            <div className={leftOpen
+                ? classes.sortByGenre
+                : clsx(classes.sortByGenre, classes.leftRetracted)
+            }>
                 <List component="nav">
                     {itemsSortGenre.map((item, index) => (
                         <ListItem button key={index}>
@@ -208,7 +222,10 @@ export default function RankingPage() {
                 </IconButton>
             </div>
 
-            <div className={classes.sortByTime}>
+            <div className={rightOpen
+                ? classes.sortByTime
+                : clsx(classes.sortByTime, classes.rightRetracted)
+            }>
                 <List component="nav">
                     <ListItem button onClick={() => switchTime(1)} >
                         <ListItemIcon>
@@ -241,6 +258,9 @@ export default function RankingPage() {
                         <ListItemText primary="Monthly" />
                     </ListItem>
                 </List>
+                <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar}>
+                    <Icon path={mdiChevronLeft} size={1} />
+                </IconButton>
             </div>
 
             <div style={{ display: 'block' }} className="C1">

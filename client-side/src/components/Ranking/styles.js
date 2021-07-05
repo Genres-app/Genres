@@ -14,34 +14,67 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         position: 'fixed',
-        // top: "30vh",
         height: "100%",
+        width: 170,
         maxWidth: 280,
         borderRight: "1px solid #dfe1e5",
         backgroundColor: theme.palette.background.paper,
+        transition: 'transform .2s',
+        "& nav": {
+            width: '100%',
+        }
+    },
+    leftRetracted: {
+        transform: 'translateX(calc(-100% + 57px))',
+        "& button": {
+            transform: 'rotate(-180deg)',
+        }
     },
     sortByGenreSwitch: {
         position: 'absolute',
         top: 64,
         right: 6,
         backgroundColor: theme.palette.background.paper,
+        transition: 'transform .3s',
     },
     sortByGenreIcon: {
         flexDirection: "row-reverse",
     },
     //Right Filter Side Bar
     sortByTime: {
+        display: 'flex',
+        alignItems: 'center',
         position: 'fixed',
+        height: "100%",
+        width: 170,
         maxWidth: 280,
-        top: '30vh',
         right: 0,
+        borderLeft: "1px solid #dfe1e5",
         backgroundColor: theme.palette.background.paper,
+        transition: 'transform .2s',
+        "& nav": {
+            width: '100%',
+        }
+    },
+    rightRetracted: {
+        transform: 'translateX(calc(100% - 57px))',
+        "& button": {
+            transform: 'rotate(0deg)',
+        }
+    },
+    sortByTimeSwitch: {
+        position: 'absolute',
+        top: 64,
+        left: 6,
+        backgroundColor: theme.palette.background.paper,
+        transform: 'rotate(-180deg)',
+        transition: 'transform .3s',
     },
     // Ranking List
     RankingContainer: {
         width: '75vw',
-        marginTop: "48px",
-        padding: '0',
+        marginTop: 64,
+        padding: 0,
         backgroundColor: 'transparent',
     },
     RankingCards: {
