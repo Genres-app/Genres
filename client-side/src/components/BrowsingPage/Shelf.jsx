@@ -14,6 +14,8 @@ import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
 
 
+<link href="show.css" type="text/css" rel="stylesheet"/>
+
 const useStyles = theme => ({
     root: {
         margin: 'auto',
@@ -22,6 +24,15 @@ const useStyles = theme => ({
         overflow: 'hidden',
         margin: '20px',
     },
+
+    text: {
+        fontSize: "20px",
+        color: "white",
+        position: 'absolute',
+        marginTop: "-160px",
+        marginLeft: "80px",
+    },
+
     media: {
         height: '300px',
         width: '200px', 
@@ -61,13 +72,13 @@ class Shelf extends React.Component {
         const handleDragStart = (e) => e.preventDefault();
 
         const items = [
-            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(1) } onMouseLeave={ () => hideText(1) }><img src={cover2} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello</div></div></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(2) } onMouseLeave={ () => hideText(2) }><img src={cover3} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello1</div></div></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(3) } onMouseLeave={ () => hideText(3) }><img src={cover4} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello2</div></div></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(4) } onMouseLeave={ () => hideText(4) }><img src={cover5} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello3</div></div></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(5) } onMouseLeave={ () => hideText(5) }><img src={cover6} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello4</div></div></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(6) } onMouseLeave={ () => hideText(6) }><img src={cover7} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello5</div></div></a>,
+            <a href='/novel' className={classes.mediaContainer} onMouseEnter={ () => showText(7) } onMouseLeave={ () => hideText(7) }><img src={cover1} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}><div  style ={{display: "none"}} className="show">hello6</div></div></a>,
     ];
             
         return (
@@ -79,3 +90,41 @@ class Shelf extends React.Component {
 }
 
 export default withStyles(useStyles)(Shelf);
+
+
+var x;
+function showText(x){
+    if(x == 1){
+    document.getElementsByClassName('show')[0].style.display = 'block';}
+    if(x == 2){
+    document.getElementsByClassName('show')[1].style.display = 'block';}
+    if(x == 3){
+    document.getElementsByClassName('show')[2].style.display = 'block';}
+    if(x == 4){
+    document.getElementsByClassName('show')[3].style.display = 'block';}
+    if(x == 5){
+    document.getElementsByClassName('show')[4].style.display = 'block';}
+    if(x == 6){
+    document.getElementsByClassName('show')[5].style.display = 'block';}
+    if(x == 7){
+    document.getElementsByClassName('show')[6].style.display = 'block';}
+
+}
+
+var y
+function hideText( y){
+    if(y == 1){
+    document.getElementsByClassName('show')[0].style.display = 'none';}
+    if(y == 2){
+    document.getElementsByClassName('show')[1].style.display = 'none';}
+    if(y == 3){
+    document.getElementsByClassName('show')[2].style.display = 'none';}
+    if(y == 4){
+    document.getElementsByClassName('show')[3].style.display = 'none';}
+    if(y == 5){
+    document.getElementsByClassName('show')[4].style.display = 'none';}
+    if(y == 6){
+    document.getElementsByClassName('show')[5].style.display = 'none';}
+    if(y == 7){
+    document.getElementsByClassName('show')[6].style.display = 'none';}
+}
