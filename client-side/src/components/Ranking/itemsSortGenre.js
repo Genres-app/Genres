@@ -20,7 +20,7 @@ import {
 } from '@mdi/js';
 
 
-export const itemsSortData = [
+export const itemsSortGenre = [
     {
     title: 'Action',
     icon: <Icon path={mdiRun} size={1}/>,
@@ -32,13 +32,18 @@ export const itemsSortData = [
     cName: 'nav-text'
     },
     {
+    title: 'Romance',
+    icon: <Icon path={mdiHeartOutline} size={1}/>,
+    cName: 'nav-text'
+    },
+    {
     title: 'Sci-Fi',
     icon: <Icon path={mdiDeathStar} size={1}/>,
     cName: 'nav-text'
     },
     {
-    title: 'Romance',
-    icon: <Icon path={mdiHeartOutline} size={1}/>,
+    title: 'Dystopian',
+    icon: <Icon path={mdiEye} size={1}/>,
     cName: 'nav-text'
     },
     {
@@ -59,11 +64,6 @@ export const itemsSortData = [
     {
     title: 'Non-fiction',
     icon: <Icon path={mdiCassette} size={1}/>,
-    cName: 'nav-text'
-    },
-    {
-    title: 'Dystopian',
-    icon: <Icon path={mdiEye} size={1}/>,
     cName: 'nav-text'
     },
   ];

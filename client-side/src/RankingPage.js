@@ -1,174 +1,44 @@
-import React, { useState, useEffect, Component  } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+//Icons
 import Icon from '@mdi/react';
 import {
+    mdiChevronLeft,
     mdiCircleSlice8,
     mdiCircleSlice4,
     mdiCircleSlice2,
     mdiCircleSlice1,
 } from '@mdi/js';
+import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';
+// Material UI Components
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import {
+    AppBar,
+    Tab,
+    Tabs,
+    Typography,
+    Box,
     Container,
     Card,
     CardContent,
-    withTheme
+    withTheme,
+    IconButton,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
 } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import { itemsSortData } from './components/Ranking/itemsSortData';
+
+import useStyles from './components/Ranking/styles';
+import { itemsSortGenre } from './components/Ranking/itemsSortGenre';
 import { ListAllTime } from './components/Ranking/allTime';
 import { ListAnnual } from './components/Ranking/annual';
 import { ListBiAnnual } from './components/Ranking/biAnnual';
 import { ListSeason } from './components/Ranking/season';
 import { ListMonthly } from './components/Ranking/monthly';
 
-// Material UI Icons
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import DateRangeOutlinedIcon from '@material-ui/icons/DateRangeOutlined';
-import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';
-import ScheduleOutlinedIcon from '@material-ui/icons/ScheduleOutlined';
-
-<link href="./components/Ranking/switchT.css" type="text/css" rel="stylesheet" />
-
-
-// Styles
-const useStyles = makeStyles((theme) => ({
-    tabForGenres: {
-        position: 'fixed',
-        flexGrow: 1,
-        width: '100%',
-        backgroundColor: theme.palette.background.paper,
-        zIndex: 999,
-    },
-    sortByTime: {
-        position: 'fixed',
-        maxWidth: 280,
-        top: '30vh',
-        right: 0,
-        backgroundColor: theme.palette.background.paper,
-    },
-    sortByData: {
-        position: 'fixed',
-        maxWidth: 280,
-        top: "30vh",
-        backgroundColor: theme.palette.background.paper,
-    },
-    // Ranking List
-    RankingContainer: {
-        width: '75vw',
-        marginTop: "48px",
-        padding: '0',
-        backgroundColor: 'transparent',
-    },
-    RankingCards: {
-        display: 'flex',
-        float: 'left',
-        width: 'calc(37vw - 32px - 2px)',
-        maxWidth: 606,
-        margin: 16,
-        border: '1px solid #dfe1e5',
-        borderRadius: 8,
-        boxShadow: 'none',
-
-        "&:hover": {
-            boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 1px 18px 0px rgb(0 0 0 / 12%)",
-        }
-    },
-    Rank1: {
-        margin: 13,
-        border: '4px solid #6030fe',
-    },
-    Rank2: {
-        margin: 13,
-        border: '4px solid #5581ff',
-    },
-    Rank3: {
-        margin: 13,
-        border: '4px solid #6fcffb',
-    },
-    //
-    RankingDecorator: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: 32,
-        backgroundColor: theme.palette.background.paper,
-        flexShrink: 0,
-
-        "& p": {
-            height: 'min-content',
-            transform: 'translateX(-2px)',
-            textAlign: 'center',
-            color: '#fff',
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            flexGrow: 2,
-        },
-        "& div": {
-            backgroundColor: theme.palette.background.paper,
-            width: 8,
-            height: '100%',
-            borderRadius: '8px 0 0 8px',
-        },
-    },
-    RankingDeco1: {
-        backgroundColor: '#6030fe',
-    },
-    RankingDeco2: {
-        backgroundColor: '#5581ff',
-    },
-    RankingDeco3: {
-        backgroundColor: '#6fcffb',
-    },
-    //
-    bookCover: {
-        height: '9.6vw',
-        width: '6vw',
-        maxHeight: 184.31,
-        maxWidth: 115.19,
-        margin: 24,
-        marginLeft: 16,
-        borderRadius: 0,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        flexShrink: 0,
-    },
-    bookInfo: {
-    },
-    bookTitle: {
-        marginLeft: 0,
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-
-        "&:hover": {
-            textDecoration: 'underline',
-        }
-    },
-    bookAuthor: {
-        color: '#651fff',
-        cursor: 'pointer',
-
-        "&:hover": {
-            textDecoration: 'underline',
-        }
-    },
-    bookDescrip: {
-        display: 'inline',
-    },
-}));
 
 //Tab for genre
 function TabPanel(props) {
@@ -226,6 +96,18 @@ export default function RankingPage() {
         },
     });
 
+    const [open, setOpen] = React.useState(false);
+
+    const ToggleLeftSideBar = () => {
+        if (open) {
+            setOpen(false);
+        } else {
+            setOpen(true);
+        }
+        console.log(open);
+    }
+
+
     // Function for creating ranking list
     const createRankingList = (sortedList) => (
 
@@ -237,26 +119,26 @@ export default function RankingPage() {
                     if (index == 0) {
                         cardClasses = clsx(classes.RankingCards, classes.Rank1);
                         decorator = (
-                        <div className={clsx(classes.RankingDecorator, classes.RankingDeco1)}>
-                            <Typography className={classes.RankingNum}>1</Typography>
-                            <div></div>
-                        </div>
+                            <div className={clsx(classes.RankingDecorator, classes.RankingDeco1)}>
+                                <Typography className={classes.RankingNum}>1</Typography>
+                                <div></div>
+                            </div>
                         );
                     } else if (index == 1) {
                         cardClasses = clsx(classes.RankingCards, classes.Rank2);
                         decorator = (
-                        <div className={clsx(classes.RankingDecorator, classes.RankingDeco2)}>
-                            <Typography className={classes.RankingNum}>2</Typography>
-                            <div></div>
-                        </div>
+                            <div className={clsx(classes.RankingDecorator, classes.RankingDeco2)}>
+                                <Typography className={classes.RankingNum}>2</Typography>
+                                <div></div>
+                            </div>
                         );
                     } else if (index == 2) {
                         cardClasses = clsx(classes.RankingCards, classes.Rank3);
                         decorator = (
-                        <div className={clsx(classes.RankingDecorator, classes.RankingDeco3)}>
-                            <Typography className={classes.RankingNum}>3</Typography>
-                            <div></div>
-                        </div>
+                            <div className={clsx(classes.RankingDecorator, classes.RankingDeco3)}>
+                                <Typography className={classes.RankingNum}>3</Typography>
+                                <div></div>
+                            </div>
                         );
                     } else {
                         cardClasses = classes.RankingCards;
@@ -295,7 +177,7 @@ export default function RankingPage() {
 
         <ThemeProvider theme={theme}>
 
-            <div className={classes.tabForGenres}>
+            <div className={classes.sortByData}>
                 <AppBar position="relative">
                     <Tabs
                         value={value}
@@ -305,11 +187,25 @@ export default function RankingPage() {
                         indicatorColor="secondary"
                         textColor="secondary"
                     >
-                        <Tab label="Novels" {...a11yProps(0)} />
-                        <Tab label="Fan-fic" {...a11yProps(1)} />
-                        <Tab label="Comics" {...a11yProps(2)} />
+                        <Tab label="Likes" {...a11yProps(0)} />
+                        <Tab label="Stars" {...a11yProps(1)} />
+                        <Tab label="Comments" {...a11yProps(2)} />
                     </Tabs>
                 </AppBar>
+            </div>
+
+            <div className={classes.sortByGenre}>
+                <List component="nav">
+                    {itemsSortGenre.map((item, index) => (
+                        <ListItem button key={index}>
+                            <ListItemText className={classes.sortByGenreText} primary={item.title} />
+                            <ListItemIcon className={classes.sortByGenreIcon}>{item.icon}</ListItemIcon>
+                        </ListItem>
+                    ))}
+                </List>
+                <IconButton aria-label="filter" className={classes.sortByGenreSwitch} onClick={ToggleLeftSideBar}>
+                    <Icon path={mdiChevronLeft} size={1} />
+                </IconButton>
             </div>
 
             <div className={classes.sortByTime}>
@@ -322,40 +218,28 @@ export default function RankingPage() {
                     </ListItem>
                     <ListItem button onClick={() => switchTime(2)} >
                         <ListItemIcon>
-                            <Icon path={mdiCircleSlice8} size={1}/>
+                            <Icon path={mdiCircleSlice8} size={1} />
                         </ListItemIcon>
                         <ListItemText primary="Annual" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(3)} >
                         <ListItemIcon>
-                            <Icon path={mdiCircleSlice4} size={1}/>
+                            <Icon path={mdiCircleSlice4} size={1} />
                         </ListItemIcon>
                         <ListItemText primary="Bi-annual" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(4)} >
                         <ListItemIcon>
-                            <Icon path={mdiCircleSlice2} size={1}/>
+                            <Icon path={mdiCircleSlice2} size={1} />
                         </ListItemIcon>
                         <ListItemText primary="Season" />
                     </ListItem>
                     <ListItem button onClick={() => switchTime(5)} >
                         <ListItemIcon>
-                            <Icon path={mdiCircleSlice1} size={1}/>
+                            <Icon path={mdiCircleSlice1} size={1} />
                         </ListItemIcon>
                         <ListItemText primary="Monthly" />
                     </ListItem>
-                </List>
-            </div>
-
-
-            <div className={classes.sortByData}>
-                <List component="nav">
-                    {itemsSortData.map((item, index) => (
-                        <ListItem button key={index}>
-                            <ListItemIcon className={classes.sortByDataIcon}>{item.icon}</ListItemIcon>
-                            <ListItemText className={classes.sortByDataText} primary={item.title} />
-                        </ListItem>
-                    ))}
                 </List>
             </div>
 
