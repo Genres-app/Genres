@@ -12,7 +12,7 @@ import {
 } from '@mdi/js';
 import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';
 // Material UI Components
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import {
     AppBar,
@@ -78,11 +78,25 @@ export default function RankingPage() {
 
     const classes = useStyles();
 
-    //tab1
+    // Top Tab
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+    };
+
+    // Left Tab
+    const [valueL, setValueL] = React.useState(0);
+
+    const handleChangeLeft = (event, newValue) => {
+        setValueL(newValue);
+    };
+
+    // Left Tab
+    const [valueR, setValueR] = React.useState(0);
+
+    const handleChangeRight = (event, newValue) => {
+        setValueR(newValue);
     };
 
     // Theme
@@ -193,7 +207,7 @@ export default function RankingPage() {
                     <Tabs
                         value={value}
                         onChange={handleChange}
-                        aria-label="simple tabs example"
+                        aria-label="Sort by data"
                         centered
                         indicatorColor="secondary"
                         textColor="secondary"
@@ -209,14 +223,21 @@ export default function RankingPage() {
                 ? classes.sortByGenre
                 : clsx(classes.sortByGenre, classes.leftRetracted)
             }>
-                <List component="nav">
+                <Tabs
+                    orientation="vertical"
+                    variant="scrollable"
+                    value={valueL}
+                    onChange={handleChangeLeft}
+                    aria-label="Sort by genre"
+                >
                     {itemsSortGenre.map((item, index) => (
-                        <ListItem button key={index}>
-                            <ListItemText className={classes.sortByGenreText} primary={item.title} />
-                            <ListItemIcon className={classes.sortByGenreIcon}>{item.icon}</ListItemIcon>
-                        </ListItem>
+                        <Tab key={index} label={item.title} icon={item.icon}
+                            classes={{
+                                labelIcon: classes.sideTabsWithIconL,
+                                wrapper: classes.sideTabsLeft,
+                            }} />
                     ))}
-                </List>
+                </Tabs>
                 <IconButton aria-label="filter" className={classes.sortByGenreSwitch} onClick={ToggleLeftSideBar}>
                     <Icon path={mdiChevronLeft} size={1} />
                 </IconButton>
@@ -226,7 +247,49 @@ export default function RankingPage() {
                 ? classes.sortByTime
                 : clsx(classes.sortByTime, classes.rightRetracted)
             }>
-                <List component="nav">
+                <Tabs
+                    orientation="vertical"
+                    variant="scrollable"
+                    value={valueR}
+                    onChange={handleChangeRight}
+                    aria-label="Sort by Time"
+                    classes={{indicator: classes.rightTabIndicator}}
+                >
+
+                    <Tab label="All-time" icon={<AllInclusiveOutlinedIcon />}
+                        classes={{
+                            labelIcon: classes.sideTabsWithIconR,
+                            wrapper: classes.sideTabsRight,
+                        }} 
+                        onClick={() => switchTime(1)}/>
+                    <Tab label="Annual" icon={<Icon path={mdiCircleSlice8} size={1} />}
+                        classes={{
+                            labelIcon: classes.sideTabsWithIconR,
+                            wrapper: classes.sideTabsRight,
+                        }} 
+                        onClick={() => switchTime(2)}/>
+                    <Tab label="Bi-annual" icon={<Icon path={mdiCircleSlice4} size={1} />}
+                        classes={{
+                            labelIcon: classes.sideTabsWithIconR,
+                            wrapper: classes.sideTabsRight,
+                        }} 
+                        onClick={() => switchTime(3)}/>
+                    <Tab label="Season" icon={<Icon path={mdiCircleSlice2} size={1} />}
+                        classes={{
+                            labelIcon: classes.sideTabsWithIconR,
+                            wrapper: classes.sideTabsRight,
+                        }} 
+                        onClick={() => switchTime(4)}/>
+                    <Tab label="Monthly" icon={<Icon path={mdiCircleSlice1} size={1} />}
+                        classes={{
+                            labelIcon: classes.sideTabsWithIconR,
+                            wrapper: classes.sideTabsRight,
+                        }} 
+                        onClick={() => switchTime(5)}/>
+
+                </Tabs>
+
+                {/* <List component="nav">
                     <ListItem button onClick={() => switchTime(1)} >
                         <ListItemIcon>
                             <AllInclusiveOutlinedIcon />
@@ -257,7 +320,7 @@ export default function RankingPage() {
                         </ListItemIcon>
                         <ListItemText primary="Monthly" />
                     </ListItem>
-                </List>
+                </List> */}
                 <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar}>
                     <Icon path={mdiChevronLeft} size={1} />
                 </IconButton>

@@ -1,3 +1,4 @@
+import { blue } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,13 +21,25 @@ const useStyles = makeStyles((theme) => ({
         borderRight: "1px solid #dfe1e5",
         backgroundColor: theme.palette.background.paper,
         transition: 'transform .2s',
-        "& nav": {
-            width: '100%',
+    },
+    sideTabsWithIconL: {
+        height: 48,
+        minHeight: 0,
+        width: 170,
+        paddingTop: 12,
+        paddingRight: 16,
+        paddingLeft: 16,
+    },
+    sideTabsLeft: {
+        display: "block",
+        textAlign: "left",
+        "& svg": {
+            float: "right",
         }
     },
     leftRetracted: {
         transform: 'translateX(calc(-100% + 57px))',
-        "& button": {
+        "& > button": {
             transform: 'rotate(-180deg)',
         }
     },
@@ -36,9 +49,6 @@ const useStyles = makeStyles((theme) => ({
         right: 6,
         backgroundColor: theme.palette.background.paper,
         transition: 'transform .3s',
-    },
-    sortByGenreIcon: {
-        flexDirection: "row-reverse",
     },
     //Right Filter Side Bar
     sortByTime: {
@@ -52,13 +62,31 @@ const useStyles = makeStyles((theme) => ({
         borderLeft: "1px solid #dfe1e5",
         backgroundColor: theme.palette.background.paper,
         transition: 'transform .2s',
-        "& nav": {
-            width: '100%',
+    },
+    rightTabIndicator: {
+        right: "auto",
+        left: 0,
+    },
+    sideTabsWithIconR: {
+        height: 48,
+        minHeight: 0,
+        width: 170,
+        paddingTop: 6,
+        paddingRight: 16,
+        paddingLeft: 56,
+    },
+    sideTabsRight: {
+        position: 'relative',
+        display: "block",
+        textAlign: "left",
+        "& svg": {
+            position: "absolute",
+            left: -40,
         }
     },
     rightRetracted: {
         transform: 'translateX(calc(100% - 57px))',
-        "& button": {
+        "& > button": {
             transform: 'rotate(0deg)',
         }
     },
