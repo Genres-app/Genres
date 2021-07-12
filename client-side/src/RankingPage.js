@@ -9,6 +9,9 @@ import {
     mdiCircleSlice4,
     mdiCircleSlice2,
     mdiCircleSlice1,
+    mdiThumbUpOutline,
+    mdiStarOutline,
+    mdiCommentMultipleOutline,
 } from '@mdi/js';
 import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';
 // Material UI Components
@@ -29,6 +32,7 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
+    Chip,
 } from '@material-ui/core';
 
 import useStyles from './components/Ranking/styles';
@@ -38,6 +42,7 @@ import { ListAnnual } from './components/Ranking/annual';
 import { ListBiAnnual } from './components/Ranking/biAnnual';
 import { ListSeason } from './components/Ranking/season';
 import { ListMonthly } from './components/Ranking/monthly';
+import ThumbUpOutlined from '@material-ui/icons/ThumbUpOutlined';
 
 
 //Tab for genre
@@ -180,15 +185,18 @@ export default function RankingPage() {
                                 <Typography className={classes.bookAuthor}>
                                     Author Name
                                 </Typography>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    className={classes.bookDescrip}
-                                    color="textSecondary"
-                                >
-                                    {/* {item.secondarytext} */}
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et sagittis tortor. Nam efficitur vel lacus a commodo.
-                                </Typography>
+                                <div className={classes.chipContainer}>
+                                    <Chip size="small" label="Tag0" clickable className={classes.chip} />
+                                    <Chip size="small" label="Tag1" clickable className={classes.chip} />
+                                    <Chip size="small" label="Tag2" clickable className={classes.chip} />
+                                </div>
+                                <div className={classes.bookData}>
+                                    <div>
+                                        <div><Icon path={mdiThumbUpOutline} size={1} /><p>3.5k</p></div>
+                                        <div><Icon path={mdiStarOutline} size={1} /><p>6.0k</p></div>
+                                        <div><Icon path={mdiCommentMultipleOutline} size={1} /><p>1.2k</p></div>
+                                    </div>
+                                </div>
                             </CardContent>
                         </Card>
                     )
@@ -253,74 +261,42 @@ export default function RankingPage() {
                     value={valueR}
                     onChange={handleChangeRight}
                     aria-label="Sort by Time"
-                    classes={{indicator: classes.rightTabIndicator}}
+                    classes={{ indicator: classes.rightTabIndicator }}
                 >
 
                     <Tab label="All-time" icon={<AllInclusiveOutlinedIcon />}
                         classes={{
                             labelIcon: classes.sideTabsWithIconR,
                             wrapper: classes.sideTabsRight,
-                        }} 
-                        onClick={() => switchTime(1)}/>
+                        }}
+                        onClick={() => switchTime(1)} />
                     <Tab label="Annual" icon={<Icon path={mdiCircleSlice8} size={1} />}
                         classes={{
                             labelIcon: classes.sideTabsWithIconR,
                             wrapper: classes.sideTabsRight,
-                        }} 
-                        onClick={() => switchTime(2)}/>
+                        }}
+                        onClick={() => switchTime(2)} />
                     <Tab label="Bi-annual" icon={<Icon path={mdiCircleSlice4} size={1} />}
                         classes={{
                             labelIcon: classes.sideTabsWithIconR,
                             wrapper: classes.sideTabsRight,
-                        }} 
-                        onClick={() => switchTime(3)}/>
+                        }}
+                        onClick={() => switchTime(3)} />
                     <Tab label="Season" icon={<Icon path={mdiCircleSlice2} size={1} />}
                         classes={{
                             labelIcon: classes.sideTabsWithIconR,
                             wrapper: classes.sideTabsRight,
-                        }} 
-                        onClick={() => switchTime(4)}/>
+                        }}
+                        onClick={() => switchTime(4)} />
                     <Tab label="Monthly" icon={<Icon path={mdiCircleSlice1} size={1} />}
                         classes={{
                             labelIcon: classes.sideTabsWithIconR,
                             wrapper: classes.sideTabsRight,
-                        }} 
-                        onClick={() => switchTime(5)}/>
+                        }}
+                        onClick={() => switchTime(5)} />
 
                 </Tabs>
 
-                {/* <List component="nav">
-                    <ListItem button onClick={() => switchTime(1)} >
-                        <ListItemIcon>
-                            <AllInclusiveOutlinedIcon />
-                        </ListItemIcon>
-                        <ListItemText primary="All-time" />
-                    </ListItem>
-                    <ListItem button onClick={() => switchTime(2)} >
-                        <ListItemIcon>
-                            <Icon path={mdiCircleSlice8} size={1} />
-                        </ListItemIcon>
-                        <ListItemText primary="Annual" />
-                    </ListItem>
-                    <ListItem button onClick={() => switchTime(3)} >
-                        <ListItemIcon>
-                            <Icon path={mdiCircleSlice4} size={1} />
-                        </ListItemIcon>
-                        <ListItemText primary="Bi-annual" />
-                    </ListItem>
-                    <ListItem button onClick={() => switchTime(4)} >
-                        <ListItemIcon>
-                            <Icon path={mdiCircleSlice2} size={1} />
-                        </ListItemIcon>
-                        <ListItemText primary="Season" />
-                    </ListItem>
-                    <ListItem button onClick={() => switchTime(5)} >
-                        <ListItemIcon>
-                            <Icon path={mdiCircleSlice1} size={1} />
-                        </ListItemIcon>
-                        <ListItemText primary="Monthly" />
-                    </ListItem>
-                </List> */}
                 <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar}>
                     <Icon path={mdiChevronLeft} size={1} />
                 </IconButton>

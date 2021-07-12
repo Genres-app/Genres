@@ -110,6 +110,7 @@ const useStyles = makeStyles((theme) => ({
         float: 'left',
         width: 'calc(37vw - 32px - 2px)',
         maxWidth: 606,
+        minWidth: 492,
         margin: 16,
         border: '1px solid #dfe1e5',
         borderRadius: 8,
@@ -171,6 +172,8 @@ const useStyles = makeStyles((theme) => ({
         width: '6vw',
         maxHeight: 184.31,
         maxWidth: 115.19,
+        minHeight: 136,
+        minWidth: 85,
         margin: 24,
         marginLeft: 16,
         borderRadius: 0,
@@ -179,6 +182,9 @@ const useStyles = makeStyles((theme) => ({
         flexShrink: 0,
     },
     bookInfo: {
+        display: "flex",
+        flexDirection: "column",
+        flexGrow: 1,
     },
     bookTitle: {
         marginLeft: 0,
@@ -198,8 +204,51 @@ const useStyles = makeStyles((theme) => ({
             textDecoration: 'underline',
         }
     },
-    bookDescrip: {
-        display: 'inline',
+    chipContainer: {
+        marginTop: theme.spacing(0.5),
+    },
+    chip: {
+        margin: theme.spacing(0.5),
+        "&:first-child": {
+            marginLeft: 0,
+        }
+    },
+    bookData: {
+        display: "flex",
+        flexDirection: "column-reverse",
+        marginTop: theme.spacing(2),
+        fontFamily: theme.typography.fontFamily,
+        fontWeight: 500,
+        // alignItems: "end",
+        flexGrow: 1,
+
+        "& > div": {
+            display: "flex",
+            justifyContent: "center",
+            maxHeight: 40,
+            width: "100%",
+            flexGrow: 1,
+        },
+
+        "& > div > div": {
+            display: "flex",
+            flexGrow: 1,
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        "& > div > div:not(:last-child)": {
+            marginRight: theme.spacing(2.5),
+            paddingRight: theme.spacing(2.5),
+            borderRight: "1px solid #dfe1e5",
+        },
+        
+        "& svg": {
+            marginRight: theme.spacing(1),
+        },
+        "& p": {
+            margin: 0,
+            marginTop: 4,
+        },
     },
 }));
 
