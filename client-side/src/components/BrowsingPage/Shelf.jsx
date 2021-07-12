@@ -20,14 +20,18 @@ import Paper from '@material-ui/core/Paper';
 
 
 const useStyles = theme => ({
-    root: {
-        margin: 'auto',
-        
+    shelf: {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
     },
     mediaContainer: {
+        display: 'block',
         overflow: 'hidden',
         margin: '20px',
-        width: 40,
+        width: 200,
+        height: 300,
+
 
         "&:hover": {
             "& div": {
@@ -38,7 +42,7 @@ const useStyles = theme => ({
 
     text: {
         fontSize: "20px",
-        color: "black",
+        color: "#fff",
         position: 'absolute',
         marginTop: "-160px",
         marginLeft: "80px",
@@ -52,11 +56,12 @@ const useStyles = theme => ({
         width: '200px',
         display: 'block',
         transition: 'filter .2s',
+        margin: 0,
 
 
 
         "&:hover": {
-            filter: 'blur(2px) brightness(.5)',
+            filter: 'blur(10px) brightness(.5)',
         }
     },
 
@@ -94,15 +99,33 @@ class Shelf extends React.Component {
             <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media}/><div className={classes.text}>hello3</div></a>,
             <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media}/><div className={classes.text}>hello4</div></a>,
             <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media}/><div className={classes.text}>hello5</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media}/><div className={classes.text}>hello</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media}/><div className={classes.text}>hello1</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media}/><div className={classes.text}>hello2</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media}/><div className={classes.text}>hello3</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media}/><div className={classes.text}>hello4</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media}/><div className={classes.text}>hello5</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media}/><div className={classes.text}>hello</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media}/><div className={classes.text}>hello1</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media}/><div className={classes.text}>hello2</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media}/><div className={classes.text}>hello3</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media}/><div className={classes.text}>hello4</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media}/><div className={classes.text}>hello5</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media}/><div className={classes.text}>hello</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media}/><div className={classes.text}>hello1</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media}/><div className={classes.text}>hello2</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media}/><div className={classes.text}>hello3</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media}/><div className={classes.text}>hello4</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media}/><div className={classes.text}>hello5</div></a>,
             //<a href='/novel' className={classes.mediaContainer}><img src={cover1} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello6</div></a>,
         ];
 
         return (
-            <Grid breakPoints={breakpoints} >
+            <div className={classes.shelf}>
 
                 {items}
 
-            </Grid>
+            </div>
         )
     }
 }

@@ -122,11 +122,14 @@ const useStyles = makeStyles((theme) => ({
   
   search: {
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
+    // borderRadius: theme.shape.borderRadius,
+    borderRadius: 8,
+    backgroundColor: "#f1f3f4",
+    // fade(theme.palette.common.white, 0.15),
+    // '&:hover': {
+    //   backgroundColor: fade(theme.palette.common.white, 0.25),
+    // },
+    height: 48,
     marginRight: theme.spacing(2),
     marginLeft: 0,
     width: '100%',

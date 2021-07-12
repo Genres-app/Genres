@@ -247,7 +247,7 @@ const Dashboard = () => {
             {
               user ? (
                 <>
-                  {/* <div className={classes.search}>
+                  <div className={classes.search}>
                     <div className={classes.searchIcon}>
                       <SearchIcon />
                     </div>
@@ -259,8 +259,8 @@ const Dashboard = () => {
                       }}
                       inputProps={{ 'aria-label': 'search' }}
                     />
-                  </div> */}
-                  <Searchbar items={genres} />
+                  </div>
+                  {/* <Searchbar items={genres} /> */}
                 </>
               ) : (
                 <></>
