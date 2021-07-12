@@ -11,9 +11,9 @@ import cover4 from '../Assets/bookcover4.jpg';
 import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
+import { Paper,Typography, Grid } from '@material-ui/core'
 
 
-<link href="show.css" type="text/css" rel="stylesheet" />
 
 const useStyles = theme => ({
     root: {
@@ -55,14 +55,14 @@ const useStyles = theme => ({
 
 
 class Shelf extends React.Component {
-    myArrow({ type, onClick, isEdge }) {
+    /*myArrow({ type, onClick, isEdge }) {
         const pointer = type === consts.PREV ? <PrevArrow /> : <NextArrow />
         return (
             <Button disableRipple onClick={onClick} disabled={isEdge} style={{ background: 'transparent' }}>
                 {pointer}
             </Button>
         )
-    }
+    }*/
 
     render() {
         const { classes } = this.props;
@@ -89,9 +89,11 @@ class Shelf extends React.Component {
         ];
 
         return (
-            <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
+            <Grid breakPoints={breakpoints} >
+            <Carousel breakPoints={breakpoints} >
                 {items}
             </Carousel>
+            </Grid>
         )
     }
 }
