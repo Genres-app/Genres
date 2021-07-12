@@ -242,7 +242,7 @@ const Dashboard = () => {
               <img src={GenresLogo} height='50px' alt=""></img>
             </Link>
 
-            <div className={classes.grow} />
+            {/* <div className={classes.grow} /> */}
 
             {
               user ? (
