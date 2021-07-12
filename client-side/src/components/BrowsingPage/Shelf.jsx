@@ -11,17 +11,23 @@ import cover4 from '../Assets/bookcover4.jpg';
 import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
-import { Paper,Typography, Grid } from '@material-ui/core'
-
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import Paper from '@material-ui/core/Paper';
 
 
 const useStyles = theme => ({
     root: {
         margin: 'auto',
+        
     },
     mediaContainer: {
         overflow: 'hidden',
         margin: '20px',
+        width: 40,
 
         "&:hover": {
             "& div": {
@@ -32,12 +38,13 @@ const useStyles = theme => ({
 
     text: {
         fontSize: "20px",
-        color: "white",
+        color: "black",
         position: 'absolute',
         marginTop: "-160px",
         marginLeft: "80px",
         transition: "opacity .2s",
         opacity: 0,
+        display:"block",
     },
 
     media: {
@@ -46,8 +53,10 @@ const useStyles = theme => ({
         display: 'block',
         transition: 'filter .2s',
 
+
+
         "&:hover": {
-            filter: 'blur(10px) brightness(.5)',
+            filter: 'blur(2px) brightness(.5)',
         }
     },
 
@@ -67,32 +76,32 @@ class Shelf extends React.Component {
     render() {
         const { classes } = this.props;
         const breakpoints = [
-            { width: 1, itemsToShow: 1, pagination: false },
-            { width: 500, itemsToShow: 3, pagination: false },
-            { width: 850, itemsToShow: 4, pagination: false },
-            { width: 1150, itemsToShow: 5, pagination: false },
-            { width: 1300, itemsToShow: 6, pagination: false },
+            { width: 1, itemsToShow: 1},
+            { width: 500, itemsToShow: 3},
+            { width: 850, itemsToShow: 4 },
+            { width: 1150, itemsToShow: 5 },
+            { width: 1300, itemsToShow: 6 },
             //{ width: 1800, itemsToShow: 7/*, pagination: false*/ },
 
         ];
 
-        const handleDragStart = (e) => e.preventDefault();
+        //const handleDragStart = (e) => e.preventDefault();
 
         const items = [
-            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello</div></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello1</div></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello2</div></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello3</div></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello4</div></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello5</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover2} className={classes.media}/><div className={classes.text}>hello</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover3} className={classes.media}/><div className={classes.text}>hello1</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover4} className={classes.media}/><div className={classes.text}>hello2</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media}/><div className={classes.text}>hello3</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media}/><div className={classes.text}>hello4</div></a>,
+            <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media}/><div className={classes.text}>hello5</div></a>,
             //<a href='/novel' className={classes.mediaContainer}><img src={cover1} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello6</div></a>,
         ];
 
         return (
             <Grid breakPoints={breakpoints} >
-            <Carousel breakPoints={breakpoints} >
+
                 {items}
-            </Carousel>
+
             </Grid>
         )
     }
