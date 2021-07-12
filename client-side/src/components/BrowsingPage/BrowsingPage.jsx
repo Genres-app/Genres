@@ -11,12 +11,12 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: '#ebf7ff'
+        background: '#ffff'
     },
     search: {
         width: 500,
         margin: '20px 0',
-        background: '#f5fbff'
+        background: '#ffff'
     },    
     heading: {
         fontSize: '180%', 
@@ -30,17 +30,19 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: "75px"
     },
     searchBarPadding: {
-        padding: '20px 0'
+        padding: '20px 0',
+        background: "#ffff",
     },
     image: {
         padding: '100px'
     },
     shelf: {
-        filter: 'drop-shadow(1px 1px 10px #a9bcc7)',
+       //filter: 'drop-shadow(1px 1px 10px #a9bcc7)',
         paddingRight: '10%',
         paddingLeft: '10%',
         paddingTop: '20px',
-        paddingBottom: '35px'
+        paddingBottom: '35px',
+        background: "#ffff",
     }
 }
 ));
@@ -76,7 +78,7 @@ export default function Body() {
             <Grid item xs={12} className={classes.bottomPadding} align='center' justify='center' alignItems='center'>
                     <div 
                         className={classes.shelf}
-                        style={{ backgroundImage: `url(${shelfSVG})`, 
+                        style={{ //backgroundImage: `url(${shelfSVG})`, 
                                 backgroundRepeat: 'repeat-y',
                                 backgroundRepeat: 'no-repeat',
                                 backgroundOrigin: 'content-box',
@@ -87,7 +89,7 @@ export default function Body() {
 
                     <div 
                         className={classes.shelf}
-                        style={{ backgroundImage: `url(${shelfSVG})`, 
+                        style={{ //backgroundImage: `url(${shelfSVG})`, 
                                 backgroundRepeat: 'repeat-y',
                                 backgroundRepeat: 'no-repeat',
                                 backgroundOrigin: 'content-box',
@@ -95,6 +97,30 @@ export default function Body() {
                                 }}>
                         <Shelf/>
                     </div>
+
+                    <div 
+                        className={classes.shelf}
+                        style={{ //backgroundImage: `url(${shelfSVG})`, 
+                                backgroundRepeat: 'repeat-y',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundOrigin: 'content-box',
+                                backgroundPosition: '0 260px',
+                                }}>
+                        <Shelf/>
+                    </div>
+
+
+                    <div 
+                        className={classes.shelf}
+                        style={{ //backgroundImage: `url(${shelfSVG})`, 
+                                backgroundRepeat: 'repeat-y',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundOrigin: 'content-box',
+                                backgroundPosition: '0 260px',
+                                }}>
+                        <Shelf/>
+                    </div>
+
 {/* 
                     <div 
                         className={classes.shelf}

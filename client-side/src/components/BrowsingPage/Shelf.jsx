@@ -4,7 +4,6 @@ import PrevArrow from '@material-ui/icons/ArrowBackIos';
 import NextArrow from '@material-ui/icons/ArrowForwardIos';
 import Button from '@material-ui/core/Button';
 import Carousel, { consts } from 'react-elastic-carousel';
-import Card from '@material-ui/core/Card';
 import cover1 from '../Assets/bookcover1.jpg';
 import cover2 from '../Assets/bookcover2.jpg';
 import cover3 from '../Assets/bookcover3.jpg';
@@ -73,7 +72,7 @@ class Shelf extends React.Component {
             { width: 850, itemsToShow: 4, pagination: false },
             { width: 1150, itemsToShow: 5, pagination: false },
             { width: 1300, itemsToShow: 6, pagination: false },
-            { width: 1800, itemsToShow: 7, pagination: false },
+            //{ width: 1800, itemsToShow: 7/*, pagination: false*/ },
 
         ];
 
@@ -86,7 +85,7 @@ class Shelf extends React.Component {
             <a href='/novel' className={classes.mediaContainer}><img src={cover5} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello3</div></a>,
             <a href='/novel' className={classes.mediaContainer}><img src={cover6} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello4</div></a>,
             <a href='/novel' className={classes.mediaContainer}><img src={cover7} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello5</div></a>,
-            <a href='/novel' className={classes.mediaContainer}><img src={cover1} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello6</div></a>,
+            //<a href='/novel' className={classes.mediaContainer}><img src={cover1} className={classes.media} onDragStart={handleDragStart} /><div className={classes.text}>hello6</div></a>,
         ];
 
         return (
