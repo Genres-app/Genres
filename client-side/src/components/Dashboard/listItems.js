@@ -7,6 +7,8 @@ import HistoryOutlinedIcon from '@material-ui/icons/HistoryOutlined';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ClassOutlinedIcon from '@material-ui/icons/ClassOutlined';
 import ForumOutlinedIcon from '@material-ui/icons/ForumOutlined';
+import Icon from '@mdi/react';
+import { mdiBeta } from '@mdi/js';
 
 
 export const ListItems = [
@@ -45,6 +47,12 @@ export const ListItems = [
   title: 'Write',
   path: '/writing',
   icon: <CreateOutlinedIcon/>,
+  cName: 'nav-text'
+  },
+  {
+  title: 'Beta-Reading',
+  path: '/beta-reading',
+  icon: <Icon path={mdiBeta} size={1} />,
   cName: 'nav-text'
   },
   {

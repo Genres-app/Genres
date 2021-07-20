@@ -227,6 +227,9 @@ export default function RankingPage() {
                 </AppBar>
             </div>
 
+            <div className={classes.sortByGenreTitle}>
+                <Typography variant="overline">Filter by Genres</Typography>
+            </div>
             <div className={leftOpen
                 ? classes.sortByGenre
                 : clsx(classes.sortByGenre, classes.leftRetracted)
@@ -251,6 +254,9 @@ export default function RankingPage() {
                 </IconButton>
             </div>
 
+            <div className={classes.sortByTimeTitle}>
+                <Typography variant="overline">Filter by Time</Typography>
+            </div>
             <div className={rightOpen
                 ? classes.sortByTime
                 : clsx(classes.sortByTime, classes.rightRetracted)

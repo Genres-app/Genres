@@ -11,6 +11,19 @@ const useStyles = makeStyles((theme) => ({
         zIndex: 999,
     },
     //Left Filter Side Bar
+    sortByGenreTitle: {
+        position: 'fixed',
+        top: 'calc(64px + 50vh)',
+        left: 56,
+        transform: 'rotate(90deg) translateX(-50%) translateY(-100%)',
+        transformOrigin: '0 0',
+
+        "& span": {
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            color: '#a2a2a2',
+        }
+    },
     sortByGenre: {
         display: 'flex',
         alignItems: 'center',
@@ -46,11 +59,24 @@ const useStyles = makeStyles((theme) => ({
     sortByGenreSwitch: {
         position: 'absolute',
         top: 64,
-        right: 6,
+        right: 4,
         backgroundColor: theme.palette.background.paper,
         transition: 'transform .3s',
     },
     //Right Filter Side Bar
+    sortByTimeTitle: {
+        position: 'fixed',
+        top: 'calc(64px + 50vh)',
+        right: 56,
+        transform: 'rotate(90deg) translateX(50%)',
+        transformOrigin: 'top right',
+
+        "& span": {
+            fontSize: '1rem',
+            fontWeight: 'bold',
+            color: '#a2a2a2',
+        }
+    },
     sortByTime: {
         display: 'flex',
         alignItems: 'center',
@@ -93,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     sortByTimeSwitch: {
         position: 'absolute',
         top: 64,
-        left: 6,
+        left: 4,
         backgroundColor: theme.palette.background.paper,
         transform: 'rotate(-180deg)',
         transition: 'transform .3s',
