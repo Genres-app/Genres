@@ -1,12 +1,22 @@
 import React from 'react';
+//Icons
+import Icon from '@mdi/react';
+import {
+    mdiChevronLeft,
+    mdiChevronRight,
+} from '@mdi/js';
+// Material UI Components
+import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Typography, Grid } from '@material-ui/core'
+import { Typography, Grid, Container, Button, IconButton } from '@material-ui/core'
 import BookCarousel from '../BookCarousel/BookCarousel.jsx';
 import Shelf from './Shelf.jsx'
 import shelfSVG from '../Assets/shelf.svg'
 import Chip from '@material-ui/core/Chip';
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     },
     search: {
         width: 500,
-        margin: '20px 0',
+        margin: '20px 20px',
         background: '#ffff'
     },
     heading: {
@@ -30,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: "75px",
     },
     searchBarPadding: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
         padding: '20px 0',
         background: "#ffff",
     },
@@ -40,6 +54,12 @@ const useStyles = makeStyles((theme) => ({
         width: '75vw',
         maxWidth: 1440,
         margin: '0 auto',
+    },
+    pageSelector: {
+        width: "max-content",
+    },
+    pageSelItem: {
+
     }
 }
 ));
@@ -47,39 +67,88 @@ const useStyles = makeStyles((theme) => ({
 export default function Body() {
     const classes = useStyles();
 
+    // Theme
+    const theme = createMuiTheme({
+        palette: {
+            primary: {
+                main: '#ffffff',
+            },
+            secondary: deepPurple,
+            alert: '#ff1744',
+        },
+    });
+
+    const pageSelector = () => (
+        <Container className={classes.pageSelector}>
+            <IconButton aria-label="last page">
+                <Icon path={mdiChevronLeft} size={1} />
+            </IconButton>
+            <Button className={classes.pageSelItem} color="secondary">1</Button>
+            <Button className={classes.pageSelItem} color="secondary">2</Button>
+            <Button className={classes.pageSelItem} color="secondary" disabled>...</Button>
+            <Button className={classes.pageSelItem} color="secondary">128</Button>
+            <IconButton aria-label="next page">
+                <Icon path={mdiChevronRight} size={1} />
+            </IconButton>
+        </Container>
+    );
+
+
+    const [alignment, setAlignment] = React.useState('24');
+
+    const handleChangeOfShowAmount = (event, newAlignment) => {
+        setAlignment(newAlignment);
+    };
+
     return (
-        <Grid container className={classes.root}>
-            <Grid item xs={12} className={classes.searchBarPadding} align='center' justify='center' alignItems='center'>
-                <Autocomplete
-                    className={classes.search}
-                    multiple
-                    id="tags-outlined"
-                    options={genres}
-                    getOptionLabel={(option) => option.genre}
-                    filterSelectedOptions
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            variant="outlined"
-                            label="Filter by Genres"
-                            placeholder="Genres"
-                        />
-                    )}
-                    renderTags={(tagValue, getTagProps) => {
-                        return tagValue.map((option, index) => (
-                            <Chip style={{ backgroundImage: 'linear-gradient(to right, #a6b2ff, #57f7e0)' }} {...getTagProps({ index })} label={option.genre} />
-                        ));
-                    }}
-                />
+        <ThemeProvider theme={theme}>
+            <Grid container className={classes.root}>
+                <Container className={classes.searchBarPadding}>
+                    <Autocomplete
+                        className={classes.search}
+                        multiple
+                        id="tags-outlined"
+                        options={genres}
+                        getOptionLabel={(option) => option.genre}
+                        filterSelectedOptions
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="outlined"
+                                label="Filter by Genres"
+                                placeholder="Genres"
+                            />
+                        )}
+                        renderTags={(tagValue, getTagProps) => {
+                            return tagValue.map((option, index) => (
+                                <Chip style={{ backgroundImage: 'linear-gradient(to right, #a6b2ff, #57f7e0)' }} {...getTagProps({ index })} label={option.genre} />
+                            ));
+                        }}
+                    />
+
+                    <ToggleButtonGroup size="small" value={alignment} exclusive onChange={handleChangeOfShowAmount}>
+                        <ToggleButton value="24">
+                            <Typography>24</Typography>
+                        </ToggleButton>
+                        <ToggleButton value="36">
+                            <Typography>36</Typography>
+                        </ToggleButton>
+                        <ToggleButton value="48">
+                            <Typography>48</Typography>
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </Container>
+
+                <div className={classes.shelf}>
+                    <Shelf />
+                </div>
+
             </Grid>
 
-            <div className={classes.shelf}>
-                <Shelf />
-            </div>
-
-
-
-        </Grid>
+            <Container className={classes.pageSelectorContainer}>
+                {pageSelector()}
+            </Container>
+        </ThemeProvider>
     );
 }
 
