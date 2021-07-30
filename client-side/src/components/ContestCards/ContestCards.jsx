@@ -3,8 +3,10 @@ import {Typography, Card, CardContent, Grid, Icon} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import corgi from '../Assets/corgi.jpg';
-
-
+import { useDispatch } from 'react-redux';
+import BetaReadingPage from '../../BetaReadingPage';
+import MasterClassPage from '../../MasterClassPage';
+import PublitPage from '../../PublitPage';
 
 const useStyles = makeStyles({
     root: {
@@ -36,6 +38,7 @@ const useStyles = makeStyles({
   });
 
 
+
 const Cards = () => {
     const classes = useStyles();
 
@@ -43,16 +46,17 @@ const Cards = () => {
         <>
         <Grid
             container 
-            spacing={8}>
+            spacing={8}
+            >
             <Grid item xs={12} md={4}>
-                <Card className={classes.root}>
+                <Card className={classes.root} onClick={() => GoToMPB(2)}>
                     <CardContent>
                         <Grid item xs={12}>
                             <img src={corgi} className={classes.media} />
                         </Grid>
                     
                         <Typography className={classes.title} gutterBottom>
-                            Annual Genres Contest
+                            Master Class
                         </Typography>
                         <Typography className={classes.description} gutterBottom>
                             Submit your original works and let the readers vote for their favorite! Winners will receive cash prize.
@@ -67,14 +71,14 @@ const Cards = () => {
 
 
             <Grid item xs={12} md={4}>
-                <Card className={classes.root}>
+                <Card className={classes.root} onClick={() => GoToMPB(3)} >
                     <CardContent>
                         <Grid item xs={12}>
                             <img src={corgi} className={classes.media} />
                         </Grid>
                     
                         <Typography className={classes.title} gutterBottom>
-                            Annual Rookie Contest
+                            Publit
                         </Typography>
                         <Typography className={classes.description} gutterBottom>
                             Our annual rookie contest is dedicated to new writers and allowing them to be heard! Winners will receive cash prize and mentorship.
@@ -89,14 +93,14 @@ const Cards = () => {
 
 
             <Grid item xs={12} md={4}>
-                <Card className={classes.root}>
+                <Card className={classes.root} onClick={() => GoToMPB(1)} >
                     <CardContent>
                         <Grid item xs={12}>
                             <img src={corgi} className={classes.media} />
                         </Grid>
                     
                         <Typography className={classes.title} gutterBottom>
-                            Genres Quarterly Contest
+                            Beta Reading
                         </Typography>
                         <Typography className={classes.description} gutterBottom>
                             Challenge yourself by writing to our prompts and let readers vote for their favorite work!
@@ -114,3 +118,19 @@ const Cards = () => {
 }
 
 export default Cards
+
+
+function GoToMPB(t) {
+    if (t == 1) {
+        window.location.href = "../../BetaReadingPage";
+    }
+    else if (t == 2) {
+        window.location.href = "../../MasterClassPage";
+    }
+    else if (t == 3) {
+        window.location.href = "../../PublitPage";
+    }
+    else {
+        console.log("Undefined!");
+    }
+}
