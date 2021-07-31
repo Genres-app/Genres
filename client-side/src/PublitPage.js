@@ -79,7 +79,7 @@ function a11yProps(index) {
     };
 }
 
-export default function RankingPage() {
+export default function PublitPage() {
 
     const classes = useStyles();
 

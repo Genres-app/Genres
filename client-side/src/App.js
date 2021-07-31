@@ -12,6 +12,9 @@ import ProfilePage from './ProfilePage';
 import WritingPage from './WritingPage';
 import BrowsingPage from './BrowsingPage';
 import RankingPage from './RankingPage';
+import BetaReadingPage from './BetaReadingPage';
+import PublitPage from './PublitPage';
+
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
               <Route exact path = '/profile' component = {ProfilePage}/>
               <Route exact path = '/browse' component = {BrowsingPage}/>
               <Route exact path = '/rankings' component = {RankingPage}/>
+              <Route exact path = '/beta-reading' component = {BetaReadingPage}/>
+              <Route exact path = '/publit' component = {PublitPage}/>
               <Footer/>
             </div>
           </Switch>

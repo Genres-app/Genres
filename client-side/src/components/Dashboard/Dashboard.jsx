@@ -195,8 +195,10 @@ const Dashboard = () => {
 
   const theme = createMuiTheme({
     palette: {
+      // type: 'dark',
       primary: {
         main: '#ffffff',
+        dark: '#333',
       },
       secondary: deepPurple,
       alert: '#ff1744',
@@ -210,6 +212,7 @@ const Dashboard = () => {
 
   return (
     <ThemeProvider theme={theme}>
+    <CssBaseline />
       <div className={classes.root}>
 
         <AppBar

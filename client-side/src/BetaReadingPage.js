@@ -1,7 +1,7 @@
 import React from 'react';
 import WPEditor from './components/WritingPage/WPEditor';
 
-const WritingPage = () => {
+const BetaReadingPage = () => {
   return (
     <div>
       <WPEditor />
@@ -9,4 +9,4 @@ const WritingPage = () => {
   )
 }
 
-export default WritingPage
+export default BetaReadingPage;

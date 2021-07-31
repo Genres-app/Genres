@@ -7,6 +7,7 @@ import {
 } from '@mdi/js';
 // Material UI Components
 import { makeStyles, createMuiTheme, ThemeProvider, withStyles } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
@@ -17,16 +18,17 @@ import shelfSVG from '../Assets/shelf.svg'
 import Chip from '@material-ui/core/Chip';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        background: '#ffff'
+        backgroundColor: theme.palette.background.paper,
     },
     search: {
         width: 500,
         margin: '20px 20px',
-        background: '#ffff'
+        backgroundColor: theme.palette.background.paper,
     },
     heading: {
         fontSize: '180%',
@@ -45,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         padding: '20px 0',
-        background: "#ffff",
+        backgroundColor: theme.palette.background.paper,
     },
     image: {
         padding: '100px'
@@ -70,6 +72,7 @@ export default function Body() {
     // Theme
     const theme = createMuiTheme({
         palette: {
+            type: 'dark',
             primary: {
                 main: '#ffffff',
             },
@@ -77,6 +80,11 @@ export default function Body() {
             alert: '#ff1744',
         },
     });
+    // createTheme({
+    //     palette: {
+    //       type: 'dark',
+    //     },
+    //   });
 
     const pageSelector = () => (
         <Container className={classes.pageSelector}>
@@ -102,6 +110,7 @@ export default function Body() {
 
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Grid container className={classes.root}>
                 <Container className={classes.searchBarPadding}>
                     <Autocomplete
