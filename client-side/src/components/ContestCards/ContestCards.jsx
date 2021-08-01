@@ -30,15 +30,15 @@ const useStyles = makeStyles({
         paddingTop: '10px'
     },
     description: {
-        fontSize: 18,
+        fontSize: 18, 
     },
     align: {
-        verticalAlign: 'middle',
-        display: 'inline-flex'
+        verticalAlign: 'right',
+        display: 'inline-flex',
     },
     media: {
         height: '100%',
-        width: '100%'    
+        width: '100%',
     }
   });
 
@@ -50,7 +50,7 @@ const Cards = () => {
             container 
             spacing={8}
             >
-            <Grid item xs={12} md={4} >
+            <Grid item xs={12} md={4}>
             <CardActionArea>
                 <Card className={classes.root} onClick={() => GoToMPB(2)}>
                     <CardContent>
