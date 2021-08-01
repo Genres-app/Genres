@@ -124,11 +124,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     // borderRadius: theme.shape.borderRadius,
     borderRadius: 8,
-    backgroundColor: "#f1f3f4",
-    // fade(theme.palette.common.white, 0.15),
-    // '&:hover': {
-    //   backgroundColor: fade(theme.palette.common.white, 0.25),
-    // },
     height: 48,
     marginRight: theme.spacing(2),
     marginLeft: 0,
@@ -136,6 +131,20 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
       width: 'auto',
+    },
+  },
+
+  search_light: {
+    backgroundColor: "#f1f3f4",
+    '&:hover': {
+      backgroundColor: '#ebeff1',
+    },
+  },
+  
+  search_dark: {
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
     },
   },
 

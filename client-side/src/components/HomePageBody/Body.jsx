@@ -130,7 +130,6 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.defaultSidePadding}>
-                    <Typography className={classes.heading} variant="h1" gutterBottom>Contests</Typography>
                     <ContestCards />
                 </Grid>
    

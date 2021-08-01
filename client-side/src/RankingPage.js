@@ -208,8 +208,7 @@ export default function RankingPage() {
 
     return (
 
-        <ThemeProvider theme={theme}>
-
+        <>
             <div className={classes.sortByData}>
                 <AppBar position="relative">
                     <Tabs
@@ -328,7 +327,7 @@ export default function RankingPage() {
                 {createRankingList(ListMonthly)}
             </div>
 
-        </ThemeProvider>
+        </>
 
     )
 }

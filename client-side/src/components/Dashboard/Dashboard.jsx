@@ -111,7 +111,6 @@ import Searchbar from '../Searchbar/Searchbar'
 // `;
 
 const Dashboard = () => {
-  const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
   const [sidebar, setSidebar] = useState(false);
@@ -200,8 +199,7 @@ const Dashboard = () => {
   const lightTheme = {
     palette: {
       primary: {
-        main: '#ffffff',
-        dark: '#333',
+        main: '#fff',
       },
       secondary: deepPurple,
       alert: '#ff1744',
@@ -212,10 +210,11 @@ const Dashboard = () => {
     palette: {
       type: 'dark',
       primary: {
-        main: '#ffffff',
-        dark: '#333',
+        main: '#333',
       },
-      secondary: deepPurple,
+      secondary: {
+        main: '#c79cff',
+      },
       alert: '#ff1744',
     },
   };
@@ -223,6 +222,8 @@ const Dashboard = () => {
   const [theme, setTheme] = useState(true)
   const themeIcon = !theme ? <Brightness7Icon /> : <Brightness2Icon />
   const appliedTheme = createMuiTheme(theme ? lightTheme : darkTheme)
+
+  const classes = useStyles(appliedTheme);
 
   const routeChange = (path) => { // Route to render new content
     history.push(path);
@@ -269,7 +270,7 @@ const Dashboard = () => {
             {
               user ? (
                 <>
-                  <div className={classes.search}>
+                  <div className={clsx(classes.search, theme ? classes.search_light : classes.search_dark)}>
                     <div className={classes.searchIcon}>
                       <SearchIcon />
                     </div>
@@ -290,7 +291,13 @@ const Dashboard = () => {
             }
 
             <div className={classes.grow} />
-            <IconButton aria-label="Toggle Theme" color="inherit" onClick={() => setTheme(!theme)}>
+            <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
+              setTheme(!theme);
+              theme?
+                localStorage.setItem('theme', 'dark')
+                :
+                localStorage.setItem('theme', 'light');
+              }}>
               {themeIcon}
             </IconButton>
             {
