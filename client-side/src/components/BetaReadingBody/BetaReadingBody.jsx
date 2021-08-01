@@ -78,7 +78,7 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advised</Typography>
+                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
                     <div className={classes.smallSidePadding}>
                         <BookCarousel />
                     </div>
@@ -86,14 +86,14 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Plot</Typography>
+                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Plot Advising</Typography>
                     <div className={classes.smallSidePadding}>
                         <BookCarousel />
                     </div>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Grammar</Typography>
+                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Wording Advising</Typography>
                     <div className={classes.smallSidePadding}>
                         <BookCarousel />
                     </div>

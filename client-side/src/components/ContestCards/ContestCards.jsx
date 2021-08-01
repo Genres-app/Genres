@@ -119,7 +119,7 @@ const Cards = () => {
                   <img src={corgi} className={classes.media} />
                 </Grid> */}
                 <Typography className={classes.title} gutterBottom>
-                  Beta Reading
+                  Mentoring
                 </Typography>
                 <Typography className={classes.description} gutterBottom>
                   Challenge yourself by writing to our prompts and let readers vote for their favorite work!
