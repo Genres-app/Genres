@@ -27,6 +27,8 @@ import {
 /*Material-UI Icons*/
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 import ClosePageIcon from '@material-ui/icons/Close';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -148,21 +150,23 @@ const Dashboard = () => {
 
   document.body.style.margin = "64px 0 0 0";
 
-  
+
   //if (window.location.pathname == "/rankings") {
   var setStyleOfAppbar1 = makeStyles(() => ({
-    appBar: { 
-       boxShadow: 'none',
-    }}));
+    appBar: {
+      boxShadow: 'none',
+    }
+  }));
   var setStyleOfAppbar2 = makeStyles(() => ({
-    appBar: { 
-        //boxShadow: 'none',
-    }}));
+    appBar: {
+      //boxShadow: 'none',
+    }
+  }));
   //}
-  
-    
+
+
   //   () => {
-    
+
   //   // if (window.location.pathname == "/rankings") {
   //   //   makeStyles(() => ({
   //   //     appBar: {
@@ -176,11 +180,11 @@ const Dashboard = () => {
 
   // }
 
-  if (window.location.pathname == "/rankings"){
-  var classOfAppbar = setStyleOfAppbar1();
+  if (window.location.pathname == "/rankings") {
+    var classOfAppbar = setStyleOfAppbar1();
   }
-  else{
-  var classOfAppbar = setStyleOfAppbar2();
+  else {
+    var classOfAppbar = setStyleOfAppbar2();
   }
 
   const [open, setOpen] = React.useState(false);
@@ -193,9 +197,8 @@ const Dashboard = () => {
     setOpen(false);
   };
 
-  const theme = createMuiTheme({
+  const lightTheme = {
     palette: {
-      // type: 'dark',
       primary: {
         main: '#ffffff',
         dark: '#333',
@@ -203,7 +206,23 @@ const Dashboard = () => {
       secondary: deepPurple,
       alert: '#ff1744',
     },
-  });
+  };
+
+  const darkTheme = {
+    palette: {
+      type: 'dark',
+      primary: {
+        main: '#ffffff',
+        dark: '#333',
+      },
+      secondary: deepPurple,
+      alert: '#ff1744',
+    },
+  };
+
+  const [theme, setTheme] = useState(true)
+  const themeIcon = !theme ? <Brightness7Icon /> : <Brightness2Icon />
+  const appliedTheme = createMuiTheme(theme ? lightTheme : darkTheme)
 
   const routeChange = (path) => { // Route to render new content
     history.push(path);
@@ -211,8 +230,8 @@ const Dashboard = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-    <CssBaseline />
+    <ThemeProvider theme={appliedTheme}>
+      <CssBaseline />
       <div className={classes.root}>
 
         <AppBar
@@ -271,7 +290,9 @@ const Dashboard = () => {
             }
 
             <div className={classes.grow} />
-
+            <IconButton aria-label="Toggle Theme" color="inherit" onClick={() => setTheme(!theme)}>
+              {themeIcon}
+            </IconButton>
             {
               user ? (
                 <>
