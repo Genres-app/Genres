@@ -4,16 +4,20 @@ import { makeStyles } from '@material-ui/core/styles'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import corgi from '../Assets/corgi.jpg';
 import { useDispatch } from 'react-redux';
-import BetaReadingPage from '../../BetaReadingPage';
-import MasterClassPage from '../../MasterClassPage';
-import PublitPage from '../../PublitPage';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+
+
 
 const useStyles = makeStyles({
     root: {
         display: "block",
         height: "100%",
         minWidth: 250,
-        padding: 20,
+        padding: 0,
         borderRadius: "10px",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
@@ -34,21 +38,20 @@ const useStyles = makeStyles({
     },
     media: {
         height: '100%',
-        width: '100%'    }
+        width: '100%'    
+    }
   });
-
-
 
 const Cards = () => {
     const classes = useStyles();
-
     return (
         <>
         <Grid
             container 
             spacing={8}
             >
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={4} >
+            <CardActionArea>
                 <Card className={classes.root} onClick={() => GoToMPB(2)}>
                     <CardContent>
                         <Grid item xs={12}>
@@ -67,10 +70,12 @@ const Cards = () => {
                         </Grid>
                     </CardContent>
                 </Card>
+                </CardActionArea>
             </Grid>
 
 
             <Grid item xs={12} md={4}>
+            <CardActionArea>
                 <Card className={classes.root} onClick={() => GoToMPB(3)} >
                     <CardContent>
                         <Grid item xs={12}>
@@ -89,10 +94,12 @@ const Cards = () => {
                         </Grid>
                     </CardContent>
                 </Card>
+            </CardActionArea>
             </Grid>
 
 
             <Grid item xs={12} md={4}>
+            <CardActionArea>
                 <Card className={classes.root} onClick={() => GoToMPB(1)} >
                     <CardContent>
                         <Grid item xs={12}>
@@ -111,10 +118,12 @@ const Cards = () => {
                         </Grid>
                     </CardContent>
                 </Card>
+            </CardActionArea>
             </Grid>
         </Grid>
         </>
     )
+    
 }
 
 export default Cards
