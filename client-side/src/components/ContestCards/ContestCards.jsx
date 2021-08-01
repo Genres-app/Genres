@@ -122,13 +122,13 @@ export default Cards
 
 function GoToMPB(t) {
     if (t == 1) {
-        window.location.href = "../../BetaReadingPage";
+        window.location.href = "/beta-reading";
     }
     else if (t == 2) {
-        window.location.href = "../../MasterClassPage";
+        window.location.href = "/masterclass";
     }
     else if (t == 3) {
-        window.location.href = "../../PublitPage";
+        window.location.href = "/publit";
     }
     else {
         console.log("Undefined!");
