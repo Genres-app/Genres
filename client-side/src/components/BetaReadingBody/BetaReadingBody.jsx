@@ -6,9 +6,6 @@ import { Paper, Button, Typography, Grid } from '@material-ui/core'
 import Cards from '../Cards/Cards.jsx';
 import BookCarousel from '../BookCarousel/BookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import book1 from '../Assets/HomeCarousel1.jpg';
-import book2 from '../Assets/HomeCarousel2.jpg';
-import book3 from '../Assets/HomeCarousel3.jpg';
 
 
 const useStyles = makeStyles({
@@ -64,34 +61,8 @@ const WhiteTypography = withStyles({
 const Body = () => {
     const classes = useStyles();
 
-    var items = [
-        {
-            name: "The Hidden Alley",
-            description: "by Lula Bone",
-            image: book1
-        },
-        {
-            name: "Druid's Curse",
-            description: "by Eilish Oliver",
-            image: book2
-        },
-        {
-            name: "Shattered Glass",
-            description: "by Lindy Shaffer",
-            image: book3
-        }
-    ]
-
     return (
         <Grid container className={classes.root}>
-            <Grid item xs={12}>
-                <Carousel>
-                    {
-                        // items.map( (item, i) => <Item key={i} item={item} /> )
-                        items.map( (item, i) => <Item key={i} item={item} /> )
-                    }
-                </Carousel>
-            </Grid>
 
             <Grid item container xs={12}>
                 <Grid item xs={12} className={classes.body}>
