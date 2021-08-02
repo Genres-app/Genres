@@ -16,11 +16,14 @@ const useStyles = makeStyles({
   root: {
     display: "block",
     minWidth: 250,
-    height: '100%',
+    // height: '100%',
     padding: 0,
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     backgroundSize: "cover",
+  },
+  rootAction: {
+    height: '100%',
   },
   title: {
     fontSize: 24,
@@ -49,7 +52,7 @@ const Cards = () => {
       >
         <Grid item xs={12} md={4}>
           <Card className={classes.root} onClick={() => GoToMPB(2)}>
-            <CardActionArea>
+            <CardActionArea className={classes.rootAction}>
               <CardMedia
                 className={classes.media}
                 image={corgi}
@@ -78,8 +81,7 @@ const Cards = () => {
 
         <Grid item xs={12} md={4}>
           <Card className={classes.root} onClick={() => GoToMPB(3)} >
-
-            <CardActionArea>
+            <CardActionArea className={classes.rootAction}>
               <CardMedia
                 className={classes.media}
                 image={corgi}
@@ -108,7 +110,7 @@ const Cards = () => {
 
         <Grid item xs={12} md={4}>
           <Card className={classes.root} onClick={() => GoToMPB(1)} >
-            <CardActionArea>
+            <CardActionArea className={classes.rootAction}>
               <CardMedia
                 className={classes.media}
                 image={corgi}

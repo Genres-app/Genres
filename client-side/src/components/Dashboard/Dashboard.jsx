@@ -359,7 +359,7 @@ const Dashboard = () => {
           <List>
             {ListItems.map((item, index) => (
               <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
-                <ListItemIcon className={classes.listItemIcon}>{item.icon}</ListItemIcon>
+                <ListItemIcon className={theme? classes.listItemIcon_light : classes.listItemIcon_dark}>{item.icon}</ListItemIcon>
                 <ListItemText className={classes.listItemText} primary={item.title} />
               </ListItem>
             ))}

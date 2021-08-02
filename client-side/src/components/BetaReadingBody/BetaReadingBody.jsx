@@ -93,7 +93,7 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Wording Advising</Typography>
+                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Spelling and Grammar</Typography>
                     <div className={classes.smallSidePadding}>
                         <BookCarousel />
                     </div>

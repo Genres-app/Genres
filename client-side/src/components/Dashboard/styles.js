@@ -82,8 +82,12 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 
-  listItemIcon: {
+  listItemIcon_light: {
     color: '#651fff',
+  },
+  
+  listItemIcon_dark: {
+    color: '#c79cff',
   },
 
 
