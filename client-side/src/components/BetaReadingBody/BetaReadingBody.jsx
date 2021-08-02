@@ -97,7 +97,7 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Wording Advising</Typography>
+                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Spelling and Grammar</Typography>
                     <card className={classes.smallSidePadding}>
                         <CardContent style = {{backgroundColor:'#CCCCFF'}}>
                         <BookCarousel />
