@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button, Typography, Grid } from '@material-ui/core'
+import { Paper, Button, Typography, Grid, CardContent } from '@material-ui/core'
 import Cards from '../Cards/Cards.jsx';
 import BookCarousel from '../BookCarousel/BookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -35,10 +35,11 @@ const useStyles = makeStyles({
     },
     smallSidePadding: {
         paddingRight: '5%',
-        paddingLeft: '5%'
+        paddingLeft: '5%',
+        
     },
     bottomPadding: {
-        paddingBottom: "75px"
+        paddingBottom: "75px",
     },
     title: {
         fontSize: '70px',
@@ -72,71 +73,41 @@ const Body = () => {
                 <Grid item xs={12}>
                 <div
                     style={{
-                        height: '50px'
+                        height: '50px',
                     }}
                     ></div>
                 </Grid>
 
-                <Grid item xs={12} className={classes.bottomPadding}>
+                <Grid item xs={12} className={classes.bottomPadding}>    
                     <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
-                    <div className={classes.smallSidePadding}>
-                        <BookCarousel />
-                    </div>
-                    
+                    <card className={classes.smallSidePadding}>
+                        <CardContent style = {{backgroundColor:'#CCCCFF'}}>
+                        <BookCarousel/>
+                        </CardContent>
+                    </card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
                     <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Plot Advising</Typography>
-                    <div className={classes.smallSidePadding}>
+                    <card className={classes.smallSidePadding}>
+                        <CardContent style = {{backgroundColor:'#ffffff'}}>
                         <BookCarousel />
-                    </div>
+                        </CardContent>
+                    </card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Spelling and Grammar</Typography>
-                    <div className={classes.smallSidePadding}>
+                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Wording Advising</Typography>
+                    <card className={classes.smallSidePadding}>
+                        <CardContent style = {{backgroundColor:'#CCCCFF'}}>
                         <BookCarousel />
-                    </div>
+                        </CardContent>
+                    </card>
                 </Grid>
 
    
             </Grid>
         </Grid>
-    )
-}
-
-
-function Item(props)
-{
-    const classes = useStyles();
-    return (
-        <Paper className={classes.carouselBody}
-            style={{
-                backgroundImage: `url(${props.item.image})`,
-            }}>
-            <Grid 
-                container 
-                spacing={8} 
-                direction="column" 
-                alignItems="center">
-                <Grid item xs={12} >
-                    <Typography className={classes.title} variant="h2" align="center">
-                        {props.item.name}
-                    </Typography>
-                    <WhiteTypography variant = "h5" align="center" paragraph>
-                        {props.item.description}
-                    </WhiteTypography>
-                </Grid>
-                <Grid item xs={3}>
-                    <Button 
-                        className="CheckButton" 
-                        variant="contained" 
-                        color="primary">
-                        Read now
-                    </Button>
-                </Grid>
-            </Grid>
-        </Paper>
     )
 }
 
