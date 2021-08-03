@@ -31,6 +31,7 @@ const useStyles = makeStyles({
         fontSize: '180%', 
         fontWeight: '500',
         color: 'white',
+
     },
     carouselBody: {
         display: 'flex',
@@ -41,8 +42,10 @@ const useStyles = makeStyles({
     },
     defaultSidePadding: {
         paddingRight: '10%',
-        paddingLeft: '2.5%',
+        paddingLeft: '6%',
         paddingBottom:'1%',
+        paddingTop: '1%',
+
     },
     smallSidePadding: {
         paddingRight: '0%',
@@ -63,14 +66,18 @@ const useStyles = makeStyles({
     media: {
         height: '100%',
       },
-    Card: {
-        paddingRight: '5%',
-        paddingLeft: '5%',
-    },
+
     rootAction: {
         height: '100%',
-        
       },
+
+    description: {
+        paddingRight: '10%',
+        paddingLeft: '6%',
+        fontSize: 18, 
+        paddingBottom: '2%', 
+        color: 'white'
+    }  
 });
 
 
@@ -103,7 +110,7 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>    
-                    <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#651fff'}} >
+                    <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#855cde'}} >
 
                      <CardMedia
                     className={classes.media}
@@ -114,7 +121,7 @@ const Body = () => {
                         </CardContent>
                         </CardContent>
                         <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
-                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%', color: 'white'}}>
+                        <Typography className ={classes.description}>
                         Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
                         </Typography>
 
@@ -122,7 +129,7 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#651fff'}} >
+                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#855cde'}} >
                      <CardMedia
                     className={classes.media}
                     />
@@ -132,14 +139,14 @@ const Body = () => {
                         </CardContent>
                         </CardContent>
                         <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
-                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%', color: 'white'}}>
+                        <Typography className ={classes.description}>
                         Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
                         </Typography>
                     </Card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#651fff'}} >
+                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#855cde'}} >
                      <CardMedia
                     className={classes.media}
                     />
@@ -149,7 +156,7 @@ const Body = () => {
                         </CardContent>
                         </CardContent>
                         <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
-                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%', color: 'white'}}>
+                        <Typography className ={classes.description}>
                         Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
                         </Typography>
                     </Card>
