@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     heading: {
         fontSize: '180%', 
         fontWeight: '500',
-
+        color: 'white',
     },
     carouselBody: {
         display: 'flex',
@@ -103,8 +103,8 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>    
-                    <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#CCCCFF'}} >
-                    <CardActionArea className={classes.rootAction}>
+                    <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#651fff'}} >
+
                      <CardMedia
                     className={classes.media}
                     />
@@ -114,16 +114,15 @@ const Body = () => {
                         </CardContent>
                         </CardContent>
                         <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
-                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%'}}>
+                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%', color: 'white'}}>
                         Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
                         </Typography>
-                        </CardActionArea>
+
                     </Card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#CCCCFF'}} >
-                    <CardActionArea className={classes.rootAction}>
+                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#651fff'}} >
                      <CardMedia
                     className={classes.media}
                     />
@@ -133,16 +132,14 @@ const Body = () => {
                         </CardContent>
                         </CardContent>
                         <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
-                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%'}}>
+                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%', color: 'white'}}>
                         Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
                         </Typography>
-                        </CardActionArea>
                     </Card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#CCCCFF'}} >
-                    <CardActionArea className={classes.rootAction}>
+                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#651fff'}} >
                      <CardMedia
                     className={classes.media}
                     />
@@ -152,10 +149,9 @@ const Body = () => {
                         </CardContent>
                         </CardContent>
                         <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
-                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%'}}>
+                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%', color: 'white'}}>
                         Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
                         </Typography>
-                        </CardActionArea>
                     </Card>
                 </Grid>
 
