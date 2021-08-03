@@ -41,7 +41,7 @@ const useStyles = makeStyles({
     },
     defaultSidePadding: {
         paddingRight: '10%',
-        paddingLeft: '6.5%',
+        paddingLeft: '2.5%',
         paddingBottom:'1%',
     },
     smallSidePadding: {
@@ -103,55 +103,58 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>    
-                    <Card className={classes.smallSidePadding}>
+                    <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#CCCCFF'}} >
                     <CardActionArea className={classes.rootAction}>
                      <CardMedia
                     className={classes.media}
                     />
-                        <CardContent >
-                        <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
-                        <Typography style={{marginLeft:"5vw", fontSize: 18}}>
-                        Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
-                        </Typography>
-                        <CardContent  style = {{backgroundColor:'#CCCCFF'}} >
+                        <CardContent style = {{paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%'}}>
+                        <CardContent style = {{backgroundColor:'#FFFFFF'}} >
                         <BookCarousel/>
                         </CardContent>
                         </CardContent>
+                        <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
+                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%'}}>
+                        Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
+                        </Typography>
                         </CardActionArea>
                     </Card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    <Card className={classes.smallSidePadding}>
+                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#CCCCFF'}} >
                     <CardActionArea className={classes.rootAction}>
                      <CardMedia
                     className={classes.media}
                     />
-                        <CardContent>
-                        <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Plot Advising</Typography>
-                        <Typography style={{marginLeft:"5vw", fontSize: 18}}>
+                        <CardContent style = {{paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%'}}>
+                        <CardContent style = {{backgroundColor:'#FFFFFF'}} >
+                        <BookCarousel/>
+                        </CardContent>
+                        </CardContent>
+                        <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
+                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%'}}>
                         Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
                         </Typography>
-                        <BookCarousel />
-                        </CardContent>
                         </CardActionArea>
                     </Card>
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>
-                    
-                    <Card className={classes.smallSidePadding} style = {{backgroundColor:'#CCCCFF'}}>
+                <Card className={classes.smallSidePadding}  style = {{backgroundColor:'#CCCCFF'}} >
                     <CardActionArea className={classes.rootAction}>
                      <CardMedia
                     className={classes.media}
                     />
-                        <CardContent >
-                        <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1">Spelling and Grammar</Typography>
-                        <Typography style={{marginLeft:"5vw", fontSize: 18}}>
-                        Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
-                        </Typography >
-                        <BookCarousel />
+                        <CardContent style = {{paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%'}}>
+                        <CardContent style = {{backgroundColor:'#FFFFFF'}} >
+                        <BookCarousel/>
                         </CardContent>
+                        </CardContent>
+                        <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
+                        <Typography style={{marginLeft:"2vw", fontSize: 18, paddingBottom: '2%'}}>
+                        Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
+                        </Typography>
                         </CardActionArea>
                     </Card>
                 </Grid>
