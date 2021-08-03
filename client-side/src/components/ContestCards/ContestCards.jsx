@@ -67,7 +67,7 @@ const Cards = () => {
                   Master Class
                 </Typography>
                 <Typography className={classes.description} gutterBottom>
-                  Submit your original works and let the readers vote for their favorite! Winners will receive cash prize.
+                Want to improve your writing? Visit our Masterclass page to find instructional videos and interviews with renowned authors.
                 </Typography>
                 {/* <Grid item xs={12} className={classes.align}>
                   <Icon component={AccessTimeIcon} style={{ paddingRight: '5px' }}></Icon>
@@ -96,7 +96,7 @@ const Cards = () => {
                   Publit
                 </Typography>
                 <Typography className={classes.description} gutterBottom>
-                  Our annual rookie contest is dedicated to new writers and allowing them to be heard! Winners will receive cash prize and mentorship.
+                Be a part of the Genres community and join the conversation! Publit is our discussion forum for our Genres members to discuss works, create fandoms, find collaborators, meet new friends and more.
                 </Typography>
                 {/* <Grid item xs={12} className={classes.align}>
                   <Icon component={AccessTimeIcon} style={{ paddingRight: '5px' }}></Icon>
@@ -124,7 +124,7 @@ const Cards = () => {
                   Mentoring
                 </Typography>
                 <Typography className={classes.description} gutterBottom>
-                  Challenge yourself by writing to our prompts and let readers vote for their favorite work!
+                  Join our mentoring program and learn more about writing process!
                 </Typography>
                 {/* <Grid item xs={12} className={classes.align}>
                   <Icon component={AccessTimeIcon} style={{ paddingRight: '5px' }}></Icon>
