@@ -42,7 +42,7 @@ const useStyles = makeStyles({
     defaultSidePadding: {
         paddingRight: '10%',
         paddingLeft: '6.5%',
-        paddingBottom:'1.5%',
+        paddingBottom:'1%',
     },
     smallSidePadding: {
         paddingRight: '0%',
@@ -103,7 +103,7 @@ const Body = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.bottomPadding}>    
-                    <Card className={classes.smallSidePadding} style = {{backgroundColor:'#CCCCFF'}} >
+                    <Card className={classes.smallSidePadding}>
                     <CardActionArea className={classes.rootAction}>
                      <CardMedia
                     className={classes.media}
@@ -113,7 +113,9 @@ const Body = () => {
                         <Typography style={{marginLeft:"5vw", fontSize: 18}}>
                         Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
                         </Typography>
+                        <CardContent  style = {{backgroundColor:'#CCCCFF'}} >
                         <BookCarousel/>
+                        </CardContent>
                         </CardContent>
                         </CardActionArea>
                     </Card>
