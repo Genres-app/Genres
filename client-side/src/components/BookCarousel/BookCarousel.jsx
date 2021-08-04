@@ -25,63 +25,63 @@ import clsx from 'clsx';
 
 
 const useStyles = theme => ({
-    root: {
-        margin: 'auto',
-    },
-    media: {
-        height: '400px',
-        width: '275px', 
-        padding: '20px',
-    },
+  root: {
+    margin: 'auto',
+  },
+  media: {
+    height: '400px',
+    width: '275px',
+    padding: '20px',
+  },
 });
 
 
 class BookCarousel extends React.Component {
-    myArrow({ type, onClick, isEdge }) {
-        const pointer = type === consts.PREV ? <PrevArrow/> : <NextArrow/>
-        return (
-        <Button disableRipple onClick={onClick} disabled={isEdge} style={{background: 'transparent'}}>
-            {pointer}
-        </Button>
-        )
-    }
+  myArrow({ type, onClick, isEdge }) {
+    const pointer = type === consts.PREV ? <PrevArrow /> : <NextArrow />
+    return (
+      <Button disableRipple onClick={onClick} disabled={isEdge} style={{ background: 'transparent' }}>
+        {pointer}
+      </Button>
+    )
+  }
 
-    state = {
-        showBox: false
-      };
-    handleBoxToggle = () => this.setState({ showBox: !this.state.showBox });
-    render() {
-        const {classes} = this.props;
-        const breakpoints = [
-            { width: 1, itemsToShow: 1, pagination: false },
-            { width: 500, itemsToShow: 2, pagination: false},
-            { width: 850, itemsToShow: 3, pagination: false },
-            { width: 1150, itemsToShow: 4, pagination: false },
-            { width: 1300, itemsToShow: 5, pagination: false },
-            { width: 1800, itemsToShow: 6, pagination: false },
-            
-        ];
+  state = {
+    showBox: false
+  };
+  handleBoxToggle = () => this.setState({ showBox: !this.state.showBox });
+  render() {
+    const { classes } = this.props;
+    const breakpoints = [
+      { width: 1, itemsToShow: 1, pagination: false },
+      { width: 500, itemsToShow: 2, pagination: false },
+      { width: 850, itemsToShow: 3, pagination: false },
+      { width: 1150, itemsToShow: 4, pagination: false },
+      { width: 1300, itemsToShow: 5, pagination: false },
+      { width: 1800, itemsToShow: 6, pagination: false },
 
-        const handleDragStart = (e) => e.preventDefault();
-         
-        return (
-        <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
-            <div
-            onMouseEnter={this.handleBoxToggle}
-            className={`container${this.state.showBox ? " show" : ""}`}
-      >     <div className="wrapper">
+    ];
+
+    const handleDragStart = (e) => e.preventDefault();
+
+    return (
+      <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
+        <div
+          onMouseEnter={this.handleBoxToggle}
+          className={`container${this.state.showBox ? " show" : ""}`}
+        >     <div className="wrapper">
             <a title="Hello World1!!!!" href='/novel'><img src={cover2} className={clsx(classes.media, "innerBox")} onDragStart={handleDragStart} /></a>
-            </div>
-            </div>
-            <a title="Hello World2!!!!" href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>
-            <a title="Hello World3!!!!" href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>
-            <a title="Hello World4!!!!" href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>
-            <a title="Hello World5!!!!" href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>
-            <a title="Hello World6!!!!" href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>
-            <a title="Hello World7!!!!" href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>
-        </Carousel>
-        )
-    }
+          </div>
+        </div>
+        <a title="Hello World2!!!!" href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>
+        <a title="Hello World3!!!!" href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>
+        <a title="Hello World4!!!!" href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>
+        <a title="Hello World5!!!!" href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>
+        <a title="Hello World6!!!!" href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>
+        <a title="Hello World7!!!!" href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>
+      </Carousel>
+    )
+  }
 }
 
 export default withStyles(useStyles)(BookCarousel);

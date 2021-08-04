@@ -5,8 +5,7 @@ import useStyles from './styles';
 import { ListItems } from './listItems';
 
 /*Material-UI Components*/
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import deepPurple from '@material-ui/core/colors/deepPurple';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
   AppBar,
@@ -110,7 +109,7 @@ import Searchbar from '../Searchbar/Searchbar'
 //   width: 100%;
 // `;
 
-const Dashboard = () => {
+const Dashboard = ({passTheme}) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
   const [sidebar, setSidebar] = useState(false);
@@ -196,34 +195,10 @@ const Dashboard = () => {
     setOpen(false);
   };
 
-  const lightTheme = {
-    palette: {
-      primary: {
-        main: '#fff',
-      },
-      secondary: deepPurple,
-      alert: '#ff1744',
-    },
-  };
-
-  const darkTheme = {
-    palette: {
-      type: 'dark',
-      primary: {
-        main: '#333',
-      },
-      secondary: {
-        main: '#c79cff',
-      },
-      alert: '#ff1744',
-    },
-  };
-
   const [theme, setTheme] = useState(true)
   const themeIcon = !theme ? <Brightness7Icon /> : <Brightness2Icon />
-  const appliedTheme = createMuiTheme(theme ? lightTheme : darkTheme)
 
-  const classes = useStyles(appliedTheme);
+  const classes = useStyles();
 
   const routeChange = (path) => { // Route to render new content
     history.push(path);
@@ -231,7 +206,7 @@ const Dashboard = () => {
   }
 
   return (
-    <ThemeProvider theme={appliedTheme}>
+    <>
       <CssBaseline />
       <div className={classes.root}>
 
@@ -293,10 +268,7 @@ const Dashboard = () => {
             <div className={classes.grow} />
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
               setTheme(!theme);
-              theme?
-                localStorage.setItem('theme', 'dark')
-                :
-                localStorage.setItem('theme', 'light');
+              passTheme(!theme);
               }}>
               {themeIcon}
             </IconButton>
@@ -366,7 +338,7 @@ const Dashboard = () => {
           </List>
         </Drawer>
       </div>
-    </ThemeProvider>
+    </>
   );
 }
 

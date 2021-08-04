@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Footer from './components/Footer/Footer';
@@ -16,42 +16,27 @@ import BetaReadingPage from './BetaReadingPage';
 import PublitPage from './PublitPage';
 
 
-import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import deepPurple from '@material-ui/core/colors/deepPurple';
-
-const lightTheme = {
-  palette: {
-    primary: {
-      main: '#fff',
-    },
-    secondary: deepPurple,
-    alert: '#ff1744',
-  },
-};
-
-const darkTheme = {
-  palette: {
-    type: 'dark',
-    primary: {
-      main: '#333',
-    },
-    secondary: {
-      main: '#c79cff',
-    },
-    alert: '#ff1744',
-  },
-};
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {lightTheme, darkTheme} from './themes';
 
 function App() {
-  console.log(localStorage.getItem('theme'));
+  const [isThemeLight, setTheme] = useState(true);
+  const handlePassedTheme = (t) => {
+    console.log(t);
+    setTheme(t);
+  }
+  
+  const appliedTheme = createMuiTheme(isThemeLight ? lightTheme : darkTheme)
   return (
     <>
+    
+    <ThemeProvider theme={appliedTheme}>
       <BrowserRouter>
         <Switch>
           <Route exact path='/reading' component={ReadingPage} />
           <Route exact path='/writing' component={WritingPage} />
           <div>
-            <Dashboard />
+            <Dashboard passTheme={handlePassedTheme}/>
 
             <Route exact path='/' component={Homepage} />
             <Route exact path="/search" component={SearchResults} />
@@ -65,6 +50,7 @@ function App() {
           </div>
         </Switch>
       </BrowserRouter>
+      </ThemeProvider>
     </>
   );
 }

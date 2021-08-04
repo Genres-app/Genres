@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
   listItemIcon_light: {
     color: '#651fff',
   },
-  
+
   listItemIcon_dark: {
     color: '#c79cff',
   },
@@ -123,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
 
-  
+
   search: {
     position: 'relative',
     // borderRadius: theme.shape.borderRadius,
@@ -144,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#ebeff1',
     },
   },
-  
+
   search_dark: {
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
