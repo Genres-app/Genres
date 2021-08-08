@@ -161,13 +161,25 @@ const useStyles = makeStyles((theme) => ({
     margin: "13px 16px",
     border: '4px solid #6030fe',
   },
+  Rank1Dark: {
+    margin: "13px 16px",
+    border: '4px solid #9e84f5',
+  },
   Rank2: {
     margin: "13px 16px",
     border: '4px solid #5581ff',
   },
+  Rank2Dark: {
+    margin: "13px 16px",
+    border: '4px solid #8ba7f8',
+  },
   Rank3: {
     margin: "13px 16px",
     border: '4px solid #6fcffb',
+  },
+  Rank3Dark: {
+    margin: "13px 16px",
+    border: '4px solid #98d9f7',
   },
   //
   RankingDecorator: {
@@ -179,13 +191,6 @@ const useStyles = makeStyles((theme) => ({
     flexShrink: 0,
 
     "& p": {
-      height: 'min-content',
-      transform: 'translateX(-2px)',
-      textAlign: 'center',
-      color: '#fff',
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      flexGrow: 2,
     },
     "& div": {
       backgroundColor: theme.palette.background.paper,
@@ -202,6 +207,24 @@ const useStyles = makeStyles((theme) => ({
   },
   RankingDeco3: {
     backgroundColor: '#6fcffb',
+  },
+  RankingDeco1Dark: {
+    backgroundColor: '#9e84f5',
+  },
+  RankingDeco2Dark: {
+    backgroundColor: '#8ba7f8',
+  },
+  RankingDeco3Dark: {
+    backgroundColor: '#98d9f7',
+  },
+  RankingNum: {
+    height: 'min-content',
+    transform: 'translateX(-2px)',
+    textAlign: 'center',
+    color: theme.palette.background.paper,
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+    flexGrow: 2,
   },
   //
   bookCover: {
@@ -234,7 +257,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   bookAuthor: {
-    color: '#651fff',
+    // color: '#651fff',
     cursor: 'pointer',
 
     "&:hover": {

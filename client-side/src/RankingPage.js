@@ -145,25 +145,25 @@ export default function RankingPage({ theme }) {
           let decorator;
           let cardClasses;
           if (index == 0) {
-            cardClasses = clsx(classes.RankingCards, classes.Rank1);
+            cardClasses = clsx(classes.RankingCards, theme? classes.Rank1 : classes.Rank1Dark);
             decorator = (
-              <div className={clsx(classes.RankingDecorator, classes.RankingDeco1)}>
+              <div className={clsx(classes.RankingDecorator, theme? classes.RankingDeco1 : classes.RankingDeco1Dark)}>
                 <Typography className={classes.RankingNum}>1</Typography>
                 <div></div>
               </div>
             );
           } else if (index == 1) {
-            cardClasses = clsx(classes.RankingCards, classes.Rank2);
+            cardClasses = clsx(classes.RankingCards, theme? classes.Rank2 : classes.Rank2Dark);
             decorator = (
-              <div className={clsx(classes.RankingDecorator, classes.RankingDeco2)}>
+              <div className={clsx(classes.RankingDecorator, theme? classes.RankingDeco2 : classes.RankingDeco2Dark)}>
                 <Typography className={classes.RankingNum}>2</Typography>
                 <div></div>
               </div>
             );
           } else if (index == 2) {
-            cardClasses = clsx(classes.RankingCards, classes.Rank3);
+            cardClasses = clsx(classes.RankingCards, theme? classes.Rank3 : classes.Rank3Dark);
             decorator = (
-              <div className={clsx(classes.RankingDecorator, classes.RankingDeco3)}>
+              <div className={clsx(classes.RankingDecorator, theme? classes.RankingDeco3 : classes.RankingDeco3Dark)}>
                 <Typography className={classes.RankingNum}>3</Typography>
                 <div></div>
               </div>
@@ -180,7 +180,7 @@ export default function RankingPage({ theme }) {
                 <Typography className={classes.bookTitle}>
                   {item.title}
                 </Typography>
-                <Typography className={classes.bookAuthor}>
+                <Typography className={classes.bookAuthor} color="secondary">
                   Author Name
                 </Typography>
                 <div className={classes.chipContainer}>
