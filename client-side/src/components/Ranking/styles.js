@@ -31,9 +31,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: 170,
     maxWidth: 280,
-    borderRight: "1px solid #dfe1e5",
     backgroundColor: theme.palette.background.paper,
     transition: 'transform .2s',
+  },
+  sortByGenreLight: {
+    borderRight: "1px solid rgba(0, 0, 0, 0.12)",
+  },
+  sortByGenreDark: {
+    borderRight: "1px solid rgba(255, 255, 255, 0.12)",
   },
   sideTabsWithIconL: {
     height: 48,
@@ -85,9 +90,14 @@ const useStyles = makeStyles((theme) => ({
     width: 170,
     maxWidth: 280,
     right: 0,
-    borderLeft: "1px solid #dfe1e5",
     backgroundColor: theme.palette.background.paper,
     transition: 'transform .2s',
+  },
+  sortByTimeLight: {
+    borderLeft: "1px solid rgba(0, 0, 0, 0.12)",
+  },
+  sortByTimeDark: {
+    borderLeft: "1px solid rgba(255, 255, 255, 0.12)",
   },
   rightTabIndicator: {
     right: "auto",
@@ -134,28 +144,29 @@ const useStyles = makeStyles((theme) => ({
   RankingCards: {
     display: 'flex',
     float: 'left',
-    width: 'calc(37vw - 32px - 2px)',
+    width: 'calc(37.5vw - 32px)',
     maxWidth: 606,
     minWidth: 492,
     margin: 16,
-    border: '1px solid #dfe1e5',
+    // border: '1px solid #dfe1e5',
     borderRadius: 8,
-    boxShadow: 'none',
+    // boxShadow: 'none',
+    // 3c4043
 
     "&:hover": {
       boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 1px 18px 0px rgb(0 0 0 / 12%)",
     }
   },
   Rank1: {
-    margin: 13,
+    margin: "13px 16px",
     border: '4px solid #6030fe',
   },
   Rank2: {
-    margin: 13,
+    margin: "13px 16px",
     border: '4px solid #5581ff',
   },
   Rank3: {
-    margin: 13,
+    margin: "13px 16px",
     border: '4px solid #6fcffb',
   },
   //
@@ -265,7 +276,6 @@ const useStyles = makeStyles((theme) => ({
     "& > div > div:not(:last-child)": {
       marginRight: theme.spacing(2.5),
       paddingRight: theme.spacing(2.5),
-      borderRight: "1px solid #dfe1e5",
     },
 
     "& svg": {
@@ -274,6 +284,16 @@ const useStyles = makeStyles((theme) => ({
     "& p": {
       margin: 0,
       marginTop: 4,
+    },
+  },
+  bookDataLight: {
+    "& > div > div:not(:last-child)": {
+      borderRight: "1px solid rgba(0, 0, 0, 0.12)",
+    },
+  },
+  bookDataDark: {
+    "& > div > div:not(:last-child)": {
+      borderRight: "1px solid rgba(255, 255, 255, 0.12)",
     },
   },
 }));

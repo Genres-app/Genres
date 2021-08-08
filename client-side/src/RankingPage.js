@@ -173,7 +173,7 @@ export default function RankingPage({ theme }) {
             decorator = <div className={classes.RankingDecorator}></div>;
           }
           return (
-            <Card className={cardClasses} alignItems="flex-start" key={index}>
+            <Card className={cardClasses} alignItems="flex-start" variant="outlined" key={index}>
               {decorator}
               <div className={classes.bookCover} style={{ backgroundImage: `url(${item.image})` }} />
               <CardContent className={classes.bookInfo}>
@@ -188,7 +188,7 @@ export default function RankingPage({ theme }) {
                   <Chip size="small" label="Tag1" clickable className={classes.chip} />
                   <Chip size="small" label="Tag2" clickable className={classes.chip} />
                 </div>
-                <div className={classes.bookData}>
+                <div className={clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark)}>
                   <div>
                     <div><Icon path={mdiThumbUpOutline} size={1} /><p>3.5k</p></div>
                     <div><Icon path={mdiStarOutline} size={1} /><p>6.0k</p></div>
@@ -202,35 +202,36 @@ export default function RankingPage({ theme }) {
       <ListItem style={{ clear: 'both' }}></ListItem>
     </Container>
   )
-  console.log(theme);
 
   return (
 
     <>
-      <div className={classes.sortByData}>
-        <AppBar position="relative">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="Sort by data"
-            centered
-            indicatorColor="secondary"
-            textColor="secondary"
-          >
-            <Tab label="Likes" {...a11yProps(0)} />
-            <Tab label="Stars" {...a11yProps(1)} />
-            <Tab label="Comments" {...a11yProps(2)} />
-          </Tabs>
-        </AppBar>
-      </div>
+      <AppBar position="relative" className={classes.sortByData}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="Sort by data"
+          centered
+          indicatorColor="secondary"
+          textColor="secondary"
+        >
+          <Tab label="Likes" {...a11yProps(0)} />
+          <Tab label="Stars" {...a11yProps(1)} />
+          <Tab label="Comments" {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
 
       <div className={classes.sortByGenreTitle}>
         <Typography variant="overline">Filter by Genres</Typography>
       </div>
-      <div className={leftOpen
-        ? classes.sortByGenre
-        : clsx(classes.sortByGenre, classes.leftRetracted)
-      }>
+      <div className={clsx(
+        leftOpen
+          ? classes.sortByGenre
+          : clsx(classes.sortByGenre, classes.leftRetracted),
+        theme
+          ? classes.sortByGenreLight
+          : classes.sortByGenreDark
+      )}>
         <Tabs
           orientation="vertical"
           variant="scrollable"
@@ -254,10 +255,14 @@ export default function RankingPage({ theme }) {
       <div className={classes.sortByTimeTitle}>
         <Typography variant="overline">Filter by Time</Typography>
       </div>
-      <div className={rightOpen
+      <div className={clsx(
+        rightOpen
         ? classes.sortByTime
-        : clsx(classes.sortByTime, classes.rightRetracted)
-      }>
+        : clsx(classes.sortByTime, classes.rightRetracted),
+        theme
+        ? classes.sortByTimeLight
+        : classes.sortByTimeDark
+      )}>
         <Tabs
           orientation="vertical"
           variant="scrollable"

@@ -109,7 +109,7 @@ import Searchbar from '../Searchbar/Searchbar'
 //   width: 100%;
 // `;
 
-const Dashboard = ({passTheme}) => {
+const Dashboard = ({ passTheme }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
   const [sidebar, setSidebar] = useState(false);
@@ -148,21 +148,6 @@ const Dashboard = ({passTheme}) => {
 
   document.body.style.margin = "64px 0 0 0";
 
-
-  //if (window.location.pathname == "/rankings") {
-  var setStyleOfAppbar1 = makeStyles(() => ({
-    appBar: {
-      boxShadow: 'none',
-    }
-  }));
-  var setStyleOfAppbar2 = makeStyles(() => ({
-    appBar: {
-      //boxShadow: 'none',
-    }
-  }));
-  //}
-
-
   //   () => {
 
   //   // if (window.location.pathname == "/rankings") {
@@ -178,12 +163,6 @@ const Dashboard = ({passTheme}) => {
 
   // }
 
-  if (window.location.pathname == "/rankings") {
-    var classOfAppbar = setStyleOfAppbar1();
-  }
-  else {
-    var classOfAppbar = setStyleOfAppbar2();
-  }
 
   const [open, setOpen] = React.useState(false);
 
@@ -195,15 +174,42 @@ const Dashboard = ({passTheme}) => {
     setOpen(false);
   };
 
+
+  // Theme
   const [theme, setTheme] = useState(true)
   const themeIcon = !theme ? <Brightness7Icon /> : <Brightness2Icon />
 
   const classes = useStyles();
 
-  const routeChange = (path) => { // Route to render new content
+
+  // Route to render new content
+  const routeChange = (path) => {
     history.push(path);
     handleDrawerClose();
   }
+
+
+  // Remove BoxShadow of AppBar @rankings
+  var setStyleOfAppbar1 = makeStyles((theme) => ({
+    appBar: {
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: 'none',
+    }
+  }));
+  var setStyleOfAppbar2 = makeStyles((theme) => ({
+    appBar: {
+      backgroundColor: theme.palette.background.paper,
+      //boxShadow: 'none',
+    }
+  }));
+
+  if (window.location.pathname == "/rankings") {
+    var classOfAppbar = setStyleOfAppbar1();
+  }
+  else {
+    var classOfAppbar = setStyleOfAppbar2();
+  }
+
 
   return (
     <>
@@ -269,7 +275,7 @@ const Dashboard = ({passTheme}) => {
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
               setTheme(!theme);
               passTheme(!theme);
-              }}>
+            }}>
               {themeIcon}
             </IconButton>
             {
@@ -331,7 +337,7 @@ const Dashboard = ({passTheme}) => {
           <List>
             {ListItems.map((item, index) => (
               <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
-                <ListItemIcon className={theme? classes.listItemIcon_light : classes.listItemIcon_dark}>{item.icon}</ListItemIcon>
+                <ListItemIcon className={theme ? classes.listItemIcon_light : classes.listItemIcon_dark}>{item.icon}</ListItemIcon>
                 <ListItemText className={classes.listItemText} primary={item.title} />
               </ListItem>
             ))}
