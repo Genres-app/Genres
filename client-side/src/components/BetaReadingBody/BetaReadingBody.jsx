@@ -1,6 +1,7 @@
 // https://www.npmjs.com/package/react-material-ui-carousel
 
 import React from 'react';
+import clsx from 'clsx';
 import Carousel from 'react-material-ui-carousel'
 import { Paper, Button, Typography, Grid, CardContent, Card } from '@material-ui/core'
 import Cards from '../Cards/Cards.jsx';
@@ -8,10 +9,9 @@ import BookCarousel from '../BookCarousel/BookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
-import corgi from '../Assets/corgi.jpg';
 import CardMedia from '@material-ui/core/CardMedia';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
     minWidth: 250,
@@ -30,8 +30,7 @@ const useStyles = makeStyles({
   heading: {
     fontSize: '180%',
     fontWeight: '500',
-    color: 'white',
-
+    color: theme.palette.background.paper,
   },
   carouselBody: {
     display: 'flex',
@@ -47,10 +46,16 @@ const useStyles = makeStyles({
     paddingTop: '1%',
 
   },
-  smallSidePadding: {
+  CategoryShelfs: {
     paddingRight: '0%',
     paddingLeft: '0%',
     paddingBottom: '0%',
+  },
+  CategoryShelfs_light: {
+    backgroundColor: '#855cde',
+  },
+  CategoryShelfs_dark: {
+    backgroundColor: '#9e84f5',
   },
   bottomPadding: {
     paddingBottom: "75px",
@@ -61,10 +66,12 @@ const useStyles = makeStyles({
     fontSize: '70px',
     fontFamily: 'Georgia-Bold',
     fontWeight: '500',
-    color: 'white',
   },
   media: {
     height: '100%',
+  },
+  bookShelf: {
+    backgroundColor: theme.palette.background.paper,
   },
 
   rootAction: {
@@ -76,9 +83,9 @@ const useStyles = makeStyles({
     paddingLeft: '6%',
     fontSize: 18,
     paddingBottom: '2%',
-    color: 'white'
+    color: theme.palette.background.paper,
   }
-});
+}));
 
 
 const WhiteTypography = withStyles({
@@ -89,10 +96,9 @@ const WhiteTypography = withStyles({
 })(Typography);
 
 
-
-const Body = () => {
+const Body = ({theme}) => {
   const classes = useStyles();
-
+  console.log(theme);
   return (
     <Grid container className={classes.root}>
 
@@ -110,13 +116,13 @@ const Body = () => {
         </Grid>
 
         <Grid item xs={12} className={classes.bottomPadding}>
-          <Card className={classes.smallSidePadding} style={{ backgroundColor: '#855cde' }} >
+          <Card className={clsx(classes.CategoryShelfs, theme? classes.CategoryShelfs_light : classes.CategoryShelfs_dark)} >
 
             <CardMedia
               className={classes.media}
             />
             <CardContent style={{ paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%' }}>
-              <CardContent style={{ backgroundColor: '#FFFFFF' }} >
+              <CardContent className={classes.bookShelf} >
                 <BookCarousel />
               </CardContent>
             </CardContent>
@@ -129,12 +135,12 @@ const Body = () => {
         </Grid>
 
         <Grid item xs={12} className={classes.bottomPadding}>
-          <Card className={classes.smallSidePadding} style={{ backgroundColor: '#855cde' }} >
+          <Card className={clsx(classes.CategoryShelfs, theme? classes.CategoryShelfs_light : classes.CategoryShelfs_dark)} >
             <CardMedia
               className={classes.media}
             />
             <CardContent style={{ paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%' }}>
-              <CardContent style={{ backgroundColor: '#FFFFFF' }} >
+              <CardContent className={classes.bookShelf} >
                 <BookCarousel />
               </CardContent>
             </CardContent>
@@ -146,12 +152,12 @@ const Body = () => {
         </Grid>
 
         <Grid item xs={12} className={classes.bottomPadding}>
-          <Card className={classes.smallSidePadding} style={{ backgroundColor: '#855cde' }} >
+          <Card className={clsx(classes.CategoryShelfs, theme? classes.CategoryShelfs_light : classes.CategoryShelfs_dark)}>
             <CardMedia
               className={classes.media}
             />
             <CardContent style={{ paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%' }}>
-              <CardContent style={{ backgroundColor: '#FFFFFF' }} >
+              <CardContent className={classes.bookShelf} >
                 <BookCarousel />
               </CardContent>
             </CardContent>

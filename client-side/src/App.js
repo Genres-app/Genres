@@ -28,7 +28,6 @@ function App() {
   const appliedTheme = createMuiTheme(isThemeLight ? lightTheme : darkTheme)
   return (
     <>
-
       <ThemeProvider theme={appliedTheme}>
         <BrowserRouter>
           <Switch>
@@ -45,7 +44,9 @@ function App() {
               <Route exact path='/rankings' render={
                 (props) => (<RankingPage {...props} theme={isThemeLight} />)
               } />
-              <Route exact path='/beta-reading' component={BetaReadingPage} />
+              <Route exact path='/beta-reading' render={
+                (props) => (<BetaReadingPage {...props} theme={isThemeLight} />)
+              } />
               <Route exact path='/publit' component={PublitPage} />
               <Footer />
             </div>

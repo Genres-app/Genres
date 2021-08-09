@@ -17,7 +17,7 @@ export const darkTheme = {
       main: '#333',
     },
     secondary: {
-      main: '#c79cff',
+      main: '#9e84f5',
     },
     alert: '#ff1744',
   },

@@ -148,21 +148,6 @@ const Dashboard = ({ passTheme }) => {
 
   document.body.style.margin = "64px 0 0 0";
 
-  //   () => {
-
-  //   // if (window.location.pathname == "/rankings") {
-  //   //   makeStyles(() => ({
-  //   //     appBar: {
-  //   //       boxShadow: 'none',
-  //   //     }}));
-  //   // }
-  // }
-  // if (window.location.pathname == "/rankings") {
-  //   car 
-  // } else {
-
-  // }
-
 
   const [open, setOpen] = React.useState(false);
 
