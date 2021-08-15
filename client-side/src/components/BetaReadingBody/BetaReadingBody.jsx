@@ -3,7 +3,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import Carousel from 'react-material-ui-carousel'
-import { Paper, Button, Typography, Grid, CardContent, Card } from '@material-ui/core'
+import { Paper, Button, Typography, Grid, CardContent, Card, Container } from '@material-ui/core'
 import Cards from '../Cards/Cards.jsx';
 import BookCarousel from '../BookCarousel/BookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: '10%',
     paddingLeft: '10%',
   },
-  heading: {
-    fontSize: '180%',
-    fontWeight: '500',
-    color: theme.palette.background.paper,
-  },
   carouselBody: {
     display: 'flex',
     flexDirection: 'column',
@@ -46,32 +41,36 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '1%',
 
   },
-  CategoryShelfs: {
-    paddingRight: '0%',
-    paddingLeft: '0%',
-    paddingBottom: '0%',
-  },
-  CategoryShelfs_light: {
-    backgroundColor: '#855cde',
-  },
-  CategoryShelfs_dark: {
-    backgroundColor: '#9e84f5',
-  },
-  bottomPadding: {
+
+
+  AdvisingSection: {
     paddingBottom: "75px",
     paddingRight: '10%',
     paddingLeft: '10%',
   },
-  title: {
-    fontSize: '70px',
-    fontFamily: 'Georgia-Bold',
-    fontWeight: '500',
+  CategoryShelfs: {
+    paddingRight: '0%',
+    paddingLeft: '0%',
+    paddingBottom: '0%',
+    borderRadius: 16,
   },
-  media: {
-    height: '100%',
+  heading: {
+    paddingBottom: 0,
+    fontSize: "2rem",
+    fontWeight: 'bold',
   },
   bookShelf: {
-    backgroundColor: theme.palette.background.paper,
+    paddingBottom: theme.spacing(2),
+  },
+  CategoryInfo: {
+    margin: theme.spacing(1),
+    borderRadius: 8,
+  },
+  CategoryInfo_light: {
+    backgroundColor: '#855cde',
+  },
+  CategoryInfo_dark: {
+    backgroundColor: '#9e84f5',
   },
 
   rootAction: {
@@ -79,10 +78,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   description: {
+    paddingTop: theme.spacing(1),
     paddingRight: '10%',
     paddingLeft: '6%',
     fontSize: 18,
-    paddingBottom: '2%',
     color: theme.palette.background.paper,
   }
 }));
@@ -96,16 +95,16 @@ const WhiteTypography = withStyles({
 })(Typography);
 
 
-const Body = ({theme}) => {
+const Body = ({ theme }) => {
   const classes = useStyles();
   console.log(theme);
   return (
     <Grid container className={classes.root}>
 
       <Grid item container xs={12}>
-        <Grid item xs={12} className={classes.body}>
+        {/* <Grid item xs={12} className={classes.body}>
           <Cards />
-        </Grid>
+        </Grid> */}
 
         <Grid item xs={12}>
           <div
@@ -115,56 +114,51 @@ const Body = ({theme}) => {
           ></div>
         </Grid>
 
-        <Grid item xs={12} className={classes.bottomPadding}>
-          <Card className={clsx(classes.CategoryShelfs, theme? classes.CategoryShelfs_light : classes.CategoryShelfs_dark)} >
-
-            <CardMedia
-              className={classes.media}
-            />
-            <CardContent style={{ paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%' }}>
-              <CardContent className={classes.bookShelf} >
-                <BookCarousel />
-              </CardContent>
+        <Grid item xs={12} className={classes.AdvisingSection}>
+          <Card className={classes.CategoryShelfs} >
+            <CardContent>
+              <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
             </CardContent>
-            <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
-            <Typography className={classes.description}>
-              Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
-            </Typography>
-
+            <CardMedia className={classes.bookShelf}>
+              <BookCarousel />
+            </CardMedia>
+            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+              <Typography className={classes.description}>
+                Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
 
-        <Grid item xs={12} className={classes.bottomPadding}>
-          <Card className={clsx(classes.CategoryShelfs, theme? classes.CategoryShelfs_light : classes.CategoryShelfs_dark)} >
-            <CardMedia
-              className={classes.media}
-            />
-            <CardContent style={{ paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%' }}>
-              <CardContent className={classes.bookShelf} >
-                <BookCarousel />
-              </CardContent>
+        <Grid item xs={12} className={classes.AdvisingSection}>
+          <Card className={classes.CategoryShelfs} >
+            <CardContent>
+              <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
             </CardContent>
-            <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
-            <Typography className={classes.description}>
-              Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
-            </Typography>
+            <CardMedia className={classes.bookShelf} >
+              <BookCarousel />
+            </CardMedia>
+            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+              <Typography className={classes.description}>
+                Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
 
-        <Grid item xs={12} className={classes.bottomPadding}>
-          <Card className={clsx(classes.CategoryShelfs, theme? classes.CategoryShelfs_light : classes.CategoryShelfs_dark)}>
-            <CardMedia
-              className={classes.media}
-            />
-            <CardContent style={{ paddingLeft: '0%', paddingRight: '0%', paddingTop: '0%' }}>
-              <CardContent className={classes.bookShelf} >
-                <BookCarousel />
-              </CardContent>
+        <Grid item xs={12} className={classes.AdvisingSection}>
+          <Card className={classes.CategoryShelfs}>
+            <CardContent>
+              <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
             </CardContent>
-            <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
-            <Typography className={classes.description}>
-              Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
-            </Typography>
+            <CardMedia className={classes.bookShelf} >
+              <BookCarousel />
+            </CardMedia>
+            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+              <Typography className={classes.description}>
+                Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
+              </Typography>
+            </CardContent>
           </Card>
         </Grid>
 

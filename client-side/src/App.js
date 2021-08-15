@@ -22,8 +22,25 @@ import { lightTheme, darkTheme } from './themes';
 function App() {
   const [isThemeLight, setTheme] = useState(true);
   const handlePassedTheme = (t) => {
+    
+    if (!window.localStorage) {
+      alert("The browser does not support localstorage");
+      return false;
+    } else {
+      localStorage.setItem("Theme", t);
+    }
     setTheme(t);
+    // console.log(t);
+    // let lt = localStorage.getItem("Theme");
+    // if (lt) {
+    //   setTheme(true);
+    // } else {
+    //   setTheme(false);
+    // }
+    // setTheme(lt);
+    // console.log(lt);
   }
+  // setTime(() => {localStorage.getItem("Theme");
 
   const appliedTheme = createMuiTheme(isThemeLight ? lightTheme : darkTheme)
   return (
