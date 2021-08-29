@@ -11,7 +11,6 @@ import cover4 from '../Assets/bookcover4.jpg';
 import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
-import clsx from 'clsx';
 import Questionnaires from './Questionnaire.jsx'
 <link href="../BookCarousel/blur.css" type="text/css" rel="stylesheet" />
 
@@ -73,14 +72,13 @@ class BetaReadingBookCarousel extends React.Component {
     return (
       <div>
       <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
-        
+        <img onClick={() => { this.handleClick(); }} src={cover1} className={classes.media} onDragStart={handleDragStart} />
         <img onClick={() => { this.handleClick(); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
-        <a href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>
-        <a href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>
-        <a href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>
-        <a href='/novel'><img src={cover6} className={classes.media} onDragStart={handleDragStart} /></a>
-        <a href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>
-        <a href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>
+        <img onClick={() => { this.handleClick(); }} src={cover3} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick(); }} src={cover4} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick(); }} src={cover5} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick(); }} src={cover6} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick(); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
       </Carousel>
       <Questionnaires ref={this.child}/>
       </div>
