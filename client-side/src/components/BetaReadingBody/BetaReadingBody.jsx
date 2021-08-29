@@ -6,6 +6,7 @@ import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Contai
 import BetaReadingBookCarousel from './BetaReadingBookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import Book from '../Book';
 
@@ -54,14 +55,17 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     paddingBottom: 0,
+    paddingTop: theme.spacing(1),
     fontSize: "2rem",
     fontWeight: 'bold',
+    color: theme.palette.background.paper,
   },
   bookShelf: {
     paddingBottom: theme.spacing(2),
   },
   CategoryInfo: {
     margin: theme.spacing(1),
+    marginBottom: theme.spacing(2),
     borderRadius: 8,
   },
   CategoryInfo_light: {
@@ -77,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
   description: {
     paddingTop: theme.spacing(1),
-    paddingRight: '10%',
+    paddingRight: 0,
     paddingLeft: '6%',
     fontSize: 18,
     color: theme.palette.background.paper,
@@ -114,55 +118,83 @@ const Body = ({ theme }) => {
 
         <Grid item xs={12} className={classes.AdvisingSection}>
           <Card className={classes.CategoryShelfs} >
-            <CardContent>
-              <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
+
+            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flexGrow: 1 }}>
+                  <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
+                  <Typography className={classes.description}>
+                    Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
+                  </Typography>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse'}}>
+                <Button
+                  color="primary"
+                  className={classes.button}
+                  endIcon={<ArrowForwardIcon />}
+                >Show More</Button>
+                </div>
+              </div>
             </CardContent>
+
             <CardMedia className={classes.bookShelf}>
               <BetaReadingBookCarousel />
             </CardMedia>
-            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
-              <Typography className={classes.description}>
-                Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
-              </Typography>
-            </CardContent>
           </Card>
         </Grid>
 
         <Grid item xs={12} className={classes.AdvisingSection}>
           <Card className={classes.CategoryShelfs} >
-            <CardContent>
-              <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
-            </CardContent>
-            <CardMedia className={classes.bookShelf} >
-              <BetaReadingBookCarousel />
-            </CardMedia>
-            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+                        
+          <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flexGrow: 1 }}>
+                <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
               <Typography className={classes.description}>
                 Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
               </Typography>
-            </CardContent>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse'}}>
+                <Button
+                  color="primary"
+                  className={classes.button}
+                  endIcon={<ArrowForwardIcon />}
+                >Show More</Button>
+                </div>
+              </div>
+            </CardContent>          
+
+            <CardMedia className={classes.bookShelf} >
+              <BetaReadingBookCarousel />
+            </CardMedia>
           </Card>
         </Grid>
 
         <Grid item xs={12} className={classes.AdvisingSection}>
           <Card className={classes.CategoryShelfs}>
-            <CardContent>
-              <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
-            </CardContent>
-            <CardMedia className={classes.bookShelf} >
-              <BetaReadingBookCarousel />
-            </CardMedia>
-            <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+
+          <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+              <div style={{ display: 'flex' }}>
+                <div style={{ flexGrow: 1 }}>
+                <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
               <Typography className={classes.description}>
                 Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
               </Typography>
-            </CardContent>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse'}}>
+                <Button
+                  color="primary"
+                  className={classes.button}
+                  endIcon={<ArrowForwardIcon />}
+                >Show More</Button>
+                </div>
+              </div>
+            </CardContent> 
+
+            <CardMedia className={classes.bookShelf} >
+              <BetaReadingBookCarousel />
+            </CardMedia>
           </Card>
-          <CardActions>
-            <Button size="small" color="primary">
-              Learn More
-            </Button>
-          </CardActions>
         </Grid>
 
         <Book id={'0002'} />
