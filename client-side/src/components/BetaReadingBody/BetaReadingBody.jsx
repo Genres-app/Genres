@@ -11,6 +11,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 
+import Book from '../Book';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "block",
@@ -160,10 +162,16 @@ const Body = ({ theme }) => {
               </Typography>
             </CardContent>
           </Card>
+          <CardActions>
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </CardActions>
         </Grid>
 
-
+        <Book id={'0002'} />
       </Grid>
+
     </Grid>
   )
 }

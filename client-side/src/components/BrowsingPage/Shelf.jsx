@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles';
 import PrevArrow from '@material-ui/icons/ArrowBackIos';
 import NextArrow from '@material-ui/icons/ArrowForwardIos';
 import Button from '@material-ui/core/Button';
