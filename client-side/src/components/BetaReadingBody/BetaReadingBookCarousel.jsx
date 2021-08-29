@@ -12,7 +12,7 @@ import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
 import clsx from 'clsx';
-import Questionnaires from './Questionnaire'
+import Questionnaires from './Questionnaire.jsx'
 <link href="../BookCarousel/blur.css" type="text/css" rel="stylesheet" />
 
 
