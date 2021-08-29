@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
 
   description: {
     paddingTop: theme.spacing(1),
-    paddingRight: 0,
+    paddingRight: theme.spacing(1),
     paddingLeft: '6%',
     fontSize: 18,
     color: theme.palette.background.paper,
@@ -127,7 +127,7 @@ const Body = ({ theme }) => {
                     Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
                   </Typography>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column-reverse'}}>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0}}>
                 <Button
                   color="primary"
                   className={classes.button}
@@ -154,7 +154,7 @@ const Body = ({ theme }) => {
                 Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.
               </Typography>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column-reverse'}}>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0}}>
                 <Button
                   color="primary"
                   className={classes.button}
@@ -181,7 +181,7 @@ const Body = ({ theme }) => {
                 Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.
               </Typography>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column-reverse'}}>
+                <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0}}>
                 <Button
                   color="primary"
                   className={classes.button}
