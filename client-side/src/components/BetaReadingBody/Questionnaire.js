@@ -21,14 +21,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default class Questionnaires extends React.Component {
 
-
-constructor(props) {
-  super(props);
-  this.state = {open: false};
-  this.handleClickOpen = this.handleClickOpen.bind(this);
-}
-componentDidMount() {
-  this.props.setClick(this.handleClickOpen);
+  constructor(props) {
+    super(props);
+    this.state = {open: false};
 }
 
 // Shows or hide the Drawer

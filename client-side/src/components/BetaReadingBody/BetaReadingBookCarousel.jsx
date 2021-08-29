@@ -31,15 +31,13 @@ const useStyles = theme => ({
 class BetaReadingBookCarousel extends React.Component {
 
   constructor(props) {
-    super(props)
-
-    // Create the child instance using react createRef
-    this.questionnaires = React.createRef()
-  }
+    super(props);
+    this.child = React.createRef();
+}
 
   
   handleClick = () => {
-    this.questionnaires.current.handleClickOpen();
+    this.child.current.handleClickOpen();
   }
 
 
@@ -71,13 +69,12 @@ class BetaReadingBookCarousel extends React.Component {
     ];
 
     const handleDragStart = (e) => e.preventDefault();
-
-    <Questionnaires ref={instance => { this.child = instance;  }} />
+    
     return (
-      
+      <div>
       <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
         
-        <img onClick={() => { this.child.handleClickOpen(); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick(); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
         <a href='/novel'><img src={cover3} className={classes.media} onDragStart={handleDragStart} /></a>
         <a href='/novel'><img src={cover4} className={classes.media} onDragStart={handleDragStart} /></a>
         <a href='/novel'><img src={cover5} className={classes.media} onDragStart={handleDragStart} /></a>
@@ -85,7 +82,8 @@ class BetaReadingBookCarousel extends React.Component {
         <a href='/novel'><img src={cover7} className={classes.media} onDragStart={handleDragStart} /></a>
         <a href='/novel'><img src={cover1} className={classes.media} onDragStart={handleDragStart} /></a>
       </Carousel>
-      
+      <Questionnaires ref={this.child}/>
+      </div>
     )
   }
 }
