@@ -2,7 +2,7 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { Paper, Button, Typography, Grid, CardContent, Card, Container } from '@material-ui/core'
+import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container } from '@material-ui/core'
 import BetaReadingBookCarousel from './BetaReadingBookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';

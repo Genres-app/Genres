@@ -90,16 +90,14 @@ render() {
             </RadioGroup>
             </FormControl>
             
-            <DialogContentText>
-              Who’s your favorite author?
-            </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Author's Name"
+              label="Who’s your favorite author?"
               type="name"
               fullWidth
+              color="secondary"
             />
 
             <DialogContentText>
