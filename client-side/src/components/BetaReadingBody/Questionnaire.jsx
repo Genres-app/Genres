@@ -42,9 +42,9 @@ render() {
             value={this.value}       
             row={true}
             /*onChange={this.handleChang}*/>
-              <FormControlLabel value="female" control={<Radio />} label="A" />
-              <FormControlLabel value="male" control={<Radio />} label="B" />
-              <FormControlLabel value="other" control={<Radio />} label="no preference" />
+              <FormControlLabel value="long" control={<Radio />} label="long novels" />
+              <FormControlLabel value="short" control={<Radio />} label="short novels" />
+              <FormControlLabel value="no preference" control={<Radio />} label="no preference" />
             </RadioGroup>
             </FormControl>
 
@@ -115,11 +115,11 @@ render() {
 
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color ="#651fff">
+            <Button onClick={this.handleClose}>
               Cancel
             </Button>
-            <a href='/novel' style={{ textDecoration: 'none' }}>
-            <Button onClick={this.handleClose} color="#651fff">
+            <a href='/novel' style={{ textDecoration: 'none'}}>
+            <Button onClick={this.handleClose} >
               Submit
             </Button>
             </a>
