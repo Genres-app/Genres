@@ -2,14 +2,11 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import Carousel from 'react-material-ui-carousel'
 import { Paper, Button, Typography, Grid, CardContent, Card, Container } from '@material-ui/core'
-import Cards from '../Cards/Cards.jsx';
-import BookCarousel from '../BookCarousel/BookCarousel.jsx';
+import BetaReadingBookCarousel from './BetaReadingBookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -120,7 +117,7 @@ const Body = ({ theme }) => {
               <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
             </CardContent>
             <CardMedia className={classes.bookShelf}>
-              <BookCarousel />
+              <BetaReadingBookCarousel />
             </CardMedia>
             <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
               <Typography className={classes.description}>
@@ -136,7 +133,7 @@ const Body = ({ theme }) => {
               <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Plot Advising</Typography>
             </CardContent>
             <CardMedia className={classes.bookShelf} >
-              <BookCarousel />
+              <BetaReadingBookCarousel />
             </CardMedia>
             <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
               <Typography className={classes.description}>
@@ -152,7 +149,7 @@ const Body = ({ theme }) => {
               <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >Spelling and Grammar</Typography>
             </CardContent>
             <CardMedia className={classes.bookShelf} >
-              <BookCarousel />
+              <BetaReadingBookCarousel />
             </CardMedia>
             <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
               <Typography className={classes.description}>
