@@ -126,7 +126,9 @@ export default class ProceedToQ extends React.Component {
             </Card>
 
 
-            <Card style = {{margin: '24px 24px 0px 24px',maxWidth: 550, marginTop:'1.5rem', backgroundColor:'#f2f2f2', borderRadius: 16}}>
+            <Card 
+               style = {{margin: '24px 24px 0px 24px',maxWidth: 550, marginTop:'1.5rem', backgroundColor:'#f2f2f2', borderRadius: 16}} >
+
             <CardContent style= {{paddingBottom: '8px'}}>
                 <DialogContent style = {{padding: '0'}}>
                     <DialogTitle id="alert-dialog-slide-title" style = {{marginleft:'0', fontSize: '24', padding: '0'}}>{"Proceed To Questionnaire?"}</DialogTitle>
