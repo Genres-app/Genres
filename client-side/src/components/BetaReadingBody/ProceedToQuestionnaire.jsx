@@ -13,6 +13,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
+import useStyles from './../Auth/styles';
 import Questionnaires from './Questionnaire.jsx'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
@@ -20,10 +21,50 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-let bodyStyles = {
-    borderRadius: 16
-  };
+let bottomStylesAgree = {
+        margin: "16px 16px 16px 16px ",
+        width: '300px',
+        height: '36px',
+        color: 'white',
+        fontSize: '12px',
+        fontWeight: '500',
+        textAlign: 'center',
+        borderRadius: '45px',
+        backgroundImage: 'linear-gradient(101deg, #A1A6FF, #63FFE6)',
+        transition: 'all 0.2s ease 0s',
+        boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
+        cursor: 'pointer',
+        "&:hover":{
+            filter: 'brightness(105%)',
+        },
+        "&:active":{
+            filter: 'brightness(95%)',
+            boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)',
+        }
+}
 
+let bottomStylesDisagree = {
+    margin: "16px 0px 16px 0px ",
+    paddingTop: '8px',
+    width: '100px',
+    height: '36px',
+    color: 'black',
+    fontSize: '12px',
+    fontWeight: '500',
+    textAlign: 'center',
+    borderRadius: '45px',
+    // backgroundImage: 'linear-gradient(101deg, #A1A6FF, #63FFE6)',
+    transition: 'all 0.2s ease 0s',
+    boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
+    cursor: 'pointer',
+    "&:hover":{
+        filter: 'brightness(105%)',
+    },
+    "&:active":{
+        filter: 'brightness(95%)',
+        boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)',
+    }
+}
 
 export default class ProceedToQ extends React.Component {
 ;
@@ -41,6 +82,11 @@ export default class ProceedToQ extends React.Component {
     this.child.current.handleClickOpen();
   }
 
+  handleContinue = () => {
+      this.handleClick();
+      this.handleClose();
+  }
+
   render() {
     return (
         <div>
@@ -52,9 +98,14 @@ export default class ProceedToQ extends React.Component {
             onClose={this.handleClose}
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
+            PaperProps={{
+                style: {
+                    borderRadius: 16
+                },
+              }}
           >
-            {/* <Card style = {{borderRadius:'16'}}> */}
-            <Card style = {{maxWidth: 550, margin: '24px 24px 0px 24px', marginTop:'1.5rem', backgroundColor:'#e6ccff', borderRadius: 16}}>
+
+            <Card style = {{maxWidth: 550, margin: '24px 24px 0px 24px', marginTop:'1.5rem', backgroundColor:'#f2f2f2', borderRadius: 16}}>
                 <CardContent style= {{paddingBottom: '16px'}}>
                     <Typography align="left" variant="subtitle2" color="textPrimary">
                         Author(s): <Typography component="span" display="inline" style={{color: '#686868'}} variant="body1">Lucas Lloyd</Typography>
@@ -75,7 +126,7 @@ export default class ProceedToQ extends React.Component {
             </Card>
 
 
-            <Card style = {{margin: '24px 24px 0px 24px',maxWidth: 550, marginTop:'1.5rem', backgroundColor:'#d9b3ff', borderRadius: 16}}>
+            <Card style = {{margin: '24px 24px 0px 24px',maxWidth: 550, marginTop:'1.5rem', backgroundColor:'#f2f2f2', borderRadius: 16}}>
             <CardContent style= {{paddingBottom: '8px'}}>
                 <DialogContent style = {{padding: '0'}}>
                     <DialogTitle id="alert-dialog-slide-title" style = {{marginleft:'0', fontSize: '24', padding: '0'}}>{"Proceed To Questionnaire?"}</DialogTitle>
@@ -89,18 +140,14 @@ export default class ProceedToQ extends React.Component {
             </Card>
 
             <DialogActions>
-              <Button onClick={this.handleClose} >
+              <Button onClick={this.handleClose} style = {bottomStylesDisagree}>
                 Disagree
               </Button>
-              <Button onClick={this.handleClose} color="secondary">
-                <div onClick={() => { this.handleClick(); }}>
+              <Button onClick={this.handleContinue} style = {bottomStylesAgree} >
                 Agree and proceed to questionnaire
                 <ArrowForwardIcon style = {{ verticalAlign: -7, display: 'inline-flex'}}/>
-                </div>
               </Button>
             </DialogActions>
-
-            {/* </Card> */}
           </Dialog>
         </div>
         <Questionnaires ref={this.child}/>

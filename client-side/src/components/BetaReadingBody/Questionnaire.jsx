@@ -11,12 +11,58 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 
+let bottomStylesSubmit = {
+  margin: "16px 16px 16px 16px ",
+  width: '100px',
+  height: '36px',
+  color: 'white',
+  fontSize: '12px',
+  fontWeight: '500',
+  textAlign: 'center',
+  borderRadius: '45px',
+  backgroundImage: 'linear-gradient(101deg, #A1A6FF, #63FFE6)',
+  transition: 'all 0.2s ease 0s',
+  boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
+  cursor: 'pointer',
+  "&:hover":{
+      filter: 'brightness(105%)',
+  },
+  "&:active":{
+      filter: 'brightness(95%)',
+      boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)',
+  }
+}
+
+let bottomStylesCancel = {
+margin: "16px 0px 16px 0px ",
+paddingTop: '8px',
+width: '100px',
+height: '36px',
+color: 'black',
+fontSize: '12px',
+fontWeight: '500',
+textAlign: 'center',
+borderRadius: '45px',
+// backgroundImage: 'linear-gradient(101deg, #A1A6FF, #63FFE6)',
+transition: 'all 0.2s ease 0s',
+boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
+cursor: 'pointer',
+"&:hover":{
+  filter: 'brightness(105%)',
+},
+"&:active":{
+  filter: 'brightness(95%)',
+  boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.2)',
+}
+}
+
 
 export default class Questionnaires extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {open: false};
+    
 }
 
 handleClickOpen = () => this.setState({open: !this.state.open});
@@ -31,8 +77,15 @@ handleChange = (event) => this.setValue({
 render() {
     return (
       <div>
-        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Questionnaire</DialogTitle>
+        <Dialog PaperProps={{
+                style: {
+                    borderRadius: 16
+                },
+              }}
+                open={this.state.open} 
+                onClose={this.handleClose} 
+                aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title" >Questionnaire</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Do you prefer long novels or short novels?
@@ -115,11 +168,11 @@ render() {
 
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleClose} style = {bottomStylesCancel}>
               Cancel
             </Button>
             <a href="/reading" style={{ textDecoration: 'none'}}>
-            <Button onClick={this.handleClose} color="secondary">
+            <Button onClick={this.handleClose} style = {bottomStylesSubmit}>
               Submit
             </Button>
             </a>
