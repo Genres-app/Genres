@@ -118,8 +118,8 @@ render() {
             <Button onClick={this.handleClose}>
               Cancel
             </Button>
-            <a href='/novel' style={{ textDecoration: 'none'}}>
-            <Button onClick={this.handleClose} >
+            <a href="/reading" style={{ textDecoration: 'none'}}>
+            <Button onClick={this.handleClose} color="secondary">
               Submit
             </Button>
             </a>
