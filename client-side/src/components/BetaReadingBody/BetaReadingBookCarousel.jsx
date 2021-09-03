@@ -11,7 +11,8 @@ import cover4 from '../Assets/bookcover4.jpg';
 import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
-import Questionnaires from './Questionnaire.jsx'
+
+import ProceedToQ from './ProceedToQuestionnaire.jsx'
 <link href="../BookCarousel/blur.css" type="text/css" rel="stylesheet" />
 
 
@@ -80,7 +81,7 @@ class BetaReadingBookCarousel extends React.Component {
         <img onClick={() => { this.handleClick(); }} src={cover6} className={classes.media} onDragStart={handleDragStart} />
         <img onClick={() => { this.handleClick(); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
       </Carousel>
-      <Questionnaires ref={this.child}/>
+      <ProceedToQ ref={this.child}/>
       </div>
     )
   }
