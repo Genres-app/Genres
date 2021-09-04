@@ -5,7 +5,9 @@ export const lightTheme = {
     primary: {
       main: '#fff',
     },
-    secondary: deepPurple,
+    secondary: {
+      main: '#855cde'
+    },
     alert: '#ff1744',
   },
 };

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container } from '@material-ui/core'
+import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container, Divider } from '@material-ui/core'
 import BetaReadingBookCarousel from './BetaReadingBookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -71,39 +71,39 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '0%',
     borderRadius: 16,
   },
-  heading: {
-    paddingBottom: 0,
-    paddingTop: theme.spacing(1),
-    fontSize: "2rem",
-    fontWeight: 'bold',
-    color: theme.palette.background.paper,
-  },
   bookShelf: {
     paddingBottom: theme.spacing(2),
   },
   CategoryInfo: {
     margin: theme.spacing(1),
     marginBottom: theme.spacing(2),
-    borderRadius: 8,
+    // borderRadius: 8,
   },
   CategoryInfo_light: {
-    backgroundColor: '#855cde',
+    color: '#855cde',
   },
   CategoryInfo_dark: {
-    backgroundColor: '#9e84f5',
+    color: '#9e84f5',
   },
 
-  rootAction: {
-    height: '100%',
+  heading: {
+    paddingBottom: 0,
+    paddingTop: theme.spacing(1),
+    fontSize: "2rem",
+    fontWeight: 'bold',
+    // color: theme.palette.background.paper,
   },
-
   description: {
     paddingTop: theme.spacing(1),
     paddingRight: theme.spacing(1),
-    paddingLeft: '6%',
+    // paddingLeft: '6%',
     fontSize: 18,
-    color: theme.palette.background.paper,
-  }
+    // color: theme.palette.background.paper,
+  },
+  
+  rootAction: {
+    height: '100%',
+  },
 }));
 
 
@@ -145,23 +145,24 @@ const Body = ({ theme }) => {
             <Card className={classes.CategoryShelfs} >
 
               <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', padding: "0 5% 0 5%" }}>
                   <div style={{ flexGrow: 1 }}>
-                    <Typography className={[classes.heading, classes.defaultSidePadding].join(' ')} variant="h1" >General Advising</Typography>
-                    <Typography className={classes.description}>
+                    <Typography className={classes.heading} variant="h1" >General Advising</Typography>
+                    <Typography className={classes.description} >
                       Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.
                     </Typography>
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0 }}>
                     <Button
-                      color="primary"
+                      variant='contained'
+                      color="secondary"
                       className={classes.button}
                       endIcon={<ArrowForwardIcon />}
                     >Show More</Button>
                   </div>
                 </div>
               </CardContent>
-
+              <Divider variant='middle'></Divider>
               <CardMedia className={classes.bookShelf}>
                 <BetaReadingBookCarousel />
               </CardMedia>
