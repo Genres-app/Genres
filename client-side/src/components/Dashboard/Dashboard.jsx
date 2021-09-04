@@ -175,24 +175,26 @@ const Dashboard = ({ passTheme }) => {
 
 
   // Remove BoxShadow of AppBar @rankings
-  var setStyleOfAppbar1 = makeStyles((theme) => ({
+  const setStyleOfAppbar1 = makeStyles((theme) => ({
     appBar: {
       backgroundColor: theme.palette.background.paper,
       boxShadow: 'none',
     }
   }));
-  var setStyleOfAppbar2 = makeStyles((theme) => ({
+  const setStyleOfAppbar2 = makeStyles((theme) => ({
     appBar: {
       backgroundColor: theme.palette.background.paper,
       //boxShadow: 'none',
     }
   }));
 
+  let classOfAppbar;
+
   if (window.location.pathname == "/rankings") {
-    var classOfAppbar = setStyleOfAppbar1();
+    classOfAppbar = setStyleOfAppbar1();
   }
   else {
-    var classOfAppbar = setStyleOfAppbar2();
+    classOfAppbar = setStyleOfAppbar2();
   }
 
 
@@ -203,6 +205,7 @@ const Dashboard = ({ passTheme }) => {
 
         <AppBar
           position="fixed"
+          color="secondary"
           className={classOfAppbar.appBar}
         >
           <Toolbar>
@@ -310,7 +313,7 @@ const Dashboard = ({ passTheme }) => {
                 <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
                 <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
                 <div className={classes.profileBtnsOfDrawer}>
-                  <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="secondary" disableElevation>Profile</Button>
+                  <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="primary" disableElevation>Profile</Button>
                   <Button className={classes.logoutBtnOfDrawer} onClick={logout} variant="outlined">Logout</Button>
                 </div>
                 <Divider />

@@ -108,7 +108,7 @@ export default function RankingPage({ theme }) {
   //         primary: {
   //             main: '#ffffff',
   //         },
-  //         secondary: deepPurple,
+  //         primary: deepPurple,
   //         alert: '#ff1744',
   //     },
   // });
@@ -180,7 +180,7 @@ export default function RankingPage({ theme }) {
                 <Typography className={classes.bookTitle}>
                   {item.title}
                 </Typography>
-                <Typography className={classes.bookAuthor} color="secondary">
+                <Typography className={classes.bookAuthor} color="primary">
                   Author Name
                 </Typography>
                 <div className={classes.chipContainer}>
@@ -212,8 +212,8 @@ export default function RankingPage({ theme }) {
           onChange={handleChange}
           aria-label="Sort by data"
           centered
-          indicatorColor="secondary"
-          textColor="secondary"
+          indicatorColor="primary"
+          textColor="primary"
         >
           <Tab label="Likes" {...a11yProps(0)} />
           <Tab label="Stars" {...a11yProps(1)} />
@@ -238,6 +238,7 @@ export default function RankingPage({ theme }) {
           value={valueL}
           onChange={handleChangeLeft}
           aria-label="Sort by genre"
+          indicatorColor="primary"
         >
           {itemsSortGenre.map((item, index) => (
             <Tab key={index} label={item.title} icon={item.icon}
@@ -269,6 +270,7 @@ export default function RankingPage({ theme }) {
           value={valueR}
           onChange={handleChangeRight}
           aria-label="Sort by Time"
+          indicatorColor="primary"
           classes={{ indicator: classes.rightTabIndicator }}
         >
 

@@ -3,10 +3,10 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 export const lightTheme = {
   palette: {
     primary: {
-      main: '#fff',
+      main: '#855cde',
     },
     secondary: {
-      main: '#855cde'
+      main: '#fff',
     },
     alert: '#ff1744',
   },
@@ -16,10 +16,10 @@ export const darkTheme = {
   palette: {
     type: 'dark',
     primary: {
-      main: '#333',
+      main: '#9e84f5',
     },
     secondary: {
-      main: '#9e84f5',
+      main: '#333',
     },
     alert: '#ff1744',
   },

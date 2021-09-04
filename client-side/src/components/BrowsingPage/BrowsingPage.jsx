@@ -74,10 +74,10 @@ export default function Body() {
       <IconButton aria-label="last page">
         <Icon path={mdiChevronLeft} size={1} />
       </IconButton>
-      <Button className={classes.pageSelItem} color="secondary">1</Button>
-      <Button className={classes.pageSelItem} color="secondary">2</Button>
-      <Button className={classes.pageSelItem} color="secondary" disabled>...</Button>
-      <Button className={classes.pageSelItem} color="secondary">128</Button>
+      <Button className={classes.pageSelItem} color="primary">1</Button>
+      <Button className={classes.pageSelItem} color="primary">2</Button>
+      <Button className={classes.pageSelItem} color="primary" disabled>...</Button>
+      <Button className={classes.pageSelItem} color="primary">128</Button>
       <IconButton aria-label="next page">
         <Icon path={mdiChevronRight} size={1} />
       </IconButton>

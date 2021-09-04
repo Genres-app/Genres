@@ -174,7 +174,7 @@ const Body = ({ theme }) => {
                   <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0 }}>
                     <Button
                       variant='contained'
-                      color="secondary"
+                      color="primary"
                       className={classes.button}
                       endIcon={<ArrowForwardIcon />}
                     >Show More</Button>
