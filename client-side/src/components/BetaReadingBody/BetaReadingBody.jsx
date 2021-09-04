@@ -2,7 +2,7 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container, Divider } from '@material-ui/core'
+import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container, Divider, Link } from '@material-ui/core'
 import BetaReadingBookCarousel from './BetaReadingBookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -10,6 +10,12 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import Book from '../Book';
 import { Translate } from '@material-ui/icons';
+
+// Router
+import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
+import BetaReadingGeneral from './BetaReadingGeneral';
+import BetaReadingPlot from './BetaReadingPlot';
+import BetaReadingGrammar from './BetaReadingGrammar';
 
 const useStyles = makeStyles((theme) => ({
   banner: {
@@ -121,21 +127,26 @@ const AdvisingSectionList = [
   {
     title: 'General Advising',
     description: 'Works in general advising are looking for feedback on the overall chapter or story. Authors would like to hear the experiences of readers.',
+    path: '/beta-reading/general',
   },
   {
     title: 'Plot Advising',
     description: 'Works in plot advising are looking to improve or confirm their current storyline with the help of reader feedback.',
+    path: '/beta-reading/plot',
   },
   {
     title: 'Spelling and Grammar',
     description: 'Just like the category name, this category are for works that may need additional help with spotting spelling, grammar, and punctuation errors.',
+    path: '/beta-reading/grammar',
   },
 ]
 
 
 const Body = ({ theme }) => {
+
   const classes = useStyles();
-  console.log(theme);
+  const history = useHistory();
+
   return (
     <>
       <Container className={classes.banner}>
@@ -186,9 +197,13 @@ const Body = ({ theme }) => {
                       <Button
                         variant='contained'
                         color="primary"
-                        className={classes.button}
                         endIcon={<ArrowForwardIcon />}
-                      >Show More</Button>
+                        onClick={function(){
+                          history.push(item.path);
+                        }}
+                      >
+                        Show More
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
@@ -205,6 +220,20 @@ const Body = ({ theme }) => {
         </Grid>
 
       </Grid>
+
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/beta-reading/general' render={
+            (props) => (<BetaReadingGeneral {...props} theme={theme} />)
+          } />
+          <Route exact path='/beta-reading/plot' render={
+            (props) => (<BetaReadingPlot {...props} theme={theme} />)
+          } />
+          <Route exact path='/beta-reading/grammar' render={
+            (props) => (<BetaReadingGrammar {...props} theme={theme} />)
+          } />
+        </Switch>
+      </BrowserRouter>
     </>
   )
 }
