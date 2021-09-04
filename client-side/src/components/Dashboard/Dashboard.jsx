@@ -28,13 +28,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import ClosePageIcon from '@material-ui/icons/Close';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+
+//Icons
+import Icon from '@mdi/react';
+import { mdiAccountCircleOutline, mdiLoginVariant, mdiLogoutVariant } from '@mdi/js';
 
 import GenresLogo from '../Assets/logo-svg2.svg';
 import { Link, useHistory, useLocation } from 'react-router-dom';
@@ -271,16 +269,23 @@ const Dashboard = ({ passTheme }) => {
                 <>
                   <Button
                     onClick={() => routeChange("/writing")}
-                    variant="contain"
+                    variant="text"
                     color="inherit"
                     endIcon={<CreateOutlinedIcon />}
-                    className={classes.button}
+                    className={clsx(classes.widerBtn, classes.appbarBtn)}
                   >
                     Write
                   </Button>
                 </>
               ) : (
-                <Button onClick={() => setOpenPopup(true)} color="inherit">Login</Button>
+                <Button
+                  onClick={() => setOpenPopup(true)}
+                  variant="text"
+                  color="inherit"
+                  endIcon={<Icon path={mdiLoginVariant} size={1} />}
+                  className={clsx(classes.widerBtn, classes.appbarBtn)}
+                >
+                  Login</Button>
               )
             }
 
@@ -312,10 +317,18 @@ const Dashboard = ({ passTheme }) => {
               <>
                 <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
                 <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
-                <div className={classes.profileBtnsOfDrawer}>
-                  <Button className={classes.profileBtnOfDrawer} onClick={() => routeChange("/profile")} variant="contained" color="primary" disableElevation>Profile</Button>
-                  <Button className={classes.logoutBtnOfDrawer} onClick={logout} variant="outlined">Logout</Button>
-                </div>
+                {/* <div className={classes.profileBtnsOfDrawer}> */}
+                <Button
+                  className={clsx(classes.widerBtn, classes.profileBtnOfDrawer)}
+                  onClick={() => routeChange("/profile")}
+                  variant="text"
+                  color="primary"
+                  endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
+                >
+                  Profile
+                </Button>
+
+                {/* </div> */}
                 <Divider />
               </>
             ) : (
@@ -330,6 +343,15 @@ const Dashboard = ({ passTheme }) => {
               </ListItem>
             ))}
           </List>
+
+          <Button
+            className={clsx(classes.widerBtn, classes.logoutBtnOfDrawer)}
+            onClick={logout}
+            variant='text'
+            endIcon={<Icon path={mdiLogoutVariant} size={1} />}>
+            Logout
+          </Button>
+
         </Drawer>
       </div>
     </>

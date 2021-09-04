@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   //   }),
   // },
 
+  appbarBtn: {
+    margin: theme.spacing(1),
+  },
+
+  widerBtn: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
 
   drawer: {
     width: 250,
@@ -54,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
   userName: {
     margin: '0 auto',
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   userEmail: {
     marginLeft: theme.spacing(2),
@@ -67,15 +75,19 @@ const useStyles = makeStyles((theme) => ({
   },
 
   profileBtnOfDrawer: {
-    flex: 1,
-    margin: theme.spacing(1),
+    flexGrow: 0,
+    margin: '0 auto',
+    marginBottom: theme.spacing(1),
+    // width: 'initial',
   },
 
   logoutBtnOfDrawer: {
-    flex: 1,
-    margin: theme.spacing(1),
+    flexGrow: 0,
+    position: 'absolute',
+    bottom: theme.spacing(2),
+    left: '50%',
+    transform: 'translateX(-50%)',
     color: 'rgb(255, 23, 68)',
-    border: '1px solid rgba(255, 23, 68, 0.5)',
 
     "&:hover": {
       backgroundColor: 'rgb(255, 23, 68, 0.04)',
@@ -184,10 +196,6 @@ const useStyles = makeStyles((theme) => ({
   accountCircle: {
     margin: '5px',
     color: 'gray',
-  },
-
-  button: {
-    margin: theme.spacing(1),
   },
 
   buttonOutline: {

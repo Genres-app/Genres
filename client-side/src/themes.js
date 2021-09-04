@@ -8,7 +8,9 @@ export const lightTheme = {
     secondary: {
       main: '#fff',
     },
-    alert: '#ff1744',
+    warning: {
+      main: '#ff1744',
+    }
   },
   shape: {
     borderRadius: 8,
@@ -24,7 +26,9 @@ export const darkTheme = {
     secondary: {
       main: '#333',
     },
-    alert: '#ff1744',
+    warning: {
+      main: '#ff1744',
+    }
   },
   shape: {
     borderRadius: 8,
