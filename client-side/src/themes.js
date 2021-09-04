@@ -10,6 +10,9 @@ export const lightTheme = {
     },
     alert: '#ff1744',
   },
+  shape: {
+    borderRadius: 8,
+  },
 };
 
 export const darkTheme = {
@@ -22,5 +25,8 @@ export const darkTheme = {
       main: '#333',
     },
     alert: '#ff1744',
+  },
+  shape: {
+    borderRadius: 8,
   },
 };
