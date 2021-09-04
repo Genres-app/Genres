@@ -9,26 +9,36 @@ import CardMedia from '@material-ui/core/CardMedia';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import Book from '../Book';
+import { Translate } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   banner: {
+    position: "relative",
     width: "100%",
     maxWidth: "none",
     height: 500,
-    paddingTop: 100,
+    paddingTop: 110,
     marginBottom: 75,
     backgroundImage: "linear-gradient(30deg, rgb(166 143 253), rgb(99, 255, 230))",
     color: theme.palette.background.paper,
+    overflow: "hidden",
+
+    "& > *": {
+      position: 'relative',
+      zIndex: 99,
+    }
   },
   banner_beta: {
-    opacity: .5,
-    fontWeight: "400",
-    textShadow: '0px 2px 4px #0000006b',
-
-    "& + *": {
-      fontWeight: "bold",
-      lineHeight: "200%",
-    }
+    position: 'absolute',
+    left: '50%',
+    top: '40%',
+    color: 'initial',
+    transform: "Translate(-50%, -50%)",
+    opacity: .05,
+    fontSize: '40rem',
+    fontWeight: "bold",
+    // textShadow: '0px 2px 4px #0000006b',
+    zIndex: 98,
   },
   root: {
     display: "block",
@@ -100,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
     // color: theme.palette.background.paper,
   },
-  
+
   rootAction: {
     height: '100%',
   },
@@ -122,8 +132,17 @@ const Body = ({ theme }) => {
     <>
       <Container className={classes.banner}>
         <Typography variant='h1' align='center' className={classes.banner_beta}>β</Typography>
-        <Typography variant="h3" align='center'>Beta-Reading</Typography>
-        <Typography variant='subtitle1' align='center'>Beta-Reading's description.</Typography>
+        <Typography variant="h2" align='center' style={{fontSize: "3.375rem",
+      fontWeight: "bold",
+      lineHeight: "200%",}}>Beta-Reading</Typography>
+        <Typography variant='h5' align='center'>
+          A space specially created for writers to share drafts of their writing with readers
+        <br/> and receive constructive feedback before it officially releases.
+        </Typography>
+        <Typography variant='subtitle1' align='center' style={{paddingTop: 12}}>
+          *To help match writers with readers that can address their needs and to protect the writer’s work, 
+          <br/>readers may have to answer a questionnaire prior to unlocking the story.
+          </Typography>
       </Container>
 
       <Grid container className={classes.root}>
