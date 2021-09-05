@@ -61,7 +61,7 @@ function App() {
               <Route exact path='/rankings' render={
                 (props) => (<RankingPage {...props} theme={isThemeLight} />)
               } />
-              <Route exact path='/beta-reading' render={
+              <Route path='/beta-reading' render={
                 (props) => (<BetaReadingPage {...props} theme={isThemeLight} />)
               } />
               <Route exact path='/publit' component={PublitPage} />

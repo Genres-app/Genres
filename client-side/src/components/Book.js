@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import cover from './Assets/bookcover5.jpg';
 import { Translate } from '@material-ui/icons';
-import {BookLib} from './BookLib';
+import { BookLib } from './BookLib';
 
 const useStyles = makeStyles((theme) => ({
   mediaContainer: {

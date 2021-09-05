@@ -1,8 +1,8 @@
 // https://www.npmjs.com/package/react-material-ui-carousel
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
-import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container, Divider, Link } from '@material-ui/core'
+import { Paper, Button, Typography, Grid, CardContent, Card, CardActions, Container, Divider } from '@material-ui/core'
 import BetaReadingBookCarousel from './BetaReadingBookCarousel.jsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -12,7 +12,7 @@ import Book from '../Book';
 import { Translate } from '@material-ui/icons';
 
 // Router
-import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
+import { Router, Switch, Route, useHistory } from 'react-router-dom';
 import BetaReadingGeneral from './BetaReadingGeneral';
 import BetaReadingPlot from './BetaReadingPlot';
 import BetaReadingGrammar from './BetaReadingGrammar';
@@ -149,80 +149,80 @@ const Body = ({ theme }) => {
 
   return (
     <>
-      <Container className={classes.banner}>
-        <Typography variant='h1' align='center' className={classes.banner_beta}>β</Typography>
-        <Typography variant="h2" align='center' style={{
-          fontSize: "3.375rem",
-          fontWeight: "bold",
-          lineHeight: "200%",
-        }}>Beta-Reading</Typography>
-        <Typography variant='h5' align='center'>
-          A space specially created for writers to share drafts of their writing with readers
-          <br /> and receive constructive feedback before it officially releases.
-        </Typography>
-        <Typography variant='subtitle1' align='center' style={{ paddingTop: 12 }}>
-          *To help match writers with readers that can address their needs and to protect the writer’s work,
-          <br />readers may have to answer a questionnaire prior to unlocking the story.
-        </Typography>
-      </Container>
-
-      <Grid container className={classes.root}>
-
-        <Grid item container xs={12}>
-          {/* <Grid item xs={12} className={classes.body}>
-          <Cards />
-        </Grid> */}
-
-          <Grid item xs={12}>
-            <div
-              style={{
-                height: '50px',
-              }}
-            ></div>
-          </Grid>
-
-          {AdvisingSectionList.map((item, index) => (
-            <Grid item xs={12} className={classes.AdvisingSection}>
-              <Card className={classes.CategoryShelfs} >
-
-                <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
-                  <div style={{ display: 'flex', padding: "0 5% 0 5%" }}>
-                    <div style={{ flexGrow: 1 }}>
-                      <Typography className={classes.heading} variant="h1" >{item.title}</Typography>
-                      <Typography className={classes.description} >
-                        {item.description}
-                      </Typography>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0 }}>
-                      <Button
-                        variant='contained'
-                        color="primary"
-                        endIcon={<ArrowForwardIcon />}
-                        onClick={function(){
-                          history.push(item.path);
-                        }}
-                      >
-                        Show More
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-                <Divider variant='middle'></Divider>
-                <CardMedia className={classes.bookShelf}>
-                  <BetaReadingBookCarousel />
-                </CardMedia>
-              </Card>
-            </Grid>
-          ))
-          }
-
-          {/* <Book id={'0002'} /> */}
-        </Grid>
-
-      </Grid>
-
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
+          <Route exact path="/beta-reading">
+
+            <Container className={classes.banner}>
+              <Typography variant='h1' align='center' className={classes.banner_beta}>β</Typography>
+              <Typography variant="h2" align='center' style={{
+                fontSize: "3.375rem",
+                fontWeight: "bold",
+                lineHeight: "200%",
+              }}>Beta-Reading</Typography>
+              <Typography variant='h5' align='center'>
+                A space specially created for writers to share drafts of their writing with readers
+                <br /> and receive constructive feedback before it officially releases.
+              </Typography>
+              <Typography variant='subtitle1' align='center' style={{ paddingTop: 12 }}>
+                *To help match writers with readers that can address their needs and to protect the writer’s work,
+                <br />readers may have to answer a questionnaire prior to unlocking the story.
+              </Typography>
+            </Container>
+
+            <Grid container className={classes.root}>
+
+              <Grid item container xs={12}>
+
+                <Grid item xs={12}>
+                  <div
+                    style={{
+                      height: '50px',
+                    }}
+                  ></div>
+                </Grid>
+
+                {AdvisingSectionList.map((item, index) => (
+                  <Grid item xs={12} className={classes.AdvisingSection}>
+                    <Card className={classes.CategoryShelfs} >
+
+                      <CardContent className={clsx(classes.CategoryInfo, theme ? classes.CategoryInfo_light : classes.CategoryInfo_dark)}>
+                        <div style={{ display: 'flex', padding: "0 5% 0 5%" }}>
+                          <div style={{ flexGrow: 1 }}>
+                            <Typography className={classes.heading} variant="h1" >{item.title}</Typography>
+                            <Typography className={classes.description} >
+                              {item.description}
+                            </Typography>
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column-reverse', flexShrink: 0 }}>
+                            <Button
+                              variant='contained'
+                              color="primary"
+                              endIcon={<ArrowForwardIcon />}
+                              onClick={function () {
+                                history.push(item.path);
+                              }}
+                            >
+                              Show More
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                      <Divider variant='middle'></Divider>
+                      <CardMedia className={classes.bookShelf}>
+                        <BetaReadingBookCarousel />
+                      </CardMedia>
+                    </Card>
+                  </Grid>
+                ))
+                }
+
+                {/* <Book id={'0002'} /> */}
+              </Grid>
+
+            </Grid>
+
+          </Route>
           <Route exact path='/beta-reading/general' render={
             (props) => (<BetaReadingGeneral {...props} theme={theme} />)
           } />
@@ -233,7 +233,7 @@ const Body = ({ theme }) => {
             (props) => (<BetaReadingGrammar {...props} theme={theme} />)
           } />
         </Switch>
-      </BrowserRouter>
+        </Router>
     </>
   )
 }

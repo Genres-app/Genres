@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-
 import cover1 from './Assets/bookcover1.jpg';
 import cover2 from './Assets/bookcover2.jpg';
 import cover3 from './Assets/bookcover3.jpg';
@@ -21,6 +19,27 @@ export const BookLib = {
     author: 'Lucas LLoyd',
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover2,
+    info: 'Description of the book2',
+  },
+  '0003': {
+    title: 'The Arrivals',
+    author: 'Lucas LLoyd',
+    genres: ['Thriller', 'Sci-Fi'],
+    cover: cover3,
+    info: 'Description of the book2',
+  },
+  '0004': {
+    title: 'The Arrivals',
+    author: 'Lucas LLoyd',
+    genres: ['Thriller', 'Sci-Fi'],
+    cover: cover4,
+    info: 'Description of the book2',
+  },
+  '0005': {
+    title: 'The Arrivals',
+    author: 'Lucas LLoyd',
+    genres: ['Thriller', 'Sci-Fi'],
+    cover: cover5,
     info: 'Description of the book2',
   },
 }
