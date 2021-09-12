@@ -7,7 +7,7 @@ import { Slate, Editable, withReact } from 'slate-react';
 // Import withHistory to allow for redo and undo functions
 import { withHistory } from 'slate-history';
 
-import { ThemeProvider, makeStyles, createMuiTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -26,6 +26,19 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 import './WPEditor.css';
 
+import GenresDrawer from '../Drawer/Drawer';
+
+/*Material-UI Icons*/
+import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { CssBaseline, Divider, Grow } from '@material-ui/core';
+
+/*Mdi Icons*/
+import Icon from '@mdi/react';
+import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish } from '@mdi/js';
+import mdiSavedOutline from './svgs/content-save-check-outline.svg';
+
+
 // HELP from https://docs.slatejs.org/walkthroughs/01-installing-slate
 // HELP from https://github.com/ianstormtaylor/slate/blob/main/site/examples/richtext.tsx
 // The text editor BELOW consists of the Slate.js framework for building
@@ -35,16 +48,30 @@ import './WPEditor.css';
 // backend currently.
 
 // useStyles is the CSS for the text editor, edit BELOW:
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   // BELOW: CSS for Appbar itself
-  grow: {
-    flexGrow: 1,
+  chapterNameInput: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
   },
-  readBar: {
-    backgroundColor: 'white',
-    position: 'fixed',
-    zIndex: 2,
+  barDivider: {
+    margin: theme.spacing(2),
   },
+  barSaveBtnsContainer: {
+    position: 'relative',
+    marginLeft: theme.spacing(1),
+  },
+  barBtnNoSave: {
+    position: "absolute",
+    left: 0,
+    color: "#fff",
+    backgroundColor: "#e53935",
+
+    "&:hover": {
+      backgroundColor: "#b71c1c"
+    }
+  },
+
   container: {
     backgroundColor: 'white',
     display: 'flex',
@@ -56,7 +83,7 @@ const useStyles = makeStyles(() => ({
   },
   back: {
     margin: 'auto',
-    color: '#505050', 
+    color: '#505050',
   },
   options: {
     color: '#505050',
@@ -64,15 +91,6 @@ const useStyles = makeStyles(() => ({
   // ABOVE: CSS for Appbar itself
 
   // BELOW: CSS for Appbar Fields
-  readBar: {
-    backgroundColor: 'white',
-    paddingTop: '10px',
-    paddingBottom: '5px',
-    maxHeight: '65px',
-    position: 'fixed',
-    top: 0,
-    zIndex: 2,
-  },
   buttonContainer: {
     minWidth: '480px',
     display: 'flex',
@@ -85,12 +103,12 @@ const useStyles = makeStyles(() => ({
     marginLeft: '50px',
     justifyContent: 'space-between',
   },
-  chName:{
-    width: '20%',
-    height: '20px',
-    marginTop: '10px',
-    marginBottom: '50px',
-  },
+  // chName: {
+  //   width: '20%',
+  //   height: '20px',
+  //   marginTop: '10px',
+  //   marginBottom: '50px',
+  // },
   draftsButton: {
     backgroundColor: 'white',
     borderColor: '#49d6af',
@@ -124,21 +142,26 @@ const useStyles = makeStyles(() => ({
 }));
 
 // Edit to change Button outline colors BELOW:
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      // Change the hex here as needed:
-      main: '#49d6af',
-    },
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: {
+//       // Change the hex here as needed:
+//       main: '#49d6af',
+//     },
+//   }
+// });
 
-export default function WPEditor() {
+export default function WPEditor({ theme }) {
   const classes = useStyles();
+
+  const [sidebar, setSidebar] = useState(false);
+  const toggleSidebar = () => setSidebar(!sidebar);
+
+  const [isSaved, setSaved] = useState(false);
 
   // Create a Slate editor object that won't change across renders.
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
-  
+
   // Keep track of state for the value of the editor.
   // Initial Values of Slate Text Editor BELOW:
   const [value, setValue] = useState([
@@ -159,9 +182,10 @@ export default function WPEditor() {
       case 'h-1': return <HeadingOneElement {...props} />
       case 'h-2': return <HeadingTwoElement {...props} />
       case 'ul': return <ULElement {...props} />
-      case 'ol':return <OLElement {...props} />
+      case 'ol': return <OLElement {...props} />
       default: return <DefaultElement {...props} />
-    }}, [])
+    }
+  }, [])
   // YOU HAVE TO DEFINE NEW BLOCK ELEMENT TYPES HERE TOO AS CONST
   // Define a React component renderer for h1.
   const HeadingOneElement = props => {
@@ -182,13 +206,13 @@ export default function WPEditor() {
   // Define a React component renderer for unordered list.
   const ULElement = props => {
     return (
-        <ul {...props.attributes} style={{display: 'list-item', fontSize: '18px'}}>{props.children}</ul>
+      <ul {...props.attributes} style={{ display: 'list-item', fontSize: '18px' }}>{props.children}</ul>
     )
   }
   // Define a React component renderer for ordered list.
   const OLElement = props => {
     return (
-      <ol {...props.attributes} style={{display: 'list-item', fontSize: '18px'}}>{props.children}</ol>
+      <ol {...props.attributes} style={{ display: 'list-item', fontSize: '18px' }}>{props.children}</ol>
     )
   }
   // Define a React component renderer for the code blocks.
@@ -202,14 +226,14 @@ export default function WPEditor() {
   // Define a React component renderer for the block quotes.
   const BlockQuoteElement = props => {
     return (
-      <pre {...props.attributes} style={{fontFamily: 'times new roman', fontSize: '18px'}}>
+      <pre {...props.attributes} style={{ fontFamily: 'times new roman', fontSize: '18px' }}>
         <blockquote><p><em>{props.children}</em></p></blockquote>
       </pre>
     )
   }
   // Default Element;
   const DefaultElement = props => {
-    return <p style={{fontSize: '18px'}}{...props.attributes}>{props.children}</p>
+    return <p style={{ fontSize: '18px' }}{...props.attributes}>{props.children}</p>
   }
   // ---------------------------------- //
 
@@ -219,11 +243,11 @@ export default function WPEditor() {
     if (leaf.bold) {
       children = <strong>{children}</strong>
     }
-  
+
     if (leaf.italic) {
       children = <em>{children}</em>
     }
-  
+
     if (leaf.underline) {
       children = <u>{children}</u>
     }
@@ -349,163 +373,207 @@ export default function WPEditor() {
   // ---------------------------------- //
 
   return (
-    <React.Fragment>
+    <>
       {/* BELOW: Top Appbar */}
-      <AppBar className={classes.readBar}>
-        <Toolbar>
-          <React.Fragment>
-            <AppBar className={classes.readBar} elevation={1}>
-              <Toolbar>
-                <div className={classes.divFields}>
-                  {/* TEXT FIELD BELOW */}
-                  {/* FIXME: The text field where the chapter name should be
-                  has no functionality for now. It needs to be connected to a 
-                  backend yet to be implemented */}
-                  <ThemeProvider theme={theme}>
-                    <TextField
-                      className={classes.chName}
-                      label="Chapter Name"
-                      variant="outlined"
-                      id="mui-theme-provider-filled-input"
-                      size="small"
-                    />
-                  </ThemeProvider>
-                  {/* TEXT FIELD ABOVE */}
+      <CssBaseline>
+        <AppBar
+          position="fixed"
+          color="secondary"
+          elevation={1}
+        >
+          <Toolbar>
 
-                  {/* BUTTONS BELOW */}
-                  {/* FIXME: The buttons have no functionality for now.
-                  They need to be connected to a backend yet to be implemented */}
-                  <div className={classes.buttonContainer}>
-                    {/* {/* ADD TO DRAFTS Button:  */}
-                    {/* FIXME: a drafts page has yet to be implemented */}
-                    <Button className={classes.draftsButton} variant="outlined">
-                      <AddCircleOutlineIcon className={classes.icon}/>
-                      <Typography className={classes.text}>Add to Drafts</Typography>
-                    </Button>
-                    {/* ADD TO BOOK Button */}
-                    {/* FIXME: a full book object has yet to be implemented */}
-                    <Button className={classes.bookButton} variant="outlined">
-                      <AddCircleOutlineIcon className={classes.icon}/>
-                      <Typography className={classes.text}>Add to Book</Typography>
-                    </Button>
-                    {/* SAVE DOCUMENT Button */}
-                    {/* FIXME: a full database of book objects in the backend
-                    has yet to be implemented */}
-                    <IconButton className={classes.saveButton} aria-label="save button" component="span">
-                      <SaveIcon />
-                    </IconButton>
-                  </div>
-                  {/* BUTTONS ABOVE */}
-                </div>
-              </Toolbar>
-            </AppBar>
-          </React.Fragment>
-        </Toolbar>
-      </AppBar>
-      {/* ABOVE: Top Appbar */}
-      
-      {/* BELOW: Text Editor Options Appbar */}
-      {/* This Appbar has a DIFFERENT CSS sheet: WPEditor.css */}
-      <AppBar className="editorBar" color="default" elevation={1}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleSidebar}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <IconButton
+              color="inherit"
+              aria-label="back"
+              onClick={() => { window.history.back() }}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <TextField
+              className={classes.chapterNameInput}
+              label="Chapter Name"
+              variant="outlined"
+              id="mui-theme-provider-filled-input"
+              size="small"
+            />
+
+            <IconButton
+              color="inherit"
+              aria-label="settings"
+            // onClick={}
+            >
+              <Icon path={mdiBookCogOutline} size={1} />
+            </IconButton>
+
+            <div style={{ flexGrow: 1 }} />
+
+            <Button
+              variant="text"
+              color="primary"
+              // className={classes.button}
+              startIcon={<Icon path={mdiPublish} size={1} />}
+            >
+              Publish
+            </Button>
+            <Divider orientation="vertical" flexItem className={classes.barDivider} />
+            <Typography variant="caption">{
+              !isSaved ?
+                "Autosave 4 minutes ago"
+                :
+                "Saved!"
+            }</Typography>
+            <div className={classes.barSaveBtnsContainer}>
+              <IconButton
+                color="inherit"
+                aria-label="add to book"
+                className={classes.barBtnSave}
+              // onClick={}
+              >
+                <div style={{ backgroundImage: `url(${mdiSavedOutline})`, backgroundSize: "cover", width: 24, height: 24 }}></div>
+              </IconButton>
+              <Grow
+                in={!isSaved}
+              >
+                <IconButton
+                  color="inherit"
+                  aria-label="add to book"
+                  className={classes.barBtnNoSave}
+                  onClick={() => {
+                    setTimeout(() => {
+                      setSaved(true)
+                    }, 1000)
+                  }}
+                >
+                  <Icon path={mdiContentSaveOutline} size={1} />
+                </IconButton>
+              </Grow>
+            </div>
+          </Toolbar>
+        </AppBar>
+        {/* ABOVE: Top Appbar */}
+
+        {/* BELOW: Text Editor Options Appbar */}
+        {/* This Appbar has a DIFFERENT CSS sheet: WPEditor.css */}
+        <AppBar className="editorBar" color="default" elevation={1}>
           <Toolbar>
             <div className="buttonsContainer">
               {/* HEADING 1 BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  BlockEditor.toggleHeadingOne(editor)
-                }}> H1
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                BlockEditor.toggleHeadingOne(editor)
+              }}> H1
               </Button>
               {/* HEADING 2 BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  BlockEditor.toggleHeadingTwo(editor)
-                }}> H2
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                BlockEditor.toggleHeadingTwo(editor)
+              }}> H2
               </Button>
               {/* CODE BLOCK BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  BlockEditor.toggleCodeBlock(editor)
-                }}> Code Block
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                BlockEditor.toggleCodeBlock(editor)
+              }}> Code Block
               </Button>
               {/* BLOCK QUOTE BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  BlockEditor.toggleBlockQuote(editor)
-                }}> <FormatQuoteIcon />
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                BlockEditor.toggleBlockQuote(editor)
+              }}> <FormatQuoteIcon />
               </Button>
 
               {/* BOLD BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  toggleMark(editor, "bold")
-                }}> <FormatBoldIcon />
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                toggleMark(editor, "bold")
+              }}> <FormatBoldIcon />
               </Button>
               {/* ITALIC BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  toggleMark(editor, "italic")
-                }}> <FormatItalicIcon />
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                toggleMark(editor, "italic")
+              }}> <FormatItalicIcon />
               </Button>
               {/* UNDERLINE BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  toggleMark(editor, "underline")
-                }}> <FormatUnderlinedIcon />
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                toggleMark(editor, "underline")
+              }}> <FormatUnderlinedIcon />
               </Button>
 
               {/* UNORDERED LIST BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  BlockEditor.toggleUL(editor)
-                }}> <FormatListBulletedIcon />
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                BlockEditor.toggleUL(editor)
+              }}> <FormatListBulletedIcon />
               </Button>
               {/* ORDERED LIST BUTTON BELOW: */}
-              <Button onMouseDown={event => { event.preventDefault()
-                  BlockEditor.toggleOL(editor)
-                }}> <FormatListNumberedIcon />
+              <Button onMouseDown={event => {
+                event.preventDefault()
+                BlockEditor.toggleOL(editor)
+              }}> <FormatListNumberedIcon />
               </Button>
             </div>
           </Toolbar>
-      </AppBar>
-      {/* ABOVE: Text Editor Options Appbar */}
+        </AppBar>
+        {/* ABOVE: Text Editor Options Appbar */}
 
-      {/* BELOW: Actual Slate.js Text Editor */}
-      <div className="editors">
-        <Slate
-          editor={editor}
-          value={value}
-          onChange={newValue => setValue(newValue)}
-        >
-        <Editable
-          renderElement={renderElement}
-          // Pass in the `renderLeaf` function.
-          renderLeaf={renderLeaf}
-          // Handle SHORTCUTS BELOW:
-          onKeyDown={event => {
-            if (!event.ctrlKey) {
-              return
-            }
-            switch (event.key) {
-              // Shortcut for turning a text block into "code" BELOW:
-              case '`': {
-                event.preventDefault()
-                BlockEditor.toggleCodeBlock(editor)
-                break
-              }
-              // Shortcut for bolding BELOW:
-              case 'b': {
-                toggleMark(editor, "bold")
-                break
-              }
-              // Shortcut for italics BELOW:
-              case 'i': {
-                toggleMark(editor, "italic")
-                break
-              }
-              // Shortcut for underline BELOW:
-              case 'u': {
-                toggleMark(editor, "underline")
-                break
-              }
-            }
-          }}
-        />
-      </Slate>
-    </div>
-    {/* ABOVE: Actual Slate.js Text Editor */}
+        {/* BELOW: Actual Slate.js Text Editor */}
+        <div className="editors">
+          <Slate
+            editor={editor}
+            value={value}
+            onChange={newValue => setValue(newValue)}
+          >
+            <Editable
+              renderElement={renderElement}
+              // Pass in the `renderLeaf` function.
+              renderLeaf={renderLeaf}
+              // Handle SHORTCUTS BELOW:
+              onKeyDown={event => {
+                if (!event.ctrlKey) {
+                  return
+                }
+                switch (event.key) {
+                  // Shortcut for turning a text block into "code" BELOW:
+                  case '`': {
+                    event.preventDefault()
+                    BlockEditor.toggleCodeBlock(editor)
+                    break
+                  }
+                  // Shortcut for bolding BELOW:
+                  case 'b': {
+                    toggleMark(editor, "bold")
+                    break
+                  }
+                  // Shortcut for italics BELOW:
+                  case 'i': {
+                    toggleMark(editor, "italic")
+                    break
+                  }
+                  // Shortcut for underline BELOW:
+                  case 'u': {
+                    toggleMark(editor, "underline")
+                    break
+                  }
+                }
+              }}
+            />
+          </Slate>
+        </div>
+        {/* ABOVE: Actual Slate.js Text Editor */}
 
-    </React.Fragment>
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={true} isUserConfirmRequired={true} />
+      </CssBaseline>
+    </>
   );
 }

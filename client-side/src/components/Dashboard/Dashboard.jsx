@@ -288,7 +288,7 @@ const Dashboard = ({ passTheme }) => {
         </AppBar>
 
 
-        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} routeFunc={routeChange} logoutFunc={logout} user={user}/>
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false}/>
       </div>
     </>
   );

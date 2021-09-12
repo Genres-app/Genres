@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import useStyles from './styles';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-/*Material-UI Components*/
+/*Material-UI*/
 import {
   Typography,
   Avatar,
@@ -15,18 +17,37 @@ import {
   ListItemText,
 } from '@material-ui/core';
 
-//Icons
+//Mdi Icons
 import Icon from '@mdi/react';
 import { mdiAccountCircleOutline, mdiLogoutVariant } from '@mdi/js';
 
 import { ListItems } from '../Dashboard/listItems';
 
 
-const GenresDrawer = ({ open, theme, toggleFunc, routeFunc, logoutFunc, user }) => {
+const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired }) => {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const classes = useStyles();
 
-  console.log("open "+open)
+    // Route to render new content
+    const routeChange = (path) => {
+      if (!(isUserConfirmRequired && !window.confirm("Unsaved Content in this page, Confirm leaving?"))) {
+        history.push(path);
+        toggleFunc();
+      } else {
+        toggleFunc();
+      }
+    }
+  
+    const logout = () => {
+      dispatch({ type: 'LOGOUT' });
+      history.push('/');
+  
+      setUser(null);
+      toggleFunc();
+    };
 
   return (
     <Drawer
@@ -47,7 +68,7 @@ const GenresDrawer = ({ open, theme, toggleFunc, routeFunc, logoutFunc, user }) 
             {/* <div className={classes.profileBtnsOfDrawer}> */}
             <Button
               className={clsx(classes.widerBtn, classes.profileBtnOfDrawer)}
-              onClick={() => routeFunc("/profile")}
+              onClick={() => routeChange("/profile")}
               variant="text"
               color="primary"
               endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
@@ -64,7 +85,7 @@ const GenresDrawer = ({ open, theme, toggleFunc, routeFunc, logoutFunc, user }) 
       }
       <List>
         {ListItems.map((item, index) => (
-          <ListItem className={classes.listItem} button onClick={() => routeFunc(item.path)} key={index}>
+          <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
             <ListItemIcon className={theme ? classes.listItemIcon_light : classes.listItemIcon_dark}>{item.icon}</ListItemIcon>
             <ListItemText className={classes.listItemText} primary={item.title} />
           </ListItem>
@@ -73,7 +94,7 @@ const GenresDrawer = ({ open, theme, toggleFunc, routeFunc, logoutFunc, user }) 
 
       <Button
         className={clsx(classes.widerBtn, classes.logoutBtnOfDrawer)}
-        onClick={logoutFunc}
+        onClick={logout}
         variant='text'
         endIcon={<Icon path={mdiLogoutVariant} size={1} />}>
         Logout

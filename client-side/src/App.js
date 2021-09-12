@@ -22,7 +22,7 @@ import { lightTheme, darkTheme } from './themes';
 function App() {
   const [isThemeLight, setTheme] = useState(true);
   const handlePassedTheme = (t) => {
-    
+
     if (!window.localStorage) {
       alert("The browser does not support localstorage");
       return false;
@@ -49,7 +49,9 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path='/reading' component={ReadingPage} />
-            <Route exact path='/writing' component={WritingPage} />
+            <Route exact path='/writing' render={
+              (props) => (<WritingPage {...props} theme={isThemeLight} />)
+            } />
             <div>
               <Dashboard passTheme={handlePassedTheme} />
 
