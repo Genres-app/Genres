@@ -42,6 +42,8 @@ import Popup from '../Auth/Popup';
 import Auth from '../Auth/Auth';
 import Searchbar from '../Searchbar/Searchbar'
 
+import GenresDrawer from '../Drawer/Drawer';
+
 /* */
 // const SidebarLink = styled(Link)`
 //   display: flex;
@@ -110,19 +112,21 @@ import Searchbar from '../Searchbar/Searchbar'
 const Dashboard = ({ passTheme }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
+
   const [sidebar, setSidebar] = useState(false);
-  const showSidebar = () => setSidebar(!sidebar);
+  const toggleSidebar = () => setSidebar(!sidebar);
+
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
 
   const logout = () => {
-    handleDrawerClose();
     dispatch({ type: 'LOGOUT' });
     history.push('/');
 
     setUser(null);
+    setSidebar();
   };
 
   const switchPopup = () => {
@@ -146,18 +150,6 @@ const Dashboard = ({ passTheme }) => {
 
   document.body.style.margin = "64px 0 0 0";
 
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-
   // Theme
   const [theme, setTheme] = useState(true)
   const themeIcon = !theme ? <Brightness7Icon /> : <Brightness2Icon />
@@ -168,7 +160,7 @@ const Dashboard = ({ passTheme }) => {
   // Route to render new content
   const routeChange = (path) => {
     history.push(path);
-    handleDrawerClose();
+    toggleSidebar();
   }
 
 
@@ -213,9 +205,9 @@ const Dashboard = ({ passTheme }) => {
                   <IconButton
                     color="inherit"
                     aria-label="open drawer"
-                    onClick={handleDrawerOpen}
+                    onClick={toggleSidebar}
                     edge="start"
-                    className={clsx(classes.menuButton, open && classes.hide)}
+                    className={clsx(classes.menuButton, sidebar && classes.hide)}
                   >
                     <MenuIcon />
                   </IconButton>
@@ -295,64 +287,8 @@ const Dashboard = ({ passTheme }) => {
           </Toolbar>
         </AppBar>
 
-        <Drawer
-          variant="temporary"
-          anchor="left"
-          open={open} onClose={handleDrawerClose}
-          className={classes.drawer}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div
-            className={clsx(classes.list, {
-              [classes.fullList]: false,
-            })}
-            role="presentation"
-            onClick={handleDrawerClose}
-            onKeyDown={handleDrawerClose}
-          ></div>
-          {
-            user ? (
-              <>
-                <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
-                <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
-                {/* <div className={classes.profileBtnsOfDrawer}> */}
-                <Button
-                  className={clsx(classes.widerBtn, classes.profileBtnOfDrawer)}
-                  onClick={() => routeChange("/profile")}
-                  variant="text"
-                  color="primary"
-                  endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
-                >
-                  Profile
-                </Button>
 
-                {/* </div> */}
-                <Divider />
-              </>
-            ) : (
-              <></>
-            )
-          }
-          <List>
-            {ListItems.map((item, index) => (
-              <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
-                <ListItemIcon className={theme ? classes.listItemIcon_light : classes.listItemIcon_dark}>{item.icon}</ListItemIcon>
-                <ListItemText className={classes.listItemText} primary={item.title} />
-              </ListItem>
-            ))}
-          </List>
-
-          <Button
-            className={clsx(classes.widerBtn, classes.logoutBtnOfDrawer)}
-            onClick={logout}
-            variant='text'
-            endIcon={<Icon path={mdiLogoutVariant} size={1} />}>
-            Logout
-          </Button>
-
-        </Drawer>
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} routeFunc={routeChange} logoutFunc={logout} user={user}/>
       </div>
     </>
   );
