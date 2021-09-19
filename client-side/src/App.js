@@ -9,6 +9,7 @@ import Homepage from './Homepage';
 import NovelLandingPage from './NovelLandingPage';
 import ReadingPage from './ReadingPage';
 import ProfilePage from './ProfilePage';
+import WritingPage from './WritingPage';
 import WritingTransitionPage from './WritingTransitionPage';
 import BrowsingPage from './BrowsingPage';
 import RankingPage from './RankingPage';
@@ -50,7 +51,7 @@ function App() {
           <Switch>
             <Route exact path='/reading' component={ReadingPage} />
             <Route exact path='/writing' render={
-              (props) => (<WritingTransitionPage {...props} theme={isThemeLight} />)
+              (props) => (<WritingPage {...props} theme={isThemeLight} />)
             } />
 
             <Route exact path="/mywriting">
