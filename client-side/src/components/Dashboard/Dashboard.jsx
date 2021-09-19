@@ -160,7 +160,7 @@ const Dashboard = ({ passTheme }) => {
   // Route to render new content
   const routeChange = (path) => {
     history.push(path);
-    toggleSidebar();
+    setSidebar(false);
   }
 
 

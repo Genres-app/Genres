@@ -1,29 +1,28 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import cover1 from '../Assets/bookcover1.jpg';
-import { withStyles } from '@material-ui/core/styles';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {
+  Card,
+  CardMedia,
+  CardActionArea,
+  CardContent,
+  CardActions,
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core';
 
 // Icons
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import HistoryIcon from '@material-ui/icons/History';
 import PublishIcon from '@material-ui/icons/Publish';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 // Data
 import { BookLib } from '../BookLib';
 import { writingDraftList } from './WritingTransitionData';
+import { Typography } from '@material-ui/core';
 
 const StyledMenu = withStyles({
   paper: {
@@ -63,27 +62,29 @@ const useStyles = makeStyles((theme) => ({
   },
   cardRoot: {
     margin: '0 0 0 0',
-    maxWidth: 345,
+    width: 156.2,
+    borderRadius: 0,
   },
   cardMedia: {
-    height: 300,
-    width: 200,
+    height: 250,
+    width: 156.2,
   },
-  paper: {
+  cardContent: {
     padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    paddingTop: theme.spacing(1.5),
+    paddingBottom: theme.spacing(.5),
+  },
+  cardActions: {
+    paddingTop: theme.spacing(.5),
+
+    "& > svg": {
+      opacity: .75,
+    }
+  },
+  lastChange: {
+    paddingTop: theme.spacing(.5),
   },
   media: {
-    height: '300px',
-    width: '200px',
-    display: 'block',
-    transition: 'filter .2s',
-    margin: 0,
-    paddingRight: 0,
-    // "&:hover": {
-    //     filter: 'blur(10px) brightness(.5)',
-    // }
   },
 }));
 
@@ -107,9 +108,21 @@ export default function Body() {
             image={BookLib[bookId].cover}
           />
         </CardActionArea>
-        <CardActions>
-          <IconButton aria-label="more"
-            onClick={handleClick}>
+        <CardContent className={classes.cardContent}>
+          <Typography variant="subtitle2" noWrap>
+            {BookLib[bookId].title}
+          </Typography>
+        </CardContent>
+        <CardActions className={classes.cardActions}>
+          <HistoryIcon fontSize="small" />
+          <Typography variant="caption" noWrap className={classes.lastChange}>
+            Sep.19 2021
+          </Typography>
+          <IconButton
+            aria-label="more"
+            onClick={handleClick}
+            size="small"
+          >
             <MoreVertIcon />
           </IconButton>
           <StyledMenu
@@ -141,9 +154,9 @@ export default function Body() {
     <div style={{ position: 'relative', marginTop: '10vh', display: 'flex', justifyContent: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'row' }} >
         {
-        writingDraftList.map((item, index) => (
-          <div><SingleBook bookId={item} /></div>
-        ))
+          writingDraftList.map((item, index) => (
+            <div><SingleBook bookId={item} /></div>
+          ))
         }
       </div>
     </div>
