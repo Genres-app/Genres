@@ -387,6 +387,7 @@ export default function WPEditor({ theme }) {
               color="inherit"
               aria-label="open drawer"
               onClick={toggleSidebar}
+              edge="start"
             >
               <MenuIcon />
             </IconButton>
