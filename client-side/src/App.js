@@ -49,13 +49,18 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path='/reading' component={ReadingPage} />
-            {/* <Route exact path='/Writing' render={
+            <Route exact path='/writing' render={
               (props) => (<WritingTransitionPage {...props} theme={isThemeLight} />)
-            } /> */}
+            } />
+
+            <Route exact path="/mywriting">
+              <Dashboard passTheme={handlePassedTheme} isMywritingPage={true}/>
+              <WritingTransitionPage />
+              <Footer />
+            </Route>
 
             <div>
               <Dashboard passTheme={handlePassedTheme} />
-              <Route exact path='/Writing' component={WritingTransitionPage} />
               <Route exact path='/' component={Homepage} />
               <Route exact path="/search" component={SearchResults} />
               <Route exact path='/novel' component={NovelLandingPage} />

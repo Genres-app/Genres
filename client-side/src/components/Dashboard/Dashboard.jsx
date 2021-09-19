@@ -29,6 +29,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import AddIcon from '@material-ui/icons/Add';
 
 //Icons
 import Icon from '@mdi/react';
@@ -109,7 +110,7 @@ import GenresDrawer from '../Drawer/Drawer';
 //   width: 100%;
 // `;
 
-const Dashboard = ({ passTheme }) => {
+const Dashboard = ({ passTheme, isMywritingPage }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -246,17 +247,27 @@ const Dashboard = ({ passTheme }) => {
             </IconButton>
             {
               user ? (
-                <>
+                !isMywritingPage ? (
                   <Button
-                    onClick={() => routeChange("/writing")}
+                    onClick={() => routeChange("/mywriting")}
                     variant="text"
                     color="inherit"
                     endIcon={<CreateOutlinedIcon />}
                     className={clsx(classes.widerBtn, classes.appbarBtn)}
                   >
-                    Write
+                    My Writing
                   </Button>
-                </>
+                ) : (
+                  <Button
+                    onClick={() => routeChange("/writing")}
+                    variant="text"
+                    color="inherit"
+                    endIcon={<AddIcon />}
+                    className={clsx(classes.widerBtn, classes.appbarBtn)}
+                  >
+                    Create New
+                  </Button>
+                )
               ) : (
                 <Button
                   onClick={() => setOpenPopup(true)}

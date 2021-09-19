@@ -11,6 +11,7 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
+  Container,
 } from '@material-ui/core';
 
 // Icons
@@ -58,10 +59,11 @@ const StyledMenuItem = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    minWidth: 250,
+    width: '75%',
   },
   cardRoot: {
-    margin: '0 0 0 0',
+    margin: theme.spacing(1),
     width: 156.2,
     borderRadius: 0,
   },
@@ -151,14 +153,40 @@ export default function Body() {
   }
 
   return (
-    <div style={{ position: 'relative', marginTop: '10vh', display: 'flex', justifyContent: 'center' }}>
-      <div style={{ display: 'flex', flexDirection: 'row' }} >
+    <Container className={classes.root}>
+      <div style={{height: 100, display: "flex", alignItems: "center"}}>
+        <Typography variant="h5">
+          Unpublished
+        </Typography>
+      </div>
+      <div style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: 'center',
+      }}>
         {
           writingDraftList.map((item, index) => (
-            <div><SingleBook bookId={item} /></div>
+            <SingleBook bookId={item} />
           ))
         }
       </div>
-    </div>
+
+      <div style={{height: 100, display: "flex", alignItems: "center"}}>
+        <Typography variant="h5">
+          Published
+        </Typography>
+      </div>
+      <div style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: 'center',
+      }}>
+        {
+          writingDraftList.map((item, index) => (
+            <SingleBook bookId={item} />
+          ))
+        }
+      </div>
+    </Container>
   );
 }
