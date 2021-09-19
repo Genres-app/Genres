@@ -9,7 +9,7 @@ import Homepage from './Homepage';
 import NovelLandingPage from './NovelLandingPage';
 import ReadingPage from './ReadingPage';
 import ProfilePage from './ProfilePage';
-import WritingPage from './WritingPage';
+import WritingTransitionPage from './WritingTransitionPage';
 import BrowsingPage from './BrowsingPage';
 import RankingPage from './RankingPage';
 import BetaReadingPage from './BetaReadingPage';
@@ -49,12 +49,13 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path='/reading' component={ReadingPage} />
-            <Route exact path='/writing' render={
-              (props) => (<WritingPage {...props} theme={isThemeLight} />)
-            } />
+            {/* <Route exact path='/Writing' render={
+              (props) => (<WritingTransitionPage {...props} theme={isThemeLight} />)
+            } /> */}
+
             <div>
               <Dashboard passTheme={handlePassedTheme} />
-
+              <Route exact path='/Writing' component={WritingTransitionPage} />
               <Route exact path='/' component={Homepage} />
               <Route exact path="/search" component={SearchResults} />
               <Route exact path='/novel' component={NovelLandingPage} />
