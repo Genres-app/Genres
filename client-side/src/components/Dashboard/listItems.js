@@ -62,8 +62,8 @@ export const ListItems = [
   cName: 'nav-text'
   },
   {
-  title: 'Publit',
-  path: '/publit',
+  title: 'Cafe',
+  path: '/cafe',
   icon: <ForumOutlinedIcon/>,
   cName: 'nav-text'
   },
