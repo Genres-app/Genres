@@ -132,6 +132,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
 
   const switchPopup = () => {
     setOpenPopup((openPopup) => !openPopup);
+    setSidebar(false);
   };
 
   useEffect(() => {
@@ -276,7 +277,8 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                   endIcon={<Icon path={mdiLoginVariant} size={1} />}
                   className={clsx(classes.widerBtn, classes.appbarBtn)}
                 >
-                  Login</Button>
+                  Login
+                </Button>
               )
             }
 
@@ -287,7 +289,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
         </AppBar>
 
 
-        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false} />
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false} loginFunc={switchPopup} />
       </div>
     </>
   );

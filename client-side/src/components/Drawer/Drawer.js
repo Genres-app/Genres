@@ -19,35 +19,35 @@ import {
 
 //Mdi Icons
 import Icon from '@mdi/react';
-import { mdiAccountCircleOutline, mdiLogoutVariant } from '@mdi/js';
+import { mdiAccountCircleOutline, mdiLogoutVariant, mdiLoginVariant } from '@mdi/js';
 
 import { ListItems } from '../Dashboard/listItems';
 
 
-const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired }) => {
+const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired, loginFunc }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const history = useHistory();
 
   const classes = useStyles();
 
-    // Route to render new content
-    const routeChange = (path) => {
-      if (!(isUserConfirmRequired && !window.confirm("Unsaved Content in this page, Confirm leaving?"))) {
-        history.push(path);
-        toggleFunc();
-      } else {
-        toggleFunc();
-      }
-    }
-  
-    const logout = () => {
-      dispatch({ type: 'LOGOUT' });
-      history.push('/');
-  
-      setUser(null);
+  // Route to render new content
+  const routeChange = (path) => {
+    if (!(isUserConfirmRequired && !window.confirm("Unsaved Content in this page, Confirm leaving?"))) {
+      history.push(path);
       toggleFunc();
-    };
+    } else {
+      toggleFunc();
+    }
+  }
+
+  const logout = () => {
+    dispatch({ type: 'LOGOUT' });
+    history.push('/');
+
+    setUser(null);
+    toggleFunc();
+  };
 
   return (
     <Drawer
@@ -75,14 +75,23 @@ const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired }) => {
             >
               Profile
             </Button>
-
-            {/* </div> */}
-            <Divider />
           </>
         ) : (
-          <></>
+          <div style={{ height: 200, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Button
+              onClick={() => loginFunc(true)}
+              variant="contained"
+              color="primary"
+              endIcon={<Icon path={mdiLoginVariant} size={1} />}
+              className={clsx(classes.widerBtn, classes.appbarBtn)}
+            >
+              Login
+            </Button>
+          </div>
         )
       }
+
+      <Divider />
       <List>
         {ListItems.map((item, index) => (
           <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
