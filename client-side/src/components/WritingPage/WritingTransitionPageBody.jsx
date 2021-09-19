@@ -18,6 +18,40 @@ import cover4 from '../Assets/bookcover4.jpg';
 import cover5 from '../Assets/bookcover5.jpg';
 import cover6 from '../Assets/bookcover6.jpg';
 import cover7 from '../Assets/bookcover7.jpg';
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    left= '50%'
+    transform= 'translateX(10px) translateY(50px)'
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     width: '200px',
     display: 'block',
     transition: 'filter .2s',
-    margin: "0 0 0 0",
+    margin: 0,
     paddingRight: 0,
     // "&:hover": {
     //     filter: 'blur(10px) brightness(.5)',
@@ -55,33 +89,70 @@ const useStyles = makeStyles((theme) => ({
 export default function NestedGrid() {
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
   function SingleBook() {
     return (
       <div style = {{}}>
-      <React.Fragment>
-        <Grid >
         <Card className={classes.cardRoot}>
-      <CardActionArea>
+
         <CardMedia
           className={classes.cardMedia}
           image={cover1}
         />
-      </CardActionArea>
+
       <CardActions>
-        <Button size="small" color="primary" style={{marginLeft:'5vw'}}>
+        <Button size="small" 
+        color="primary" 
+        style={{marginLeft:'5vw'}}         
+        onClick={handleClick}>
         <MoreVertIcon/>
         </Button>
+        <StyledMenu
+        id="customized-menu"
+        getContentAnchorEl={null}
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <StyledMenuItem>
+          <ListItemIcon>
+            <SendIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Edit" />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemIcon>
+            <DraftsIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Save As" />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemIcon>
+            <InboxIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary="Delete" />
+        </StyledMenuItem>
+      </StyledMenu>
       </CardActions>
     </Card>
-        </Grid>
-      </React.Fragment>
       </div>
     );
   }
 
   return (
     <div className={classes.root} style={{marginTop:100}} >
-      <div  >
+
       <Grid container item xs={12} spacing={3} justify = "center" >
         <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
           <SingleBook />
@@ -102,8 +173,7 @@ export default function NestedGrid() {
           <SingleBook />
         </Grid>
       </Grid>
-      
-      </div>
+
     </div>
   );
 }
