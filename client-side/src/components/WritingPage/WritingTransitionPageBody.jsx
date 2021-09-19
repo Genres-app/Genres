@@ -35,8 +35,6 @@ const StyledMenu = withStyles({
   <Menu
     elevation={0}
     getContentAnchorEl={null}
-    left= '50%'
-    transform= 'translateX(10px) translateY(50px)'
     {...props}
   />
 ));
@@ -57,16 +55,13 @@ const StyledMenuItem = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: "auto",
-
   },
   cardRoot: {
-    maxWidth: '673px',
-
+    margin:'0 0 0 0',
+    maxWidth: 345,
   },
   cardMedia: {
-    height: '22vh',
-
+    height: '25vh',
   },
   paper: {
     padding: theme.spacing(1),
@@ -102,14 +97,11 @@ export default function NestedGrid() {
 
   function SingleBook() {
     return (
-      <div style = {{}}>
         <Card className={classes.cardRoot}>
-
         <CardMedia
           className={classes.cardMedia}
           image={cover1}
         />
-
       <CardActions>
         <Button size="small" 
         color="primary" 
@@ -146,34 +138,20 @@ export default function NestedGrid() {
       </StyledMenu>
       </CardActions>
     </Card>
-      </div>
     );
   }
 
   return (
-    <div className={classes.root} style={{marginTop:100}} >
-
-      <Grid container item xs={12} spacing={3} justify = "center" >
-        <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
-          <SingleBook />
-        </Grid>
-        <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
-          <SingleBook />
-        </Grid>
-        <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
-          <SingleBook />
-        </Grid>
-        <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
-          <SingleBook />
-        </Grid>
-        <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
-          <SingleBook />
-        </Grid>
-        <Grid container item xs={1} style={{marginRight:'3.5vw'}}>
-          <SingleBook />
-        </Grid>
-      </Grid>
-
+    <div style={{position: 'relative', marginTop: '10vh', display: 'flex', justifyContent: 'center'}}>
+    <div style = {{display: 'flex', flexDirection: 'row'}} >
+        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
+        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
+        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
+        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
+        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
+        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
+        <div><SingleBook/></div>
+    </div>
     </div>
   );
 }
