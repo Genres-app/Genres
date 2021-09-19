@@ -8,24 +8,22 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import cover1 from '../Assets/bookcover1.jpg';
-import cover2 from '../Assets/bookcover2.jpg';
-import cover3 from '../Assets/bookcover3.jpg';
-import cover4 from '../Assets/bookcover4.jpg';
-import cover5 from '../Assets/bookcover5.jpg';
-import cover6 from '../Assets/bookcover6.jpg';
-import cover7 from '../Assets/bookcover7.jpg';
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+
+// Icons
+import PublishIcon from '@material-ui/icons/Publish';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
+// Data
+import { BookLib } from '../BookLib';
+import { writingDraftList } from './WritingTransitionData';
 
 const StyledMenu = withStyles({
   paper: {
@@ -35,6 +33,14 @@ const StyledMenu = withStyles({
   <Menu
     elevation={0}
     getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
     {...props}
   />
 ));
@@ -51,7 +57,6 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -61,7 +66,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
   },
   cardMedia: {
-    height: '25vh',
+    height: 300,
+    width: 200,
   },
   paper: {
     padding: theme.spacing(1),
@@ -81,37 +87,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NestedGrid() {
+export default function Body() {
   const classes = useStyles();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const SingleBook = ({ bookId }) => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-
-  function SingleBook() {
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
     return (
-      <Card className={classes.cardRoot}>
-        <CardMedia
-          className={classes.cardMedia}
-          image={cover1}
-        />
+      <Card variant="outlined" className={classes.cardRoot}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.cardMedia}
+            image={BookLib[bookId].cover}
+          />
+        </CardActionArea>
         <CardActions>
-          <Button size="small"
-            color="primary"
-            style={{ marginLeft: '5vw' }}
+          <IconButton aria-label="more"
             onClick={handleClick}>
             <MoreVertIcon />
-          </Button>
+          </IconButton>
           <StyledMenu
             id="customized-menu"
-            getContentAnchorEl={null}
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
@@ -119,19 +121,13 @@ export default function NestedGrid() {
           >
             <StyledMenuItem>
               <ListItemIcon>
-                <SendIcon fontSize="small" />
+                <PublishIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="Edit" />
+              <ListItemText primary="Publish" />
             </StyledMenuItem>
             <StyledMenuItem>
               <ListItemIcon>
-                <DraftsIcon fontSize="small" />
-              </ListItemIcon>
-              <ListItemText primary="Save As" />
-            </StyledMenuItem>
-            <StyledMenuItem>
-              <ListItemIcon>
-                <InboxIcon fontSize="small" />
+                <DeleteForeverIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Delete" />
             </StyledMenuItem>
@@ -144,13 +140,11 @@ export default function NestedGrid() {
   return (
     <div style={{ position: 'relative', marginTop: '10vh', display: 'flex', justifyContent: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'row' }} >
-        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
-        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
-        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
-        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
-        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
-        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
-        <div><SingleBook /></div>
+        {
+        writingDraftList.map((item, index) => (
+          <div><SingleBook bookId={item} /></div>
+        ))
+        }
       </div>
     </div>
   );
