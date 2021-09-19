@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   cardRoot: {
-    margin:'0 0 0 0',
+    margin: '0 0 0 0',
     maxWidth: 345,
   },
   cardMedia: {
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     // "&:hover": {
     //     filter: 'blur(10px) brightness(.5)',
     // }
-},
+  },
 }));
 
 export default function NestedGrid() {
@@ -97,61 +97,61 @@ export default function NestedGrid() {
 
   function SingleBook() {
     return (
-        <Card className={classes.cardRoot}>
+      <Card className={classes.cardRoot}>
         <CardMedia
           className={classes.cardMedia}
           image={cover1}
         />
-      <CardActions>
-        <Button size="small" 
-        color="primary" 
-        style={{marginLeft:'5vw'}}         
-        onClick={handleClick}>
-        <MoreVertIcon/>
-        </Button>
-        <StyledMenu
-        id="customized-menu"
-        getContentAnchorEl={null}
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Edit" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Save As" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Delete" />
-        </StyledMenuItem>
-      </StyledMenu>
-      </CardActions>
-    </Card>
+        <CardActions>
+          <Button size="small"
+            color="primary"
+            style={{ marginLeft: '5vw' }}
+            onClick={handleClick}>
+            <MoreVertIcon />
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            getContentAnchorEl={null}
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <StyledMenuItem>
+              <ListItemIcon>
+                <SendIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Edit" />
+            </StyledMenuItem>
+            <StyledMenuItem>
+              <ListItemIcon>
+                <DraftsIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Save As" />
+            </StyledMenuItem>
+            <StyledMenuItem>
+              <ListItemIcon>
+                <InboxIcon fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary="Delete" />
+            </StyledMenuItem>
+          </StyledMenu>
+        </CardActions>
+      </Card>
     );
   }
 
   return (
-    <div style={{position: 'relative', marginTop: '10vh', display: 'flex', justifyContent: 'center'}}>
-    <div style = {{display: 'flex', flexDirection: 'row'}} >
-        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
-        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
-        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
-        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
-        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
-        <div style = {{marginRight: '2vw'}}><SingleBook/></div>
-        <div><SingleBook/></div>
-    </div>
+    <div style={{ position: 'relative', marginTop: '10vh', display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'row' }} >
+        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
+        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
+        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
+        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
+        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
+        <div style={{ marginRight: '2vw' }}><SingleBook /></div>
+        <div><SingleBook /></div>
+      </div>
     </div>
   );
 }
