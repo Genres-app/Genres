@@ -199,23 +199,17 @@ const Dashboard = ({ passTheme }) => {
           className={classOfAppbar.appBar}
         >
           <Toolbar>
-            {
-              user ? (
-                <>
-                  <IconButton
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleSidebar}
-                    edge="start"
-                    className={clsx(classes.menuButton, sidebar && classes.hide)}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                </>
-              ) : (
-                <></>
-              )
-            }
+
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleSidebar}
+              edge="start"
+              className={clsx(classes.menuButton, sidebar && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+
 
             {/* <Typography variant = "h6" className = {classes.title}>
             Genres
@@ -226,28 +220,22 @@ const Dashboard = ({ passTheme }) => {
 
             {/* <div className={classes.grow} /> */}
 
-            {
-              user ? (
-                <>
-                  <div className={clsx(classes.search, theme ? classes.search_light : classes.search_dark)}>
-                    <div className={classes.searchIcon}>
-                      <SearchIcon />
-                    </div>
-                    <InputBase
-                      placeholder="Search…"
-                      classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                      }}
-                      inputProps={{ 'aria-label': 'search' }}
-                    />
-                  </div>
-                  {/* <Searchbar items={genres} /> */}
-                </>
-              ) : (
-                <></>
-              )
-            }
+
+            <div className={clsx(classes.search, theme ? classes.search_light : classes.search_dark)}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
+            {/* <Searchbar items={genres} /> */}
+
 
             <div className={classes.grow} />
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
@@ -288,7 +276,7 @@ const Dashboard = ({ passTheme }) => {
         </AppBar>
 
 
-        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false}/>
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false} />
       </div>
     </>
   );
