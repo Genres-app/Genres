@@ -64,12 +64,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cardRoot: {
     margin: theme.spacing(1),
-    width: 156.2,
+    width: 187,
     borderRadius: 0,
   },
   cardMedia: {
-    height: 250,
-    width: 156.2,
+    height: 300,
+    width: 187, //187.44
   },
   cardContent: {
     padding: theme.spacing(1),
@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   lastChange: {
-    paddingTop: theme.spacing(.5),
+    paddingTop: theme.spacing(.25),
   },
   media: {
   },
@@ -120,6 +120,7 @@ export default function Body() {
           <Typography variant="caption" noWrap className={classes.lastChange}>
             Sep.19 2021
           </Typography>
+          <div style={{flexGrow: 1}}></div>
           <IconButton
             aria-label="more"
             onClick={handleClick}

@@ -26,16 +26,18 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 import './WPEditor.css';
 
+import clsx from 'clsx';
 import GenresDrawer from '../Drawer/Drawer';
 
 /*Material-UI Icons*/
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { CssBaseline, Divider, Grow } from '@material-ui/core';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import { CardActionArea, CssBaseline, Divider, Grow } from '@material-ui/core';
 
 /*Mdi Icons*/
 import Icon from '@mdi/react';
-import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish } from '@mdi/js';
+import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish, mdiNoteTextOutline } from '@mdi/js';
 import mdiSavedOutline from './svgs/content-save-check-outline.svg';
 
 
@@ -138,7 +140,40 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: '5px',
     color: '#3EB997',
   },
-  // ABOVE: CSS for Appbar Fields
+
+  sideNotesToggle: {
+    position: 'fixed',
+    top: 120,
+    left: 16,
+  },
+  sideNotesCloseBtn: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 64,
+    width: "100%",
+  },
+  sideNotesPlaceholder: {
+    width: 0,
+    height: 1,
+    transition: 'width .2s ease-in-out',
+  },
+  sideNotesPH_On: {
+    width: 200,
+  },
+  sideNotes: {
+    position: 'fixed',
+    top: 105,
+    width: 200,
+    height: "calc(100vh - 105px)",
+    transform: "translateX(-100%)",
+    transition: 'transform .2s ease-in-out',
+    backgroundColor: "#fff",
+    borderRight: "1px solid rgba(0, 0, 0, 0.12)",
+  },
+  sideNotes_On: {
+    transform: "translateX(0)",
+  },
 }));
 
 // Edit to change Button outline colors BELOW:
@@ -156,6 +191,9 @@ export default function WPEditor({ theme }) {
 
   const [sidebar, setSidebar] = useState(false);
   const toggleSidebar = () => setSidebar(!sidebar);
+
+  const [sideNotesOn, setSideNotes] = useState(true);
+  const toggleSideNotes = () => setSideNotes(!sideNotesOn);
 
   const [isSaved, setSaved] = useState(false);
 
@@ -528,50 +566,79 @@ export default function WPEditor({ theme }) {
         </AppBar>
         {/* ABOVE: Text Editor Options Appbar */}
 
-        {/* BELOW: Actual Slate.js Text Editor */}
-        <div className="editors">
-          <Slate
-            editor={editor}
-            value={value}
-            onChange={newValue => setValue(newValue)}
+        <Button
+            aria-label="toggle side notes"
+            className={classes.sideNotesToggle}
+            onClick={toggleSideNotes}
+            startIcon={
+              <Icon path={mdiNoteTextOutline} size={1} />}
           >
-            <Editable
-              renderElement={renderElement}
-              // Pass in the `renderLeaf` function.
-              renderLeaf={renderLeaf}
-              // Handle SHORTCUTS BELOW:
-              onKeyDown={event => {
-                if (!event.ctrlKey) {
-                  return
-                }
-                switch (event.key) {
-                  // Shortcut for turning a text block into "code" BELOW:
-                  case '`': {
-                    event.preventDefault()
-                    BlockEditor.toggleCodeBlock(editor)
-                    break
+            Show Side Notes
+          </Button>
+        <div style={{ display: 'flex' }}>
+
+          <div className={sideNotesOn ? clsx(classes.sideNotesPlaceholder, classes.sideNotesPH_On) : classes.sideNotesPlaceholder}></div>
+          <div className={
+            sideNotesOn ?
+              clsx(classes.sideNotes, classes.sideNotes_On)
+              :
+              classes.sideNotes
+          }>
+            <CardActionArea className={classes.sideNotesCloseBtn} onClick={toggleSideNotes}>
+            <Icon path={mdiNoteTextOutline} size={1} style={{marginRight: 8}}/>
+            <Typography variant="button" style={{marginTop: 1}}>Hide Side Notes</Typography>
+            </CardActionArea>
+            <Divider />
+            <Typography>
+              Side Notes Area WIP
+            </Typography>
+          </div>
+
+          {/* BELOW: Actual Slate.js Text Editor */}
+          <div className="editors" style={{ width: 720 }}>
+            <Slate
+              editor={editor}
+              value={value}
+              onChange={newValue => setValue(newValue)}
+            >
+              <Editable
+                renderElement={renderElement}
+                // Pass in the `renderLeaf` function.
+                renderLeaf={renderLeaf}
+                // Handle SHORTCUTS BELOW:
+                onKeyDown={event => {
+                  if (!event.ctrlKey) {
+                    return
                   }
-                  // Shortcut for bolding BELOW:
-                  case 'b': {
-                    toggleMark(editor, "bold")
-                    break
+                  switch (event.key) {
+                    // Shortcut for turning a text block into "code" BELOW:
+                    case '`': {
+                      event.preventDefault()
+                      BlockEditor.toggleCodeBlock(editor)
+                      break
+                    }
+                    // Shortcut for bolding BELOW:
+                    case 'b': {
+                      toggleMark(editor, "bold")
+                      break
+                    }
+                    // Shortcut for italics BELOW:
+                    case 'i': {
+                      toggleMark(editor, "italic")
+                      break
+                    }
+                    // Shortcut for underline BELOW:
+                    case 'u': {
+                      toggleMark(editor, "underline")
+                      break
+                    }
                   }
-                  // Shortcut for italics BELOW:
-                  case 'i': {
-                    toggleMark(editor, "italic")
-                    break
-                  }
-                  // Shortcut for underline BELOW:
-                  case 'u': {
-                    toggleMark(editor, "underline")
-                    break
-                  }
-                }
-              }}
-            />
-          </Slate>
+                }}
+              />
+            </Slate>
+          </div>
+          {/* ABOVE: Actual Slate.js Text Editor */}
         </div>
-        {/* ABOVE: Actual Slate.js Text Editor */}
 
         <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={true} isUserConfirmRequired={true} />
       </CssBaseline>
