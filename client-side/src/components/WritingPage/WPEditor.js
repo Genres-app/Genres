@@ -567,14 +567,14 @@ export default function WPEditor({ theme }) {
         {/* ABOVE: Text Editor Options Appbar */}
 
         <Button
-            aria-label="toggle side notes"
-            className={classes.sideNotesToggle}
-            onClick={toggleSideNotes}
-            startIcon={
-              <Icon path={mdiNoteTextOutline} size={1} />}
-          >
-            Show Side Notes
-          </Button>
+          aria-label="toggle side notes"
+          className={classes.sideNotesToggle}
+          onClick={toggleSideNotes}
+          startIcon={
+            <Icon path={mdiNoteTextOutline} size={1} />}
+        >
+          Show Side Notes
+        </Button>
         <div style={{ display: 'flex' }}>
 
           <div className={sideNotesOn ? clsx(classes.sideNotesPlaceholder, classes.sideNotesPH_On) : classes.sideNotesPlaceholder}></div>
@@ -585,8 +585,8 @@ export default function WPEditor({ theme }) {
               classes.sideNotes
           }>
             <CardActionArea className={classes.sideNotesCloseBtn} onClick={toggleSideNotes}>
-            <Icon path={mdiNoteTextOutline} size={1} style={{marginRight: 8}}/>
-            <Typography variant="button" style={{marginTop: 1}}>Hide Side Notes</Typography>
+              <Icon path={mdiNoteTextOutline} size={1} style={{ marginRight: 8 }} />
+              <Typography variant="button" style={{ marginTop: 1 }}>Hide Side Notes</Typography>
             </CardActionArea>
             <Divider />
             <Typography>
