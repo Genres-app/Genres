@@ -117,25 +117,29 @@ export default function NEPContentsTopCard() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
 
-  const handleOptionsMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
+  const [string, setString] = useState('');
 
   const [disabled, setDisabled] = useState(false);
 
-  const handleChildClick = (e) => {
-    e.stopPropagation();
-    console.log('handleChildClick');
-  };
+  const [value, setValue] = useState('');
+
+  const handleChange = (event) => {
+    setValue(event.Target);
+  }
 
   const hide = () => {
     setDisabled(!disabled);
+    setString(value);
+    // handleChange();
+    // handleChildClick();
+    // handleSubmit();
   };
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+  }
 
   const menuId = 'primary-novel-options-menu';
 
@@ -169,16 +173,19 @@ export default function NEPContentsTopCard() {
           {/* Placeholder Text BELOW: */}
           <Typography align="left" variant="subtitle2" color="textPrimary">
             Author(s): <Typography component="span" display="inline" style={{color: '#686868'}} variant="body1">
-          <form  style = {{display: 'inline', opacity: disabled ? 0.25 : 1,
-          pointerEvents: disabled ? "none" : "initial" }}>
-          <input onClick={handleChildClick} type="text"/>
+          <form style = {{display: 'inline', opacity: disabled ? 0 : 1, pointerEvents: disabled ? "none" : "initial"}}>
+          <input onChange={handleChange} type="text"/>
+          </form> </Typography>
+          </Typography>
+          <Typography align="left" variant="subtitle2" color="textPrimary">
+            Genre(s): <Typography display="inline" style={{color: '#686868'}} variant="body1"><form style = {{display: 'inline', opacity: disabled ? 0.25 : 1, pointerEvents: disabled ? "none" : "initial"}}>
+          <input  type="text"/>
           </form></Typography>
           </Typography>
           <Typography align="left" variant="subtitle2" color="textPrimary">
-            Genre(s): <Typography display="inline" style={{color: '#686868'}} variant="body1">Educational, Sci-Fi, Thriller</Typography>
-          </Typography>
-          <Typography align="left" variant="subtitle2" color="textPrimary">
-            Status: <Typography display="inline" style={{color: '#686868'}} variant="body1">Ongoing</Typography>
+            Status: <Typography display="inline" style={{color: '#686868'}} variant="body1"><form style = {{display: 'inline', opacity: disabled ? 0.25 : 1, pointerEvents: disabled ? "none" : "initial"}}>
+          <input  type="text"/>
+          </form></Typography>
           </Typography>
           <Typography align="left" variant="subtitle2" color="textPrimary">
             Last Updated: <Typography display="inline" style={{color: '#686868'}} variant="body1" >April 12, 2021</Typography>
@@ -186,10 +193,9 @@ export default function NEPContentsTopCard() {
           <Typography align="left" variant="subtitle2" color="textPrimary">
             Synopsis: 
             <Typography style={{color: '#686868'}} variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <form style = {{display: 'inline', opacity: disabled ? 0.25 : 1, pointerEvents: disabled ? "none" : "initial"}}>
+          <input style={{ width: "30vw"}}  type="text"/>
+          </form>
             </Typography>
           </Typography>
         </div>
