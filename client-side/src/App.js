@@ -15,7 +15,7 @@ import BrowsingPage from './BrowsingPage';
 import RankingPage from './RankingPage';
 import BetaReadingPage from './BetaReadingPage';
 import PublitPage from './PublitPage';
-
+import NovelEditingPage from './NovelEditingPage';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from './themes';
@@ -74,6 +74,7 @@ function App() {
                 (props) => (<BetaReadingPage {...props} theme={isThemeLight} />)
               } />
               <Route exact path='/publit' component={PublitPage} />
+              <Route exact path="/NovelEditingPage" component = {NovelEditingPage}/>
               <Footer />
             </div>
           </Switch>

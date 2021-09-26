@@ -13,6 +13,7 @@ import {
   ListItemText,
   Container,
 } from '@material-ui/core';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // Icons
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -24,6 +25,15 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { BookLib } from '../BookLib';
 import { writingDraftList } from './WritingTransitionData';
 import { Typography } from '@material-ui/core';
+
+// Page
+import NovelEditingPage from '../../NovelEditingPage';
+import { useHistory } from "react-router-dom";
+import { Redirect } from 'react-router';
+import { NavLink } from 'react-router-dom';
+
+
+
 
 const StyledMenu = withStyles({
   paper: {
@@ -102,14 +112,34 @@ export default function Body() {
     const handleClose = () => {
       setAnchorEl(null);
     };
+
+    
+    const GoToEditingPage = () => {
+
+      <Redirect to={NovelEditingPage} />
+    }
+    
     return (
       <Card variant="outlined" className={classes.cardRoot}>
+
+        
+
         <CardActionArea>
+        <NavLink to="/NovelEditingPage">
           <CardMedia
             className={classes.cardMedia}
             image={BookLib[bookId].cover}
+
           />
+          
+          </NavLink>
+         
+          
+
+          
         </CardActionArea>
+
+        
         <CardContent className={classes.cardContent}>
           <Typography variant="subtitle2" noWrap>
             {BookLib[bookId].title}
