@@ -74,7 +74,7 @@ function App() {
                 (props) => (<BetaReadingPage {...props} theme={isThemeLight} />)
               } />
               <Route exact path='/publit' component={PublitPage} />
-              <Route exact path="/NovelEditingPage" component = {NovelEditingPage}/>
+              <Route exact path="/NovelEditing" component = {NovelEditingPage}/>
               <Footer />
             </div>
           </Switch>

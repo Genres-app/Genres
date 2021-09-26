@@ -27,9 +27,6 @@ import { writingDraftList } from './WritingTransitionData';
 import { Typography } from '@material-ui/core';
 
 // Page
-import NovelEditingPage from '../../NovelEditingPage';
-import { useHistory } from "react-router-dom";
-import { Redirect } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
 
@@ -128,30 +125,16 @@ export default function Body() {
       setAnchorEl(null);
     };
 
-    
-    const GoToEditingPage = () => {
-
-      <Redirect to={NovelEditingPage} />
-    }
-    
     return (
       <Card variant="outlined" className={classes.cardRoot}>
 
-        
-
         <CardActionArea>
-        <NavLink to="/NovelEditingPage">
+        <NavLink to="/NovelEditing">
           <CardMedia
             className={classes.cardMedia}
             image={BookLib[bookId].cover}
-
-          />
-          
+          /> 
           </NavLink>
-         
-          
-
-          
         </CardActionArea>
 
         

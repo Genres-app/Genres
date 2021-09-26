@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { MonetizationOn, BookmarkBorder, Bookmark } from '@material-ui/icons';
+import EditIcon from '@material-ui/icons/Edit';
 
 // The buttons for donating and saving are BELOW:
 // FIXME: these buttons are currently only UI and do not function
@@ -17,7 +18,7 @@ const useStyles = makeStyles(() => ({
     },
     flexDirection: 'column',
   },
-  tip: {
+  button: {
     color: 'white',
     backgroundColor: '#a0a0a0',
     '&:hover': {
@@ -45,16 +46,17 @@ export default function BadgeVisibility() {
     <div className={classes.root}>
       <div className={classes.container}>
         {/* BELOW is a BUTTON for the tip feature */}
-        <Button className={classes.tip}>
+        {/* <Button className={classes.button} style = {{marginRight: '1vw'}}>
           <MonetizationOn className={classes.icon}/>
           Tip Author
-        </Button>
+        </Button> */}
         {/* BELOW is a CHECKBOX for the save feature */}
-        <FormControlLabel
+        <Button className={classes.button}>
+        <EditIcon
           control={<Checkbox icon={<BookmarkBorder />} checkedIcon={<Bookmark />} name="checkedH" />}
-          label="SAVE"
           className={classes.save}
         />
+        </Button>
       </div>
     </div>
   );

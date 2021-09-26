@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -14,7 +14,9 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 import SciFi from './Copy of Sci-Fi Book Cover Template - Made with PosterMyWall.jpg';
 
-import ContentsButtons from './NEPContentsButtons'
+import EditingContentsButtons from './NEPContentsButtons'
+import Form from './Form.jsx'
+
 
 // Here are the topmost elements of the Novel Landing Page,
 // which includes the cover image and text descriptions of a given novel.
@@ -105,8 +107,10 @@ const useStyles = makeStyles(() => ({
   },
   icon: {
     paddingRight: '5px',
-  }
+  },
 }));
+
+
 
 export default function NEPContentsTopCard() {
   const classes = useStyles();
@@ -121,27 +125,21 @@ export default function NEPContentsTopCard() {
     setAnchorEl(null);
   };
 
+
+  const [disabled, setDisabled] = useState(false);
+
+  const handleChildClick = (e) => {
+    e.stopPropagation();
+    console.log('handleChildClick');
+  };
+
+  const hide = () => {
+    setDisabled(!disabled);
+  };
+
   const menuId = 'primary-novel-options-menu';
 
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      className={classes.divMoreButton}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <MonetizationOnIcon className={classes.icon} />Tip Author
-      </MenuItem>
-      <MenuItem onClick={handleMenuClose}>
-        <BookmarkBorderIcon className={classes.icon} />Save
-      </MenuItem>
-    </Menu>
-  );
+
 
   return (
     <div className={classes.topContainer}>
@@ -154,20 +152,9 @@ export default function NEPContentsTopCard() {
             <Typography className={classes.text} align="left" component="h5" variant="h5">
               The Arrivals
             </Typography>
-            <ContentsButtons />
-            {/* BELOW is the MORE ICONS BUTTON */}
-            <IconButton
-              edge="end"
-              aria-label="bar options"
-              aria-controls={menuId}
-              onClick={handleOptionsMenuOpen}
-              aria-haspopup="true"
-              color="primary"
-              className={classes.divMoreButton}
-            >
-            <MoreHorizIcon />
-            </IconButton>
-            {/* ABOVE is the MORE ICONS BUTTON */}
+            <div onClick={hide}>
+            <EditingContentsButtons />
+            </div>
           </div>
 
           {/* BELOW is the LIKE BUTTON */}
@@ -181,7 +168,11 @@ export default function NEPContentsTopCard() {
 
           {/* Placeholder Text BELOW: */}
           <Typography align="left" variant="subtitle2" color="textPrimary">
-            Author(s): <Typography component="span" display="inline" style={{color: '#686868'}} variant="body1">Lucas Lloyd</Typography>
+            Author(s): <Typography component="span" display="inline" style={{color: '#686868'}} variant="body1">
+          <form  style = {{display: 'inline', opacity: disabled ? 0.25 : 1,
+          pointerEvents: disabled ? "none" : "initial" }}>
+          <input onClick={handleChildClick} type="text"/>
+          </form></Typography>
           </Typography>
           <Typography align="left" variant="subtitle2" color="textPrimary">
             Genre(s): <Typography display="inline" style={{color: '#686868'}} variant="body1">Educational, Sci-Fi, Thriller</Typography>
@@ -193,11 +184,16 @@ export default function NEPContentsTopCard() {
             Last Updated: <Typography display="inline" style={{color: '#686868'}} variant="body1" >April 12, 2021</Typography>
           </Typography>
           <Typography align="left" variant="subtitle2" color="textPrimary">
-            Synopsis: <Typography style={{color: '#686868'}} variant="body2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Typography>
+            Synopsis: 
+            <Typography style={{color: '#686868'}} variant="body2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </Typography>
           </Typography>
         </div>
       </div>
-      {renderMenu}
     </div>
   );
 }
