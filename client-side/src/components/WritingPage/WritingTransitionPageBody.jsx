@@ -70,7 +70,22 @@ const StyledMenuItem = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 250,
-    width: '75%',
+    width: 1266, // 6 in a row
+    "@media (max-width: 1688px)": { // 5 in a row
+      width: 1063,
+    },
+    "@media (max-width: 1417px)": { // 4 in a row
+      width: 860,
+    },
+    "@media (max-width: 1147px)": { // 3 in a row
+      width: 657,
+    }
+  },
+  bookList: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%",
+    margin: "auto",
   },
   cardRoot: {
     margin: theme.spacing(1),
@@ -190,11 +205,7 @@ export default function Body() {
           Unpublished
         </Typography>
       </div>
-      <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: 'center',
-      }}>
+      <div className={classes.bookList}>
         {
           writingDraftList.map((item, index) => (
             <SingleBook bookId={item} />
@@ -207,11 +218,7 @@ export default function Body() {
           Published
         </Typography>
       </div>
-      <div style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: 'center',
-      }}>
+      <div className={classes.bookList}>
         {
           writingDraftList.map((item, index) => (
             <SingleBook bookId={item} />
