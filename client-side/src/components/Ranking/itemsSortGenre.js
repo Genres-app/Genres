@@ -8,6 +8,7 @@ import WhatshotOutlinedIcon from '@material-ui/icons/WhatshotOutlined';
 import React, { useState, useEffect, Component  } from 'react';
 import Icon from '@mdi/react';
 import {
+  mdiAllInclusive,
   mdiRun,
   mdiDeathlyHallows,
   mdiDeathStar,
@@ -17,10 +18,16 @@ import {
   mdiEmoticonFrown,
   mdiCassette,
   mdiEye,
+  mdiAccountGroupOutline,
 } from '@mdi/js';
 
 
 export const itemsSortGenre = [
+  {
+  title: 'Overall',
+  icon: <Icon path={mdiAllInclusive} size={1}/>,
+  cName: 'nav-text'
+  },
     {
     title: 'Action',
     icon: <Icon path={mdiRun} size={1}/>,
@@ -64,6 +71,11 @@ export const itemsSortGenre = [
     {
     title: 'Non-fiction',
     icon: <Icon path={mdiCassette} size={1}/>,
+    cName: 'nav-text'
+    },
+    {
+    title: 'Fan-Fiction',
+    icon: <Icon path={mdiAccountGroupOutline} size={1}/>,
     cName: 'nav-text'
     },
   ];
