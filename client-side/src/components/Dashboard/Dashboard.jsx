@@ -256,7 +256,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                     endIcon={<CreateOutlinedIcon />}
                     className={clsx(classes.widerBtn, classes.appbarBtn)}
                   >
-                    My Writing
+                    Writing Space
                   </Button>
                 ) : (
                   <Button

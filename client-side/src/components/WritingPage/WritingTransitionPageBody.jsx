@@ -20,6 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import HistoryIcon from '@material-ui/icons/History';
 import PublishIcon from '@material-ui/icons/Publish';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import AddIcon from '@material-ui/icons/Add';
 
 // Data
 import { BookLib } from '../BookLib';
@@ -84,6 +85,26 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     margin: "auto",
   },
+  addNewCard: {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+    alignItems: "center",
+  },
+  customPlusIcon: {
+    position: 'relative',
+    width: 56, 
+    height: 56,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    backgroundImage: "linear-gradient(150deg, rgb(166 143 253), rgb(166 143 253) 20%, rgb(99, 255, 230) 80%, rgb(99, 255, 230))",
+    "& > div": {
+      position: "absolute",
+      width: "42.86%",
+      height: "42.86%",
+      backgroundColor: "#fff"
+    }
+  },
   cardRoot: {
     margin: theme.spacing(1),
     width: 187,
@@ -129,15 +150,15 @@ export default function Body() {
       <Card variant="outlined" className={classes.cardRoot}>
 
         <CardActionArea>
-        <NavLink to="/NovelEditing">
-          <CardMedia
-            className={classes.cardMedia}
-            image={BookLib[bookId].cover}
-          /> 
+          <NavLink to="/NovelEditing">
+            <CardMedia
+              className={classes.cardMedia}
+              image={BookLib[bookId].cover}
+            />
           </NavLink>
         </CardActionArea>
 
-        
+
         <CardContent className={classes.cardContent}>
           <Typography variant="subtitle2" noWrap>
             {BookLib[bookId].title}
@@ -148,7 +169,7 @@ export default function Body() {
           <Typography variant="caption" noWrap className={classes.lastChange}>
             Sep.19 2021
           </Typography>
-          <div style={{flexGrow: 1}}></div>
+          <div style={{ flexGrow: 1 }}></div>
           <IconButton
             aria-label="more"
             onClick={handleClick}
@@ -183,12 +204,24 @@ export default function Body() {
 
   return (
     <Container className={classes.root}>
-      <div style={{height: 100, display: "flex", alignItems: "center"}}>
+      <div style={{ height: 100, display: "flex", alignItems: "center" }}>
         <Typography variant="h5">
           Unpublished
         </Typography>
       </div>
       <div className={classes.bookList}>
+
+        <Card variant="outlined" className={classes.cardRoot}>
+          <CardActionArea className={classes.addNewCard}>
+            <div className={classes.customPlusIcon}>
+              <div style={{left: 0}}></div>
+              <div style={{right: 0}}></div>
+              <div style={{bottom: 0}}></div>
+              <div style={{bottom: 0, right: 0}}></div>
+            </div>
+            <Typography variant="button">Start New Book</Typography>
+          </CardActionArea>
+        </Card>
         {
           writingDraftList.map((item, index) => (
             <SingleBook bookId={item} />
@@ -196,7 +229,7 @@ export default function Body() {
         }
       </div>
 
-      <div style={{height: 100, display: "flex", alignItems: "center"}}>
+      <div style={{ height: 100, display: "flex", alignItems: "center" }}>
         <Typography variant="h5">
           Published
         </Typography>

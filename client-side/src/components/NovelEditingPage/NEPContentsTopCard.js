@@ -1,15 +1,20 @@
-import React, { useState }  from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import IconButton from '@material-ui/core/IconButton';
+import {
+  Menu,
+  MenuItem,
+  Button,
+  IconButton,
+  Typography,
+  TextField,
+} from '@material-ui/core/';
 
+/*Material-UI Icons*/
+import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
+import SaveIcon from '@material-ui/icons/Save';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 import SciFi from './Copy of Sci-Fi Book Cover Template - Made with PosterMyWall.jpg';
@@ -18,20 +23,15 @@ import EditingContentsButtons from './NEPContentsButtons'
 import Form from './Form.jsx'
 
 
-// Here are the topmost elements of the Novel Landing Page,
-// which includes the cover image and text descriptions of a given novel.
-// FIXME: the images and text used are STATIC as of now, and must be changed.
-// FIXME: this page should be dynamically loaded based on the backend object.
 
-// CSS for the elements of this page are BELOW:
-// NOTE: To edit the Tip Author and Save buttons, you must go to
-// NLPContentsButtons.js and its stylesheet there.
+
 const useStyles = makeStyles(() => ({
   topContainer: {
-    backgroundImage: 'linear-gradient(150deg, #e9fcf9, #eeeefc)',
-    paddingTop:'40px',
-    paddingBottom:'50px',
+    // backgroundImage: `url(${SciFi})`,
+    paddingTop: '40px',
+    paddingBottom: '50px',
     marginTop: '2px',
+    width: '100%',
   },
   divWholeInfoBox: {
     width: '75%',
@@ -73,19 +73,19 @@ const useStyles = makeStyles(() => ({
   },
   divContents: {
     '@media (min-width:1024px)': { // resize text size when >1024 px
-      maxWidth: '55%',
+      width: '55%',
     },
     '@media (max-width:1024px)': { // resize text size when <1024 px
-      maxWidth: '65%',
+      width: '65%',
     },
     '@media (max-width:768px)': { // resize text size when <767 px
-      maxWidth: '100%',
+      width: '100%',
     },
     textAlign: 'left',
     marginRight: 'auto',
     marginLeft: '15px',
     paddingTop: '0px',
-    padding:'10px',
+    padding: '10px',
   },
   divTitleButtons: {
     display: 'flex',
@@ -114,90 +114,88 @@ const useStyles = makeStyles(() => ({
 
 export default function NEPContentsTopCard() {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const isMenuOpen = Boolean(anchorEl);
 
-  const [string, setString] = useState('');
+  const [title, setTitle] = useState('The Arrivals');
+  const [isEditing, setIsEditing] = useState(false);
+  const [status, setStatus] = useState('');
+  const [synopsis, setSyno] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
 
-  const [disabled, setDisabled] = useState(false);
-
-  const [value, setValue] = useState('');
-
-  const handleChange = (event) => {
-    setValue(event.Target);
+  const handleInput = () => {
+    console.log("Saved!");
   }
-
-  const hide = () => {
-    setDisabled(!disabled);
-    setString(value);
-    // handleChange();
-    // handleChildClick();
-    // handleSubmit();
-  };
-
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-  }
-
-  const menuId = 'primary-novel-options-menu';
-
-
 
   return (
     <div className={classes.topContainer}>
       <div className={classes.divWholeInfoBox}>
         <div className={classes.divCover}>
-          <img className={classes.divCoverPhoto} src= {SciFi} alt="Book Cover"/>
+          <img className={classes.divCoverPhoto} src={SciFi} alt="Book Cover" />
         </div>
         <div className={classes.divContents}>
           <div className={classes.divTitleButtons}>
             <Typography className={classes.text} align="left" component="h5" variant="h5">
               The Arrivals
             </Typography>
-            <div onClick={hide}>
-            <EditingContentsButtons />
-            </div>
+            {
+              !isEditing ?
+                <Button onClick={() => setIsEditing(true)} endIcon={<CreateOutlinedIcon />} color="primary" variant="contained">
+                  Edit Info
+                </Button>
+                :
+                <Button onClick={() => { handleInput(); setIsEditing(false) }} endIcon={<SaveIcon />} color="primary" variant="contained">
+                  Save Info
+                </Button>
+            }
           </div>
 
           {/* BELOW is the LIKE BUTTON */}
           {/* FIXME: the like button as of now is only STATIC and
           needs to be fully implemented and connected to be a backend */}
           <Button className={classes.likeButton}>
-            <ThumbUpAltIcon className={classes.icon}/>
+            <ThumbUpAltIcon className={classes.icon} />
             99 Thumbs Up
           </Button>
           {/* ABOVE is the LIKE BUTTON */}
 
           {/* Placeholder Text BELOW: */}
-          <Typography align="left" variant="subtitle2" color="textPrimary">
-            Author(s): <Typography component="span" display="inline" style={{color: '#686868'}} variant="body1">
-          <form style = {{display: 'inline', opacity: disabled ? 0 : 1, pointerEvents: disabled ? "none" : "initial"}}>
-          <input onChange={handleChange} type="text"/>
-          </form> </Typography>
-          </Typography>
-          <Typography align="left" variant="subtitle2" color="textPrimary">
-            Genre(s): <Typography display="inline" style={{color: '#686868'}} variant="body1"><form style = {{display: 'inline', opacity: disabled ? 0.25 : 1, pointerEvents: disabled ? "none" : "initial"}}>
-          <input  type="text"/>
-          </form></Typography>
-          </Typography>
-          <Typography align="left" variant="subtitle2" color="textPrimary">
-            Status: <Typography display="inline" style={{color: '#686868'}} variant="body1"><form style = {{display: 'inline', opacity: disabled ? 0.25 : 1, pointerEvents: disabled ? "none" : "initial"}}>
-          <input  type="text"/>
-          </form></Typography>
-          </Typography>
-          <Typography align="left" variant="subtitle2" color="textPrimary">
-            Last Updated: <Typography display="inline" style={{color: '#686868'}} variant="body1" >April 12, 2021</Typography>
-          </Typography>
-          <Typography align="left" variant="subtitle2" color="textPrimary">
-            Synopsis: 
-            <Typography style={{color: '#686868'}} variant="body2">
-            <form style = {{display: 'inline', opacity: disabled ? 0.25 : 1, pointerEvents: disabled ? "none" : "initial"}}>
-          <input style={{ width: "30vw"}}  type="text"/>
-          </form>
+          <form>
+            <Typography align="left" variant="subtitle2" color="textPrimary">
+              Author(s): <Typography component="span" display="inline" style={{ color: '#686868' }} variant="body1">Lucas Lloyd</Typography>
             </Typography>
-          </Typography>
+
+            <Typography align="left" variant="subtitle2" color="textPrimary">
+              Genre(s):
+            </Typography>
+            <input type="text" name="genres" />
+
+            <Typography align="left" variant="subtitle2" color="textPrimary">
+              Status:
+            </Typography>
+            <input type="text" name="status" onChange={e => setStatus(e.target.value)} />
+
+            <Typography align="left" variant="subtitle2" color="textPrimary">
+              Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
+            </Typography>
+
+            {
+              !isEditing ?
+                <>
+                  <Typography align="left" variant="subtitle2" color="textPrimary">
+                    Synopsis:
+                  </Typography>
+                  <Typography style={{ color: '#686868' }} variant="body2">{synopsis}</Typography>
+                </>
+                :
+                <TextField
+                  name="synopsis"
+                  fullWidth
+                  label="Synopsis"
+                  multiline
+                  variant="filled"
+                  defaultValue={synopsis}
+                  onChange={e => setSyno(e.target.value)}
+                />
+            }
+          </form>
         </div>
       </div>
     </div>
