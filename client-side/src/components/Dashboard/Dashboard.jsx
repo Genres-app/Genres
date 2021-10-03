@@ -35,7 +35,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Icon from '@mdi/react';
 import { mdiAccountCircleOutline, mdiLoginVariant, mdiLogoutVariant } from '@mdi/js';
 
-import GenresLogo from '../Assets/logo-svg2.svg';
+import GenresLogo from '../Assets/logos/Genres_iconOnly_480x.png';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
 import styled from 'styled-components';
@@ -216,9 +216,28 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
             {/* <Typography variant = "h6" className = {classes.title}>
             Genres
           </Typography> */}
-            <Link to="/">
-              <img src={GenresLogo} height='50px' alt=""></img>
-            </Link>
+            {/* <Link to="/"> */}
+            <div
+              onClick={() => routeChange("/")}
+              style={{
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+              }}>
+              <img src={GenresLogo} height='48px' alt=""></img>
+              <Typography
+                variant="h5"
+                style={{
+                  textDecorationLine: "none",
+                  fontWeight: "bold",
+                  opacity: .75,
+                  userSelect: "none",
+                }}>
+                Genres
+              </Typography>
+            </div>
+            {/* </Link> */}
 
             {/* <div className={classes.grow} /> */}
 
