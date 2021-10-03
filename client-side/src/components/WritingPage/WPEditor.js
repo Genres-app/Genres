@@ -8,21 +8,20 @@ import { Slate, Editable, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-
-import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import SaveIcon from '@material-ui/icons/Save';
-import FormatBoldIcon from '@material-ui/icons/FormatBold';
-import FormatItalicIcon from '@material-ui/icons/FormatItalic';
-import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
-import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
-import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import {
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  TextField,
+  CardActionArea,
+  Divider,
+  Grow
+} from '@material-ui/core';
+import TreeView from '@material-ui/lab/TreeView';
+import TreeItem from '@material-ui/lab/TreeItem';
 
 import './WPEditor.css';
 
@@ -33,13 +32,23 @@ import GenresDrawer from '../Drawer/Drawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import { CardActionArea, CssBaseline, Divider, Grow } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import FormatBoldIcon from '@material-ui/icons/FormatBold';
+import FormatItalicIcon from '@material-ui/icons/FormatItalic';
+import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
+import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import AddIcon from '@material-ui/icons/Add';
 
 /*Mdi Icons*/
 import Icon from '@mdi/react';
 import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish, mdiNoteTextOutline } from '@mdi/js';
 import mdiSavedOutline from './svgs/content-save-check-outline.svg';
 
+/*Data Import*/
+import { writingNoteData } from './WritingNoteData';
 
 // HELP from https://docs.slatejs.org/walkthroughs/01-installing-slate
 // HELP from https://github.com/ianstormtaylor/slate/blob/main/site/examples/richtext.tsx
@@ -141,6 +150,8 @@ const useStyles = makeStyles((theme) => ({
     color: '#3EB997',
   },
 
+  /* Side Notes Section */
+
   sideNotesToggle: {
     position: 'fixed',
     top: 120,
@@ -159,12 +170,12 @@ const useStyles = makeStyles((theme) => ({
     transition: 'width .2s ease-in-out',
   },
   sideNotesPH_On: {
-    width: 200,
+    width: 400,
   },
   sideNotes: {
     position: 'fixed',
     top: 105,
-    width: 200,
+    width: 400,
     height: "calc(100vh - 105px)",
     transform: "translateX(-100%)",
     transition: 'transform .2s ease-in-out',
@@ -173,6 +184,29 @@ const useStyles = makeStyles((theme) => ({
   },
   sideNotes_On: {
     transform: "translateX(0)",
+  },
+
+  notesTree: {
+    width: 199,
+    padding: theme.spacing(1),
+  },
+  addNewNoteBtn: {
+    margin: theme.spacing(1),
+  },
+  noteCards: {
+    width: 200,
+    display: "flex",
+    flexDirection: "column",
+    "& textarea": {
+      resize: "none",
+      minHeight: 100,
+      margin: theme.spacing(1),
+      marginBottom: theme.spacing(.5),
+      padding: theme.spacing(1),
+      borderRadius: theme.spacing(1),
+      fontSize: "1rem",
+      fontFamily: theme.typography.fontFamily,
+    }
   },
 }));
 
@@ -589,9 +623,47 @@ export default function WPEditor({ theme }) {
               <Typography variant="button" style={{ marginTop: 1 }}>Hide Side Notes</Typography>
             </CardActionArea>
             <Divider />
-            <Typography>
-              Side Notes Area WIP
-            </Typography>
+            <div style={{ display: "flex", height: "100%" }}>
+              <div className={classes.notesTree}>
+                <TreeView
+                  defaultCollapseIcon={<ExpandMoreIcon />}
+                  defaultExpandIcon={<ChevronRightIcon />}
+                >
+                  {
+                    Object.keys(writingNoteData).map((key, index) => (
+                      <TreeItem nodeId={index} label={key} />
+                    ))
+                  }
+
+                  <TreeItem nodeId="1" label="Characters">
+                    <TreeItem nodeId="2" label="Char1" />
+                    <TreeItem nodeId="3" label="Char2" />
+                    <TreeItem nodeId="4" label="Char3" />
+                  </TreeItem>
+                  <TreeItem nodeId="5" label="Others">
+                    <TreeItem nodeId="10" label="Settings" />
+                    <TreeItem nodeId="6" label="Factions">
+                      <TreeItem nodeId="8" label="Faction1" />
+                      <TreeItem nodeId="9" label="Faction2" />
+                    </TreeItem>
+                  </TreeItem>
+                </TreeView>
+              </div>
+              <Divider orientation="vertical" />
+              <div className={classes.noteCards}>
+                <Button
+                  aria-label="add new note"
+                  className={classes.addNewNoteBtn}
+                  // onClick={toggleSideNotes}
+                  startIcon={<AddIcon />}
+                  color="primary"
+                >
+                  New Note
+                </Button>
+                <textarea></textarea>
+                <textarea></textarea>
+              </div>
+            </div>
           </div>
 
           {/* BELOW: Actual Slate.js Text Editor */}

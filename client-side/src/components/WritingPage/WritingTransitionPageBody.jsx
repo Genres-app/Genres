@@ -186,7 +186,6 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(12),
     height: theme.spacing(12),
     margin: '0 auto',
-    marginTop: theme.spacing(4),
     marginBottom: theme.spacing(1),
     fontSize: '3rem',
   },
@@ -291,7 +290,7 @@ export default function Body() {
   }
   return (
     <>
-      <div style={{ backgroundImage: "linear-gradient(30deg, rgb(166 143 253), rgb(99, 255, 230))", margin: 0, padding: 0}}>
+      <div style={{ backgroundColor: "#855cde", margin: 0, padding: 0}}>
       <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
             <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
             <Button
