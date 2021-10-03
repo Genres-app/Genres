@@ -278,15 +278,17 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                     Writing Space
                   </Button>
                 ) : (
-                  <Button
-                    onClick={() => routeChange("/writing")}
-                    variant="text"
-                    color="inherit"
-                    endIcon={<AddIcon />}
-                    className={clsx(classes.widerBtn, classes.appbarBtn)}
-                  >
-                    Create New
-                  </Button>
+                  <>
+                  </>
+                  // <Button
+                  //   onClick={() => routeChange("/writing")}
+                  //   variant="text"
+                  //   color="inherit"
+                  //   endIcon={<AddIcon />}
+                  //   className={clsx(classes.widerBtn, classes.appbarBtn)}
+                  // >
+                  //   Create New
+                  // </Button>
                 )
               ) : (
                 <Button

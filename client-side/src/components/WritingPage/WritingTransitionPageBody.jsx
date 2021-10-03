@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       width: "42.86%",
       height: "42.86%",
-      backgroundColor: "#fff"
+      backgroundColor: theme.palette.background.paper,
     }
   },
   cardRoot: {

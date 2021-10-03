@@ -44,8 +44,8 @@ export const ListItems = [
   cName: 'nav-text'
   },
   {
-  title: 'Write',
-  path: '/writing',
+  title: 'Writing Space',
+  path: '/mywriting',
   icon: <CreateOutlinedIcon/>,
   cName: 'nav-text'
   },
