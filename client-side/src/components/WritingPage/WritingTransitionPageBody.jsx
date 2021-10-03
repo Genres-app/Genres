@@ -33,6 +33,9 @@ import { Typography } from '@material-ui/core';
 // Page
 import { NavLink } from 'react-router-dom';
 
+import Box from '@material-ui/core/Box';
+
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -40,6 +43,25 @@ function a11yProps(index) {
   };
 }
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
 
 const StyledMenu = withStyles({
   paper: {
@@ -217,11 +239,6 @@ export default function Body() {
       </Card>
     );
   }
-  const [IsPublished, setValue] = React.useState(1);
-
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
 
   const [TopBarvalue, setTopBarValue] = React.useState(0);
 
@@ -238,17 +255,16 @@ export default function Body() {
           textColor="primary"
           onChange={handleTopBar}
         >
-          <Tab label="Unpublished"  {...a11yProps(0)} onClick={() => handleChange(1)}/>
-          <Tab label="Published"  {...a11yProps(1)} onClick={() => handleChange(-1)}/>
+          <Tab label="Unpublished"  {...a11yProps(0)} />
+          <Tab label="Published"  {...a11yProps(1)} />
         </Tabs>
       </AppBar>
 
-      );
 
-  return(
+    return(
+
     <Container style = {{marginTop: 100}}>
-    {
-    (IsPublished === 1) ? 
+    <TabPanel value={TopBarvalue} index={0}>
 
       <div className={classes.bookList} >
 
@@ -269,8 +285,8 @@ export default function Body() {
           ))
         }
       </div>
-
-      : 
+      </TabPanel>
+      <TabPanel value={TopBarvalue} index={1}>
       <div className={classes.bookList}>
         {
           writingDraftList.map((item, index) => (
@@ -278,8 +294,9 @@ export default function Body() {
           ))
         }
       </div>
-      }
+      </TabPanel>
     </Container>
+    );
     </>
   );
 }
