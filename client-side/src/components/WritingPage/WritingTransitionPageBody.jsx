@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
+  AppBar,
+  Tab,
+  Tabs,
   Card,
   CardMedia,
   CardActionArea,
@@ -30,7 +33,12 @@ import { Typography } from '@material-ui/core';
 // Page
 import { NavLink } from 'react-router-dom';
 
-
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 
 const StyledMenu = withStyles({
@@ -131,6 +139,14 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
   },
+  sortByData: {
+    position: 'fixed',
+    margin: 0,
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    zIndex: 999,
+  },
 }));
 
 export default function Body() {
@@ -201,17 +217,42 @@ export default function Body() {
       </Card>
     );
   }
+  const [IsPublished, setValue] = React.useState(1);
 
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+
+  const [TopBarvalue, setTopBarValue] = React.useState(0);
+
+  const handleTopBar = (event, newValue) => {
+    setTopBarValue(newValue);
+  };
   return (
-    <Container className={classes.root}>
-      <div style={{ height: 100, display: "flex", alignItems: "center" }}>
-        <Typography variant="h5">
-          Unpublished
-        </Typography>
-      </div>
-      <div className={classes.bookList}>
+    <>
+    <AppBar position="relative" className={classes.sortByData}>
+        <Tabs
+          value={TopBarvalue}
+          centered
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={handleTopBar}
+        >
+          <Tab label="Unpublished"  {...a11yProps(0)} onClick={() => handleChange(1)}/>
+          <Tab label="Published"  {...a11yProps(1)} onClick={() => handleChange(-1)}/>
+        </Tabs>
+      </AppBar>
 
-        <Card variant="outlined" className={classes.cardRoot}>
+      );
+
+  return(
+    <Container style = {{marginTop: 100}}>
+    {
+    (IsPublished === 1) ? 
+
+      <div className={classes.bookList} >
+
+        <Card variant="outlined" className={classes.cardRoot} >
           <CardActionArea className={classes.addNewCard}>
             <div className={classes.customPlusIcon}>
               <div style={{left: 0}}></div>
@@ -229,11 +270,7 @@ export default function Body() {
         }
       </div>
 
-      <div style={{ height: 100, display: "flex", alignItems: "center" }}>
-        <Typography variant="h5">
-          Published
-        </Typography>
-      </div>
+      : 
       <div className={classes.bookList}>
         {
           writingDraftList.map((item, index) => (
@@ -241,6 +278,8 @@ export default function Body() {
           ))
         }
       </div>
+      }
     </Container>
+    </>
   );
 }
