@@ -21,9 +21,13 @@ const useStyles = makeStyles({
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center center",
     backgroundSize: "cover",
+    height: "100%",
   },
   rootAction: {
     height: '100%',
+    "& > div": {
+      height: "100%",
+    }
   },
   title: {
     fontSize: 24,
@@ -51,8 +55,9 @@ const Cards = () => {
         spacing={8}
       >
         <Grid item xs={12} md={4}>
-          <Card className={classes.root} onClick={() => GoToMPB(2)}>
+          <Card className={classes.root} onClick={() => {window.location.href = "/masterclass"}}>
             <CardActionArea className={classes.rootAction}>
+              <div>
               <CardMedia
                 className={classes.media}
                 image={corgi}
@@ -74,14 +79,16 @@ const Cards = () => {
                   <Typography className={classes.description} >10 days left</Typography>
                 </Grid> */}
               </CardContent>
+              </div>
             </CardActionArea>
           </Card>
         </Grid>
 
 
         <Grid item xs={12} md={4}>
-          <Card className={classes.root} onClick={() => GoToMPB(3)} >
+          <Card className={classes.root} onClick={() => {window.location.href = "/cafe"}} >
             <CardActionArea className={classes.rootAction}>
+              <div>
               <CardMedia
                 className={classes.media}
                 image={corgi}
@@ -93,7 +100,7 @@ const Cards = () => {
                 </Grid> */}
 
                 <Typography className={classes.title} gutterBottom>
-                  Publit
+                  Cafe
                 </Typography>
                 <Typography className={classes.description} gutterBottom>
                 Be a part of the Genres community and join the conversation! Publit is our discussion forum for our Genres members to discuss works, create fandoms, find collaborators, meet new friends and more.
@@ -103,14 +110,16 @@ const Cards = () => {
                   <Typography className={classes.description} >10 days left</Typography>
                 </Grid> */}
               </CardContent>
+              </div>
             </CardActionArea>
           </Card>
         </Grid>
 
 
         <Grid item xs={12} md={4}>
-          <Card className={classes.root} onClick={() => GoToMPB(1)} >
+          <Card className={classes.root} onClick={() => {window.location.href = "/masterclass"}} >
             <CardActionArea className={classes.rootAction}>
+              <div>
               <CardMedia
                 className={classes.media}
                 image={corgi}
@@ -131,6 +140,7 @@ const Cards = () => {
                   <Typography className={classes.description} >10 days left</Typography>
                 </Grid> */}
               </CardContent>
+              </div>
             </CardActionArea>
           </Card>
         </Grid>
@@ -141,19 +151,3 @@ const Cards = () => {
 }
 
 export default Cards
-
-
-function GoToMPB(t) {
-  if (t == 1) {
-    window.location.href = "/beta-reading";
-  }
-  else if (t == 2) {
-    window.location.href = "/masterclass";
-  }
-  else if (t == 3) {
-    window.location.href = "/publit";
-  }
-  else {
-    console.log("Undefined!");
-  }
-}

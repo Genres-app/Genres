@@ -109,6 +109,12 @@ const useStyles = makeStyles((theme) => ({
       width: 657,
     }
   },
+  tabPanel: {
+    paddingTop: theme.spacing(10),
+    "& > div": {
+      padding: 0,
+    }
+  },
   bookList: {
     display: "flex",
     flexWrap: "wrap",
@@ -123,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
   },
   customPlusIcon: {
     position: 'relative',
-    width: 56, 
+    width: 56,
     height: 56,
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
@@ -161,7 +167,7 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
   },
-  sortByData: {
+  publishStateTabs: {
     position: 'fixed',
     margin: 0,
     flexGrow: 1,
@@ -247,7 +253,7 @@ export default function Body() {
   };
   return (
     <>
-    <AppBar position="relative" className={classes.sortByData}>
+      <AppBar position="relative" className={classes.publishStateTabs}>
         <Tabs
           value={TopBarvalue}
           centered
@@ -261,42 +267,40 @@ export default function Body() {
       </AppBar>
 
 
-    return(
 
-    <Container style = {{marginTop: 100}}>
-    <TabPanel value={TopBarvalue} index={0}>
+      <Container className={classes.root}>
+        <TabPanel value={TopBarvalue} index={0} className={classes.tabPanel}>
 
-      <div className={classes.bookList} >
+          <div className={classes.bookList} >
 
-        <Card variant="outlined" className={classes.cardRoot} >
-          <CardActionArea className={classes.addNewCard}>
-            <div className={classes.customPlusIcon}>
-              <div style={{left: 0}}></div>
-              <div style={{right: 0}}></div>
-              <div style={{bottom: 0}}></div>
-              <div style={{bottom: 0, right: 0}}></div>
-            </div>
-            <Typography variant="button">Start New Book</Typography>
-          </CardActionArea>
-        </Card>
-        {
-          writingDraftList.map((item, index) => (
-            <SingleBook bookId={item} />
-          ))
-        }
-      </div>
-      </TabPanel>
-      <TabPanel value={TopBarvalue} index={1}>
-      <div className={classes.bookList}>
-        {
-          writingDraftList.map((item, index) => (
-            <SingleBook bookId={item} />
-          ))
-        }
-      </div>
-      </TabPanel>
-    </Container>
-    );
+            <Card variant="outlined" className={classes.cardRoot} >
+              <CardActionArea className={classes.addNewCard}>
+                <div className={classes.customPlusIcon}>
+                  <div style={{ left: 0 }}></div>
+                  <div style={{ right: 0 }}></div>
+                  <div style={{ bottom: 0 }}></div>
+                  <div style={{ bottom: 0, right: 0 }}></div>
+                </div>
+                <Typography variant="button">Start New Book</Typography>
+              </CardActionArea>
+            </Card>
+            {
+              writingDraftList.map((item, index) => (
+                <SingleBook bookId={item} />
+              ))
+            }
+          </div>
+        </TabPanel>
+        <TabPanel value={TopBarvalue} index={1} className={classes.tabPanel}>
+          <div className={classes.bookList}>
+            {
+              writingDraftList.map((item, index) => (
+                <SingleBook bookId={item} />
+              ))
+            }
+          </div>
+        </TabPanel>
+      </Container>
     </>
   );
 }
