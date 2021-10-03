@@ -1,7 +1,8 @@
-import React from 'react';
+import React,  { useState }from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   AppBar,
+  Avatar,
   Tab,
   Tabs,
   Card,
@@ -15,8 +16,12 @@ import {
   ListItemIcon,
   ListItemText,
   Container,
+  Button,
 } from '@material-ui/core';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import clsx from 'clsx';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 // Icons
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -24,6 +29,8 @@ import HistoryIcon from '@material-ui/icons/History';
 import PublishIcon from '@material-ui/icons/Publish';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import AddIcon from '@material-ui/icons/Add';
+import Icon from '@mdi/react';
+import { mdiAccountCircleOutline, mdiLogoutVariant, mdiLoginVariant } from '@mdi/js';
 
 // Data
 import { BookLib } from '../BookLib';
@@ -168,12 +175,36 @@ const useStyles = makeStyles((theme) => ({
   media: {
   },
   publishStateTabs: {
-    position: 'fixed',
+    position: 'relative',
     margin: 0,
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     zIndex: 999,
+  },
+  avatarOfDrawer: {
+    width: theme.spacing(12),
+    height: theme.spacing(12),
+    margin: '0 auto',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(1),
+    fontSize: '3rem',
+  },
+  userName: {
+    margin: '0 auto',
+    textAlign:'center',
+    marginBottom: theme.spacing(1),
+  },
+  widerBtn: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
+  profileBtnOfWriting: {
+    flexGrow: 0,
+    margin: '0 auto',
+    marginBottom: theme.spacing(1),
+    left: '50%',
+    transform: 'translate(-50%)',
   },
 }));
 
@@ -251,8 +282,30 @@ export default function Body() {
   const handleTopBar = (event, newValue) => {
     setTopBarValue(newValue);
   };
+
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const routeChange = (path) => {
+      history.push(path);
+  }
   return (
     <>
+      <div style={{ backgroundImage: "linear-gradient(30deg, rgb(166 143 253), rgb(99, 255, 230))", margin: 0, padding: 0}}>
+      <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
+            <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
+            <Button
+              className={clsx(classes.widerBtn, classes.profileBtnOfWriting)}
+               onClick={() => routeChange("/profile")}
+              variant="text"
+              color="primary"
+              endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
+            >
+              Profile
+            </Button>
+            </div>
+
+
       <AppBar position="relative" className={classes.publishStateTabs}>
         <Tabs
           value={TopBarvalue}
@@ -266,6 +319,7 @@ export default function Body() {
         </Tabs>
       </AppBar>
 
+      
 
 
       <Container className={classes.root}>
