@@ -189,6 +189,16 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
     classOfAppbar = setStyleOfAppbar2();
   }
 
+  console.log(localStorage.getItem('CurrentTheme'))
+
+
+  if (localStorage.getItem('CurrentTheme') == 'false' ) {
+    // setTheme('false');
+    passTheme(false);
+  }
+
+
+
 
   return (
     <>
@@ -262,6 +272,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
               setTheme(!theme);
               passTheme(!theme);
+             localStorage.setItem('CurrentTheme', !theme);
             }}>
               {themeIcon}
             </IconButton>
