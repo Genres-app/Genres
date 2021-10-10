@@ -175,24 +175,32 @@ const useStyles = makeStyles((theme) => ({
   media: {
   },
   publishStateTabs: {
-    position: 'relative',
-    margin: 0,
+    position: 'absolute',
+    margin: '160px 0 0 0',
     flexGrow: 1,
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     zIndex: 999,
+    paddingTop: '3.5vh',
   },
   avatarOfDrawer: {
+    position: 'relative',
     width: theme.spacing(12),
     height: theme.spacing(12),
-    margin: '0 auto',
+    margin: '0 0 0 400px',
+    marginTop: '0vh',
     marginBottom: theme.spacing(1),
     fontSize: '3rem',
+    border: '3.5px solid white',
+    zIndex: 1000,
+    transform: 'translateY(50%)',
   },
   userName: {
-    margin: '0 auto',
-    textAlign:'center',
+    position: 'relative',
+    margin: '0 0 0 525px',
+    marginTop: '0vh',
     marginBottom: theme.spacing(1),
+    zIndex: 1000,
   },
   widerBtn: {
     paddingLeft: theme.spacing(2),
@@ -290,22 +298,13 @@ export default function Body() {
   }
   return (
     <>
-      <div style={{ backgroundColor: "#855cde", margin: 0, padding: 0}}>
+      <div style={{  backgroundColor: "#855cde", margin: '0 0 0 0', paddding: 0, paddingTop: '0vh'}}>
       <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
             <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
-            <Button
-              className={clsx(classes.widerBtn, classes.profileBtnOfWriting)}
-               onClick={() => routeChange("/profile")}
-              variant="text"
-              color="primary"
-              endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
-            >
-              Profile
-            </Button>
             </div>
 
 
-      <AppBar position="relative" className={classes.publishStateTabs}>
+      <AppBar className={classes.publishStateTabs}>
         <Tabs
           value={TopBarvalue}
           centered

@@ -19,11 +19,15 @@ import Chip from '@material-ui/core/Chip';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Pagination from '@material-ui/lab/Pagination';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
   },
   search: {
     width: 500,
@@ -59,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   pageSelector: {
     width: "max-content",
+    marginTop: '10px',
   },
   pageSelItem: {
 
@@ -71,16 +76,9 @@ export default function Body() {
 
   const pageSelector = () => (
     <Container className={classes.pageSelector}>
-      <IconButton aria-label="last page">
-        <Icon path={mdiChevronLeft} size={1} />
-      </IconButton>
-      <Button className={classes.pageSelItem} color="primary">1</Button>
-      <Button className={classes.pageSelItem} color="primary">2</Button>
-      <Button className={classes.pageSelItem} color="primary" disabled>...</Button>
-      <Button className={classes.pageSelItem} color="primary">128</Button>
-      <IconButton aria-label="next page">
-        <Icon path={mdiChevronRight} size={1} />
-      </IconButton>
+      <div className={classes.root} style ={{backgroundColor: '#fafafa'}}>
+      <Pagination color="primary" count={10} page={page} onChange={handleChange} />
+    </div>
     </Container>
   );
 
@@ -90,7 +88,11 @@ export default function Body() {
   const handleChangeOfShowAmount = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
-
+  
+  const [page, setPage] = React.useState(1);
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
   return (
     <>
       <Grid container className={classes.root}>
