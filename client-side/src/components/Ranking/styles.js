@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     "& span": {
       fontSize: '1rem',
       fontWeight: 'bold',
-      color: '#a2a2a2',
+      color: theme.palette.primary.main,
     }
   },
   sortByGenre: {
@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: 170,
     maxWidth: 280,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.background.paper,
     transition: 'transform .2s',
   },
   sortByGenreLight: {
@@ -65,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 64,
     right: 4,
-    backgroundColor: theme.palette.background.paper,
     transition: 'transform .3s',
   },
   //Right Filter Side Bar
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
     "& span": {
       fontSize: '1rem',
       fontWeight: 'bold',
-      color: '#a2a2a2',
+      color: theme.palette.primary.main,
     }
   },
   sortByTime: {
@@ -90,7 +90,8 @@ const useStyles = makeStyles((theme) => ({
     width: 170,
     maxWidth: 280,
     right: 0,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.background.paper,
     transition: 'transform .2s',
   },
   sortByTimeLight: {
@@ -130,7 +131,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 64,
     left: 4,
-    backgroundColor: theme.palette.background.paper,
     transform: 'rotate(-180deg)',
     transition: 'transform .3s',
   },
