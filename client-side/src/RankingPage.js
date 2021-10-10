@@ -145,25 +145,25 @@ export default function RankingPage({ theme }) {
           let decorator;
           let cardClasses;
           if (index == 0) {
-            cardClasses = clsx(classes.RankingCards, theme? classes.Rank1 : classes.Rank1Dark);
+            cardClasses = clsx(classes.RankingCards, theme ? classes.Rank1 : classes.Rank1Dark);
             decorator = (
-              <div className={clsx(classes.RankingDecorator, theme? classes.RankingDeco1 : classes.RankingDeco1Dark)}>
+              <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco1 : classes.RankingDeco1Dark)}>
                 <Typography className={classes.RankingNum}>1</Typography>
                 <div></div>
               </div>
             );
           } else if (index == 1) {
-            cardClasses = clsx(classes.RankingCards, theme? classes.Rank2 : classes.Rank2Dark);
+            cardClasses = clsx(classes.RankingCards, theme ? classes.Rank2 : classes.Rank2Dark);
             decorator = (
-              <div className={clsx(classes.RankingDecorator, theme? classes.RankingDeco2 : classes.RankingDeco2Dark)}>
+              <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco2 : classes.RankingDeco2Dark)}>
                 <Typography className={classes.RankingNum}>2</Typography>
                 <div></div>
               </div>
             );
           } else if (index == 2) {
-            cardClasses = clsx(classes.RankingCards, theme? classes.Rank3 : classes.Rank3Dark);
+            cardClasses = clsx(classes.RankingCards, theme ? classes.Rank3 : classes.Rank3Dark);
             decorator = (
-              <div className={clsx(classes.RankingDecorator, theme? classes.RankingDeco3 : classes.RankingDeco3Dark)}>
+              <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco3 : classes.RankingDeco3Dark)}>
                 <Typography className={classes.RankingNum}>3</Typography>
                 <div></div>
               </div>
@@ -203,6 +203,133 @@ export default function RankingPage({ theme }) {
     </Container>
   )
 
+  // Func for creating ranking body
+  const createRankingBody = (ftrData, ftrGenres, ftrTime) => {
+    return (
+      <>
+        {
+          (ftrData != 0) ?
+            <>
+              <div className={classes.sortByGenreTitle}>
+                <Typography variant="overline">Filter by Genres</Typography>
+              </div>
+              <div className={clsx(
+                leftOpen
+                  ? classes.sortByGenre
+                  : clsx(classes.sortByGenre, classes.leftRetracted),
+                theme
+                  ? classes.sortByGenreLight
+                  : classes.sortByGenreDark
+              )}>
+                <Tabs
+                  orientation="vertical"
+                  variant="scrollable"
+                  value={valueL}
+                  onChange={handleChangeLeft}
+                  aria-label="Sort by genre"
+                  indicatorColor="secondary"
+                >
+                  {itemsSortGenre.map((item, index) => (
+                    <Tab key={index} label={item.title} icon={item.icon}
+                      classes={{
+                        labelIcon: classes.sideTabsWithIconL,
+                        wrapper: classes.sideTabsLeft,
+                      }} />
+                  ))}
+                </Tabs>
+                <IconButton aria-label="filter" className={classes.sortByGenreSwitch} onClick={ToggleLeftSideBar} color="secondary">
+                  <Icon path={mdiChevronLeft} size={1} />
+                </IconButton>
+              </div>
+
+              <div className={classes.sortByTimeTitle}>
+                <Typography variant="overline">Filter by Time</Typography>
+              </div>
+              <div className={clsx(
+                rightOpen
+                  ? classes.sortByTime
+                  : clsx(classes.sortByTime, classes.rightRetracted),
+                theme
+                  ? classes.sortByTimeLight
+                  : classes.sortByTimeDark
+              )}>
+                <Tabs
+                  orientation="vertical"
+                  variant="scrollable"
+                  value={valueR}
+                  onChange={handleChangeRight}
+                  aria-label="Sort by Time"
+                  indicatorColor="secondary"
+                  classes={{ indicator: classes.rightTabIndicator }}
+                >
+
+                  <Tab label="All-time" icon={<AllInclusiveOutlinedIcon />}
+                    classes={{
+                      labelIcon: classes.sideTabsWithIconR,
+                      wrapper: classes.sideTabsRight,
+                    }}
+                    onClick={() => switchTime(1)} />
+                  <Tab label="Annual" icon={<Icon path={mdiCircleSlice8} size={1} />}
+                    classes={{
+                      labelIcon: classes.sideTabsWithIconR,
+                      wrapper: classes.sideTabsRight,
+                    }}
+                    onClick={() => switchTime(2)} />
+                  <Tab label="Bi-annual" icon={<Icon path={mdiCircleSlice4} size={1} />}
+                    classes={{
+                      labelIcon: classes.sideTabsWithIconR,
+                      wrapper: classes.sideTabsRight,
+                    }}
+                    onClick={() => switchTime(3)} />
+                  <Tab label="Season" icon={<Icon path={mdiCircleSlice2} size={1} />}
+                    classes={{
+                      labelIcon: classes.sideTabsWithIconR,
+                      wrapper: classes.sideTabsRight,
+                    }}
+                    onClick={() => switchTime(4)} />
+                  <Tab label="Monthly" icon={<Icon path={mdiCircleSlice1} size={1} />}
+                    classes={{
+                      labelIcon: classes.sideTabsWithIconR,
+                      wrapper: classes.sideTabsRight,
+                    }}
+                    onClick={() => switchTime(5)} />
+
+                </Tabs>
+
+                <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar} color="secondary">
+                  <Icon path={mdiChevronLeft} size={1} />
+                </IconButton>
+              </div>
+            </>
+            :
+            <>
+            </>
+        }
+
+
+        <div style={{ display: 'block' }} className="C1">
+          {createRankingList(ListAllTime)}
+        </div>
+
+        <div style={{ display: 'none' }} className="C2">
+          {createRankingList(ListAnnual)}
+        </div>
+
+        <div style={{ display: 'none' }} className="C3">
+          {createRankingList(ListBiAnnual)}
+        </div>
+
+        <div style={{ display: 'none' }} className="C4">
+          {createRankingList(ListSeason)}
+        </div>
+
+        <div style={{ display: 'none' }} className="C5">
+          {createRankingList(ListMonthly)}
+        </div>
+      </>
+    )
+  }
+
   return (
 
     <>
@@ -215,122 +342,26 @@ export default function RankingPage({ theme }) {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab label="Likes" {...a11yProps(0)} />
+          <Tab label="Trending" {...a11yProps(0)} />
+          <Tab label="Likes" {...a11yProps(1)} />
           <Tab label="Stars" {...a11yProps(1)} />
-          <Tab label="Comments" {...a11yProps(2)} />
+          <Tab label="Comments" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
+      <TabPanel value={value} index={0} className={classes.tabPanel}>
+        {createRankingBody(0, 0, 0)}
+      </TabPanel>
+      <TabPanel value={value} index={1} className={classes.tabPanel}>
+        {createRankingBody(1, 0, 0)}
+      </TabPanel>
+      <TabPanel value={value} index={2} className={classes.tabPanel}>
+        {createRankingBody(2, 0, 0)}
+      </TabPanel>
+      <TabPanel value={value} index={3} className={classes.tabPanel}>
+        {createRankingBody(3, 0, 0)}
+      </TabPanel>
 
-      <div className={classes.sortByGenreTitle}>
-        <Typography variant="overline">Filter by Genres</Typography>
-      </div>
-      <div className={clsx(
-        leftOpen
-          ? classes.sortByGenre
-          : clsx(classes.sortByGenre, classes.leftRetracted),
-        theme
-          ? classes.sortByGenreLight
-          : classes.sortByGenreDark
-      )}>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={valueL}
-          onChange={handleChangeLeft}
-          aria-label="Sort by genre"
-          indicatorColor="secondary"
-        >
-          {itemsSortGenre.map((item, index) => (
-            <Tab key={index} label={item.title} icon={item.icon}
-              classes={{
-                labelIcon: classes.sideTabsWithIconL,
-                wrapper: classes.sideTabsLeft,
-              }} />
-          ))}
-        </Tabs>
-        <IconButton aria-label="filter" className={classes.sortByGenreSwitch} onClick={ToggleLeftSideBar} color="secondary">
-          <Icon path={mdiChevronLeft} size={1} />
-        </IconButton>
-      </div>
 
-      <div className={classes.sortByTimeTitle}>
-        <Typography variant="overline">Filter by Time</Typography>
-      </div>
-      <div className={clsx(
-        rightOpen
-        ? classes.sortByTime
-        : clsx(classes.sortByTime, classes.rightRetracted),
-        theme
-        ? classes.sortByTimeLight
-        : classes.sortByTimeDark
-      )}>
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={valueR}
-          onChange={handleChangeRight}
-          aria-label="Sort by Time"
-          indicatorColor="secondary"
-          classes={{ indicator: classes.rightTabIndicator }}
-        >
-
-          <Tab label="All-time" icon={<AllInclusiveOutlinedIcon />}
-            classes={{
-              labelIcon: classes.sideTabsWithIconR,
-              wrapper: classes.sideTabsRight,
-            }}
-            onClick={() => switchTime(1)} />
-          <Tab label="Annual" icon={<Icon path={mdiCircleSlice8} size={1} />}
-            classes={{
-              labelIcon: classes.sideTabsWithIconR,
-              wrapper: classes.sideTabsRight,
-            }}
-            onClick={() => switchTime(2)} />
-          <Tab label="Bi-annual" icon={<Icon path={mdiCircleSlice4} size={1} />}
-            classes={{
-              labelIcon: classes.sideTabsWithIconR,
-              wrapper: classes.sideTabsRight,
-            }}
-            onClick={() => switchTime(3)} />
-          <Tab label="Season" icon={<Icon path={mdiCircleSlice2} size={1} />}
-            classes={{
-              labelIcon: classes.sideTabsWithIconR,
-              wrapper: classes.sideTabsRight,
-            }}
-            onClick={() => switchTime(4)} />
-          <Tab label="Monthly" icon={<Icon path={mdiCircleSlice1} size={1} />}
-            classes={{
-              labelIcon: classes.sideTabsWithIconR,
-              wrapper: classes.sideTabsRight,
-            }}
-            onClick={() => switchTime(5)} />
-
-        </Tabs>
-
-        <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar} color="secondary">
-          <Icon path={mdiChevronLeft} size={1} />
-        </IconButton>
-      </div>
-
-      <div style={{ display: 'block' }} className="C1">
-        {createRankingList(ListAllTime)}
-      </div>
-
-      <div style={{ display: 'none' }} className="C2">
-        {createRankingList(ListAnnual)}
-      </div>
-
-      <div style={{ display: 'none' }} className="C3">
-        {createRankingList(ListBiAnnual)}
-      </div>
-
-      <div style={{ display: 'none' }} className="C4">
-        {createRankingList(ListSeason)}
-      </div>
-
-      <div style={{ display: 'none' }} className="C5">
-        {createRankingList(ListMonthly)}
-      </div>
 
     </>
 

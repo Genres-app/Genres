@@ -10,6 +10,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     zIndex: 999,
   },
+  tabPanel: {
+    "& > div" :{
+      padding: 0,
+    }
+  },
   //Left Filter Side Bar
   sortByGenreTitle: {
     position: 'fixed',
@@ -137,8 +142,8 @@ const useStyles = makeStyles((theme) => ({
   // Ranking List
   RankingContainer: {
     width: '75vw',
-    marginTop: 64,
     padding: 0,
+    paddingTop: 64,
     backgroundColor: 'transparent',
   },
   RankingCards: {
