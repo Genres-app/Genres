@@ -165,17 +165,33 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   sideNotesPlaceholder: {
-    width: 0,
-    height: 1,
-    transition: 'width .2s ease-in-out',
+    flexShrink: 0,
+    width: 410,
+    minWidth: 410,
+    maxWidth: "calc(50vw + 10px)",
+    height: "100vh",
+    marginTop: 105,
+    borderRight: "1px solid",
+    borderRightColor: theme.palette.divider,
+    backgroundColor: theme.palette.background.paper,
+    transform: "translateX(-100%)",
+    transition: 'transform .2s ease-in-out, background-color .2s',
+    userSelect: "none",
+    cursor: "col-resize",
+
+    "&:hover": {
+      backgroundColor: "#d7caf4",
+    }
   },
   sideNotesPH_On: {
-    width: 400,
+    transform: "translateX(0)",
   },
   sideNotes: {
     position: 'fixed',
     top: 105,
     width: 400,
+    minWidth: 400,
+    maxWidth: "50vw",
     height: "calc(100vh - 105px)",
     transform: "translateX(-100%)",
     transition: 'transform .2s ease-in-out',
@@ -189,6 +205,7 @@ const useStyles = makeStyles((theme) => ({
   notesTree: {
     width: 199,
     padding: theme.spacing(1),
+    userSelect: "none",
   },
   addNewNoteBtn: {
     margin: theme.spacing(1),
@@ -228,6 +245,30 @@ export default function WPEditor({ theme }) {
 
   const [sideNotesOn, setSideNotes] = useState(true);
   const toggleSideNotes = () => setSideNotes(!sideNotesOn);
+
+  // Side Notes Column Resizing Part(1/4)
+  const [sideNotesResizing, setSideNotesResizing] = useState(false);
+
+  useEffect(
+    () => {
+      // Side Notes Column Resizing Part(2/4)
+      const SN = document.getElementById("SideNotes");
+      const SN_PH = document.getElementById("SideNotesPH");
+      document.onmousemove = function (e) {
+        if (sideNotesResizing) {
+          let newSideNotesWidth = e.clientX;
+          SN.style.width = newSideNotesWidth - 5 + "px";
+          SN_PH.style.width = newSideNotesWidth + 5 + "px";
+        }
+      }
+    }
+  )
+
+  // Side Notes Column Resizing Part(3/4)
+  document.onmouseup = function (e) {
+    setTimeout(function () { setSideNotesResizing(false); }, 100)
+    console.log(sideNotesResizing);
+  }
 
   const [isSaved, setSaved] = useState(false);
 
@@ -611,13 +652,24 @@ export default function WPEditor({ theme }) {
         </Button>
         <div style={{ display: 'flex' }}>
 
-          <div className={sideNotesOn ? clsx(classes.sideNotesPlaceholder, classes.sideNotesPH_On) : classes.sideNotesPlaceholder}></div>
+          <div className=
+            {
+              sideNotesOn ?
+                clsx(classes.sideNotesPlaceholder, classes.sideNotesPH_On)
+                :
+                classes.sideNotesPlaceholder
+            }
+            // Side Notes Column Resizing Part(4/4)
+            onMouseDown={() => setSideNotesResizing(true)}
+            id={"SideNotesPH"}
+          ></div>
           <div className={
             sideNotesOn ?
               clsx(classes.sideNotes, classes.sideNotes_On)
               :
               classes.sideNotes
-          }>
+          }
+            id={"SideNotes"}>
             <CardActionArea className={classes.sideNotesCloseBtn} onClick={toggleSideNotes}>
               <Icon path={mdiNoteTextOutline} size={1} style={{ marginRight: 8 }} />
               <Typography variant="button" style={{ marginTop: 1 }}>Hide Side Notes</Typography>
