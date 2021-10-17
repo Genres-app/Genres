@@ -36,8 +36,8 @@ class BetaReadingBookCarousel extends React.Component {
 }
 
   
-  handleClick = () => {
-    this.child.current.handleClickOpen();
+  handleClick = (cover) => {
+    this.child.current.handleClickOpen(cover);
   }
 
 
@@ -73,13 +73,13 @@ class BetaReadingBookCarousel extends React.Component {
     return (
       <div>
       <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
-        <img onClick={() => { this.handleClick(); }} src={cover1} className={classes.media} onDragStart={handleDragStart} />
-        <img onClick={() => { this.handleClick(); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
-        <img onClick={() => { this.handleClick(); }} src={cover3} className={classes.media} onDragStart={handleDragStart} />
-        <img onClick={() => { this.handleClick(); }} src={cover4} className={classes.media} onDragStart={handleDragStart} />
-        <img onClick={() => { this.handleClick(); }} src={cover5} className={classes.media} onDragStart={handleDragStart} />
-        <img onClick={() => { this.handleClick(); }} src={cover6} className={classes.media} onDragStart={handleDragStart} />
-        <img onClick={() => { this.handleClick(); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0001'); }} src={cover1} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0002'); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0003'); }} src={cover3} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0004'); }} src={cover4} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0005'); }} src={cover5} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0006'); }} src={cover6} className={classes.media} onDragStart={handleDragStart} />
+        <img onClick={() => { this.handleClick('0007'); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
       </Carousel>
       <ProceedToQ ref={this.child}/>
       </div>

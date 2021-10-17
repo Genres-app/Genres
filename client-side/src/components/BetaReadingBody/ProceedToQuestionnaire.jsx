@@ -16,6 +16,14 @@ import Grid from '@material-ui/core/Grid';
 import useStyles from './../Auth/styles';
 import Questionnaires from './Questionnaire.jsx'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import cover1 from '../Assets/bookcover1.jpg';
+import cover2 from '../Assets/bookcover2.jpg';
+import cover3 from '../Assets/bookcover3.jpg';
+import cover4 from '../Assets/bookcover4.jpg';
+import cover5 from '../Assets/bookcover5.jpg';
+import cover6 from '../Assets/bookcover6.jpg';
+import cover7 from '../Assets/bookcover7.jpg';
+import { BookLib } from '../BookLib';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -66,16 +74,29 @@ let bottomStylesDisagree = {
     }
 }
 
+let media = {
+  height: '400px',
+  width: '275px',
+  padding: '20px',
+}
+
 export default class ProceedToQ extends React.Component {
 ;
     constructor(props) {
       super(props);
       this.state = {open: false};
       this.child = React.createRef();
+      this.BookID = "";
   }
   
-  handleClickOpen = () => this.setState({open: !this.state.open});
+  handleClickOpen = (BookCover) => {this.setState({open: !this.state.open});
+      this.BookID = BookCover;
+      console.log(this.BookID);
+  }
   
+  handleBookCover = (BookCover) => {return <img src = {BookCover}/>}
+
+
   handleClose = () => this.setState({open: false});
 
   handleClick = () => {
@@ -105,6 +126,8 @@ export default class ProceedToQ extends React.Component {
               }}
           >
 
+            <div style={{ backgroundImage: `url(${BookLib[this.BookID].cover})` }} style = {media} />
+              
             <Card style = {{maxWidth: 550, margin: '24px 24px 0px 24px', marginTop:'1.5rem', backgroundColor:'#f2f2f2', borderRadius: 16}}>
                 <CardContent style= {{paddingBottom: '16px'}}>
                     <Typography align="left" variant="subtitle2" color="textPrimary">
