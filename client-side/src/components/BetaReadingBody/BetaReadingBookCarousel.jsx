@@ -38,7 +38,7 @@ class BetaReadingBookCarousel extends React.Component {
 
   state = {
     questOpen: false,
-    questId: "0000",
+    questId: "0001",
   }
 
 
@@ -88,7 +88,7 @@ class BetaReadingBookCarousel extends React.Component {
           <img onClick={() => { this.handleClick('0007'); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
         </Carousel>
 
-        <ProceedToQ open={this.state.questOpen} bookId={this.state.questId} />
+        <ProceedToQ open={this.state.questOpen} bookId={this.state.questId} handleClkFunc={this.handleClick}/>
       </div>
     )
   }

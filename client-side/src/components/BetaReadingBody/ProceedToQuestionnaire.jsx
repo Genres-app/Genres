@@ -74,7 +74,7 @@ let bottomStylesDisagree = {
   }
 }
 
-const ProceedToQ = ({open, bookId}) => {
+const ProceedToQ = ({ open, bookId, handleClkFunc }) => {
   console.log(bookId);
   return (
     <div>
@@ -91,13 +91,16 @@ const ProceedToQ = ({open, bookId}) => {
             },
           }}
         >
-
-          <div style={{
-            backgroundImage: `url(${BookLib['0001'].cover})`,
-            height: '400px',
-            width: '275px',
-            padding: '20px',
-          }} />
+          {BookLib[bookId] ?
+            <div style={{
+              backgroundImage: `url(${BookLib[bookId].cover})`,
+              height: '400px',
+              width: '275px',
+              padding: '20px',
+            }} />
+            :
+            <></>
+          }
 
           <Card style={{ maxWidth: 550, margin: '24px 24px 0px 24px', marginTop: '1.5rem', backgroundColor: '#f2f2f2', borderRadius: 16 }}>
             <CardContent style={{ paddingBottom: '16px' }}>
