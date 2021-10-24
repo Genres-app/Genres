@@ -1,29 +1,23 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
-import Typography from '@material-ui/core/Typography';
+import {
+  Button,
+  Chip,
+  Avatar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+  Typography,
+} from '@material-ui/core/';
 import { makeStyles } from "@material-ui/core/styles";
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import useStyles from './../Auth/styles';
 import Questionnaires from './Questionnaire.jsx'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import cover1 from '../Assets/bookcover1.jpg';
-import cover2 from '../Assets/bookcover2.jpg';
-import cover3 from '../Assets/bookcover3.jpg';
-import cover4 from '../Assets/bookcover4.jpg';
-import cover5 from '../Assets/bookcover5.jpg';
-import cover6 from '../Assets/bookcover6.jpg';
-import cover7 from '../Assets/bookcover7.jpg';
 import { BookLib } from '../BookLib';
+import { Divider } from '@material-ui/core';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -87,66 +81,120 @@ const ProceedToQ = ({ open, bookId, handleClkFunc }) => {
           aria-describedby="alert-dialog-slide-description"
           PaperProps={{
             style: {
-              borderRadius: 16
-            },
+              maxWidth: "none",
+              height: "60vh",
+              width: "60vw",
+            }
           }}
         >
-          {BookLib[bookId] ?
-            <div style={{
-              backgroundImage: `url(${BookLib[bookId].cover})`,
-              height: '400px',
-              width: '275px',
-              padding: '20px',
-            }} />
-            :
-            <></>
-          }
+          <div
+            style={{
+              display: "flex",
+              overflow: "hidden",
+            }}>
 
-          <Card style={{ maxWidth: 550, margin: '24px 24px 0px 24px', marginTop: '1.5rem', backgroundColor: '#f2f2f2', borderRadius: 16 }}>
-            <CardContent style={{ paddingBottom: '16px' }}>
-              <Typography align="left" variant="subtitle2" color="textPrimary">
-                Author(s): <Typography component="span" display="inline" style={{ color: '#686868' }} variant="body1">Lucas Lloyd</Typography>
-              </Typography>
-              <Typography align="left" variant="subtitle2" color="textPrimary">
-                Genre(s): <Typography display="inline" style={{ color: '#686868' }} variant="body1">Educational, Sci-Fi, Thriller</Typography>
-              </Typography>
-              <Typography align="left" variant="subtitle2" color="textPrimary">
-                Status: <Typography display="inline" style={{ color: '#686868' }} variant="body1">Ongoing</Typography>
-              </Typography>
-              <Typography align="left" variant="subtitle2" color="textPrimary">
-                Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
-              </Typography>
-              <Typography align="left" variant="subtitle2" color="textPrimary">
-                Synopsis: <Typography style={{ color: '#686868' }} variant="body2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Typography>
-              </Typography>
-            </CardContent>
-          </Card>
+            {BookLib[bookId] ?
+              <div style={{
+                backgroundImage: `url(${BookLib[bookId].cover})`,
+                backgroundSize: "cover",
+                height: '60vh',
+                width: '37.5vh',
+                padding: '20px',
+                flexShrink: 0,
+              }} />
+              :
+              <></>
+            }
+            <DialogContent
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
 
+              <div
+                style={{
+                  marginTop: 12,
+                  marginBottom: 12,
+                  overflowY: "auto",
+                  flexGrow: 1,
+                }}>
+                <DialogTitle
+                  style={{ paddingLeft: 0 }}>
+                  {BookLib[bookId] ?
+                    BookLib[bookId].title
+                    :
+                    "Title"
+                  }
+                </DialogTitle>
+                <Typography align="left" variant="body1" color="textPrimary" style={{ fontWeight: 500 }}>
+                  Author(s): <span style={{ color: '#686868', fontWeight: "normal" }}>
+                    {BookLib[bookId] ?
+                      BookLib[bookId].author.map(
+                        (item, i) =>
+                          <Chip
+                            label={item}
+                            avatar={<Avatar src="" />}
+                            style={{
+                              marginRight: 8,
+                              "&:last-child":
+                                { marginRight: 0, }
+                            }}
+                          // className={classes.authorChips}
+                          />
+                      )
+                      :
+                      "Author"
+                    }</span><br />
+                  Genre(s): <span style={{ color: '#686868', fontWeight: "normal" }}>
+                    {BookLib[bookId] ?
+                      BookLib[bookId].genres.map(
+                        (item, i) =>
+                          item + " "
+                      )
+                      :
+                      "N/A"
+                    }</span><br />
+                  Status: <span style={{ color: '#686868', fontWeight: "normal" }}>Ongoing</span><br />
+                  Last Updated: <span style={{ color: '#686868', fontWeight: "normal" }}>April 12, 2021</span><br />
+                  Synopsis: <span style={{ color: '#686868', fontWeight: "normal" }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  </span>
+                </Typography>
+              </div>
 
-          <Card
-            style={{ margin: '24px 24px 0px 24px', maxWidth: 550, marginTop: '1.5rem', backgroundColor: '#f2f2f2', borderRadius: 16 }} >
-
-            <CardContent style={{ paddingBottom: '8px' }}>
-              <DialogContent style={{ padding: '0' }}>
-                <DialogTitle id="alert-dialog-slide-title" style={{ marginleft: '0', fontSize: '24', padding: '0' }}>{"Proceed To Questionnaire?"}</DialogTitle>
-              </DialogContent>
-              <DialogContent style={{ padding: '0' }}>
-                <DialogContentText id="alert-dialog-slide-description" style={{ fontSize: 18, fontWeight: 'normal' }} >
+              <div
+                style={{
+                  flexShrink: 0,
+                }}>
+                <Divider />
+                <DialogTitle
+                  id="alert-dialog-slide-title"
+                  style={{
+                    paddingLeft: 0,
+                  }}>
+                  Proceed To Questionnaire?
+                </DialogTitle>
+                <DialogContentText
+                  id="alert-dialog-slide-description"
+                  style={{
+                    fontSize: 18,
+                    fontWeight: 'normal'
+                  }} >
                   By answering this questionnaire, you acknowledge and agree to keep this story confidential until its official release.
                 </DialogContentText>
-              </DialogContent>
-            </CardContent>
-          </Card>
+                <DialogActions>
+                  <Button style={bottomStylesDisagree}>
+                    Disagree
+                  </Button>
+                  <Button style={bottomStylesAgree} >
+                    Agree and proceed to questionnaire
+                    <ArrowForwardIcon style={{ verticalAlign: -7, display: 'inline-flex' }} />
+                  </Button>
+                </DialogActions>
+              </div>
 
-          <DialogActions>
-            <Button style={bottomStylesDisagree}>
-              Disagree
-            </Button>
-            <Button style={bottomStylesAgree} >
-              Agree and proceed to questionnaire
-              <ArrowForwardIcon style={{ verticalAlign: -7, display: 'inline-flex' }} />
-            </Button>
-          </DialogActions>
+            </DialogContent>
+          </div>
         </Dialog>
       </div>
       <Questionnaires />
