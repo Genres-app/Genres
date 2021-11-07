@@ -208,16 +208,6 @@ export default function NEPContentsTopCard() {
                 />
 
                 <TextField
-                  name="status"
-                  fullWidth
-                  label="status"
-                  multiline
-                  variant="filled"
-                  defaultValue={status}
-                  onChange={e => setStatus(e.target.value)}
-                />
-
-                <TextField
                   name="author"
                   fullWidth
                   label="author"
@@ -235,6 +225,16 @@ export default function NEPContentsTopCard() {
                   variant="filled"
                   defaultValue={genres}
                   onChange={e => setGenres(e.target.value)}
+                />
+                
+                <TextField
+                  name="status"
+                  fullWidth
+                  label="status"
+                  multiline
+                  variant="filled"
+                  defaultValue={status}
+                  onChange={e => setStatus(e.target.value)}
                 />
 
                 <TextField
