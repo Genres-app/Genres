@@ -24,8 +24,8 @@ import { mdiAccountCircleOutline, mdiLogoutVariant, mdiLoginVariant } from '@mdi
 import { ListItems } from '../Dashboard/listItems';
 
 
-const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired, loginFunc }) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+const GenresDrawer = ({ open, theme, toggleFunc, user, isUserConfirmRequired, loginFunc }) => {
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -41,11 +41,16 @@ const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired, loginFun
     }
   }
 
+  const login = () => {
+    loginFunc(true);
+    // setUser(user);
+  }
+
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
     history.push('/');
 
-    setUser(null);
+    // setUser(null);
     toggleFunc();
   };
 
@@ -79,7 +84,7 @@ const GenresDrawer = ({ open, theme, toggleFunc, isUserConfirmRequired, loginFun
         ) : (
           <div style={{ height: 200, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button
-              onClick={() => loginFunc(true)}
+              onClick={login}
               variant="contained"
               color="primary"
               endIcon={<Icon path={mdiLoginVariant} size={1} />}
