@@ -117,8 +117,10 @@ export default function NEPContentsTopCard() {
 
   const [title, setTitle] = useState('The Arrivals');
   const [isEditing, setIsEditing] = useState(false);
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('Unpublished');
   const [synopsis, setSyno] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+  const [author, setAuthor] = useState('Mike');
+  const [genres, setGenres] = useState('Horror');
 
   const handleInput = () => {
     console.log("Saved!");
@@ -133,7 +135,7 @@ export default function NEPContentsTopCard() {
         <div className={classes.divContents}>
           <div className={classes.divTitleButtons}>
             <Typography className={classes.text} align="left" component="h5" variant="h5">
-              The Arrivals
+              {title}
             </Typography>
             {
               !isEditing ?
@@ -157,34 +159,84 @@ export default function NEPContentsTopCard() {
           {/* ABOVE is the LIKE BUTTON */}
 
           {/* Placeholder Text BELOW: */}
-          <form>
-            <Typography align="left" variant="subtitle2" color="textPrimary">
-              Author(s): <Typography component="span" display="inline" style={{ color: '#686868' }} variant="body1">Lucas Lloyd</Typography>
-            </Typography>
-
-            <Typography align="left" variant="subtitle2" color="textPrimary">
-              Genre(s):
-            </Typography>
-            <input type="text" name="genres" />
-
-            <Typography align="left" variant="subtitle2" color="textPrimary">
-              Status:
-            </Typography>
-            <input type="text" name="status" onChange={e => setStatus(e.target.value)} />
-
-            <Typography align="left" variant="subtitle2" color="textPrimary">
-              Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
-            </Typography>
+          
+            
 
             {
               !isEditing ?
+
                 <>
+
+                <Typography align="left" variant="subtitle2" color="textPrimary">
+                  Author(s):
+                </Typography>
+                <Typography style={{ color: '#686868' }} variant="body2">{author}</Typography>
+
+                <Typography align="left" variant="subtitle2" color="textPrimary">
+                  Genre(s):
+                </Typography>
+                <Typography style={{ color: '#686868' }} variant="body2">{genres}</Typography>
+
+                <Typography align="left" variant="subtitle2" color="textPrimary">
+                  Status:
+                </Typography>
+                <Typography style={{ color: '#686868' }} variant="body2">{status}</Typography>
+
+                <Typography align="left" variant="subtitle2" color="textPrimary">
+                  Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
+                </Typography>
+
                   <Typography align="left" variant="subtitle2" color="textPrimary">
                     Synopsis:
-                  </Typography>
+                </Typography>
                   <Typography style={{ color: '#686868' }} variant="body2">{synopsis}</Typography>
+
                 </>
+
                 :
+                
+                <>
+
+                  <TextField
+                  name="title"
+                  fullWidth
+                  label="title"
+                  multiline
+                  variant="filled"
+                  defaultValue={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
+
+                <TextField
+                  name="status"
+                  fullWidth
+                  label="status"
+                  multiline
+                  variant="filled"
+                  defaultValue={status}
+                  onChange={e => setStatus(e.target.value)}
+                />
+
+                <TextField
+                  name="author"
+                  fullWidth
+                  label="author"
+                  multiline
+                  variant="filled"
+                  defaultValue={author}
+                  onChange={e => setAuthor(e.target.value)}
+                />
+
+                <TextField
+                  name="genres"
+                  fullWidth
+                  label="genres"
+                  multiline
+                  variant="filled"
+                  defaultValue={genres}
+                  onChange={e => setGenres(e.target.value)}
+                />
+
                 <TextField
                   name="synopsis"
                   fullWidth
@@ -194,8 +246,11 @@ export default function NEPContentsTopCard() {
                   defaultValue={synopsis}
                   onChange={e => setSyno(e.target.value)}
                 />
+
+                </>
+                
             }
-          </form>
+          
         </div>
       </div>
     </div>
