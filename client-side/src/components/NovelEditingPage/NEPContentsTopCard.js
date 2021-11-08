@@ -121,14 +121,14 @@ export default function NEPContentsTopCard() {
 
   const [title, setTitle] = useState('The Arrivals');
   const [isEditing, setIsEditing] = useState(false);
-  
+
   const [synopsis, setSyno] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
   const [genres, setGenres] = useState('Horror');
 
   const statusUnpublished = "unpublished";
   const statusPublished = "published";
   const [status, setStatus] = useState('Unpublished');
-  
+
   const handleInput = () => {
     console.log("Saved!");
   }
@@ -149,23 +149,23 @@ export default function NEPContentsTopCard() {
         </div>
         <div className={classes.divContents}>
           <div className={classes.divTitleButtons}>
-          
+
             {
               !isEditing ?
-            <Typography className={classes.text} align="left" component="h5" variant="h5">
-              {title}
-            </Typography>
-            :
-            <TextField
-              name="title"
-              label="title"
-              multiline
-              variant="filled"
-              defaultValue={title}
-              onChange={e => setTitle(e.target.value)}
-            />
+                <Typography className={classes.text} align="left" component="h5" variant="h5">
+                  {title}
+                </Typography>
+                :
+                <TextField
+                  name="title"
+                  label="Title"
+                  multiline
+                  variant="filled"
+                  defaultValue={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
             }
-          
+
             {
               !isEditing ?
                 <Button onClick={() => setIsEditing(true)} endIcon={<CreateOutlinedIcon />} color="primary" variant="contained">
@@ -188,13 +188,13 @@ export default function NEPContentsTopCard() {
           {/* ABOVE is the LIKE BUTTON */}
 
           {/* Placeholder Text BELOW: */}
-          
-            
 
-            {
-              !isEditing ?
 
-                <>
+
+          {
+            !isEditing ?
+
+              <>
 
                 <Typography align="left" variant="subtitle2" color="textPrimary">
                   Author(s):
@@ -215,38 +215,38 @@ export default function NEPContentsTopCard() {
                   Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
                 </Typography>
 
-                  <Typography align="left" variant="subtitle2" color="textPrimary">
-                    Synopsis:
+                <Typography align="left" variant="subtitle2" color="textPrimary">
+                  Synopsis:
                 </Typography>
-                  <Typography style={{ color: '#686868' }} variant="body2">{synopsis}</Typography>
+                <Typography style={{ color: '#686868' }} variant="body2">{synopsis}</Typography>
 
-                </>
+              </>
 
-                :
-                
-                <>
+              :
+
+              <>
 
                 <TextField
                   name="genres"
                   fullWidth
-                  label="genres"
+                  label="Genres"
                   multiline
                   variant="filled"
                   defaultValue={genres}
                   onChange={e => setGenres(e.target.value)}
                 />
-                
-                <div style = {{backgroundColor : "rgba(0, 0, 0, 0.09)", border: '0.5px solid black', borderWidth:'0 0 0.5px 0'}}>
-                  <div style = {{marginLeft: '12px', paddingTop: '8px'}}>
-                <p style = {{margin: 0, padding: 0, fontSize: '0.7rem', fontWeight: '5', fontFamily: "Roboto", }}>
-                    Status
-                </p>
-                
-                <RadioGroup value={status} onChange={handleChangeStatus} row={true} >
-                <FormControlLabel value="Published" control={<Radio color="primary"/>} label="Published" />
-                <FormControlLabel value="Unpublished" control={<Radio color="primary"/>} label="UnPublished" />
-                </RadioGroup>
-                </div>
+
+                <div style={{}}>
+                  <div style={{ marginLeft: '12px', paddingTop: '8px', display: "flex" }}>
+                    <Typography style={{opacity: .8, marginRight: "1rem", paddingTop: ".5rem"}} variant="body1">
+                      Status
+                    </Typography>
+
+                    <RadioGroup value={status} onChange={handleChangeStatus} row={true} >
+                      <FormControlLabel value="Published" control={<Radio color="primary" />} label="Published" />
+                      <FormControlLabel value="Unpublished" control={<Radio color="primary" />} label="UnPublished" />
+                    </RadioGroup>
+                  </div>
                 </div>
 
                 <TextField
@@ -259,10 +259,10 @@ export default function NEPContentsTopCard() {
                   onChange={e => setSyno(e.target.value)}
                 />
 
-                </>
-                
-            }
-          
+              </>
+
+          }
+
         </div>
       </div>
     </div>

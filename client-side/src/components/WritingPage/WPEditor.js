@@ -44,7 +44,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 /*Mdi Icons*/
 import Icon from '@mdi/react';
-import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish, mdiNoteTextOutline } from '@mdi/js';
+import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish, mdiNoteTextOutline, mdiDockLeft, mdiViewSplitVertical } from '@mdi/js';
 import mdiSavedOutline from './svgs/content-save-check-outline.svg';
 
 /*Data Import*/
@@ -238,6 +238,8 @@ const useStyles = makeStyles((theme) => ({
 // });
 
 export default function WPEditor({ theme }) {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
+
   const classes = useStyles();
 
   const [sidebar, setSidebar] = useState(false);
@@ -764,7 +766,7 @@ export default function WPEditor({ theme }) {
           {/* ABOVE: Actual Slate.js Text Editor */}
         </div>
 
-        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={true} isUserConfirmRequired={true} />
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={true} />
       </CssBaseline>
     </>
   );
