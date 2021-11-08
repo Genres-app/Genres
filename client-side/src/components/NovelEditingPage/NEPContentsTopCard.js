@@ -25,7 +25,8 @@ import SciFi from './Copy of Sci-Fi Book Cover Template - Made with PosterMyWall
 
 import EditingContentsButtons from './NEPContentsButtons'
 import Form from './Form.jsx'
-
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -136,7 +137,7 @@ export default function NEPContentsTopCard() {
   const handleChangeStatus = (event) => {
     setStatus(event.target.value);
   };
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   // handleChange = (event) => this.setValue({
   //   setValue: event.value
   // });
@@ -199,7 +200,7 @@ export default function NEPContentsTopCard() {
                 <Typography align="left" variant="subtitle2" color="textPrimary">
                   Author(s):
                 </Typography>
-                <Typography style={{ color: '#686868' }} variant="body2">Lucas Lloyd</Typography>
+                <Typography style={{ color: '#686868' }} variant="body2">{user.result.username}</Typography>
 
                 <Typography align="left" variant="subtitle2" color="textPrimary">
                   Genre(s):
