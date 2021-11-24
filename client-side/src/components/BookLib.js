@@ -12,6 +12,7 @@ export const BookLib = {
     author: [1],
     genres: ['Action', 'Sci-Fi'],
     cover: cover1,
+    status: 1,
     info: 'Description of the book1',
   },
   '0002': {
@@ -19,13 +20,15 @@ export const BookLib = {
     author: [2,0],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover2,
-    info: 'Description of the book2',
+    status: 0,
+    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla turpis elit, pulvinar vel tellus ut, congue ultricies elit. Fusce tristique velit dolor, eget interdum risus dictum vitae. Nam sapien quam, vestibulum non viverra a, rhoncus id leo. Quisque feugiat est orci, nec mollis eros convallis ac. Aenean varius enim dolor, at consequat libero consequat id. Sed consequat, felis vel faucibus interdum, urna justo lobortis nulla, quis suscipit diam libero id nulla. Duis eu purus ut tellus laoreet sollicitudin. Suspendisse id imperdiet lorem, tempor hendrerit tellus. Donec tincidunt mi quis neque vulputate, quis scelerisque metus rhoncus.',
   },
   '0003': {
     title: 'Mystic Emperors of the Deep',
     author: [3],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover3,
+    status: -1,
     info: 'Description of the book3',
   },
   '0004': {
@@ -33,6 +36,7 @@ export const BookLib = {
     author: [4],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover4,
+    status: 1,
     info: 'Description of the book4',
   },
   '0005': {
@@ -40,6 +44,7 @@ export const BookLib = {
     author: [5],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover5,
+    status: 1,
     info: 'Description of the book5',
   },
   '0006': {
@@ -47,6 +52,7 @@ export const BookLib = {
     author: [6],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover6,
+    status: 0,
     info: 'Description of the book6',
   },
   '0007': {
@@ -54,6 +60,7 @@ export const BookLib = {
     author: [2],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover7,
+    status: -1,
     info: 'Description of the book7',
   },
 }
