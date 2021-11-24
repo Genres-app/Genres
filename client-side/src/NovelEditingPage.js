@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NovelLandingPage() {
+export default function NovelEditingPage() {
   const classes = useStyles();
 
   return (

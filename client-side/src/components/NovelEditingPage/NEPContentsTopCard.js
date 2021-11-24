@@ -5,8 +5,17 @@ import {
   MenuItem,
   Button,
   IconButton,
+  Icon,
+  Card,
   Typography,
   TextField,
+  Divider,
+  List,
+  ListItem,
+  ListItemIcon,
+  Avatar,
+  ListItemText,
+  ListSubheader,
 } from '@material-ui/core/';
 
 /*Material-UI Icons*/
@@ -16,6 +25,9 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -27,16 +39,22 @@ import EditingContentsButtons from './NEPContentsButtons'
 import Form from './Form.jsx'
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import hexToRgb from '../../utilities/HexToRgb';
+import RgbBrightener from '../../utilities/RgbBrightener';
 
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   topContainer: {
     // backgroundImage: `url(${SciFi})`,
     paddingTop: '40px',
     paddingBottom: '50px',
     marginTop: '2px',
     width: '100%',
+    backgroundColor: () => {
+      let rgb = hexToRgb(theme.palette.primary.main)
+      return RgbBrightener(rgb.r, rgb.g, rgb.b, .92)
+    },
   },
   divWholeInfoBox: {
     width: '75%',
@@ -74,7 +92,6 @@ const useStyles = makeStyles(() => ({
     maxHeight: '100%',
     margin: 'auto',
     display: 'block',
-    filter: 'drop-shadow(2px 2px 2px #000000)',
   },
   divContents: {
     '@media (min-width:1024px)': { // resize text size when >1024 px
@@ -91,12 +108,34 @@ const useStyles = makeStyles(() => ({
     marginLeft: '15px',
     paddingTop: '0px',
     padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
   },
   divTitleButtons: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+
+  cardAuthorContainer: {
+    backgroundColor: theme.palette.background.paper,
+    height: "9rem",
+    width: "10rem",
+    // borderRadius: theme.shape.borderRadius,
+  },
+
+  divNovelDataContainer: {
+    display: "flex",
+    justifyContent: 'space-between',
+    width: "100%",
+    height: "auto",
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    "& > button": {
+      width: `calc(33.3% - ${theme.spacing(.67)}px)`,
+    }
+  },
+
   divMoreButton: {
     '@media (min-width:768px)': { // resize text size when <767 px
       display: 'none',
@@ -107,11 +146,19 @@ const useStyles = makeStyles(() => ({
     paddingTop: '5px',
   },
   likeButton: {
-    marginTop: '3px',
     color: '#3bbf9b',
   },
   icon: {
     paddingRight: '5px',
+  },
+
+  divBookInfo: {
+    position: 'relative',
+    paddingTop: theme.spacing(1),
+  },
+  infoEditingBtn: {
+    position: 'absolute',
+    right: 0,
   },
 }));
 
@@ -126,9 +173,9 @@ export default function NEPContentsTopCard() {
   const [synopsis, setSyno] = useState('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
   const [genres, setGenres] = useState('Horror');
 
-  const statusUnpublished = "unpublished";
-  const statusPublished = "published";
-  const [status, setStatus] = useState('Unpublished');
+  const statusUnpublished = "Incomplete";
+  const statusPublished = "Complete";
+  const [status, setStatus] = useState('Complete');
 
   const handleInput = () => {
     console.log("Saved!");
@@ -150,119 +197,151 @@ export default function NEPContentsTopCard() {
         </div>
         <div className={classes.divContents}>
           <div className={classes.divTitleButtons}>
-
-            {
-              !isEditing ?
-                <Typography className={classes.text} align="left" component="h5" variant="h5">
-                  {title}
-                </Typography>
-                :
-                <TextField
-                  name="title"
-                  label="Title"
-                  multiline
-                  variant="filled"
-                  defaultValue={title}
-                  onChange={e => setTitle(e.target.value)}
-                />
-            }
-
-            {
-              !isEditing ?
-                <Button onClick={() => setIsEditing(true)} endIcon={<CreateOutlinedIcon />} color="primary" variant="contained">
-                  Edit Info
-                </Button>
-                :
-                <Button onClick={() => { handleInput(); setIsEditing(false) }} endIcon={<SaveIcon />} color="primary" variant="contained">
-                  Save Info
-                </Button>
-            }
-          </div>
-
-          {/* BELOW is the LIKE BUTTON */}
-          {/* FIXME: the like button as of now is only STATIC and
-          needs to be fully implemented and connected to be a backend */}
-          <Button className={classes.likeButton}>
-            <ThumbUpAltIcon className={classes.icon} />
-            99 Thumbs Up
-          </Button>
-          {/* ABOVE is the LIKE BUTTON */}
-
-          {/* Placeholder Text BELOW: */}
-
-
-
-          {
-            !isEditing ?
-
-              <>
-
-                <Typography align="left" variant="subtitle2" color="textPrimary">
-                  Author(s):
-                </Typography>
-                <Typography style={{ color: '#686868' }} variant="body2">{user.result.username}</Typography>
-
-                <Typography align="left" variant="subtitle2" color="textPrimary">
-                  Genre(s):
-                </Typography>
-                <Typography style={{ color: '#686868' }} variant="body2">{genres}</Typography>
-
-                <Typography align="left" variant="subtitle2" color="textPrimary">
-                  Status:
-                </Typography>
-                <Typography style={{ color: '#686868' }} variant="body2">{status}</Typography>
+            <div className={classes.divTitleContents}>
+              {
+                !isEditing ?
+                  <Typography className={classes.text} align="left" component="h4" variant="h4">
+                    {title}
+                  </Typography>
+                  :
+                  <TextField
+                    name="title"
+                    label="Title"
+                    multiline
+                    variant="filled"
+                    defaultValue={title}
+                    onChange={e => setTitle(e.target.value)}
+                  />
+              }
+              <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                // justifyContent: 'space-between',
+                alignItems: 'center',
+              }}>
+                <Typography variant="subtitle2">{status}</Typography>
 
                 <Typography align="left" variant="subtitle2" color="textPrimary">
                   Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
                 </Typography>
+              </div>
+              <div className={classes.divNovelDataContainer}>
+                <Button
+                  variant="text"
+                  color="primary"
+                  startIcon={<FavoriteBorderIcon />}
+                >
+                  55 Likes
+                </Button>
+                <Button
+                  variant="text"
+                  color="primary"
+                  startIcon={<StarBorderIcon />}
+                >
+                  20 Stars
+                </Button>
+                <Button
+                  variant="text"
+                  color="primary"
+                  startIcon={<ChatBubbleOutlineIcon />}
+                >
+                  13 Comments
+                </Button>
+              </div>
+              <Divider />
+            </div>
 
-                <Typography align="left" variant="subtitle2" color="textPrimary">
-                  Synopsis:
-                </Typography>
-                <Typography style={{ color: '#686868' }} variant="body2">{synopsis}</Typography>
+            <Card className={classes.cardAuthorContainer} variant="outlined">
+              <List
+                component="author-list"
+                subheader={
+                  <ListSubheader style={{ height: '2rem', fontSize: '1rem', transform: "translateY(-.2rem)" }}>
+                    Author
+                  </ListSubheader>
+                }
+              >
+                <ListItem>
+                  <ListItemIcon>
+                    <Avatar></Avatar>
+                  </ListItemIcon>
+                  <ListItemText primary={user.result.username} />
+                </ListItem>
+              </List>
+            </Card>
 
-              </>
+          </div>
 
-              :
+          <div className={classes.divBookInfo}>
 
-              <>
+            {
+              !isEditing ?
+                <Button onClick={() => setIsEditing(true)} endIcon={<CreateOutlinedIcon />} color="primary" variant="contained" className={classes.infoEditingBtn}>
+                  Edit Info
+                </Button>
+                :
+                <Button onClick={() => { handleInput(); setIsEditing(false) }} endIcon={<SaveIcon />} color="primary" variant="contained" className={classes.infoEditingBtn}>
+                  Save Info
+                </Button>
+            }
 
-                <TextField
-                  name="genres"
-                  fullWidth
-                  label="Genres"
-                  multiline
-                  variant="filled"
-                  defaultValue={genres}
-                  onChange={e => setGenres(e.target.value)}
-                />
+            {
+              !isEditing ?
 
-                <div style={{}}>
-                  <div style={{ marginLeft: '12px', paddingTop: '8px', display: "flex" }}>
-                    <Typography style={{opacity: .8, marginRight: "1rem", paddingTop: ".5rem"}} variant="body1">
-                      Status
-                    </Typography>
+                <>
 
-                    <RadioGroup value={status} onChange={handleChangeStatus} row={true} >
-                      <FormControlLabel value="Published" control={<Radio color="primary" />} label="Published" />
-                      <FormControlLabel value="Unpublished" control={<Radio color="primary" />} label="UnPublished" />
-                    </RadioGroup>
+                  <Typography align="left" variant="subtitle2" color="textPrimary">
+                    Genre(s):
+                  </Typography>
+                  <Typography style={{ color: '#686868' }} variant="body2">{genres}</Typography>
+
+                  <Typography align="left" variant="subtitle2" color="textPrimary">
+                    Synopsis:
+                  </Typography>
+                  <Typography style={{ color: '#686868' }} variant="body2">{synopsis}</Typography>
+
+                </>
+
+                :
+
+                <>
+
+                  <TextField
+                    name="genres"
+                    fullWidth
+                    label="Genres"
+                    multiline
+                    variant="filled"
+                    defaultValue={genres}
+                    onChange={e => setGenres(e.target.value)}
+                  />
+
+                  <div style={{}}>
+                    <div style={{ marginLeft: '12px', paddingTop: '8px', display: "flex" }}>
+                      <Typography style={{ opacity: .8, marginRight: "1rem", paddingTop: ".5rem" }} variant="body1">
+                        Status
+                      </Typography>
+
+                      <RadioGroup value={status} onChange={handleChangeStatus} row={true} >
+                        <FormControlLabel value="Published" control={<Radio color="primary" />} label="Published" />
+                        <FormControlLabel value="Unpublished" control={<Radio color="primary" />} label="UnPublished" />
+                      </RadioGroup>
+                    </div>
                   </div>
-                </div>
 
-                <TextField
-                  name="synopsis"
-                  fullWidth
-                  label="Synopsis"
-                  multiline
-                  variant="filled"
-                  defaultValue={synopsis}
-                  onChange={e => setSyno(e.target.value)}
-                />
+                  <TextField
+                    name="synopsis"
+                    fullWidth
+                    label="Synopsis"
+                    multiline
+                    variant="filled"
+                    defaultValue={synopsis}
+                    onChange={e => setSyno(e.target.value)}
+                  />
 
-              </>
+                </>
 
-          }
+            }
+          </div>
 
         </div>
       </div>

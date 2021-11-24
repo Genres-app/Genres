@@ -1,5 +1,3 @@
-import deepPurple from '@material-ui/core/colors/deepPurple';
-
 export const lightTheme = {
   palette: {
     primary: {

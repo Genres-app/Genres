@@ -231,7 +231,7 @@ export default function Body() {
     return (
       <Card variant="outlined" className={classes.cardRoot}>
 
-        <CardActionArea>
+        <CardActionArea onClick={() => routeChange(`/book/${bookId}`)}>
           <NavLink to="/NovelEditing">
             <CardMedia
               className={classes.cardMedia}
