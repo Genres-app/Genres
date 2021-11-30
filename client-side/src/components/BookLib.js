@@ -17,7 +17,7 @@ export const BookLib = {
   },
   '0002': {
     title: 'The Arrivals',
-    author: [2,0],
+    author: [2, 4, 5],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover2,
     status: 0,

@@ -17,26 +17,26 @@ export const UserData = {
   3: {
     userName: 'Tom Douglas',
     userAvatar: null,
-    descrip: 'description of testing-user0'
+    descrip: 'description of testing-user3'
   },
   4: {
     userName: 'H. W. Kishor',
     userAvatar: null,
-    descrip: 'description of testing-user0'
+    descrip: 'description of testing-user4'
   },
   5: {
     userName: 'Ken Adams',
     userAvatar: null,
-    descrip: 'description of testing-user0'
+    descrip: 'description of testing-user5'
   },
   6: {
     userName: 'Arthur White',
     userAvatar: null,
-    descrip: 'description of testing-user0'
+    descrip: 'description of testing-user6'
   },
   7: {
-    userName: 'test',
+    userName: 'Test',
     userAvatar: null,
-    descrip: 'description of testing-user0'
+    descrip: 'description of testing-user7'
   },
 }

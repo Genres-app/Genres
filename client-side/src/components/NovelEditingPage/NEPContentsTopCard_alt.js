@@ -9,7 +9,6 @@ import {
   IconButton,
   Icon,
   Card,
-  Chip,
   Typography,
   TextField,
   Divider,
@@ -35,9 +34,6 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import AddIcon from '@material-ui/icons/Add';
-
-import MdiIcon from '@mdi/react';
-import { mdiPound } from '@mdi/js';
 
 import EditingContentsButtons from './NEPContentsButtons'
 import Form from './Form.jsx'
@@ -126,10 +122,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    // marginRight: theme.spacing(2)
-  },
-  title: {
-    paddingBottom: theme.spacing(1),
+    marginRight: theme.spacing(2)
   },
 
   divNovelStatus: {
@@ -151,20 +144,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
 
-  divAuthorsContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: `${theme.spacing(1)}px 0`,
-  },
-  divAuthorCard: {
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: theme.spacing(2),
-  },
-  avatarAuthorCard: {
-    marginRight: theme.spacing(1),
-  },
-
   divNovelDataContainer: {
     display: "flex",
     justifyContent: 'space-between',
@@ -174,20 +153,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     "& > button": {
       width: `calc(33.3% - ${theme.spacing(.67)}px)`,
-      // paddingBottom: theme.spacing(.25),
+      paddingBottom: theme.spacing(.25),
     },
   },
   NovelDataBtnLabel: {
-    // '@media (min-width:1024px)': { // when >1024 px
-
-    // },
-    // '@media (max-width:1024px)': { // when <1024 px
-    //   display: "block"
-    // },
+    display: "block"
   },
   NovelDataBtnIcon: {
     display: "flex",
-    marginRight: ".4rem",
+    marginRight: 0,
     alignItems: 'center',
     justifyContent: 'center',
     "& > svg": {
@@ -195,25 +169,28 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 
-  // cardAuthorContainer: {
-  //   backgroundColor: theme.palette.background.paper,
-  //   height: "9.5rem",
-  //   Width: "max-content",
-  //   maxWidth: "12rem",
-  //   "& > ul > li": {
-  //     paddingLeft: theme.spacing(1.5),
-  //     paddingRight: theme.spacing(1.5),
-  //   }
-  // },
-  // cardAuthorIcon: {
-  //   minWidth: theme.spacing(6),
-  // },
+  cardAuthorContainer: {
+    backgroundColor: theme.palette.background.paper,
+    height: "9.5rem",
+    Width: "max-content",
+    maxWidth: "12rem",
+    "& > ul > li": {
+      paddingLeft: theme.spacing(1.5),
+      paddingRight: theme.spacing(1.5),
+    }
+  },
+  cardAuthorIcon: {
+    minWidth: theme.spacing(6),
+  },
 
   divMoreButton: {
     '@media (min-width:768px)': { // resize text size when <767 px
       display: 'none',
     },
     color: '#505050',
+  },
+  text: {
+    paddingTop: '5px',
   },
   likeButton: {
     color: '#3bbf9b',
@@ -225,13 +202,6 @@ const useStyles = makeStyles((theme) => ({
   divBookInfo: {
     position: 'relative',
     paddingTop: theme.spacing(1),
-  },
-  chipGenres: {
-    margin: theme.spacing(0.5),
-    marginTop: 0,
-    alignItems: 'center',
-    fontWeight: 'bold',
-    lineHeight: "100%",
   },
   infoEditingBtn: {
     position: 'absolute',
@@ -279,7 +249,7 @@ export default function NEPContentsTopCard() {
             <div className={classes.divTitleContents}>
               {
                 !isEditing ?
-                  <Typography className={classes.title} align="left" component="h4" variant="h4">
+                  <Typography className={classes.text} align="left" component="h4" variant="h4">
                     {BookLib[bookId].title}
                   </Typography>
                   :
@@ -312,19 +282,8 @@ export default function NEPContentsTopCard() {
                 </Typography>
               </div>
 
-              <div className={classes.divAuthorsContainer}>
-                {BookLib[bookId].author.map((item, index) => (
-                  <div className={classes.divAuthorCard} key={index}>
-                    <Avatar className={classes.avatarAuthorCard}>{UserData[item].userName[0]}</Avatar>
-                    <Typography noWrap>{UserData[item].userName}</Typography>
-                  </div>
-                ))
-                }
-                <AddIcon />
+              <div style={{ flexGrow: 1 }}></div>
 
-              </div>
-
-              <Divider />
               <div className={classes.divNovelDataContainer}>
                 <Button
                   variant="text"
@@ -363,7 +322,7 @@ export default function NEPContentsTopCard() {
               <Divider />
             </div>
 
-            {/* <Card className={classes.cardAuthorContainer} variant="outlined">
+            <Card className={classes.cardAuthorContainer} variant="outlined">
               <List
                 subheader={
                   <ListSubheader style={{ height: '2rem', fontSize: '1rem', transform: "translateY(-.2rem)" }}>
@@ -384,38 +343,42 @@ export default function NEPContentsTopCard() {
                   <ListItemText primary={"Add..."} />
                 </ListItem>
               </List>
-            </Card> */}
+            </Card>
 
           </div>
 
           <div className={classes.divBookInfo}>
-            <li style={{ display: 'flex', marginBottom: ".5rem" }}>
-              {
-                BookLib[bookId].genres.map((item, index) => (
-                  <Chip
-                    key={index}
-                    className={classes.chipGenres}
-                    icon={<MdiIcon path={mdiPound} size={1} />}
-                    label={item}
-                    onDelete={isEditing ? console.log("Deleting Chip!") : undefined}
-                    variant="outlined"
-                    color="primary"
-                    clickable
-                  />
-                ))
-              }
-            </li>
-
             {
               !isEditing ?
+
                 <>
+
+                  <Typography align="left" variant="subtitle2" color="textPrimary">
+                    Genre(s):
+                  </Typography>
+                  <Typography style={{ color: '#686868' }} variant="body2">{BookLib[bookId].genres}</Typography>
+
                   <Typography align="left" variant="subtitle2" color="textPrimary">
                     Synopsis:
                   </Typography>
                   <Typography style={{ color: '#686868' }} variant="body2">{BookLib[bookId].info}</Typography>
+
                 </>
+
                 :
+
                 <>
+
+                  <TextField
+                    name="genres"
+                    fullWidth
+                    label="Genres"
+                    multiline
+                    variant="filled"
+                    defaultValue={BookLib[bookId].genres}
+                  // onChange={e => setGenres(e.target.value)}
+                  />
+
                   <div style={{}}>
                     <div style={{ marginLeft: '12px', paddingTop: '8px', display: "flex" }}>
                       <Typography style={{ opacity: .8, marginRight: "1rem", paddingTop: ".5rem" }} variant="body1">
