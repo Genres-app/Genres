@@ -170,12 +170,14 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
   const setStyleOfAppbar1 = makeStyles((theme) => ({
     appBar: {
       backgroundColor: theme.palette.background.paper,
+      color: theme.palette.text.primary,
       boxShadow: 'none',
     }
   }));
   const setStyleOfAppbar2 = makeStyles((theme) => ({
     appBar: {
       backgroundColor: theme.palette.background.paper,
+      color: theme.palette.text.primary,
       //boxShadow: 'none',
     }
   }));

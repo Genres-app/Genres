@@ -61,6 +61,12 @@ import { writingNoteData } from './WritingNoteData';
 // useStyles is the CSS for the text editor, edit BELOW:
 const useStyles = makeStyles((theme) => ({
   // BELOW: CSS for Appbar itself
+  AppBar: {
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
+  },
+
+
   chapterNameInput: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -493,8 +499,9 @@ export default function WPEditor({ theme }) {
       <CssBaseline>
         <AppBar
           position="fixed"
-          color="secondary"
           elevation={1}
+          color="secondary"
+          className={classes.AppBar}
         >
           <Toolbar>
 
