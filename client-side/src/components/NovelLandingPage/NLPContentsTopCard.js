@@ -251,7 +251,8 @@ export default function NLPContentsTopCard() {
   const { bookId } = useParams();
 
   const [isEditing, setIsEditing] = useState(false);
-  
+  const [isLiked, setIsLiked] = useState(false);
+  const [isStared, setIsStared] = useState(false);
 
 
 
@@ -314,7 +315,7 @@ export default function NLPContentsTopCard() {
 
             <Divider />
 
-            
+
                   <div className={classes.divNovelDataContainer}>
                     <Button
                       variant="text"
@@ -352,32 +353,7 @@ export default function NLPContentsTopCard() {
                   </div>
                   <Divider />
               
-
-
           </div>
-
-          {/* <Card className={classes.cardAuthorContainer} variant="outlined">
-            <List
-              subheader={
-                <ListSubheader style={{ height: '2rem', fontSize: '1rem', transform: "translateY(-.2rem)" }}>
-                  Author
-                </ListSubheader>
-              }
-            >
-              <ListItem>
-                <ListItemIcon className={classes.cardAuthorIcon}>
-                  <Avatar></Avatar>
-                </ListItemIcon>
-                <ListItemText primary={<Typography noWrap>{UserData[BookLib[bookId].author[0]].userName}</Typography>} disableTypography />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon className={classes.cardAuthorIcon}>
-                  <Avatar><AddIcon /></Avatar>
-                </ListItemIcon>
-                <ListItemText primary={"Add..."} />
-              </ListItem>
-            </List>
-          </Card> */}
 
         </div>
 
@@ -398,50 +374,10 @@ export default function NLPContentsTopCard() {
               ))
             }
           </li>
-
-          {
-            !isEditing ?
-              <>
-                <Typography align="left" variant="subtitle2" color="textPrimary">
-                  Synopsis:
-                </Typography>
-                <Typography style={{ color: '#686868' }} variant="body2">{BookLib['0001'].info}</Typography>
-              </>
-              :
-              <>
-                {/* <div style={{}}>
-                  <div style={{ marginLeft: '12px', paddingTop: '8px', display: "flex" }}>
-                    <Typography style={{ opacity: .8, marginRight: "1rem", paddingTop: ".5rem" }} variant="body1">
-                      Status
-                    </Typography>
-
-                    <RadioGroup value={
-                      BookLib[bookId].status == 1 ?
-                        "Complete"
-                        : BookLib[bookId].status == 0 ?
-                          "Incomplete"
-                          :
-                          "Unpublished"
-                    } onChange={handleChangeStatus} row={true} >
-                      <FormControlLabel value="Published" control={<Radio color="primary" />} label="Published" />
-                      <FormControlLabel value="Unpublished" control={<Radio color="primary" />} label="UnPublished" />
-                    </RadioGroup>
-                  </div>
-                </div> */}
-
-                <TextField
-                  name="synopsis"
-                  fullWidth
-                  label="Synopsis"
-                  multiline
-                  variant="outlined"
-                  defaultValue={BookLib['0001'].info}
-                // onChange={e => setSyno(e.target.value)}
-                />
-
-              </>
-
-          }
+              <Typography align="left" variant="subtitle2" color="textPrimary">
+                Synopsis:
+              </Typography>
+              <Typography style={{ color: '#686868' }} variant="body2">{BookLib['0001'].info}</Typography>
         </div>
 
       {/* <div style={{marginTop: '.5rem', display: 'flex', flexDirection: 'row-reverse'}}>
