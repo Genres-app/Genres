@@ -196,17 +196,27 @@ const useStyles = makeStyles((theme) => ({
     height: 64,
     width: "100%",
   },
-  sideNotesPlaceholder: {
-    flexShrink: 0,
-    width: 410,
-    minWidth: 410,
-    maxWidth: "calc(50vw + 10px)",
-    height: "100vh",
+
+  sideNotes: {
+    // position: 'fixed',
+    // top: 105,
     marginTop: 105,
+    width: 400,
+    minWidth: 400,
+    maxWidth: "50vw",
+    height: "calc(100vh - 105px)",
+    // transform: "translateX(-100%)",
+    transition: 'transform .2s ease-in-out',
+    backgroundColor: "#fff",
+    borderRight: "1px solid rgba(0, 0, 0, 0.12)",
+  },
+
+  sideNotesResizeBar: {
+    height: "100vh",
+    width: 10,
     borderRight: "1px solid",
     borderRightColor: theme.palette.divider,
     backgroundColor: theme.palette.background.paper,
-    transform: "translateX(-100%)",
     transition: 'transform .2s ease-in-out, background-color .2s',
     userSelect: "none",
     cursor: "col-resize",
@@ -214,24 +224,6 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#d7caf4",
     }
-  },
-  sideNotesPH_On: {
-    transform: "translateX(0)",
-  },
-  sideNotes: {
-    position: 'fixed',
-    top: 105,
-    width: 400,
-    minWidth: 400,
-    maxWidth: "50vw",
-    height: "calc(100vh - 105px)",
-    transform: "translateX(-100%)",
-    transition: 'transform .2s ease-in-out',
-    backgroundColor: "#fff",
-    borderRight: "1px solid rgba(0, 0, 0, 0.12)",
-  },
-  sideNotes_On: {
-    transform: "translateX(0)",
   },
 
   notesTree: {
@@ -287,14 +279,20 @@ export default function WPEditor({ theme }) {
     () => {
       // Side Notes Column Resizing Part(2/4)
       const SN = document.getElementById("SideNotes");
-      const SN_PH = document.getElementById("SideNotesPH");
       document.onmousemove = function (e) {
         if (sideNotesResizing) {
           let newSideNotesWidth = e.clientX;
           SN.style.width = newSideNotesWidth - 5 + "px";
-          SN_PH.style.width = newSideNotesWidth + 5 + "px";
         }
       }
+
+      // Update Toggle SideNotes
+      if (sideNotesOn) {
+        document.getElementById("NotesAndEditorContainer").style.width = "100%"
+      } else {
+        document.getElementById("NotesAndEditorContainer").style.width = window.innerWidth + document.getElementById("SideNotes").offsetWidth + "px"
+      }
+
     }
   )
 
@@ -622,7 +620,7 @@ export default function WPEditor({ theme }) {
             Show Side Notes
           </Button>
 
-          <Divider orientation="vertical" className={classes.EditorToolbarDivider}/>
+          <Divider orientation="vertical" className={classes.EditorToolbarDivider} />
           <div style={{ flexGrow: 1 }}></div>
 
           {/* HEADING 1 BUTTON BELOW: */}
@@ -684,119 +682,105 @@ export default function WPEditor({ theme }) {
         </div>
 
         {/* ABOVE: Text Editor Options Appbar */}
+        <div style={{ width: '100%', overflow: 'hidden', height: '100vh' }}> 
+        {/* Double Divs are used for Toggling SideNote: Change inner div's width to move SideNote out of viewport */}
+          <div style={{ display: 'flex', float: 'right', transition: 'width .2s ease-in-out' }} id={"NotesAndEditorContainer"}>
 
-        <div style={{ display: 'flex' }}>
+            <div className={classes.sideNotes} id={"SideNotes"}>
 
-          <div className=
-            {
-              sideNotesOn ?
-                clsx(classes.sideNotesPlaceholder, classes.sideNotesPH_On)
-                :
-                classes.sideNotesPlaceholder
-            }
-            // Side Notes Column Resizing Part(4/4)
-            onMouseDown={() => setSideNotesResizing(true)}
-            id={"SideNotesPH"}
-          ></div>
-          <div className={
-            sideNotesOn ?
-              clsx(classes.sideNotes, classes.sideNotes_On)
-              :
-              classes.sideNotes
-          }
-            id={"SideNotes"}>
-            {/* <CardActionArea className={classes.sideNotesCloseBtn} onClick={toggleSideNotes}>
-              <Icon path={mdiNoteTextOutline} size={1} style={{ marginRight: 8 }} />
-              <Typography variant="button" style={{ marginTop: 1 }}>Hide Side Notes</Typography>
-            </CardActionArea>
-            <Divider /> */}
-            <div style={{ display: "flex", height: "100%" }}>
-              <div className={classes.notesTree}>
-                <TreeView
-                  defaultCollapseIcon={<ExpandMoreIcon />}
-                  defaultExpandIcon={<ChevronRightIcon />}
-                >
-                  {
-                    Object.keys(writingNoteData).map((key, index) => (
-                      <TreeItem nodeId={index} label={key} />
-                    ))
-                  }
+              <div style={{ display: "flex", height: "100%" }}>
+                <div className={classes.notesTree}>
+                  <TreeView
+                    defaultCollapseIcon={<ExpandMoreIcon />}
+                    defaultExpandIcon={<ChevronRightIcon />}
+                  >
+                    {
+                      Object.keys(writingNoteData).map((key, index) => (
+                        <TreeItem nodeId={index} label={key} />
+                      ))
+                    }
 
-                  <TreeItem nodeId="1" label="Characters">
-                    <TreeItem nodeId="2" label="Char1" />
-                    <TreeItem nodeId="3" label="Char2" />
-                    <TreeItem nodeId="4" label="Char3" />
-                  </TreeItem>
-                  <TreeItem nodeId="5" label="Others">
-                    <TreeItem nodeId="10" label="Settings" />
-                    <TreeItem nodeId="6" label="Factions">
-                      <TreeItem nodeId="8" label="Faction1" />
-                      <TreeItem nodeId="9" label="Faction2" />
+                    <TreeItem nodeId="1" label="Characters">
+                      <TreeItem nodeId="2" label="Char1" />
+                      <TreeItem nodeId="3" label="Char2" />
+                      <TreeItem nodeId="4" label="Char3" />
                     </TreeItem>
-                  </TreeItem>
-                </TreeView>
-              </div>
-              <Divider orientation="vertical" />
-              <div className={classes.noteCards}>
-                <Button
-                  aria-label="add new note"
-                  className={classes.addNewNoteBtn}
-                  // onClick={toggleSideNotes}
-                  startIcon={<AddIcon />}
-                  color="primary"
-                >
-                  New Note
-                </Button>
-                <textarea></textarea>
-                <textarea></textarea>
+                    <TreeItem nodeId="5" label="Others">
+                      <TreeItem nodeId="10" label="Settings" />
+                      <TreeItem nodeId="6" label="Factions">
+                        <TreeItem nodeId="8" label="Faction1" />
+                        <TreeItem nodeId="9" label="Faction2" />
+                      </TreeItem>
+                    </TreeItem>
+                  </TreeView>
+                </div>
+                <Divider orientation="vertical" />
+                <div className={classes.noteCards}>
+                  <Button
+                    aria-label="add new note"
+                    className={classes.addNewNoteBtn}
+                    // onClick={toggleSideNotes}
+                    startIcon={<AddIcon />}
+                    color="primary"
+                  >
+                    New Note
+                  </Button>
+                  <textarea></textarea>
+                  <textarea></textarea>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* BELOW: Actual Slate.js Text Editor */}
-          <div className="editors" style={{ width: 720 }}>
-            <Slate
-              editor={editor}
-              value={value}
-              onChange={newValue => setValue(newValue)}
-            >
-              <Editable
-                renderElement={renderElement}
-                // Pass in the `renderLeaf` function.
-                renderLeaf={renderLeaf}
-                // Handle SHORTCUTS BELOW:
-                onKeyDown={event => {
-                  if (!event.ctrlKey) {
-                    return
-                  }
-                  switch (event.key) {
-                    // Shortcut for turning a text block into "code" BELOW:
-                    case '`': {
-                      event.preventDefault()
-                      BlockEditor.toggleCodeBlock(editor)
-                      break
+            <div className={classes.sideNotesResizeBar}
+              // Side Notes Column Resizing Part(4/4)
+              onMouseDown={() => setSideNotesResizing(true)}
+            ></div>
+
+            {/* BELOW: Actual Slate.js Text Editor */}
+            <div className="editors" style={{ width: 720 }}>
+              <Slate
+                editor={editor}
+                value={value}
+                onChange={newValue => setValue(newValue)}
+              >
+                <Editable
+                  renderElement={renderElement}
+                  // Pass in the `renderLeaf` function.
+                  renderLeaf={renderLeaf}
+                  // Handle SHORTCUTS BELOW:
+                  onKeyDown={event => {
+                    if (!event.ctrlKey) {
+                      return
                     }
-                    // Shortcut for bolding BELOW:
-                    case 'b': {
-                      toggleMark(editor, "bold")
-                      break
+                    switch (event.key) {
+                      // Shortcut for turning a text block into "code" BELOW:
+                      case '`': {
+                        event.preventDefault()
+                        BlockEditor.toggleCodeBlock(editor)
+                        break
+                      }
+                      // Shortcut for bolding BELOW:
+                      case 'b': {
+                        toggleMark(editor, "bold")
+                        break
+                      }
+                      // Shortcut for italics BELOW:
+                      case 'i': {
+                        toggleMark(editor, "italic")
+                        break
+                      }
+                      // Shortcut for underline BELOW:
+                      case 'u': {
+                        toggleMark(editor, "underline")
+                        break
+                      }
                     }
-                    // Shortcut for italics BELOW:
-                    case 'i': {
-                      toggleMark(editor, "italic")
-                      break
-                    }
-                    // Shortcut for underline BELOW:
-                    case 'u': {
-                      toggleMark(editor, "underline")
-                      break
-                    }
-                  }
-                }}
-              />
-            </Slate>
+                  }}
+                />
+              </Slate>
+            </div>
+            {/* ABOVE: Actual Slate.js Text Editor */}
           </div>
-          {/* ABOVE: Actual Slate.js Text Editor */}
         </div>
 
         <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={true} />
