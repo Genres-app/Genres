@@ -276,24 +276,11 @@ export default function NLPContentsTopCard() {
       <div className={classes.divContents}>
         <div className={classes.divTitleButtons}>
           <div className={classes.divTitleContents}>
-            {
-              !isEditing ?
+
                 <Typography className={classes.title} align="left" component="h4" variant="h4">
                   {BookLib['0001'].title}
                 </Typography>
-                :
-                <TextField
-                  name="title"
-                  label="Title"
-                  multiline
-                  variant="outlined"
-                  defaultValue={BookLib['0001'].title}
-                  // onChange={e => setTitle(e.target.value)}
-                  style={{
-                    marginBottom: ".5rem"
-                  }}
-                />
-            }
+
             <div style={{
               display: 'flex',
               flexDirection: 'row',
@@ -301,42 +288,16 @@ export default function NLPContentsTopCard() {
               alignItems: 'center',
             }}>
               {
-                !isEditing ?
-                  <>
-                    {
-                      BookLib['0001'].status == 1 ?
-                        <div className={clsx(classes.divNovelStatus, classes.statusComplete)}>Complete</div>
-                        : BookLib['0001'].status == 0 ?
-                          <div className={clsx(classes.divNovelStatus, classes.statusIncomplete)}>Incomplete</div>
-                          :
-                          <div className={clsx(classes.divNovelStatus, classes.statusUnpublished)}>Unpublished</div>
-                    }
-                    < Typography align="left" variant="subtitle2" color="textPrimary">
-                      Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
-                    </Typography>
-                  </>
-                  :
-                  <>
-                    <ToggleButtonGroup
-                      size="small"
-                      value={0}
-                      exclusive
-                      // onChange={}
-                      aria-label="NovelStatus"
-                    >
-                      <ToggleButton value="1" aria-label="NovelStatus Complete" className={clsx(classes.divNovelStatus_Edit, classes.statusComplete)}>
-                        Complete
-                      </ToggleButton>
-                      <ToggleButton value="0" aria-label="NovelStatus Incomplete" className={clsx(classes.divNovelStatus_Edit, classes.statusComplete)}>
-                        Incomplete
-                      </ToggleButton>
-                      <ToggleButton value="2" aria-label="NovelStatus Unpublished" className={clsx(classes.divNovelStatus_Edit, classes.statusComplete)}>
-                        Unpublished
-                      </ToggleButton>
-                    </ToggleButtonGroup>
-                  </>
+                BookLib['0001'].status == 1 ?
+                  <div className={clsx(classes.divNovelStatus, classes.statusComplete)}>Complete</div>
+                  : BookLib['0001'].status == 0 ?
+                    <div className={clsx(classes.divNovelStatus, classes.statusIncomplete)}>Incomplete</div>
+                    :
+                    <div className={clsx(classes.divNovelStatus, classes.statusUnpublished)}>Unpublished</div>
               }
-
+              < Typography align="left" variant="subtitle2" color="textPrimary">
+                Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
+              </Typography>
             </div>
 
             <div className={classes.divAuthorsContainer}>
@@ -352,9 +313,8 @@ export default function NLPContentsTopCard() {
             </div>
 
             <Divider />
-            {
-              !isEditing ?
-                <>
+
+            
                   <div className={classes.divNovelDataContainer}>
                     <Button
                       variant="text"
@@ -391,10 +351,8 @@ export default function NLPContentsTopCard() {
                     </Button>
                   </div>
                   <Divider />
-                </>
-                :
-                <></>
-            }
+              
+
 
           </div>
 
