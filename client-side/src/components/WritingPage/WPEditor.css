@@ -1,4 +1,4 @@
-.editorBar {
+/* .editorBar {
   padding: 1em;
   margin-top: 65px;
   padding-top: 15px;
@@ -10,7 +10,7 @@
   max-height: 25px;
   margin: 0 auto;
   margin-bottom: 10px;
-}
+} */
 .editors {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.12);

@@ -156,12 +156,38 @@ const useStyles = makeStyles((theme) => ({
     color: '#3EB997',
   },
 
+  /*Editor Tool Bar */
+  EditorToolbar: {
+    position: 'fixed',
+    top: 64,
+    width: '100%',
+    height: 41,
+    padding: theme.spacing(.5),
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.background.paper,
+
+    "& > button": {
+      margin: `0 ${theme.spacing(.5)}px`,
+      color: theme.palette.background.paper,
+
+      "&:hover": {
+        backgroundColor: 'rgba(255,255,255,.04)',
+      },
+    }
+  },
+  EditorToolbarDivider: {
+    backgroundColor: theme.palette.background.paper,
+  },
+
+
   /* Side Notes Section */
 
   sideNotesToggle: {
-    position: 'fixed',
-    top: 120,
-    left: 16,
+    // position: 'fixed',
+    // top: 120,
+    // left: 16,
   },
   sideNotesCloseBtn: {
     display: "flex",
@@ -500,7 +526,6 @@ export default function WPEditor({ theme }) {
         <AppBar
           position="fixed"
           elevation={1}
-          color="secondary"
           className={classes.AppBar}
         >
           <Toolbar>
@@ -586,79 +611,80 @@ export default function WPEditor({ theme }) {
 
         {/* BELOW: Text Editor Options Appbar */}
         {/* This Appbar has a DIFFERENT CSS sheet: WPEditor.css */}
-        <AppBar className="editorBar" color="default" elevation={1}>
-          <Toolbar>
-            <div className="buttonsContainer">
-              {/* HEADING 1 BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                BlockEditor.toggleHeadingOne(editor)
-              }}> H1
-              </Button>
-              {/* HEADING 2 BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                BlockEditor.toggleHeadingTwo(editor)
-              }}> H2
-              </Button>
-              {/* CODE BLOCK BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                BlockEditor.toggleCodeBlock(editor)
-              }}> Code Block
-              </Button>
-              {/* BLOCK QUOTE BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                BlockEditor.toggleBlockQuote(editor)
-              }}> <FormatQuoteIcon />
-              </Button>
+        <div className={classes.EditorToolbar}>
+          <Button
+            aria-label="toggle side notes"
+            className={classes.sideNotesToggle}
+            onClick={toggleSideNotes}
+            startIcon={
+              <Icon path={mdiNoteTextOutline} size={1} />}
+          >
+            Show Side Notes
+          </Button>
 
-              {/* BOLD BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                toggleMark(editor, "bold")
-              }}> <FormatBoldIcon />
-              </Button>
-              {/* ITALIC BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                toggleMark(editor, "italic")
-              }}> <FormatItalicIcon />
-              </Button>
-              {/* UNDERLINE BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                toggleMark(editor, "underline")
-              }}> <FormatUnderlinedIcon />
-              </Button>
+          <Divider orientation="vertical" className={classes.EditorToolbarDivider}/>
+          <div style={{ flexGrow: 1 }}></div>
 
-              {/* UNORDERED LIST BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                BlockEditor.toggleUL(editor)
-              }}> <FormatListBulletedIcon />
-              </Button>
-              {/* ORDERED LIST BUTTON BELOW: */}
-              <Button onMouseDown={event => {
-                event.preventDefault()
-                BlockEditor.toggleOL(editor)
-              }}> <FormatListNumberedIcon />
-              </Button>
-            </div>
-          </Toolbar>
-        </AppBar>
+          {/* HEADING 1 BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            BlockEditor.toggleHeadingOne(editor)
+          }}> H1
+          </Button>
+          {/* HEADING 2 BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            BlockEditor.toggleHeadingTwo(editor)
+          }}> H2
+          </Button>
+          {/* CODE BLOCK BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            BlockEditor.toggleCodeBlock(editor)
+          }}> Code Block
+          </Button>
+          {/* BLOCK QUOTE BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            BlockEditor.toggleBlockQuote(editor)
+          }}> <FormatQuoteIcon />
+          </Button>
+
+          {/* BOLD BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            toggleMark(editor, "bold")
+          }}> <FormatBoldIcon />
+          </Button>
+          {/* ITALIC BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            toggleMark(editor, "italic")
+          }}> <FormatItalicIcon />
+          </Button>
+          {/* UNDERLINE BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            toggleMark(editor, "underline")
+          }}> <FormatUnderlinedIcon />
+          </Button>
+
+          {/* UNORDERED LIST BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            BlockEditor.toggleUL(editor)
+          }}> <FormatListBulletedIcon />
+          </Button>
+          {/* ORDERED LIST BUTTON BELOW: */}
+          <Button onMouseDown={event => {
+            event.preventDefault()
+            BlockEditor.toggleOL(editor)
+          }}> <FormatListNumberedIcon />
+          </Button>
+        </div>
+
         {/* ABOVE: Text Editor Options Appbar */}
 
-        <Button
-          aria-label="toggle side notes"
-          className={classes.sideNotesToggle}
-          onClick={toggleSideNotes}
-          startIcon={
-            <Icon path={mdiNoteTextOutline} size={1} />}
-        >
-          Show Side Notes
-        </Button>
         <div style={{ display: 'flex' }}>
 
           <div className=
@@ -679,11 +705,11 @@ export default function WPEditor({ theme }) {
               classes.sideNotes
           }
             id={"SideNotes"}>
-            <CardActionArea className={classes.sideNotesCloseBtn} onClick={toggleSideNotes}>
+            {/* <CardActionArea className={classes.sideNotesCloseBtn} onClick={toggleSideNotes}>
               <Icon path={mdiNoteTextOutline} size={1} style={{ marginRight: 8 }} />
               <Typography variant="button" style={{ marginTop: 1 }}>Hide Side Notes</Typography>
             </CardActionArea>
-            <Divider />
+            <Divider /> */}
             <div style={{ display: "flex", height: "100%" }}>
               <div className={classes.notesTree}>
                 <TreeView
