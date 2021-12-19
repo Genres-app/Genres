@@ -48,7 +48,7 @@ const rows = [
 ];
 // ABOVE: PLACEHOLDERS
 
-export default function NLPTableContents() {
+export default function NEPTableContents() {
   const classes = useStyles();
   const preventDefault = (event) => event.preventDefault(); // DELETE LATER
 

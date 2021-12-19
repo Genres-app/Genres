@@ -259,8 +259,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 export default function NEPContentsTopCard() {
   const classes = useStyles();
   const { bookId } = useParams();
