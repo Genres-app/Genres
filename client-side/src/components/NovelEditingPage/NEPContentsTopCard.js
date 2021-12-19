@@ -20,6 +20,7 @@ import {
   ListItemText,
   ListSubheader,
 } from '@material-ui/core/';
+import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab/';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -140,6 +141,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     borderRadius: '.6rem',
     color: theme.palette.background.paper,
+    textTransform: 'none',
   },
   statusComplete: {
     backgroundColor: theme.palette.primary.main,
@@ -149,6 +151,16 @@ const useStyles = makeStyles((theme) => ({
   },
   statusUnpublished: {
     backgroundColor: theme.palette.primary.main,
+  },
+  divNovelStatus_Edit: {
+    display: 'block',
+    fontSize: '.8rem',
+    fontWeight: 'bold',
+    padding: '.2rem .4rem',
+    // marginRight: theme.spacing(1),
+    borderRadius: '.6rem',
+    color: theme.palette.background.paper,
+    textTransform: 'none',
   },
 
   divAuthorsContainer: {
@@ -234,9 +246,9 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "100%",
   },
   infoEditingBtn: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
+    // // position: 'absolute',
+    // right: 0,
+    // bottom: 0,
     backgroundColor: theme.palette.background.paper,
     "&:hover": {
       backgroundColor: () => {
@@ -287,9 +299,12 @@ export default function NEPContentsTopCard() {
                     name="title"
                     label="Title"
                     multiline
-                    variant="filled"
+                    variant="outlined"
                     defaultValue={BookLib[bookId].title}
-                  // onChange={e => setTitle(e.target.value)}
+                    // onChange={e => setTitle(e.target.value)}
+                    style={{
+                      marginBottom: ".5rem"
+                    }}
                   />
               }
               <div style={{
@@ -299,17 +314,42 @@ export default function NEPContentsTopCard() {
                 alignItems: 'center',
               }}>
                 {
-                  BookLib[bookId].status == 1 ?
-                    <div className={clsx(classes.divNovelStatus, classes.statusComplete)}>Complete</div>
-                    : BookLib[bookId].status == 0 ?
-                      <div className={clsx(classes.divNovelStatus, classes.statusIncomplete)}>Incomplete</div>
-                      :
-                      <div className={clsx(classes.divNovelStatus, classes.statusUnpublished)}>Unpublished</div>
+                  !isEditing ?
+                    <>
+                      {
+                        BookLib[bookId].status == 1 ?
+                          <div className={clsx(classes.divNovelStatus, classes.statusComplete)}>Complete</div>
+                          : BookLib[bookId].status == 0 ?
+                            <div className={clsx(classes.divNovelStatus, classes.statusIncomplete)}>Incomplete</div>
+                            :
+                            <div className={clsx(classes.divNovelStatus, classes.statusUnpublished)}>Unpublished</div>
+                      }
+                      < Typography align="left" variant="subtitle2" color="textPrimary">
+                        Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
+                      </Typography>
+                    </>
+                    :
+                    <>
+                      <ToggleButtonGroup
+                        size="small"
+                        value={0}
+                        exclusive
+                        // onChange={}
+                        aria-label="NovelStatus"
+                      >
+                        <ToggleButton value="1" aria-label="NovelStatus Complete" className={clsx(classes.divNovelStatus_Edit, classes.statusComplete)}>
+                          Complete
+                        </ToggleButton>
+                        <ToggleButton value="0" aria-label="NovelStatus Incomplete" className={clsx(classes.divNovelStatus_Edit, classes.statusComplete)}>
+                          Incomplete
+                        </ToggleButton>
+                        <ToggleButton value="2" aria-label="NovelStatus Unpublished" className={clsx(classes.divNovelStatus_Edit, classes.statusComplete)}>
+                          Unpublished
+                        </ToggleButton>
+                      </ToggleButtonGroup>
+                    </>
                 }
 
-                <Typography align="left" variant="subtitle2" color="textPrimary">
-                  Last Updated: <Typography display="inline" style={{ color: '#686868' }} variant="body1" >April 12, 2021</Typography>
-                </Typography>
               </div>
 
               <div className={classes.divAuthorsContainer}>
@@ -325,42 +365,50 @@ export default function NEPContentsTopCard() {
               </div>
 
               <Divider />
-              <div className={classes.divNovelDataContainer}>
-                <Button
-                  variant="text"
-                  color="primary"
-                  startIcon={<><FavoriteBorderIcon />55</>}
-                  classes={{
-                    label: classes.NovelDataBtnLabel,
-                    startIcon: classes.NovelDataBtnIcon,
-                  }}
-                >
-                  Likes
-                </Button>
-                <Button
-                  variant="text"
-                  color="primary"
-                  startIcon={<><StarBorderIcon />20</>}
-                  classes={{
-                    label: classes.NovelDataBtnLabel,
-                    startIcon: classes.NovelDataBtnIcon,
-                  }}
-                >
-                  Stars
-                </Button>
-                <Button
-                  variant="text"
-                  color="primary"
-                  startIcon={<><ChatBubbleOutlineIcon />13</>}
-                  classes={{
-                    label: classes.NovelDataBtnLabel,
-                    startIcon: classes.NovelDataBtnIcon,
-                  }}
-                >
-                  Comments
-                </Button>
-              </div>
-              <Divider />
+              {
+                !isEditing ?
+                  <>
+                    <div className={classes.divNovelDataContainer}>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        startIcon={<><FavoriteBorderIcon />55</>}
+                        classes={{
+                          label: classes.NovelDataBtnLabel,
+                          startIcon: classes.NovelDataBtnIcon,
+                        }}
+                      >
+                        Likes
+                      </Button>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        startIcon={<><StarBorderIcon />20</>}
+                        classes={{
+                          label: classes.NovelDataBtnLabel,
+                          startIcon: classes.NovelDataBtnIcon,
+                        }}
+                      >
+                        Stars
+                      </Button>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        startIcon={<><ChatBubbleOutlineIcon />13</>}
+                        classes={{
+                          label: classes.NovelDataBtnLabel,
+                          startIcon: classes.NovelDataBtnIcon,
+                        }}
+                      >
+                        Comments
+                      </Button>
+                    </div>
+                    <Divider />
+                  </>
+                  :
+                  <></>
+              }
+
             </div>
 
             {/* <Card className={classes.cardAuthorContainer} variant="outlined">
@@ -416,7 +464,7 @@ export default function NEPContentsTopCard() {
                 </>
                 :
                 <>
-                  <div style={{}}>
+                  {/* <div style={{}}>
                     <div style={{ marginLeft: '12px', paddingTop: '8px', display: "flex" }}>
                       <Typography style={{ opacity: .8, marginRight: "1rem", paddingTop: ".5rem" }} variant="body1">
                         Status
@@ -434,14 +482,14 @@ export default function NEPContentsTopCard() {
                         <FormControlLabel value="Unpublished" control={<Radio color="primary" />} label="UnPublished" />
                       </RadioGroup>
                     </div>
-                  </div>
+                  </div> */}
 
                   <TextField
                     name="synopsis"
                     fullWidth
                     label="Synopsis"
                     multiline
-                    variant="filled"
+                    variant="outlined"
                     defaultValue={BookLib[bookId].info}
                   // onChange={e => setSyno(e.target.value)}
                   />
@@ -450,19 +498,22 @@ export default function NEPContentsTopCard() {
 
             }
           </div>
-          {
-            !isEditing ?
-              <Button onClick={() => setIsEditing(true)} endIcon={<CreateOutlinedIcon />} color="primary" variant="outlined" className={classes.infoEditingBtn}>
-                Edit Info
-              </Button>
-              :
-              <Button onClick={() => { handleInput(); setIsEditing(false) }} endIcon={<SaveIcon />} color="primary" variant="outlined" className={classes.infoEditingBtn}>
-                Save Info
-              </Button>
-          }
+
+          <div style={{marginTop: '.5rem', display: 'flex', flexDirection: 'row-reverse'}}>
+            {
+              !isEditing ?
+                <Button onClick={() => setIsEditing(true)} endIcon={<CreateOutlinedIcon />} color="primary" variant="outlined" className={classes.infoEditingBtn}>
+                  Edit Info
+                </Button>
+                :
+                <Button onClick={() => { handleInput(); setIsEditing(false) }} endIcon={<SaveIcon />} color="primary" variant="outlined" className={classes.infoEditingBtn}>
+                  Save Info
+                </Button>
+            }
+          </div>
 
         </div>
       </div>
-    </div>
+    </div >
   );
 }
