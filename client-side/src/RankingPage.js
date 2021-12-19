@@ -227,7 +227,7 @@ export default function RankingPage({ theme }) {
                   value={valueL}
                   onChange={handleChangeLeft}
                   aria-label="Sort by genre"
-                  indicatorColor="secondary"
+                  classes={{indicator: classes.indicator}}
                 >
                   {itemsSortGenre.map((item, index) => (
                     <Tab key={index} label={item.title} icon={item.icon}
@@ -237,7 +237,7 @@ export default function RankingPage({ theme }) {
                       }} />
                   ))}
                 </Tabs>
-                <IconButton aria-label="filter" className={classes.sortByGenreSwitch} onClick={ToggleLeftSideBar} color="secondary">
+                <IconButton aria-label="filter" className={classes.sortByGenreSwitch} onClick={ToggleLeftSideBar}>
                   <Icon path={mdiChevronLeft} size={1} />
                 </IconButton>
               </div>
@@ -259,8 +259,7 @@ export default function RankingPage({ theme }) {
                   value={valueR}
                   onChange={handleChangeRight}
                   aria-label="Sort by Time"
-                  indicatorColor="secondary"
-                  classes={{ indicator: classes.rightTabIndicator }}
+                  classes={{ indicator: clsx(classes.rightTabIndicator, classes.indicator) }}
                 >
 
                   <Tab label="All-time" icon={<AllInclusiveOutlinedIcon />}
@@ -296,7 +295,7 @@ export default function RankingPage({ theme }) {
 
                 </Tabs>
 
-                <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar} color="secondary">
+                <IconButton aria-label="filter" className={classes.sortByTimeSwitch} onClick={ToggleRightSideBar}>
                   <Icon path={mdiChevronLeft} size={1} />
                 </IconButton>
               </div>

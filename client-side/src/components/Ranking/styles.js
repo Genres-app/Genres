@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
       padding: 0,
     }
   },
+
   //Left Filter Side Bar
   sortByGenreTitle: {
     position: 'fixed',
@@ -72,7 +73,16 @@ const useStyles = makeStyles((theme) => ({
     top: 64,
     right: 4,
     transition: 'transform .3s',
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "rgba(255,255,255,0.04)",
+    }
   },
+
+  indicator: {
+    backgroundColor: "#fff",
+  },
+
   //Right Filter Side Bar
   sortByTimeTitle: {
     position: 'fixed',
@@ -138,6 +148,10 @@ const useStyles = makeStyles((theme) => ({
     left: 4,
     transform: 'rotate(-180deg)',
     transition: 'transform .3s',
+    color: '#fff',
+    "&:hover": {
+      backgroundColor: "rgba(255,255,255,0.04)",
+    }
   },
   // Ranking List
   RankingContainer: {
