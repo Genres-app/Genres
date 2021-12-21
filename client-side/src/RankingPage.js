@@ -148,7 +148,7 @@ export default function RankingPage({ theme }) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank1 : classes.Rank1Dark);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco1 : classes.RankingDeco1Dark)}>
-                <Typography className={classes.RankingNum}>1</Typography>
+                <Typography className={classes.RankingNum}>#1</Typography>
                 <div></div>
               </div>
             );
@@ -156,7 +156,7 @@ export default function RankingPage({ theme }) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank2 : classes.Rank2Dark);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco2 : classes.RankingDeco2Dark)}>
-                <Typography className={classes.RankingNum}>2</Typography>
+                <Typography className={classes.RankingNum}>#2</Typography>
                 <div></div>
               </div>
             );
@@ -164,13 +164,18 @@ export default function RankingPage({ theme }) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank3 : classes.Rank3Dark);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco3 : classes.RankingDeco3Dark)}>
-                <Typography className={classes.RankingNum}>3</Typography>
+                <Typography className={classes.RankingNum}>#3</Typography>
                 <div></div>
               </div>
             );
           } else {
-            cardClasses = classes.RankingCards;
-            decorator = <div className={classes.RankingDecorator}></div>;
+            cardClasses = clsx(classes.RankingCards, theme ? classes.RankOthers : classes.RankOthersDark);
+            decorator = (
+              <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDecoOthers : classes.RankingDecoOthersDark)}>
+                <Typography className={classes.RankingNum}>#{index+1}</Typography>
+                <div></div>
+              </div>
+            );
           }
           return (
             <Card className={cardClasses} alignItems="flex-start" variant="outlined" key={index}>
