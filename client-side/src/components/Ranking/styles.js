@@ -178,7 +178,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Rank1: {
     margin: "13px 16px",
-    border: '5px solid #8c1aff',
+    border: '5px solid #b366ff',
   },
   Rank1Dark: {
     margin: "13px 16px",
@@ -186,7 +186,7 @@ const useStyles = makeStyles((theme) => ({
   },
   Rank2: {
     margin: "13px 16px",
-    border: '5px solid #4d4dff',
+    border: '5px solid #6666ff',
   },
   Rank2Dark: {
     margin: "13px 16px",
@@ -202,7 +202,7 @@ const useStyles = makeStyles((theme) => ({
   },
   RankOthers: {
     margin: "13px 16px",
-    border: '5px solid #80e5ff',
+    border: '5px solid #a3a3c2',
   },
   RankOthersDark: {
     margin: "13px 16px",
@@ -227,16 +227,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   RankingDeco1: {
-    backgroundColor: '#8c1aff',
+    backgroundColor: '#b366ff',
   },
   RankingDeco2: {
-    backgroundColor: '#4d4dff',
+    backgroundColor: '#6666ff',
   },
   RankingDeco3: {
     backgroundColor: '#3399ff',
   },
   RankingDecoOthers: {
-    backgroundColor: '#80e5ff',
+    backgroundColor: '#a3a3c2',
   },
   RankingDeco1Dark: {
     backgroundColor: '#9e84f5',
