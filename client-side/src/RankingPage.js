@@ -209,7 +209,7 @@ export default function RankingPage({ theme }) {
                   <Chip size="small" label="Tag1" clickable className={classes.chip} />
                   <Chip size="small" label="Tag2" clickable className={classes.chip} />
                 </div>
-                <Typography style = {{fontSize: '16px', fontWeight: 'bold'}}>
+                <Typography style = {{fontSize: '1rem', fontWeight: '500'}}>
                 Synopsis:
                 </Typography>
                 <Typography className={classes.synopsis} color="black">
