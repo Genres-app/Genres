@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useParams } from 'react-router';
 //Icons
 import Icon from '@mdi/react';
 import {
@@ -41,7 +42,7 @@ import { ListBiAnnual } from './components/Ranking/biAnnual';
 import { ListSeason } from './components/Ranking/season';
 import { ListMonthly } from './components/Ranking/monthly';
 import ThumbUpOutlined from '@material-ui/icons/ThumbUpOutlined';
-
+import { BookLib } from './components/BookLib';
 
 //Tab for genre
 function TabPanel(props) {
@@ -102,6 +103,7 @@ export default function RankingPage({ theme }) {
     setValueR(newValue);
   };
 
+  const { bookId } = useParams();
   // Theme
   // const theme = createMuiTheme({
   //     palette: {
@@ -136,6 +138,8 @@ export default function RankingPage({ theme }) {
   }
 
 
+  var UserBr = false;
+
   // Function for creating ranking list
   const createRankingList = (sortedList) => (
 
@@ -144,6 +148,18 @@ export default function RankingPage({ theme }) {
         sortedList.map((item, index) => {
           let decorator;
           let cardClasses;
+          let bookId = index + 1;
+          let bookNum = '000' + '1';
+          bookNum = '000' + bookId;
+          var synopsis = BookLib[bookNum].info;
+          if(synopsis.length > 100){
+            synopsis = synopsis.substring(0, 100);
+            synopsis = synopsis + "......";
+            UserBr = false;
+          }
+          if(synopsis.length <= 100){
+            UserBr = true;
+          }
           if (index == 0) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank1 : classes.Rank1Dark);
             decorator = (
@@ -193,6 +209,22 @@ export default function RankingPage({ theme }) {
                   <Chip size="small" label="Tag1" clickable className={classes.chip} />
                   <Chip size="small" label="Tag2" clickable className={classes.chip} />
                 </div>
+                <Typography style = {{fontSize: '16px', fontWeight: 'bold'}}>
+                Synopsis:
+                </Typography>
+                <Typography className={classes.synopsis} color="black">
+                  {synopsis}
+                  {
+                    !UserBr?
+                    <>
+                    </>
+                    :
+                    <>
+                    <div style = {{marginTop : "1.3rem"}}>
+                    </div>
+                    </>
+                  }
+                </Typography>
                 <div className={clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark)}>
                   <div>
                     <div><Icon path={mdiThumbUpOutline} size={1} /><p>3.5k</p></div>

@@ -352,6 +352,11 @@ const useStyles = makeStyles((theme) => ({
       borderRight: "1px solid rgba(255, 255, 255, 0.12)",
     },
   },
+  synopsis: {
+    fontSize: '0.875rem',
+    fontFamily: "Roboto", 
+    fontWeight: '400',
+  },
 }));
 
 export default useStyles;
