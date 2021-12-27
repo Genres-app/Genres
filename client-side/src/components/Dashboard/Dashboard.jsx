@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import useStyles from './styles';
-import { ListItems } from './listItems';
 
 /*Material-UI Components*/
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,12 +29,14 @@ import Brightness2Icon from '@material-ui/icons/Brightness2';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import AddIcon from '@material-ui/icons/Add';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 //Icons
 import Icon from '@mdi/react';
 import { mdiAccountCircleOutline, mdiLoginVariant, mdiLogoutVariant } from '@mdi/js';
 
 import GenresLogo from '../Assets/logos/Genres_iconOnly_480x.png';
+import GenresLogo_new from '../Assets/logos/Genres_Redesign.png';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
 import styled from 'styled-components';
@@ -44,6 +45,7 @@ import Auth from '../Auth/Auth';
 import Searchbar from '../Searchbar/Searchbar'
 
 import GenresDrawer from '../Drawer/Drawer';
+import { ListItems } from './listItems';
 
 /* */
 // const SidebarLink = styled(Link)`
@@ -194,12 +196,22 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
   console.log(localStorage.getItem('CurrentTheme'))
 
 
-  if (localStorage.getItem('CurrentTheme') == 'false' ) {
+  if (localStorage.getItem('CurrentTheme') == 'false') {
     // setTheme('false');
     passTheme(false);
   }
 
+  const getCurrentPageTitle = () => {
+    let pathName = window.location.pathname;
+    let majorPathName = "/" + pathName.split('/')[1];
+    for (let i = 1; i < ListItems.length; i++) { // Ignore /Home
+      if (majorPathName == ListItems[i].path) {
+        return ListItems[i].title
+      }
+    }
 
+    return majorPathName.slice(1);
+  }
 
 
   return (
@@ -214,17 +226,6 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
         >
           <Toolbar>
 
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleSidebar}
-              edge="start"
-              className={clsx(classes.menuButton, sidebar && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-
-
             {/* <Typography variant = "h6" className = {classes.title}>
             Genres
           </Typography> */}
@@ -237,22 +238,85 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                 alignItems: "center",
                 cursor: "pointer",
               }}>
-              <img src={GenresLogo} height='48px' alt=""></img>
-              <Typography
-                variant="h5"
-                style={{
-                  textDecorationLine: "none",
-                  fontWeight: "bold",
-                  opacity: .75,
-                  userSelect: "none",
-                }}>
-                Genres
-              </Typography>
+              <img src={GenresLogo_new} height='48px' alt="" />
+              <div style={{ marginLeft: '.5rem', }}>
+                <div style={{
+                  width: 'calc(100% - .25rem)',
+                  height: '.75rem',
+                  backgroundColor: '#8befd9',
+
+                  transform: 'translateY(1.3rem) translateX(.6rem)'
+                }}></div>
+                <Typography
+                  variant="h5"
+                  color="primary"
+                  style={{
+                    textDecorationLine: "none",
+                    fontWeight: 600,
+                    // opacity: .9,
+                    userSelect: "none",
+                    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+
+                    transform: 'translateY(-.5rem)',
+                  }}>
+                  Genres
+                </Typography>
+              </div>
             </div>
             {/* </Link> */}
 
             {/* <div className={classes.grow} /> */}
+            {/* <ChevronRightIcon style={{marginLeft: '.5rem'}}/> */}
 
+            {
+              getCurrentPageTitle() ?
+                <Button
+                  onClick={toggleSidebar}
+                  variant="text"
+                  color="primary"
+                  startIcon={<ChevronRightIcon />}
+                  endIcon={<MenuIcon />}
+                  classes={{
+                    root: classes.drawerToggleBtn,
+                    startIcon: classes.drawerToggleIcon,
+                    endIcon: classes.drawerToggleIcon,
+                  }}
+                  size="large"
+                >
+                  {getCurrentPageTitle()}
+                </Button>
+                :
+                <IconButton
+                  color="inherit"
+                  aria-label="open drawer"
+                  onClick={toggleSidebar}
+                  // edge="start"
+                  className={classes.menuButton}
+                >
+                  <MenuIcon />
+                </IconButton>
+            }
+
+            <Divider orientation='vertical' style={{ height: '2rem', marginLeft: '.5rem' }} />
+
+            <Button
+              // onClick={() => routeChange("/mywriting")}
+              variant="text"
+              color="primary"
+              startIcon={ListItems[2].icon}
+              className={clsx(classes.widerBtn, classes.appbarBtn)}
+            >
+              {ListItems[2].title}
+            </Button>
+            <Button
+              // onClick={() => routeChange("/mywriting")}
+              variant="text"
+              color="primary"
+              startIcon={ListItems[6].icon}
+              className={clsx(classes.widerBtn, classes.appbarBtn)}
+            >
+              {ListItems[6].title}
+            </Button>
 
             <div className={clsx(classes.search, theme ? classes.search_light : classes.search_dark)}>
               <div className={classes.searchIcon}>
@@ -274,22 +338,27 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
               setTheme(!theme);
               passTheme(!theme);
-             localStorage.setItem('CurrentTheme', !theme);
+              localStorage.setItem('CurrentTheme', !theme);
             }}>
               {themeIcon}
             </IconButton>
             {
               user ? (
                 !isMywritingPage ? (
-                  <Button
-                    onClick={() => routeChange("/mywriting")}
-                    variant="text"
-                    color="inherit"
-                    endIcon={<CreateOutlinedIcon />}
-                    className={clsx(classes.widerBtn, classes.appbarBtn)}
-                  >
-                    Writing Space
-                  </Button>
+                  <>
+                    <Button
+                      onClick={() => routeChange("/mywriting")}
+                      variant="text"
+                      color="inherit"
+                      endIcon={<CreateOutlinedIcon />}
+                      className={clsx(classes.widerBtn, classes.appbarBtn)}
+                    >
+                      Writing Space
+                    </Button>
+                    <div className={classes.appbarAvatarContainer}>
+                      <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar} />
+                    </div>
+                  </>
                 ) : (
                   <>
                   </>

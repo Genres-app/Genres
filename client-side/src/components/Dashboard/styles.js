@@ -33,19 +33,34 @@ const useStyles = makeStyles((theme) => ({
   //     duration: theme.transitions.duration.leavingScreen,
   //   }),
   // },
+  drawerToggleBtn: {
+    margin: theme.spacing(1),
+    marginLeft: theme.spacing(1.5),
+    marginRight: 0,
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    paddingLeft: theme.spacing(.5),
+    paddingRight: theme.spacing(1.5),
+  },
+
+  drawerToggleIcon: {
+    color: theme.palette.text.primary,
+  },
 
   appbarBtn: {
     margin: theme.spacing(1),
+    marginRight: 0,
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    // fontSize: '1rem',
   },
 
   widerBtn: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingLeft: theme.spacing(1.5),
+    paddingRight: theme.spacing(1.5),
   },
 
 
   menuButton: {
-    // marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
 
   menuButtonHidden: {
@@ -89,6 +104,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: theme.spacing(3),
       width: 'auto',
     },
+    flexGrow: .3,
   },
 
   search_light: {
@@ -113,10 +129,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: theme.palette.primary.main,
   },
 
   inputRoot: {
-    color: 'inherit',
+    color: theme.palette.primary.main,
   },
 
   inputInput: {
@@ -183,9 +200,23 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       filter: 'brightness(1.2)',
     }
+  },
+
+  appbarAvatarContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+    background: "linear-gradient(135deg, #7c5ecc, #8befd9)",
+    borderRadius: "50%",
+    marginLeft: theme.spacing(1),
+  },
+  appbarAvatar: {
+    width: theme.spacing(4.5),
+    height: theme.spacing(4.5),
+    border: `${theme.spacing(.25)}px solid ${theme.palette.background.paper}`,
   }
-
-
 
 }));
 

@@ -48,6 +48,9 @@ function App() {
   return (
     <>
       <ThemeProvider theme={appliedTheme}>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
         <BrowserRouter>
           <Switch>
             <Route exact path='/reading' component={ReadingPage} />
@@ -56,7 +59,7 @@ function App() {
             } />
 
             <Route exact path="/mywriting">
-              <Dashboard passTheme={handlePassedTheme} isMywritingPage={true}/>
+              <Dashboard passTheme={handlePassedTheme} isMywritingPage={true} />
               <WritingTransitionPage />
               <Footer />
             </Route>
@@ -75,7 +78,7 @@ function App() {
                 (props) => (<BetaReadingPage {...props} theme={isThemeLight} />)
               } />
               <Route exact path='/publit' component={PublitPage} />
-              <Route exact path="/book/:bookId" component = {NovelPageDistribution}/>
+              <Route exact path="/book/:bookId" component={NovelPageDistribution} />
               <Footer />
             </div>
           </Switch>
