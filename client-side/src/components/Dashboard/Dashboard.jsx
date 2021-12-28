@@ -137,6 +137,10 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
     setSidebar(false);
   };
 
+  // Theme
+  const [theme, setTheme] = useState(true)
+
+
   useEffect(() => {
     const token = user?.token;
     //JWT
@@ -149,16 +153,19 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
 
     setUser(JSON.parse(localStorage.getItem('profile')));
     setOpenPopup(false);
+
+
+    if (localStorage.getItem('Theme') == 'false') {
+      setTheme(false)
+    } else {
+      setTheme(true)
+    }
+
   }, [location]);
 
 
-  document.body.style.margin = "64px 0 0 0";
-
-  // Theme
-  const [theme, setTheme] = useState(true)
-  const themeIcon = !theme ? <Brightness7Icon /> : <Brightness2Icon />
-
   const classes = useStyles();
+  document.body.style.margin = "64px 0 0 0";
 
 
   // Route to render new content
@@ -184,8 +191,8 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
     }
   }));
 
+  // Change Style @ /rankings
   let classOfAppbar;
-
   if (window.location.pathname == "/rankings") {
     classOfAppbar = setStyleOfAppbar1();
   }
@@ -193,14 +200,13 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
     classOfAppbar = setStyleOfAppbar2();
   }
 
-  console.log(localStorage.getItem('CurrentTheme'))
 
-
-  if (localStorage.getItem('CurrentTheme') == 'false') {
-    // setTheme('false');
+  // Load Theme when refresh
+  if (localStorage.getItem('Theme') == 'false') {
     passTheme(false);
-  }
+  } else {}
 
+  // Func: Get Title of Current Page
   const getCurrentPageTitle = () => {
     let pathName = window.location.pathname;
     let majorPathName = "/" + pathName.split('/')[1];
@@ -209,7 +215,6 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
         return ListItems[i].title
       }
     }
-
     return majorPathName.slice(1);
   }
 
@@ -338,9 +343,9 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
               setTheme(!theme);
               passTheme(!theme);
-              localStorage.setItem('CurrentTheme', !theme);
+              // localStorage.setItem('CurrentTheme', !theme);
             }}>
-              {themeIcon}
+              {!theme ? <Brightness7Icon /> : <Brightness2Icon />}
             </IconButton>
             {
               user ? (
