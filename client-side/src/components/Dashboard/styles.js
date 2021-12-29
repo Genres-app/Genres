@@ -211,6 +211,7 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(135deg, #7c5ecc, #8befd9)",
     borderRadius: "50%",
     marginLeft: theme.spacing(1),
+    cursor: 'pointer',
   },
   appbarAvatar: {
     width: theme.spacing(4.5),

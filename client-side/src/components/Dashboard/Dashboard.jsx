@@ -204,7 +204,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
   // Load Theme when refresh
   if (localStorage.getItem('Theme') == 'false') {
     passTheme(false);
-  } else {}
+  } else { }
 
   // Func: Get Title of Current Page
   const getCurrentPageTitle = () => {
@@ -218,6 +218,21 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
     return majorPathName.slice(1);
   }
 
+
+  // Render Navigation Button ShortCut
+  const ShortcutNavBtn = (indexOfList) => {
+    return (
+      <Button
+        onClick={() => routeChange(ListItems[indexOfList].path)}
+        variant="text"
+        color="primary"
+        startIcon={ListItems[indexOfList].icon}
+        className={clsx(classes.widerBtn, classes.appbarBtn)}
+      >
+        {ListItems[indexOfList].title}
+      </Button>
+    )
+  }
 
   return (
     <>
@@ -304,24 +319,19 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
 
             <Divider orientation='vertical' style={{ height: '2rem', marginLeft: '.5rem' }} />
 
-            <Button
-              // onClick={() => routeChange("/mywriting")}
-              variant="text"
-              color="primary"
-              startIcon={ListItems[2].icon}
-              className={clsx(classes.widerBtn, classes.appbarBtn)}
-            >
-              {ListItems[2].title}
-            </Button>
-            <Button
-              // onClick={() => routeChange("/mywriting")}
-              variant="text"
-              color="primary"
-              startIcon={ListItems[6].icon}
-              className={clsx(classes.widerBtn, classes.appbarBtn)}
-            >
-              {ListItems[6].title}
-            </Button>
+
+            { // Show Rankings
+              '/' + window.location.pathname.split('/')[1] != ListItems[2].path ?  // Check if current page is the same as shortcuts, if so show 'Browse'
+                ShortcutNavBtn(2)
+                :
+                ShortcutNavBtn(1)
+            }
+            { // Show Beta Reading
+              '/' + window.location.pathname.split('/')[1] != ListItems[6].path ?
+                ShortcutNavBtn(6)
+                :
+                ShortcutNavBtn(1)
+            }
 
             <div className={clsx(classes.search, theme ? classes.search_light : classes.search_dark)}>
               <div className={classes.searchIcon}>
@@ -360,22 +370,13 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                     >
                       Writing Space
                     </Button>
-                    <div className={classes.appbarAvatarContainer}>
+                    <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
                       <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar} />
                     </div>
                   </>
                 ) : (
                   <>
                   </>
-                  // <Button
-                  //   onClick={() => routeChange("/writing")}
-                  //   variant="text"
-                  //   color="inherit"
-                  //   endIcon={<AddIcon />}
-                  //   className={clsx(classes.widerBtn, classes.appbarBtn)}
-                  // >
-                  //   Create New
-                  // </Button>
                 )
               ) : (
                 <Button
