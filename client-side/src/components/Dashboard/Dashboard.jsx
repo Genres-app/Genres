@@ -37,6 +37,7 @@ import { mdiAccountCircleOutline, mdiLoginVariant, mdiLogoutVariant } from '@mdi
 
 import GenresLogo from '../Assets/logos/Genres_iconOnly_480x.png';
 import GenresLogo_new from '../Assets/logos/Genres_Redesign.png';
+import GenresLogo_new_dark from '../Assets/logos/Genres_Redesign_dark.png';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
 import styled from 'styled-components';
@@ -258,15 +259,25 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                 alignItems: "center",
                 cursor: "pointer",
               }}>
-              <img src={GenresLogo_new} height='48px' alt="" />
+              <img src={theme? GenresLogo_new : GenresLogo_new_dark} height='48px' alt="" />
               <div style={{ marginLeft: '.5rem', }}>
-                <div style={{
+                <div style={theme? {
                   width: 'calc(100% - .25rem)',
                   height: '.75rem',
-                  backgroundColor: '#8befd9',
+                  backgroundColor: '#76eed9',
 
                   transform: 'translateY(1.3rem) translateX(.6rem)'
-                }}></div>
+                }
+                :
+                {
+                  width: 'calc(100% - .25rem)',
+                  height: '.75rem',
+                  backgroundColor: '#13edad',
+                  opacity: .3,
+
+                  transform: 'translateY(1.3rem) translateX(.6rem)'
+                }
+                }></div>
                 <Typography
                   variant="h5"
                   color="primary"
@@ -350,7 +361,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
 
 
             <div className={classes.grow} />
-            <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => {
+            <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="primary" onClick={() => {
               setTheme(!theme);
               passTheme(!theme);
               // localStorage.setItem('CurrentTheme', !theme);
@@ -364,7 +375,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                     <Button
                       onClick={() => routeChange("/mywriting")}
                       variant="text"
-                      color="inherit"
+                      color="primary"
                       endIcon={<CreateOutlinedIcon />}
                       className={clsx(classes.widerBtn, classes.appbarBtn)}
                     >
@@ -382,7 +393,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                 <Button
                   onClick={() => setOpenPopup(true)}
                   variant="text"
-                  color="inherit"
+                  color="primary"
                   endIcon={<Icon path={mdiLoginVariant} size={1} />}
                   className={clsx(classes.widerBtn, classes.appbarBtn)}
                 >
