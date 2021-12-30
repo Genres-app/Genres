@@ -4,7 +4,7 @@ export const lightTheme = {
       main: '#855cde',
     },
     secondary: {
-      main: '#3bbf9b',
+      main: '#4de8be',
     },
     warning: {
       main: '#ff1744',

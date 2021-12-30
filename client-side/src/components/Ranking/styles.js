@@ -1,5 +1,7 @@
 import { blue } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
+import hexToRgb from '../../utilities/HexToRgb';
+import RgbaInterpolate from '../../utilities/RgbaInterpolate';
 
 const useStyles = makeStyles((theme) => ({
   //Fixed Tab Bar
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 999,
   },
   tabPanel: {
-    "& > div" :{
+    "& > div": {
       padding: 0,
     }
   },
@@ -155,120 +157,147 @@ const useStyles = makeStyles((theme) => ({
   },
   // Ranking List
   RankingContainer: {
-    width: '75vw',
+    maxWidth: 'none',
     padding: 0,
     paddingTop: 64,
     backgroundColor: 'transparent',
+    width: 1884, // 3 in a row
+    "@media (max-width: 2253px)": { // 2 in a row
+      width: 1256,
+    },
+    "@media (max-width: 1625px)": { // 1 in a row
+      width: 628,
+    },
   },
   RankingCards: {
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     float: 'left',
-    width: 'calc(37.5vw - 32px)',
-    maxWidth: 606,
-    minWidth: 492,
+    // height: 250,
+    width: 596,
+    height: 'calc(258px + 2rem)',
+    // maxWidth: 606,
+    // minWidth: 492,
     margin: 16,
     // border: '1px solid #dfe1e5',
     borderRadius: 8,
     // boxShadow: 'none',
     // 3c4043
+    backgroundColor: theme.palette.primary.main,
+    borderWidth: 0,
 
     "&:hover": {
       boxShadow: "0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 1px 18px 0px rgb(0 0 0 / 12%)",
     }
   },
   Rank1: {
-    margin: "13px 16px",
-    border: '5px solid #b366ff',
+    background: `linear-gradient(${theme.palette.primary.main}, ${theme.palette.secondary.main},${theme.palette.primary.main})`,
   },
   Rank1Dark: {
-    margin: "13px 16px",
-    border: '5px solid #9e84f5',
+    background: `linear-gradient(${theme.palette.primary.main}, ${theme.palette.secondary.main},${theme.palette.primary.main})`,
   },
   Rank2: {
-    margin: "13px 16px",
-    border: '5px solid #6666ff',
   },
   Rank2Dark: {
-    margin: "13px 16px",
-    border: '5px solid #8ba7f8',
   },
   Rank3: {
-    margin: "13px 16px",
-    border: '5px solid #3399ff',
+    backgroundColor: RgbaInterpolate(
+      hexToRgb(theme.palette.primary.main).r,
+      hexToRgb(theme.palette.primary.main).g,
+      hexToRgb(theme.palette.primary.main).b,
+      1, .7, 
+      hexToRgb("#8c8a97").r, 
+      hexToRgb("#8c8a97").g,
+      hexToRgb("#8c8a97").b,
+      1, true),
   },
   Rank3Dark: {
-    margin: "13px 16px",
-    border: '5px solid #98d9f7',
+    backgroundColor: RgbaInterpolate(
+      hexToRgb(theme.palette.primary.main).r,
+      hexToRgb(theme.palette.primary.main).g,
+      hexToRgb(theme.palette.primary.main).b,
+      1, .7, 
+      hexToRgb("#9e9caa").r, 
+      hexToRgb("#9e9caa").g,
+      hexToRgb("#9e9caa").b,
+      1, true),
   },
   RankOthers: {
-    margin: "13px 16px",
-    border: '5px solid #a3a3c2',
+    backgroundColor: "#616066",
   },
   RankOthersDark: {
-    margin: "13px 16px",
-    border: '5px solid #CACACA',
+    backgroundColor: "#afaeb7",
   },
-  //
+
+  // RankingNumberDecoration
   RankingDecorator: {
+    position: 'relative',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     width: 48,
-    backgroundColor: theme.palette.background.paper,
+    height: '100%',
     flexShrink: 0,
-
-    "& p": {
-    },
-    "& div": {
-      backgroundColor: theme.palette.background.paper,
-      width: 8,
-      height: '100%',
-      borderRadius: '8px 0 0 8px',
-    },
+    overflow: 'hidden',
   },
-  RankingDeco1: {
-    backgroundColor: '#b366ff',
-  },
-  RankingDeco2: {
-    backgroundColor: '#6666ff',
-  },
-  RankingDeco3: {
-    backgroundColor: '#3399ff',
-  },
-  RankingDecoOthers: {
-    backgroundColor: '#a3a3c2',
-  },
-  RankingDeco1Dark: {
-    backgroundColor: '#9e84f5',
-  },
-  RankingDeco2Dark: {
-    backgroundColor: '#8ba7f8',
-  },
-  RankingDeco3Dark: {
-    backgroundColor: '#98d9f7',
-  },
-  RankingDecoOthersDark: {
-    backgroundColor: '#CACACA',
+  // RankingNumber for 1,2,3
+  RankingNameHash: {
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    color: theme.palette.background.paper,
+    position: 'absolute',
+    transform: 'translateY(-1rem) translateX(-.1rem)',
+    fontSize: '1.5rem',
+    fontWeight: 600,
   },
   RankingNum: {
     height: 'min-content',
-    transform: 'translateX(-2px)',
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    transform: 'translateX(.75rem)',
     textAlign: 'center',
     color: theme.palette.background.paper,
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
+    fontSize: '4rem',
+    fontWeight: 500,
+    flexGrow: 2,
+  },
+  // RankingNumber for 4+
+  RankingNameHashOthers: {
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    color: theme.palette.background.paper,
+    position: 'absolute',
+    transform: 'translateY(-1.25rem) translateX(.25rem)',
+    fontSize: '1rem',
+    fontWeight: 500,
+  },
+  RankingNumOthers: {
+    height: 'min-content',
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    // transform: 'translateX(.5rem)',
+    textAlign: 'center',
+    color: theme.palette.background.paper,
+    fontSize: '2rem',
+    fontWeight: 500,
     flexGrow: 2,
   },
   //
+  RankingCardsInner: {
+    display: 'flex',
+    overflow: 'hidden',
+    flexGrow: 1,
+    marginRight: 4,
+    borderRadius: 5,
+    backgroundColor: theme.palette.background.paper,
+  },
+  //
   bookCover: {
-    height: '9.6vw',
-    width: '6vw',
-    maxHeight: 184.31,
-    maxWidth: 115.19,
-    minHeight: 136,
-    minWidth: 85,
-    margin: 24,
-    marginLeft: 16,
+    height: 250,
+    width: 156.2,
+    // maxHeight: 184.31,
+    // maxWidth: 115.19,
+    // minHeight: 136,
+    // minWidth: 85,
+    margin: '1rem',
+    // marginLeft: 16,
     borderRadius: 0,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -278,27 +307,42 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     flexGrow: 1,
+    height: 'calc(250px + 2rem)',
+    paddingTop: theme.spacing(1),
+    paddingBottom: `${theme.spacing(2)}px !important`,
+    paddingLeft: 0,
   },
   bookTitle: {
     marginLeft: 0,
+    marginTop: theme.spacing(1),
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
     fontSize: '1.5rem',
-    fontWeight: 'bold',
+    fontWeight: 600,
     cursor: 'pointer',
+    lineHeight: '100%',
 
     "&:hover": {
       textDecoration: 'underline',
     }
   },
   bookAuthor: {
-    // color: '#651fff',
     cursor: 'pointer',
 
     "&:hover": {
       textDecoration: 'underline',
     }
   },
+  AvatarInGroup: {
+    borderColor: theme.palette.background.paper,
+    color: theme.palette.background.paper,
+  },
+  showAllAuthorsBtn: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
+  },
   chipContainer: {
-    marginTop: theme.spacing(0.5),
+    marginTop: theme.spacing(1),
+    display: 'flex',
   },
   chip: {
     margin: theme.spacing(0.5),
@@ -306,11 +350,22 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: 0,
     }
   },
+  synopsis: {
+    marginTop: theme.spacing(1),
+    fontSize: '0.875rem',
+    // fontFamily: "Roboto",
+    // fontWeight: '400',
+    overflow: 'hidden',
+    // textOverflow: 'ellipsis',
+    display: "-webkit-box",
+    "-webkit-line-clamp": 4,
+    "-webkit-box-orient": "vertical",
+  },
   bookData: {
     display: "flex",
     flexDirection: "column-reverse",
-    marginTop: theme.spacing(2),
-    fontFamily: theme.typography.fontFamily,
+    marginTop: theme.spacing(1),
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
     fontWeight: 500,
     // alignItems: "end",
     flexGrow: 1,
@@ -343,19 +398,50 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bookDataLight: {
+    color: "#616066",
     "& > div > div:not(:last-child)": {
       borderRight: "1px solid rgba(0, 0, 0, 0.12)",
     },
   },
   bookDataDark: {
+    color: "#afaeb7",
     "& > div > div:not(:last-child)": {
       borderRight: "1px solid rgba(255, 255, 255, 0.12)",
     },
   },
-  synopsis: {
-    fontSize: '0.875rem',
-    fontFamily: "Roboto", 
-    fontWeight: '400',
+  bookDataRank1: {
+    color: theme.palette.primary.main
+  },
+  bookDataRank1_Dark: {
+    color: theme.palette.primary.main
+  },
+  bookDataRank2: {
+    color: theme.palette.primary.main
+  },
+  bookDataRank2_Dark: {
+    color: theme.palette.primary.main
+  },
+  bookDataRank3: {
+    color: RgbaInterpolate(
+      hexToRgb(theme.palette.primary.main).r,
+      hexToRgb(theme.palette.primary.main).g,
+      hexToRgb(theme.palette.primary.main).b,
+      1, .7, 
+      hexToRgb("#8c8a97").r, 
+      hexToRgb("#8c8a97").g,
+      hexToRgb("#8c8a97").b,
+      1, true)
+  },
+  bookDataRank3_Dark: {
+    color: RgbaInterpolate(
+      hexToRgb(theme.palette.primary.main).r,
+      hexToRgb(theme.palette.primary.main).g,
+      hexToRgb(theme.palette.primary.main).b,
+      1, .7, 
+      hexToRgb("#9e9caa").r, 
+      hexToRgb("#9e9caa").g,
+      hexToRgb("#9e9caa").b,
+      1, true),
   },
 }));
 

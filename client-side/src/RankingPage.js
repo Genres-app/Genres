@@ -10,14 +10,16 @@ import {
   mdiCircleSlice4,
   mdiCircleSlice2,
   mdiCircleSlice1,
-  mdiThumbUpOutline,
+  mdiThumbUp,
   mdiStarOutline,
-  mdiCommentMultipleOutline,
+  mdiCommentTextMultiple,
+  mdiBookmarkMultiple,
 } from '@mdi/js';
 import AllInclusiveOutlinedIcon from '@material-ui/icons/AllInclusiveOutlined';
 // Material UI Components
 import {
   AppBar,
+  Avatar,
   Tab,
   Tabs,
   Typography,
@@ -36,13 +38,14 @@ import {
 
 import useStyles from './components/Ranking/styles';
 import { itemsSortGenre } from './components/Ranking/itemsSortGenre';
-import { ListAllTime } from './components/Ranking/allTime';
-import { ListAnnual } from './components/Ranking/annual';
-import { ListBiAnnual } from './components/Ranking/biAnnual';
-import { ListSeason } from './components/Ranking/season';
-import { ListMonthly } from './components/Ranking/monthly';
-import ThumbUpOutlined from '@material-ui/icons/ThumbUpOutlined';
 import { BookLib } from './components/BookLib';
+
+import GenresTag from './components/Widgets/GenresTag';
+import { rankList } from './components/Ranking/generatedRankList';
+import AuthorChip from './components/Widgets/AuthorChip';
+import { AvatarGroup } from '@material-ui/lab';
+import { UserData } from './components/UserData';
+import MoreHoriz from '@material-ui/icons/MoreHoriz';
 
 //Tab for genre
 function TabPanel(props) {
@@ -145,94 +148,88 @@ export default function RankingPage({ theme }) {
 
     <Container className={classes.RankingContainer}>
       {
-        sortedList.map((item, index) => {
+        sortedList.map((id, index) => {
           let decorator;
           let cardClasses;
-          let bookId = index + 1;
-          let bookNum = '000' + '1';
-          bookNum = '000' + bookId;
-          var synopsis = BookLib[bookNum].info;
-          if(synopsis.length > 100){
-            synopsis = synopsis.substring(0, 100);
-            synopsis = synopsis + "......";
-            UserBr = false;
-          }
-          if(synopsis.length <= 100){
-            UserBr = true;
-          }
+          let bookDataClasses;
           if (index == 0) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank1 : classes.Rank1Dark);
+            bookDataClasses = clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark, classes.bookDataRank1);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco1 : classes.RankingDeco1Dark)}>
-                <Typography className={classes.RankingNum}>#1</Typography>
-                <div></div>
+                <p className={classes.RankingNameHash}>#</p>
+                <Typography className={classes.RankingNum}>1</Typography>
               </div>
             );
           } else if (index == 1) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank2 : classes.Rank2Dark);
+            bookDataClasses = clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark, classes.bookDataRank2);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco2 : classes.RankingDeco2Dark)}>
-                <Typography className={classes.RankingNum}>#2</Typography>
-                <div></div>
+                <p className={classes.RankingNameHash}>#</p>
+                <Typography className={classes.RankingNum}>2</Typography>
               </div>
             );
           } else if (index == 2) {
             cardClasses = clsx(classes.RankingCards, theme ? classes.Rank3 : classes.Rank3Dark);
+            bookDataClasses = clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark, classes.bookDataRank3);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco3 : classes.RankingDeco3Dark)}>
-                <Typography className={classes.RankingNum}>#3</Typography>
-                <div></div>
+                <p className={classes.RankingNameHash}>#</p>
+                <Typography className={classes.RankingNum}>3</Typography>
               </div>
             );
           } else {
             cardClasses = clsx(classes.RankingCards, theme ? classes.RankOthers : classes.RankOthersDark);
+            bookDataClasses = clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark);
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDecoOthers : classes.RankingDecoOthersDark)}>
-                <Typography className={classes.RankingNum}>#{index+1}</Typography>
-                <div></div>
+                <p className={classes.RankingNameHashOthers}>#</p>
+                <Typography className={classes.RankingNumOthers}>{index + 1}</Typography>
               </div>
             );
           }
           return (
             <Card className={cardClasses} alignItems="flex-start" variant="outlined" key={index}>
               {decorator}
-              <div className={classes.bookCover} style={{ backgroundImage: `url(${item.image})` }} />
-              <CardContent className={classes.bookInfo}>
-                <Typography className={classes.bookTitle}>
-                  {item.title}
-                </Typography>
-                <Typography className={classes.bookAuthor} color="primary">
-                  Author Name
-                </Typography>
-                <div className={classes.chipContainer}>
-                  <Chip size="small" label="Tag0" clickable className={classes.chip} />
-                  <Chip size="small" label="Tag1" clickable className={classes.chip} />
-                  <Chip size="small" label="Tag2" clickable className={classes.chip} />
-                </div>
-                <Typography style = {{fontSize: '1rem', fontWeight: '500'}}>
-                Synopsis:
-                </Typography>
-                <Typography className={classes.synopsis} color="black">
-                  {synopsis}
-                  {
-                    !UserBr?
-                    <>
-                    </>
-                    :
-                    <>
-                    <div style = {{marginTop : "1.3rem"}}>
-                    </div>
-                    </>
-                  }
-                </Typography>
-                <div className={clsx(classes.bookData, theme ? classes.bookDataLight : classes.bookDataDark)}>
-                  <div>
-                    <div><Icon path={mdiThumbUpOutline} size={1} /><p>3.5k</p></div>
-                    <div><Icon path={mdiStarOutline} size={1} /><p>6.0k</p></div>
-                    <div><Icon path={mdiCommentMultipleOutline} size={1} /><p>1.2k</p></div>
+              <div className={classes.RankingCardsInner}>
+                <div className={classes.bookCover} style={{ backgroundImage: `url(${BookLib[id].cover})` }} />
+                <CardContent className={classes.bookInfo}>
+                  <Typography className={classes.bookTitle}>
+                    {BookLib[id].title}
+                  </Typography>
+                  <div className={classes.chipContainer}>
+                    {AuthorChip(BookLib[id].author[0], false)}
+                    <AvatarGroup max={3} classes={{avatar: classes.AvatarInGroup}}>
+                      {BookLib[id].author.slice(1).map((i, k) => (
+                        <Avatar alt={UserData[i].userName} src={UserData[i].userAvatar}>
+                          {UserData[i].userName[0]}
+                        </Avatar>
+                      ))}
+                      {/* <Avatar>1</Avatar>
+                      <Avatar>2</Avatar> */}
+                    </AvatarGroup>
+                    {/* <IconButton aria-label='Show All' className={classes.showAllAuthorsBtn}><MoreHoriz /></IconButton> */}
                   </div>
-                </div>
-              </CardContent>
+                  <div className={classes.chipContainer}>
+                    {
+                      BookLib[id].genres.map((i, k) => (
+                        GenresTag(i, k, false)
+                      ))
+                    }
+                  </div>
+                  <Typography className={classes.synopsis}>
+                    {BookLib[id].info}
+                  </Typography>
+                  <div className={bookDataClasses}>
+                    <div>
+                      <div><Icon path={mdiThumbUp} size={1} /><p>3.5k</p></div>
+                      <div><Icon path={mdiBookmarkMultiple} size={1} /><p>6.0k</p></div>
+                      <div><Icon path={mdiCommentTextMultiple} size={1} /><p>1.2k</p></div>
+                    </div>
+                  </div>
+                </CardContent>
+              </div>
             </Card>
           )
         })}
@@ -264,7 +261,7 @@ export default function RankingPage({ theme }) {
                   value={valueL}
                   onChange={handleChangeLeft}
                   aria-label="Sort by genre"
-                  classes={{indicator: classes.indicator}}
+                  classes={{ indicator: classes.indicator }}
                 >
                   {itemsSortGenre.map((item, index) => (
                     <Tab key={index} label={item.title} icon={item.icon}
@@ -344,23 +341,23 @@ export default function RankingPage({ theme }) {
 
 
         <div style={{ display: 'block' }} className="C1">
-          {createRankingList(ListAllTime)}
+          {createRankingList(rankList)}
         </div>
 
         <div style={{ display: 'none' }} className="C2">
-          {createRankingList(ListAnnual)}
+          {createRankingList(rankList)}
         </div>
 
         <div style={{ display: 'none' }} className="C3">
-          {createRankingList(ListBiAnnual)}
+          {createRankingList(rankList)}
         </div>
 
         <div style={{ display: 'none' }} className="C4">
-          {createRankingList(ListSeason)}
+          {createRankingList(rankList)}
         </div>
 
         <div style={{ display: 'none' }} className="C5">
-          {createRankingList(ListMonthly)}
+          {createRankingList(rankList)}
         </div>
       </>
     )
@@ -380,7 +377,7 @@ export default function RankingPage({ theme }) {
         >
           <Tab label="Trending" {...a11yProps(0)} />
           <Tab label="Likes" {...a11yProps(1)} />
-          <Tab label="Stars" {...a11yProps(1)} />
+          <Tab label="Saved" {...a11yProps(1)} />
           <Tab label="Comments" {...a11yProps(1)} />
         </Tabs>
       </AppBar>

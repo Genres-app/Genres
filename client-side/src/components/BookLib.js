@@ -17,7 +17,7 @@ export const BookLib = {
   },
   '0002': {
     title: 'The Arrivals',
-    author: [2, 4, 5],
+    author: [2, 4, 5, 1,3],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover2,
     status: 0,
@@ -57,7 +57,7 @@ export const BookLib = {
   },
   '0007': {
     title: 'The Man From Nowhere',
-    author: [2],
+    author: [2, 1],
     genres: ['Thriller', 'Sci-Fi'],
     cover: cover7,
     status: -1,

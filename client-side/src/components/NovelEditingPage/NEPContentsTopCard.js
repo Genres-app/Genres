@@ -48,6 +48,7 @@ import RgbBrightener from '../../utilities/RgbBrightener';
 // Data
 import { BookLib } from '../BookLib';
 import { UserData } from '../UserData';
+import GenresTag from '../Widgets/GenresTag';
 
 
 
@@ -438,16 +439,7 @@ export default function NEPContentsTopCard() {
             <li style={{ display: 'flex', marginBottom: ".5rem" }}>
               {
                 BookLib[bookId].genres.map((item, index) => (
-                  <Chip
-                    key={index}
-                    className={classes.chipGenres}
-                    icon={<MdiIcon path={mdiPound} size={1} />}
-                    label={item}
-                    onDelete={isEditing ? console.log("Deleting Chip!") : undefined}
-                    variant="outlined"
-                    color="primary"
-                    clickable
-                  />
+                  GenresTag(item, index, isEditing)
                 ))
               }
             </li>
