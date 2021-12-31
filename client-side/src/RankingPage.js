@@ -34,6 +34,7 @@ import {
   ListItemIcon,
   ListItemText,
   Chip,
+  Tooltip,
 } from '@material-ui/core';
 
 import useStyles from './components/Ranking/styles';
@@ -42,10 +43,7 @@ import { BookLib } from './components/BookLib';
 
 import GenresTag from './components/Widgets/GenresTag';
 import { rankList } from './components/Ranking/generatedRankList';
-import AuthorChip from './components/Widgets/AuthorChip';
-import { AvatarGroup } from '@material-ui/lab';
-import { UserData } from './components/UserData';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import AuthorsRowShowFirst from './components/Widgets/AuthorsRowShowFirst';
 
 //Tab for genre
 function TabPanel(props) {
@@ -199,17 +197,7 @@ export default function RankingPage({ theme }) {
                     {BookLib[id].title}
                   </Typography>
                   <div className={classes.chipContainer}>
-                    {AuthorChip(BookLib[id].author[0], false)}
-                    <AvatarGroup max={3} classes={{avatar: classes.AvatarInGroup}}>
-                      {BookLib[id].author.slice(1).map((i, k) => (
-                        <Avatar alt={UserData[i].userName} src={UserData[i].userAvatar}>
-                          {UserData[i].userName[0]}
-                        </Avatar>
-                      ))}
-                      {/* <Avatar>1</Avatar>
-                      <Avatar>2</Avatar> */}
-                    </AvatarGroup>
-                    {/* <IconButton aria-label='Show All' className={classes.showAllAuthorsBtn}><MoreHoriz /></IconButton> */}
+                    {AuthorsRowShowFirst(BookLib[id])}
                   </div>
                   <div className={classes.chipContainer}>
                     {

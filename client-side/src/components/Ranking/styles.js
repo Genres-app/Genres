@@ -332,10 +332,6 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: 'underline',
     }
   },
-  AvatarInGroup: {
-    borderColor: theme.palette.background.paper,
-    color: theme.palette.background.paper,
-  },
   showAllAuthorsBtn: {
     width: theme.spacing(5),
     height: theme.spacing(5),
