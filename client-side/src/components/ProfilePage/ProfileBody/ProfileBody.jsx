@@ -8,6 +8,8 @@ import Banner from '../Banner.jsx'
 import CommentBox from '../CommentBox.jsx'
 import ProfileCarouselContainer from '../ProfileCarouselContainer.jsx'
 import AboutBody from '../AboutBody.jsx'
+import BarCharts from './../BarCharts.jsx';
+import RadialCharts from './../RadialCharts.jsx';
 
 //placeholders. Remove after implementing backend.
 import bookcover1 from '../../Assets/bookcover1.jpg';
@@ -197,10 +199,11 @@ const ProfileBody = (props) => {
             ></Banner>
 
             {/* Tabs */}
-            <div className={selectedTab===0? classes.profileTabStyles: classes.activityTabStyles}>
+            <div className={classes.profileTabStyles}>
                 <StyledTabs variant="fullWidth" value={selectedTab} onChange={handleChange}>
                     <StyledTab label="Profile"/>
                     <StyledTab label="Activity"/>
+                    <StyledTab label="Statistics"/>
                 </StyledTabs>
             </div>
 
@@ -224,7 +227,63 @@ const ProfileBody = (props) => {
 
             {/* Display Readinglist + Master class carousels if on Activity tab */}
             {selectedTab === 1 && 
-            <Container className = {`${classes.container} ${classes.activityBodyContainer}`}>
+            <Container className = {`${classes.container} ${classes.profileBodyContainer}`}>
+            
+            
+                  <div>
+                    {/* Display radial charts if width > 1024 */}
+                    <div className={classes.radialCharts}>
+                      {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
+                      <RadialCharts 
+                        value={readTime} 
+                        total={readTotal} 
+                        readTime={true} 
+                        label={'Weekly Read Time'}
+                      ></RadialCharts>
+                      {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
+                      <RadialCharts 
+                        value={pagesRead} 
+                        total={pagesTotal} 
+                        pagesRead={true} 
+                        label={'Pages Read'}
+                      ></RadialCharts>
+                      {/*FIXME:  if an ongoing event exists, fetch values from db */}
+                      <RadialCharts 
+                        value={chartEvent? eventValue:0} 
+                        total={chartEvent? eventTotal:100} 
+                        eventUnit={chartEvent? eventUnit: false}
+                        label={'Current Event'}
+                      ></RadialCharts>
+                    </div>
+
+                    {/* Display bar charts if width <= 1024 */}
+                    <div className={classes.barCharts}>
+                      {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
+                      <BarCharts
+                        value={readTime} 
+                        total={readTotal} 
+                        readTime={true} 
+                        label={'Weekly Read Time'}
+                      ></BarCharts>
+                       {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
+                      <BarCharts
+                        value={pagesRead} 
+                        total={pagesTotal} 
+                        pagesRead={true} 
+                        label={'Pages Read'}
+                      ></BarCharts>
+                      {/*FIXME:  if an ongoing event exists, fetch values from db */}
+                      <BarCharts
+                        value={chartEvent? eventValue:0} 
+                        total={chartEvent? eventTotal:100} 
+                        eventUnit={chartEvent? eventUnit: false}
+                        label={'Current Event'}
+                      ></BarCharts>
+                    </div>
+                  </div>
+                
+
+
 
                 <div className={classes.flexColumn}>
                     <ProfileCarouselContainer 
@@ -239,6 +298,10 @@ const ProfileBody = (props) => {
                         books={masterClasses}
                     ></ProfileCarouselContainer>
                 </div>
+
+
+                
+
             </Container>
             }
         </main>

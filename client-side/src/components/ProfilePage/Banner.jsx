@@ -14,10 +14,7 @@ import {changeBannerPic} from '../../actions/profile'
 
 //ABOUT: The banner displayed if on profile page and viewport width > 1024.
 const useStyles = makeStyles((theme) => ({
-      container: {
-        backgroundColor: theme.palette.background.paper,
-        padding: '0px 0px 0px 0px',
-      },
+      
       banner: {
         paddingRight: '10%',
         paddingLeft: '10%',
@@ -161,22 +158,8 @@ const useStyles = makeStyles((theme) => ({
           display: 'block',
         },
       },
-      radialCharts: {
-        display: 'flex',
-        justifyContent: 'center',
-        '@media (max-width:1024px)': {
-          display: 'none',
-        },
-      },
-      barCharts: {
-        display: 'none',
-        width: '100%',
-        '@media (max-width:1024px)': {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-        },
-      },
+      
+      
 }));
 
 const Banner = (props) => {
@@ -198,15 +181,12 @@ const Banner = (props) => {
         <Container className = {classes.container} maxWidth = "xl">
             {/* Banner image to be changed by user */}
             <img className = {classes.bannerImg} src={bannerPic} alt='banner'></img>
-            <div className = {`${classes.banner} ${props.selectedTab === 0? classes.bannerProfilePadding: undefined}`}>
+            <div className = {`${classes.banner} ${props.selectedTab === 0? classes.bannerProfilePadding:  classes.bannerProfilePadding}`}>
 
-                {/* About/bookmark */}
-                {props.selectedTab === 0 && 
+                {/* About/bookmark */}      
                     <AboutBookmark user={props.user}></AboutBookmark>
-                }
-
                 {/* Container to organize banner items if width > 1024 */}
-                {props.selectedTab === 0 && 
+                
                 <div className = {classes.bannerContainer}>
                     {/* Invisible div for bookmark so it doesn't go over other elements when viewport is scaled down */}
                     <div className = {classes.placeHolder}></div>
@@ -254,67 +234,14 @@ const Banner = (props) => {
                         </div>
                     </div>
                 </div>
-                }
+                
+                
+                {/* Display About section in banner if width <= 1024 */}     
+                <AboutBanner className={classes.aboutBanner} user={props.user}></AboutBanner>
 
-                {/* Display About section in banner if width <= 1024 */}
-                {props.selectedTab === 0 && 
-                  <AboutBanner className={classes.aboutBanner} user={props.user}></AboutBanner>
-                }
 
-                {/* Display charts if on Activity page */}
-                {props.selectedTab === 1 && 
-                  <div>
-                    {/* Display radial charts if width > 1024 */}
-                    <div className={classes.radialCharts}>
-                      {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
-                      <RadialCharts 
-                        value={props.readTime} 
-                        total={props.readTotal} 
-                        readTime={true} 
-                        label={'Weekly Read Time'}
-                      ></RadialCharts>
-                      {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
-                      <RadialCharts 
-                        value={props.pagesRead} 
-                        total={props.pagesTotal} 
-                        pagesRead={true} 
-                        label={'Pages Read'}
-                      ></RadialCharts>
-                      {/*FIXME:  if an ongoing event exists, fetch values from db */}
-                      <RadialCharts 
-                        value={props.chartEvent? props.eventValue:0} 
-                        total={props.chartEvent? props.eventTotal:100} 
-                        eventUnit={props.chartEvent? props.eventUnit: false}
-                        label={'Current Event'}
-                      ></RadialCharts>
-                    </div>
+                {/* Display charts if on Activity page */}      
 
-                    {/* Display bar charts if width <= 1024 */}
-                    <div className={classes.barCharts}>
-                      {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
-                      <BarCharts
-                        value={props.readTime} 
-                        total={props.readTotal} 
-                        readTime={true} 
-                        label={'Weekly Read Time'}
-                      ></BarCharts>
-                       {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
-                      <BarCharts
-                        value={props.pagesRead} 
-                        total={props.pagesTotal} 
-                        pagesRead={true} 
-                        label={'Pages Read'}
-                      ></BarCharts>
-                      {/*FIXME:  if an ongoing event exists, fetch values from db */}
-                      <BarCharts
-                        value={props.chartEvent? props.eventValue:0} 
-                        total={props.chartEvent? props.eventTotal:100} 
-                        eventUnit={props.chartEvent? props.eventUnit: false}
-                        label={'Current Event'}
-                      ></BarCharts>
-                    </div>
-                  </div>
-                }
             </div>
         </Container>
     )
