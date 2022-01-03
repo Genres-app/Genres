@@ -18,7 +18,10 @@ import {
   TextField,
   CardActionArea,
   Divider,
-  Grow
+  Grow,
+  Tooltip,
+  Menu,
+  MenuItem
 } from '@material-ui/core';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
@@ -44,11 +47,25 @@ import AddIcon from '@material-ui/icons/Add';
 
 /*Mdi Icons*/
 import Icon from '@mdi/react';
-import { mdiBookCogOutline, mdiContentSaveOutline, mdiPublish, mdiNoteTextOutline, mdiDockLeft, mdiViewSplitVertical } from '@mdi/js';
+import {
+  mdiBookCogOutline,
+  mdiContentSaveOutline,
+  mdiPublish,
+  mdiNoteTextOutline,
+  mdiDockLeft,
+  mdiViewSplitVertical,
+  mdiDotsVertical,
+  mdiChevronDown,
+  mdiUndo,
+  mdiRedo
+} from '@mdi/js';
 import mdiSavedOutline from './svgs/content-save-check-outline.svg';
 
 /*Data Import*/
 import { writingNoteData } from './WritingNoteData';
+import { BookLib } from '../BookLib';
+import RgbaInterpolate from '../../utilities/RgbaInterpolate';
+import hexToRgb from '../../utilities/HexToRgb';
 
 // HELP from https://docs.slatejs.org/walkthroughs/01-installing-slate
 // HELP from https://github.com/ianstormtaylor/slate/blob/main/site/examples/richtext.tsx
@@ -64,11 +81,30 @@ const useStyles = makeStyles((theme) => ({
   AppBar: {
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.text.primary,
+    boxShadow: theme.shadows[0],
   },
 
-
+  bookCoverInAppbar: {
+    height: 64,
+    width: 40,
+    backgroundColor: '#ccc',
+    position: 'relative',
+    marginLeft: theme.spacing(1.5),
+    marginRight: theme.spacing(1),
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  chapterNoInput: {
+    width: '6rem',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
   chapterNameInput: {
     marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  appbarIconBtn: {
     marginRight: theme.spacing(1),
   },
   barDivider: {
@@ -165,12 +201,12 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(.5),
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[2],
+    borderTop: `1px solid ${theme.palette.divider}`,
 
     "& > button": {
       margin: `0 ${theme.spacing(.5)}px`,
-      color: theme.palette.background.paper,
 
       "&:hover": {
         backgroundColor: 'rgba(255,255,255,.04)',
@@ -187,7 +223,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     "& > button": {
       margin: `0 ${theme.spacing(.5)}px`,
-      color: theme.palette.background.paper,
+      // color: theme.palette.background.paper,
 
       "&:hover": {
         backgroundColor: 'rgba(255,255,255,.04)',
@@ -226,7 +262,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   sideNotesResizeBar: {
-    height: "100vh",
+    height: "calc(100vh - 105px)",
+    marginTop: 105,
     width: 10,
     borderRight: "1px solid",
     borderRightColor: theme.palette.divider,
@@ -234,6 +271,9 @@ const useStyles = makeStyles((theme) => ({
     transition: 'transform .2s ease-in-out, background-color .2s',
     userSelect: "none",
     cursor: "col-resize",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
 
     "&:hover": {
       backgroundColor: "#d7caf4",
@@ -242,8 +282,16 @@ const useStyles = makeStyles((theme) => ({
 
   notesTree: {
     width: 199,
+    flexShrink: 0,
     padding: theme.spacing(1),
     userSelect: "none",
+    backgroundColor:
+      RgbaInterpolate(
+        hexToRgb(theme.palette.primary.main).r,
+        hexToRgb(theme.palette.primary.main).g,
+        hexToRgb(theme.palette.primary.main).b, 1,
+        .9, 128, 128, 128, 1, true),
+    color: theme.palette.background.paper,
   },
   addNewNoteBtn: {
     margin: theme.spacing(1),
@@ -304,7 +352,7 @@ export default function WPEditor({ theme }) {
       if (sideNotesOn) {
         document.getElementById("NotesAndEditorContainer").style.width = "100%"
       } else {
-        document.getElementById("NotesAndEditorContainer").style.width = window.innerWidth + document.getElementById("SideNotes").offsetWidth + "px"
+        document.getElementById("NotesAndEditorContainer").style.width = window.innerWidth + document.getElementById("SideNotes").offsetWidth + 10 + "px"
       }
 
     }
@@ -531,6 +579,24 @@ export default function WPEditor({ theme }) {
   // ABOVE: Editing BLOCKS (headings, lists etc.)
   // ---------------------------------- //
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const chapters = [
+    [1, 'ChapterA'],
+    [2, 'ChapterB'],
+    [3, 'ChapterC'],
+    [4, 'ChapterD'],
+    [4.5, 'ChapterD+'],
+    [5, 'ChapterE']
+  ]
   return (
     <>
       {/* BELOW: Top Appbar */}
@@ -551,13 +617,56 @@ export default function WPEditor({ theme }) {
               <MenuIcon />
             </IconButton>
 
-            <IconButton
+            {/* <IconButton
               color="inherit"
               aria-label="back"
               onClick={() => { window.history.back() }}
             >
               <ArrowBackIcon />
-            </IconButton>
+            </IconButton> */}
+            <div className={classes.bookCoverInAppbar} style={{ backgroundImage: `url(${BookLib["0001"].cover})` }}>
+            </div>
+            <Tooltip title="Select Chapter">
+              <IconButton
+                color="inherit"
+                aria-label="chapterSelector"
+                onClick={handleClick}
+              >
+                <Icon path={mdiChevronDown} size={1} />
+              </IconButton>
+            </Tooltip>
+
+            <Menu
+              id="chapter-select-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+              PaperProps={{
+                style: {
+                  maxHeight: '10rem',
+                },
+              }}
+            >
+              {chapters.map((item, index) => (
+                <MenuItem onClick={handleClose}>{item[0] + " " + item[1]}</MenuItem>
+              ))}
+            </Menu>
+
+            <TextField
+              className={classes.chapterNoInput}
+              label="Ch. No."
+              variant="outlined"
+              size="small"
+            />
             <TextField
               className={classes.chapterNameInput}
               label="Chapter Name"
@@ -566,13 +675,37 @@ export default function WPEditor({ theme }) {
               size="small"
             />
 
-            <IconButton
-              color="inherit"
-              aria-label="settings"
-            // onClick={}
-            >
-              <Icon path={mdiBookCogOutline} size={1} />
-            </IconButton>
+            <Tooltip title="Book Setting">
+              <IconButton
+                color="inherit"
+                aria-label="settings"
+                // onClick={}
+                className={classes.appbarIconBtn}
+              >
+                <Icon path={mdiBookCogOutline} size={1} />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Undo">
+              <IconButton
+                color="inherit"
+                aria-label="undo"
+                // onClick={() => { window.history.back() }}
+                className={classes.appbarIconBtn}
+              >
+                <Icon path={mdiUndo} size={1} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Redo">
+              <IconButton
+                color="inherit"
+                aria-label="redo"
+                // onClick={() => { window.history.back() }}
+                className={classes.appbarIconBtn}
+              >
+                <Icon path={mdiRedo} size={1} />
+              </IconButton>
+            </Tooltip>
 
             <div style={{ flexGrow: 1 }} />
 
@@ -591,32 +724,38 @@ export default function WPEditor({ theme }) {
                 :
                 "Saved!"
             }</Typography>
+
             <div className={classes.barSaveBtnsContainer}>
-              <IconButton
-                color="inherit"
-                aria-label="add to book"
-                className={classes.barBtnSave}
-              // onClick={}
-              >
-                <div style={{ backgroundImage: `url(${mdiSavedOutline})`, backgroundSize: "cover", width: 24, height: 24 }}></div>
-              </IconButton>
-              <Grow
-                in={!isSaved}
-              >
+              <Tooltip title="Save">
                 <IconButton
                   color="inherit"
                   aria-label="add to book"
-                  className={classes.barBtnNoSave}
-                  onClick={() => {
-                    setTimeout(() => {
-                      setSaved(true)
-                    }, 1000)
-                  }}
+                  className={classes.barBtnSave}
+                // onClick={}
                 >
-                  <Icon path={mdiContentSaveOutline} size={1} />
+                  <div style={{ backgroundImage: `url(${mdiSavedOutline})`, backgroundSize: "cover", width: 24, height: 24 }}></div>
                 </IconButton>
+              </Tooltip>
+              <Grow
+                in={!isSaved}
+              >
+                <Tooltip title="Save">
+                  <IconButton
+                    color="inherit"
+                    aria-label="add to book"
+                    className={classes.barBtnNoSave}
+                    onClick={() => {
+                      setTimeout(() => {
+                        setSaved(true)
+                      }, 1000)
+                    }}
+                  >
+                    <Icon path={mdiContentSaveOutline} size={1} />
+                  </IconButton>
+                </Tooltip>
               </Grow>
             </div>
+
           </Toolbar>
         </AppBar>
         {/* ABOVE: Top Appbar */}
@@ -699,7 +838,7 @@ export default function WPEditor({ theme }) {
         {/* ABOVE: Text Editor Options Appbar */}
         <div style={{ width: '100%', overflow: 'hidden', height: '100vh' }}>
           {/* Double Divs are used for Toggling SideNote: Change inner div's width to move SideNote out of viewport */}
-          <div style={{ display: 'flex', float: 'right', transition: 'width .2s ease-in-out' }} id={"NotesAndEditorContainer"}>
+          <div style={{ display: 'flex', float: 'right', transition: 'width .2s cubic-bezier(0.21, 0.73, 0.3, 1)' }} id={"NotesAndEditorContainer"}>
 
             <div className={classes.sideNotes} id={"SideNotes"}>
 
@@ -752,7 +891,19 @@ export default function WPEditor({ theme }) {
             <div className={classes.sideNotesResizeBar}
               // Side Notes Column Resizing Part(4/4)
               onMouseDown={() => setSideNotesResizing(true)}
-            ></div>
+            >
+              <div style={{
+                flexShrink: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+                width: 10,
+                opacity: .3,
+              }}>
+                <Icon path={mdiDotsVertical} size={1} style={{ flexShrink: 0 }} />
+              </div>
+            </div>
 
             {/* BELOW: Actual Slate.js Text Editor */}
             <div className="editors" style={{ width: 720 }}>
