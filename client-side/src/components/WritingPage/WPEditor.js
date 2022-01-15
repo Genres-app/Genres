@@ -31,6 +31,8 @@ import './WPEditor.css';
 import clsx from 'clsx';
 import GenresDrawer from '../Drawer/Drawer';
 
+import ColorThief from 'colorthief';
+
 /*Material-UI Icons*/
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -292,6 +294,7 @@ const useStyles = makeStyles((theme) => ({
         hexToRgb(theme.palette.primary.main).b, 1,
         .9, 128, 128, 128, 1, true),
     color: theme.palette.background.paper,
+    transition: 'background-color .2s, color .2s',
   },
   addNewNoteBtn: {
     margin: theme.spacing(1),
@@ -328,6 +331,8 @@ export default function WPEditor({ theme }) {
 
   const classes = useStyles();
 
+  const colorThief = new ColorThief();
+
   const [sidebar, setSidebar] = useState(false);
   const toggleSidebar = () => setSidebar(!sidebar);
 
@@ -355,13 +360,27 @@ export default function WPEditor({ theme }) {
         document.getElementById("NotesAndEditorContainer").style.width = window.innerWidth + document.getElementById("SideNotes").offsetWidth + 10 + "px"
       }
 
+      // Update color of NotesTree's container when bookcover is loaded
+      const img = document.querySelector('#bookCover');
+      img.onload = function () {
+        let colorOfBookCover = colorThief.getColor(img);
+        let eleNotesTreeContainer = document.getElementById("notesTreeContainer")
+        eleNotesTreeContainer.style.backgroundColor = `rgb(${colorOfBookCover[0]},${colorOfBookCover[1]},${colorOfBookCover[2]})`;
+        if (colorOfBookCover[0] + colorOfBookCover[1] + colorOfBookCover[2] > 255 * 3 / 2) {
+          eleNotesTreeContainer.style.color = '#000';
+        } else {
+          eleNotesTreeContainer.style.color = '#fff';
+        }
+      }
+
     }
   )
+
 
   // Side Notes Column Resizing Part(3/4)
   document.onmouseup = function (e) {
     setTimeout(function () { setSideNotesResizing(false); }, 100)
-    console.log(sideNotesResizing);
+    // console.log(sideNotesResizing);
   }
 
   const [isSaved, setSaved] = useState(false);
@@ -597,6 +616,7 @@ export default function WPEditor({ theme }) {
     [4.5, 'ChapterD+'],
     [5, 'ChapterE']
   ]
+
   return (
     <>
       {/* BELOW: Top Appbar */}
@@ -624,8 +644,9 @@ export default function WPEditor({ theme }) {
             >
               <ArrowBackIcon />
             </IconButton> */}
-            <div className={classes.bookCoverInAppbar} style={{ backgroundImage: `url(${BookLib["0001"].cover})` }}>
-            </div>
+            {/* <div className={classes.bookCoverInAppbar} id="bookCover" style={{ backgroundImage: `url(${BookLib["0001"].cover})` }}>
+            </div> */}
+            <img src={BookLib["0001"].cover} className={classes.bookCoverInAppbar} id="bookCover" />
             <Tooltip title="Select Chapter">
               <IconButton
                 color="inherit"
@@ -843,7 +864,7 @@ export default function WPEditor({ theme }) {
             <div className={classes.sideNotes} id={"SideNotes"}>
 
               <div style={{ display: "flex", height: "100%" }}>
-                <div className={classes.notesTree}>
+                <div className={classes.notesTree} id="notesTreeContainer">
                   <TreeView
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}

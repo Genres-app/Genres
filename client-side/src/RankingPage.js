@@ -165,7 +165,7 @@ export default function RankingPage({ theme }) {
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco2 : classes.RankingDeco2Dark)}>
                 <p className={classes.RankingNameHash}>#</p>
-                <Typography className={classes.RankingNum}>2</Typography>
+                <Typography className={clsx(classes.RankingNum, classes.RankingNum2)}>2</Typography>
               </div>
             );
           } else if (index == 2) {
@@ -174,7 +174,7 @@ export default function RankingPage({ theme }) {
             decorator = (
               <div className={clsx(classes.RankingDecorator, theme ? classes.RankingDeco3 : classes.RankingDeco3Dark)}>
                 <p className={classes.RankingNameHash}>#</p>
-                <Typography className={classes.RankingNum}>3</Typography>
+                <Typography className={clsx(classes.RankingNum, classes.RankingNum3)}>3</Typography>
               </div>
             );
           } else {

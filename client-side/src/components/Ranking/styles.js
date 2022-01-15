@@ -260,6 +260,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     flexGrow: 2,
   },
+  RankingNum2: {
+    transform: 'translateX(.5rem)',
+    fontSize: '3.3rem',
+  },
+  RankingNum3: {
+    transform: 'translateX(.25rem)',
+    fontSize: '2.7rem',
+  },
   // RankingNumber for 4+
   RankingNameHashOthers: {
     fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
