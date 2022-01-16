@@ -51,11 +51,30 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 0,
     fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
     // fontSize: '1rem',
-  },
-
-  widerBtn: {
     paddingLeft: theme.spacing(1.5),
     paddingRight: theme.spacing(1.5),
+  },
+
+  hideWhenWidLessThan1260: {
+    "@media (max-width: 1259px)": {
+      display: "none",
+    },
+  },
+  showWhenWidLessThan1260: {
+    "@media (min-width: 1260px)": {
+      display: "none",
+    },
+  },
+  
+  hideWhenWidLessThan900: {
+    "@media (max-width: 899px)": {
+      display: "none",
+    },
+  },
+  showWhenWidLessThan900: {
+    "@media (min-width: 900px)": {
+      display: "none",
+    },
   },
 
 
@@ -204,6 +223,7 @@ const useStyles = makeStyles((theme) => ({
 
   appbarAvatarContainer: {
     display: 'flex',
+    flexShrink: 0,
     alignItems: 'center',
     justifyContent: 'center',
     width: theme.spacing(5),

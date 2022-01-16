@@ -228,7 +228,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
         variant="text"
         color="primary"
         startIcon={ListItems[indexOfList].icon}
-        className={clsx(classes.widerBtn, classes.appbarBtn)}
+        className={clsx(classes.appbarBtn, classes.hideWhenWidLessThan1260)}
       >
         {ListItems[indexOfList].title}
       </Button>
@@ -259,24 +259,24 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                 alignItems: "center",
                 cursor: "pointer",
               }}>
-              <img src={theme? GenresLogo_new : GenresLogo_new_dark} height='48px' alt="" />
+              <img src={theme ? GenresLogo_new : GenresLogo_new_dark} height='48px' alt="" />
               <div style={{ marginLeft: '.5rem', }}>
-                <div style={theme? {
+                <div style={theme ? {
                   width: 'calc(100% - .25rem)',
                   height: '.75rem',
                   backgroundColor: '#76eed9',
 
                   transform: 'translateY(1.3rem) translateX(.6rem)'
                 }
-                :
-                {
-                  width: 'calc(100% - .25rem)',
-                  height: '.75rem',
-                  backgroundColor: '#13edad',
-                  opacity: .3,
+                  :
+                  {
+                    width: 'calc(100% - .25rem)',
+                    height: '.75rem',
+                    backgroundColor: '#13edad',
+                    opacity: .3,
 
-                  transform: 'translateY(1.3rem) translateX(.6rem)'
-                }
+                    transform: 'translateY(1.3rem) translateX(.6rem)'
+                  }
                 }></div>
                 <Typography
                   variant="h5"
@@ -328,7 +328,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                 </IconButton>
             }
 
-            <Divider orientation='vertical' style={{ height: '2rem', marginLeft: '.5rem' }} />
+            <Divider orientation='vertical' style={{ height: '2rem', marginLeft: '.5rem' }} className={classes.hideWhenWidLessThan1260} />
 
 
             { // Show Rankings
@@ -377,10 +377,17 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                       variant="text"
                       color="primary"
                       endIcon={<CreateOutlinedIcon />}
-                      className={clsx(classes.widerBtn, classes.appbarBtn)}
+                      className={clsx(classes.appbarBtn, classes.hideWhenWidLessThan1260)}
                     >
                       Writing Space
                     </Button>
+                    <IconButton
+                      color="primary"
+                      onClick={() => routeChange("/mywriting")}
+                      className={classes.showWhenWidLessThan1260}
+                    >
+                      <CreateOutlinedIcon />
+                    </IconButton>
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
                       <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar} />
                     </div>
@@ -395,7 +402,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                   variant="text"
                   color="primary"
                   endIcon={<Icon path={mdiLoginVariant} size={1} />}
-                  className={clsx(classes.widerBtn, classes.appbarBtn)}
+                  className={classes.appbarBtn}
                 >
                   Login
                 </Button>
