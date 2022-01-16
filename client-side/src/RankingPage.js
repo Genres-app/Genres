@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect, Component, useLayoutEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
@@ -45,6 +45,20 @@ import GenresTag from './components/Widgets/GenresTag';
 import { rankList } from './components/Ranking/generatedRankList';
 import AuthorsRowShowFirst from './components/Widgets/AuthorsRowShowFirst';
 
+
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 //Tab for genre
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,6 +96,7 @@ function a11yProps(index) {
 export default function RankingPage({ theme }) {
 
   const classes = useStyles();
+  const [width, height] = useWindowSize();
 
   // Top Tab
   const [value, setValue] = React.useState(0);
@@ -230,7 +245,7 @@ export default function RankingPage({ theme }) {
     return (
       <>
         {
-          (ftrData != 0) ?
+          (ftrData != 0) && width > 998 ?
             <>
               <div className={classes.sortByGenreTitle}>
                 <Typography variant="overline">Filter by Genres</Typography>
