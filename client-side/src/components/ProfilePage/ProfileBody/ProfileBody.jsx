@@ -10,6 +10,8 @@ import ProfileCarouselContainer from '../ProfileCarouselContainer.jsx'
 import AboutBody from '../AboutBody.jsx'
 import BarCharts from './../BarCharts.jsx';
 import RadialCharts from './../RadialCharts.jsx';
+import Paper from '@material-ui/core/Paper';
+import BarChart from './Chart';
 
 //placeholders. Remove after implementing backend.
 import bookcover1 from '../../Assets/bookcover1.jpg';
@@ -182,7 +184,7 @@ const ProfileBody = (props) => {
     }))((props) => <Tab disableRipple {...props} />);
       
     return (
-        <main className = {classes.content}>
+        <main className = {classes.content} style = {{ width: "100%"}}>
 
             {/* Banner */}
             <Banner 
@@ -199,13 +201,20 @@ const ProfileBody = (props) => {
             ></Banner>
 
             {/* Tabs */}
-            <div className={classes.profileTabStyles}>
-                <StyledTabs variant="fullWidth" value={selectedTab} onChange={handleChange}>
-                    <StyledTab label="Profile"/>
-                    <StyledTab label="Activity"/>
-                    <StyledTab label="Statistics"/>
-                </StyledTabs>
-            </div>
+            <Paper className={classes.profileTabStyles}>
+            <Tabs
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+                variant="fullWidth" 
+                value={selectedTab} 
+                onChange={handleChange}
+            >
+                <Tab label="Profile" />
+                <Tab label="Activity" />
+                <Tab label="Statistics" />
+            </Tabs>
+            </Paper>
 
             {/* Display AuthorShowcase carousel + comments if on Profile tab */}
             {selectedTab === 0 && 
@@ -302,6 +311,15 @@ const ProfileBody = (props) => {
 
                 
 
+            </Container>
+            }
+
+            {/* Display Readinglist + Master class carousels if on Statistics tab */}
+            {selectedTab === 2 && 
+            <Container className = {`${classes.container} ${classes.profileBodyContainer}`}>
+                <div style={{margin: "20px 0px 0px 20px"}}>
+                  <BarChart/>
+                </div>
             </Container>
             }
         </main>
