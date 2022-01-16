@@ -80,10 +80,11 @@ const BarChart = () => {
             ],
             borderWidth: 2,
             pointRadius: 3,
+            tension: 0,
         }]
         }}
-        height={200}
-        width={300}
+        height={100}
+        width={150}
     /></div>
 
 }
