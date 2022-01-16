@@ -47,6 +47,7 @@ import Searchbar from '../Searchbar/Searchbar'
 
 import GenresDrawer from '../Drawer/Drawer';
 import { ListItems } from './listItems';
+import { useLayoutEffect } from 'react';
 
 /* */
 // const SidebarLink = styled(Link)`
@@ -113,6 +114,20 @@ import { ListItems } from './listItems';
 //   width: 100%;
 // `;
 
+
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 const Dashboard = ({ passTheme, isMywritingPage }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
@@ -124,6 +139,13 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
   const history = useHistory();
   const location = useLocation();
   const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
+
+  const [width, height] = useWindowSize();
+  if (width >= 600) {
+    document.body.style.margin = "64px 0 0 0";
+  } else {
+    document.body.style.margin = "56px 0 0 0";
+  }
 
   const logout = () => {
     dispatch({ type: 'LOGOUT' });
@@ -166,7 +188,6 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
 
 
   const classes = useStyles();
-  document.body.style.margin = "64px 0 0 0";
 
 
   // Route to render new content
@@ -253,12 +274,8 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
             {/* <Link to="/"> */}
             <div
               onClick={() => routeChange("/")}
-              style={{
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                cursor: "pointer",
-              }}>
+              className={clsx(classes.appBarLogo, classes.hideWhenWidLessThan600)}
+            >
               <img src={theme ? GenresLogo_new : GenresLogo_new_dark} height='48px' alt="" />
               <div style={{ marginLeft: '.5rem', }}>
                 <div style={theme ? {
@@ -296,6 +313,24 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
             </div>
             {/* </Link> */}
 
+            <IconButton
+              color="primary"
+              aria-label="open drawer"
+              onClick={toggleSidebar}
+              edge="start"
+              className={classes.showWhenWidLessThan600}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="primary"
+              className={clsx(classes.appBarTitleMobile, classes.showWhenWidLessThan600)}>
+              {getCurrentPageTitle() ?
+                getCurrentPageTitle()
+                :
+                "Genres"
+              }
+            </Typography>
+
             {/* <div className={classes.grow} /> */}
             {/* <ChevronRightIcon style={{marginLeft: '.5rem'}}/> */}
 
@@ -308,7 +343,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                   startIcon={<ChevronRightIcon />}
                   endIcon={<MenuIcon />}
                   classes={{
-                    root: classes.drawerToggleBtn,
+                    root: clsx(classes.drawerToggleBtn, classes.hideWhenWidLessThan600),
                     startIcon: classes.drawerToggleIcon,
                     endIcon: classes.drawerToggleIcon,
                   }}
@@ -322,7 +357,7 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                   aria-label="open drawer"
                   onClick={toggleSidebar}
                   // edge="start"
-                  className={classes.menuButton}
+                  className={clsx(classes.menuButton, classes.hideWhenWidLessThan600)}
                 >
                   <MenuIcon />
                 </IconButton>
@@ -344,7 +379,8 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                 ShortcutNavBtn(1)
             }
 
-            <div className={clsx(classes.search, theme ? classes.search_light : classes.search_dark)}>
+
+            <div className={clsx(classes.search, classes.hideWhenWidLessThan900, theme ? classes.search_light : classes.search_dark)}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -361,6 +397,15 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
 
 
             <div className={classes.grow} />
+
+            <IconButton
+              color="primary"
+              // onClick={() => routeChange("/mywriting")}
+              className={classes.showWhenWidLessThan900}
+            >
+              <SearchIcon />
+            </IconButton>
+
             <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="primary" onClick={() => {
               setTheme(!theme);
               passTheme(!theme);

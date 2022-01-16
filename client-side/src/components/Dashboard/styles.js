@@ -12,6 +12,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
+  appBarLogo: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    cursor: "pointer",
+  },
+
   grow: {
     flexGrow: 1,
   },
@@ -77,6 +84,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
+  hideWhenWidLessThan600: {
+    "@media (max-width: 599px)": {
+      display: "none",
+    },
+  },
+  showWhenWidLessThan600: {
+    "@media (min-width: 600px)": {
+      display: "none",
+    },
+  },
+
 
   menuButton: {
     marginLeft: theme.spacing(2),
@@ -91,6 +109,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+  },
+
+  appBarTitleMobile: {
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
   },
 
 
