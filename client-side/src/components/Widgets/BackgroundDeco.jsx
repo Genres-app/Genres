@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
+import { useLayoutEffect } from 'react';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   parallelogram: {
@@ -27,15 +29,36 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 const BackgroundDecoration = () => {
   const classes = useStyles();
+  const [width, height] = useWindowSize();
 
 
   return (
     <>
-      <div class={classes.parallelogram}></div>
-      <div class={classes.parallelogram} style={{top: 270}}></div>
-      <div class={classes.circle}></div>
+      {
+        width >= 1260 ?
+          <>
+            <div class={classes.parallelogram}></div>
+            <div class={classes.parallelogram} style={{ top: 270 }}></div>
+            <div class={classes.circle}></div>
+          </>
+          :
+          <></>
+      }
     </>
   )
 }
