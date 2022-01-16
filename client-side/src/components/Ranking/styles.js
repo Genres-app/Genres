@@ -155,6 +155,9 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "rgba(255,255,255,0.04)",
     }
   },
+
+  // bottom Filter 
+
   // Ranking List
   RankingContainer: {
     maxWidth: 'none',

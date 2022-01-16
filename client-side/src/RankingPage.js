@@ -245,7 +245,7 @@ export default function RankingPage({ theme }) {
     return (
       <>
         {
-          (ftrData != 0) && width > 998 ?
+          (ftrData != 0) && width >= 998 ?
             <>
               <div className={classes.sortByGenreTitle}>
                 <Typography variant="overline">Filter by Genres</Typography>
@@ -337,6 +337,15 @@ export default function RankingPage({ theme }) {
                 </IconButton>
               </div>
             </>
+            :
+            <>
+            </>
+        }
+
+        {
+          (ftrData != 0) && width < 998 ?
+            <div className={classes.bottomFilterContainer}>
+            </div>
             :
             <>
             </>

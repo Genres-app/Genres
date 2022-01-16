@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
       bannerImg: {
         position: 'absolute',
         width: '100%',
+        marginLeft: -24, // FIXME:
         height: '270px',
         objectFit: 'cover',
         '@media (max-width:1024px)': {
