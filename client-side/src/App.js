@@ -20,6 +20,7 @@ import NovelPageDistribution from './NovelPageDistribution';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from './themes';
+import BackgroundDecoration from './components/Widgets/BackgroundDeco';
 
 function App() {
   const [isThemeLight, setTheme] = useState(true);
@@ -79,6 +80,7 @@ function App() {
               } />
               <Route exact path='/publit' component={PublitPage} />
               <Route exact path="/book/:bookId" component={NovelPageDistribution} />
+              <BackgroundDecoration />
               <Footer />
             </div>
           </Switch>
