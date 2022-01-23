@@ -157,6 +157,14 @@ const useStyles = makeStyles((theme) => ({
   },
 
   // bottom Filter 
+  bottomFilterContainer: {
+    position: 'fixed',
+    bottom: 0,
+    height: '3.5rem',
+    backgroundColor: theme.palette.background.paper,
+    width: '100%',
+    boxShadow: theme.shadows[1],
+  },
 
   // Ranking List
   RankingContainer: {

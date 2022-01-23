@@ -17,6 +17,7 @@ import BetaReadingPage from './BetaReadingPage';
 import PublitPage from './PublitPage';
 import NovelEditingPage from './NovelEditingPage';
 import NovelPageDistribution from './NovelPageDistribution';
+import MessagePage from './MessagePage';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from './themes';
@@ -71,6 +72,7 @@ function App() {
               <Route exact path="/search" component={SearchResults} />
               <Route exact path='/novel' component={NovelLandingPage} />
               <Route exact path='/profile' component={ProfilePage} />
+              <Route exact path='/message' component={MessagePage} />
               <Route exact path='/browse' component={BrowsingPage} />
               <Route exact path='/rankings' render={
                 (props) => (<RankingPage {...props} theme={isThemeLight} />)

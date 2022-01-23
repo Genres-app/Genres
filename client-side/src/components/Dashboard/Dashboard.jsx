@@ -434,7 +434,9 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
                       <CreateOutlinedIcon />
                     </IconButton>
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
-                      <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar} />
+                      <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar}>
+                        {user.result.username.charAt(0)}
+                      </Avatar>
                     </div>
                   </>
                 ) : (

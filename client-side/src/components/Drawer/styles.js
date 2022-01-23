@@ -33,6 +33,36 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
   },
 
+  LevelContainer: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "3rem",
+    marginRight: "3rem",
+    marginBottom: ".5rem",
+  },
+
+  lvl: {
+    fontWeight: 'bold',
+  },
+
+  expBar: {
+    display: "flex",
+    alignItems: "center",
+    height: "1rem",
+    width: "100%",
+    backgroundColor: "#88888855",
+    marginLeft: "1rem",
+    borderRadius: ".5rem",
+
+    "& > div": {
+      width: "calc(66% - 4px)",
+      height: "calc(1rem - 4px)",
+      marginLeft: 2,
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: "calc((1rem - 4px) / 2)",
+    }
+  },
+
   profileBtnsOfDrawer: {
     display: 'flex',
     flexDirection: 'row',
@@ -41,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
   profileBtnOfDrawer: {
     flexGrow: 0,
-    margin: '0 auto',
+    margin: '0 .5rem',
     marginBottom: theme.spacing(1),
     // width: 'initial',
   },

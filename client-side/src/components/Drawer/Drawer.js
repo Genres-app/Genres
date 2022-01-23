@@ -19,7 +19,7 @@ import {
 
 //Mdi Icons
 import Icon from '@mdi/react';
-import { mdiAccountCircleOutline, mdiLogoutVariant, mdiLoginVariant } from '@mdi/js';
+import { mdiAccountCircleOutline, mdiLogoutVariant, mdiLoginVariant, mdiMessageTextOutline } from '@mdi/js';
 
 import { ListItems } from '../Dashboard/listItems';
 
@@ -70,16 +70,32 @@ const GenresDrawer = ({ open, theme, toggleFunc, user, isUserConfirmRequired, lo
           <>
             <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
             <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
-            {/* <div className={classes.profileBtnsOfDrawer}> */}
-            <Button
-              className={clsx(classes.widerBtn, classes.profileBtnOfDrawer)}
-              onClick={() => routeChange("/profile")}
-              variant="text"
-              color="primary"
-              endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
-            >
-              Profile
-            </Button>
+            <div className={classes.LevelContainer}>
+              <Typography className={classes.lvl}>Lv.6</Typography>
+              <div className={classes.expBar}>
+                <div></div>
+              </div>
+            </div>
+            <div className={classes.profileBtnsOfDrawer}>
+              <Button
+                className={clsx(classes.widerBtn, classes.profileBtnOfDrawer)}
+                onClick={() => routeChange("/profile")}
+                variant="text"
+                color="primary"
+                endIcon={<Icon path={mdiAccountCircleOutline} size={1} />}
+              >
+                Profile
+              </Button>
+              <Button
+                className={clsx(classes.widerBtn, classes.profileBtnOfDrawer)}
+                onClick={() => routeChange("/message")}
+                variant="text"
+                color="primary"
+                endIcon={<Icon path={mdiMessageTextOutline} size={1} />}
+              >
+                Message
+              </Button>
+            </div>
           </>
         ) : (
           <div style={{ height: 200, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
