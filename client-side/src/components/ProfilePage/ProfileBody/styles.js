@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 
   content: {
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     paddingBottom: '10px',
   },
   container: {
