@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
   bannerImg: {
     position: 'absolute',
     width: '100%',
-    marginLeft: -24, // FIXME:
     height: '270px',
     objectFit: 'cover',
     '@media (max-width:1024px)': {
@@ -179,72 +178,74 @@ const Banner = (props) => {
   };
 
   return (
-    <Container className={classes.container} maxWidth="xl">
+    <div>
       {/* Banner image to be changed by user */}
       <img className={classes.bannerImg} src={bannerPic} alt='banner'></img>
-      <div className={`${classes.banner} ${props.selectedTab === 0 ? classes.bannerProfilePadding : classes.bannerProfilePadding}`}>
+      <Container className={classes.container} maxWidth="xl">
+        <div className={`${classes.banner} ${props.selectedTab === 0 ? classes.bannerProfilePadding : classes.bannerProfilePadding}`}>
 
-        {/* About/bookmark */}
-        <AboutBookmark user={props.user}></AboutBookmark>
-        {/* Container to organize banner items if width > 1024 */}
+          {/* About/bookmark */}
+          <AboutBookmark user={props.user}></AboutBookmark>
+          {/* Container to organize banner items if width > 1024 */}
 
-        <div className={classes.bannerContainer}>
-          {/* Invisible div for bookmark so it doesn't go over other elements when viewport is scaled down */}
-          <div className={classes.placeHolder}></div>
+          <div className={classes.bannerContainer}>
+            {/* Invisible div for bookmark so it doesn't go over other elements when viewport is scaled down */}
+            <div className={classes.placeHolder}></div>
 
-          <div className={classes.bannerItems}>
+            <div className={classes.bannerItems}>
 
-            <div className={classes.ribbonContainer}>
-              <div className={classes.ribbonTail}></div>
+              <div className={classes.ribbonContainer}>
+                <div className={classes.ribbonTail}></div>
 
-              <div className={classes.nameContainer}>
-                <div style={{ display: 'flex' }}>
-                  {/*FIXME: change code to get user's name based on appropriate db schema of passed in user prop*/}
-                  <Typography className={classes.profileName} variant="h4" align="left">{props.user.result.name}</Typography>
-                  {/*FIXME:  dynamically display pro tag if user is a pro user, based on isPro bool in passed in user prop*/}
-                  <div className={classes.proTag}>PRO</div>
+                <div className={classes.nameContainer}>
+                  <div style={{ display: 'flex' }}>
+                    {/*FIXME: change code to get user's name based on appropriate db schema of passed in user prop*/}
+                    <Typography className={classes.profileName} variant="h4" align="left">{props.user.result.name}</Typography>
+                    {/*FIXME:  dynamically display pro tag if user is a pro user, based on isPro bool in passed in user prop*/}
+                    <div className={classes.proTag}>PRO</div>
+                  </div>
+                  {/*FIXME: change code to get username based on appropriate db schema of passed in user prop*/}
+                  <Typography className={classes.userName} variant="h6" align="left">@{props.user.result.username}</Typography>
                 </div>
-                {/*FIXME: change code to get username based on appropriate db schema of passed in user prop*/}
-                <Typography className={classes.userName} variant="h6" align="left">@{props.user.result.username}</Typography>
+              </div>
+
+              <div className={classes.bannerButtonArea}>
+                <Grid container spacing={2} justify="center">
+                  <Grid item>
+                    <input
+                      accept="image/*"
+                      style={{ display: 'none' }}
+                      id="bannerImage"
+                      multiple
+                      type="file"
+                      onChange={handleBannerPicChange}
+                    />
+                    <label htmlFor="bannerImage">
+                      <Button component="span" className={classes.bannerButton}>
+                        <EditIcon className={classes.icons} fontSize='small'></EditIcon>Edit Banner
+                      </Button>
+                    </label>
+                  </Grid>
+                  <Grid item>
+                    <Button className={classes.bannerButton}>
+                      <SettingsIcon className={classes.icons} fontSize='small'></SettingsIcon>Settings
+                    </Button>
+                  </Grid>
+                </Grid>
               </div>
             </div>
-
-            <div className={classes.bannerButtonArea}>
-              <Grid container spacing={2} justify="center">
-                <Grid item>
-                  <input
-                    accept="image/*"
-                    style={{ display: 'none' }}
-                    id="bannerImage"
-                    multiple
-                    type="file"
-                    onChange={handleBannerPicChange}
-                  />
-                  <label htmlFor="bannerImage">
-                    <Button component="span" className={classes.bannerButton}>
-                      <EditIcon className={classes.icons} fontSize='small'></EditIcon>Edit Banner
-                    </Button>
-                  </label>
-                </Grid>
-                <Grid item>
-                  <Button className={classes.bannerButton}>
-                    <SettingsIcon className={classes.icons} fontSize='small'></SettingsIcon>Settings
-                  </Button>
-                </Grid>
-              </Grid>
-            </div>
           </div>
+
+
+          {/* Display About section in banner if width <= 1024 */}
+          <AboutBanner className={classes.aboutBanner} user={props.user}></AboutBanner>
+
+
+          {/* Display charts if on Activity page */}
+
         </div>
-
-
-        {/* Display About section in banner if width <= 1024 */}
-        <AboutBanner className={classes.aboutBanner} user={props.user}></AboutBanner>
-
-
-        {/* Display charts if on Activity page */}
-
-      </div>
-    </Container>
+      </Container>
+    </div>
   )
 }
 
