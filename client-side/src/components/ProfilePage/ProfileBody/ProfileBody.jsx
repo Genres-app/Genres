@@ -212,7 +212,6 @@ const ProfileBody = (props) => {
             >
                 <Tab label="Profile" />
                 <Tab label="Activity" />
-                <Tab label="Statistics" />
             </Tabs>
             </Paper>
 
@@ -314,14 +313,14 @@ const ProfileBody = (props) => {
             </Container>
             }
 
-            {/* Display Readinglist + Master class carousels if on Statistics tab */}
-            {selectedTab === 2 && 
+            
+            {/* {selectedTab === 2 && 
             <Container className = {`${classes.container} ${classes.profileBodyContainer}`}>
                 <div style={{margin: "20px 0px 0px 20px"}}>
                   <BarChart/>
                 </div>
             </Container>
-            }
+            } */}
         </main>
     )
 }

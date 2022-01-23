@@ -37,6 +37,9 @@ import { BookLib } from '../BookLib';
 import { writingDraftList } from './WritingTransitionData';
 import { Typography } from '@material-ui/core';
 
+
+//Chart
+import BarChart from './Chart';
 // Page
 import { NavLink } from 'react-router-dom';
 
@@ -314,6 +317,7 @@ export default function Body() {
         >
           <Tab label="Unpublished"  {...a11yProps(0)} />
           <Tab label="Published"  {...a11yProps(1)} />
+          <Tab label="Statistics"  {...a11yProps(2)} />
         </Tabs>
       </AppBar>
 
@@ -352,6 +356,14 @@ export default function Body() {
             }
           </div>
         </TabPanel>
+
+
+        {/* Display Readinglist + Master class carousels if on Statistics tab */}
+      <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel}>
+          <div >
+            <BarChart/>
+          </div>
+          </TabPanel>
       </Container>
     </>
   );
