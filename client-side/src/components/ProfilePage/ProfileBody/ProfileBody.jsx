@@ -202,19 +202,18 @@ const ProfileBody = (props) => {
 
       <div className={classes.mainContainer}>
         {/* Tabs */}
-        <Paper className={classes.profileTabStyles}>
-          <Tabs
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-            variant="fullWidth"
-            value={selectedTab}
-            onChange={handleChange}
-          >
-            <Tab label="Profile" />
-            <Tab label="Activity" />
-          </Tabs>
-        </Paper>
+        <Tabs
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+          variant="fullWidth"
+          value={selectedTab}
+          onChange={handleChange}
+          className={classes.profileTabStyles}
+        >
+          <Tab label="Profile" />
+          <Tab label="Activity" />
+        </Tabs>
 
         {/* Display AuthorShowcase carousel + comments if on Profile tab */}
         {selectedTab === 0 &&

@@ -26,19 +26,20 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: '10px',
   },
   container: {
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     padding: '0px 0px 0px 0px',
   },
 
   mainContainer: {
-    maxWidth: 1920,
+    maxWidth: 1256,
+    width: "80%",
     margin: "0 auto",
-    padding: "0 10% 0 calc(15% + 260px)",
   },
   profileBodyContainer: {
     // width: '60%',
     // marginLeft: 'clamp(410px, 32%, 32%)',
     // marginRight: '2%',
+    paddingLeft: "calc(260px + 3rem)",
     '@media (max-width:1024px)': {
       width: '100%',
       marginLeft: '0px',
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   profileTabStyles: {
     maxWidth: '800px',
     marginTop: '10px',
+    paddingLeft: "calc(260px + 3rem)",
     // marginLeft: 'clamp(410px, 32%, 32%)',
     '@media (max-width:1024px)': {
       maxWidth: '100%',

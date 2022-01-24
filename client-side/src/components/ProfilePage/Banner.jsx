@@ -16,8 +16,9 @@ import { changeBannerPic } from '../../actions/profile'
 const useStyles = makeStyles((theme) => ({
 
   banner: {
-    paddingRight: '10%',
-    paddingLeft: '10%',
+    maxWidth: 1256,
+    width: "80%",
+    margin: "0 auto",
     backgroundColor: 'white',
     height: '270px',
     '@media (max-width:1024px)': {
