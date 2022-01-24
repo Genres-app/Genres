@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 
 //ABOUT: Radial charts that are displayed if on activity tab and viewport width > 1024.
 const RadialCharts = (props) => {
-    const chartValue = (props.value/props.total)*100;
+    const chartValue = (props.value / props.total) * 100;
 
     const state = {
         series: [chartValue],
@@ -17,7 +17,7 @@ const RadialCharts = (props) => {
                     hollow: {
                         margin: 0,
                         size: "62%",
-                        background: "#293450"
+                        background: "rgba(242, 242, 242, 0.85)",
                     },
                     track: {
                         dropShadow: {
@@ -30,24 +30,28 @@ const RadialCharts = (props) => {
                     },
                     dataLabels: {
                         name: {
-                        offsetY: -10,
-                        color: "#fff",
-                        fontSize: "13px"
+                            offsetY: -10,
+                            color: "#855cde",
+                            fontSize: "13px",
+                            fontWeight: 'bold',
+                            fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
                         },
                         value: {
-                        color: "#fff",
-                        fontSize: "22px",
-                        show: true,
-                        formatter: function(val) {
-                            if (props.readTime) {
-                                return `${props.value} mins`;
-                            } else if (props.pagesRead) {
-                                return `${props.value} pages`;
-                            } else if (props.eventUnit) {
-                                return `${props.value} ${props.eventUnit}`;
-                            } else
-                                return 'TBD';
-                        }
+                            color: "#855cde",
+                            fontSize: "22px",
+                            fontWeight: 'bold',
+                            fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+                            show: true,
+                            formatter: function (val) {
+                                if (props.readTime) {
+                                    return `${props.value} mins`;
+                                } else if (props.pagesRead) {
+                                    return `${props.value} pages`;
+                                } else if (props.eventUnit) {
+                                    return `${props.value} ${props.eventUnit}`;
+                                } else
+                                    return 'TBD';
+                            }
                         },
                     }
                 }
@@ -63,10 +67,10 @@ const RadialCharts = (props) => {
             },
             labels: [props.label]
         },
-      };
-    
+    };
+
     return (
-        <Chart options={state.options} series={state.series} type="radialBar" height={285} />            
+        <Chart options={state.options} series={state.series} type="radialBar" height={285} />
     )
 }
 

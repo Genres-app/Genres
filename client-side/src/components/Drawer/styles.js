@@ -23,11 +23,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(1),
     fontSize: '3rem',
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
   },
 
   userName: {
     margin: '0 auto',
     marginBottom: theme.spacing(1),
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
   },
   userEmail: {
     marginLeft: theme.spacing(2),
@@ -71,9 +73,14 @@ const useStyles = makeStyles((theme) => ({
 
   profileBtnOfDrawer: {
     flexGrow: 0,
-    margin: '0 .5rem',
+    margin: '0',
+    marginLeft: ".5rem",
     marginBottom: theme.spacing(1),
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
     // width: 'initial',
+    "&:last-child": {
+      marginRight: ".5rem",
+    }
   },
 
   logoutBtnOfDrawer: {
@@ -83,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
     left: '50%',
     transform: 'translateX(-50%)',
     color: 'rgb(255, 23, 68)',
+    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
 
     "&:hover": {
       backgroundColor: 'rgb(255, 23, 68, 0.04)',
@@ -95,6 +103,12 @@ const useStyles = makeStyles((theme) => ({
 
   listItemIcon_dark: {
     color: '#9e84f5',
+  },
+
+  listItemText: {
+    "& > span": {
+      fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    }
   },
 }))
 

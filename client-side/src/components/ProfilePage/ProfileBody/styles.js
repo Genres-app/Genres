@@ -21,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
 
-
-
-
-
   content: {
     // backgroundColor: theme.palette.background.paper,
     paddingBottom: '10px',
@@ -33,10 +29,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: '0px 0px 0px 0px',
   },
+
+  mainContainer: {
+    maxWidth: 1920,
+    margin: "0 auto",
+    padding: "0 10% 0 calc(15% + 260px)",
+  },
   profileBodyContainer: {
-    width: '60%',
-    marginLeft: 'clamp(410px, 32%, 32%)',
-    marginRight: '2%',
+    // width: '60%',
+    // marginLeft: 'clamp(410px, 32%, 32%)',
+    // marginRight: '2%',
     '@media (max-width:1024px)': {
       width: '100%',
       marginLeft: '0px',
@@ -60,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   profileTabStyles: {
     maxWidth: '800px',
     marginTop: '10px',
-    marginLeft: 'clamp(410px, 32%, 32%)',
+    // marginLeft: 'clamp(410px, 32%, 32%)',
     '@media (max-width:1024px)': {
       maxWidth: '100%',
       marginLeft: '0px',
@@ -69,8 +71,8 @@ const useStyles = makeStyles((theme) => ({
   activityTabStyles: {
     maxWidth: '610px',
     marginTop: '10px',
-    marginLeft: 'clamp(2px, 30%, 30%)',
-    marginRight: 'clamp(2px, 30%, 30%)',
+    // marginLeft: 'clamp(2px, 30%, 30%)',
+    // marginRight: 'clamp(2px, 30%, 30%)',
     marginTop: '10px',
     '@media (max-width:1024px)': {
       maxWidth: '100%',
