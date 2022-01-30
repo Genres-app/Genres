@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     // width: '60%',
     // marginLeft: 'clamp(410px, 32%, 32%)',
     // marginRight: '2%',
-    paddingLeft: "calc(260px + 3rem)",
+    paddingLeft: "calc(286px + 1.5rem)",
     '@media (max-width:1024px)': {
       width: '100%',
       marginLeft: '0px',

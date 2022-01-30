@@ -19,9 +19,19 @@ const useStyles = makeStyles((theme) => ({
           display: 'none',
         },
       },
+      bio: {
+        marginLeft: '26px',
+        width: '260px',
+        height: '100%',
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: theme.shape.borderRadius,
+        overflow: "hidden",
+        boxShadow: theme.shadows[5],
+        // boxShadow: '0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      },
       aboutImg: {
-        width: '100%',
-        height: '50%',
+        width: 260,
+        height: 260,
         objectFit: 'cover',
       },
       aboutLabel: {
@@ -136,13 +146,6 @@ const useStyles = makeStyles((theme) => ({
       },
       bookmarkString: {
         position: 'absolute',
-      },
-      bio: {
-        marginLeft: '26px',
-        width: '260px',
-        height: '100%',
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: '0 6px 20px 0 rgba(0, 0, 0, 0.19)',
       },
       textField: {
         maxHeight: '110px',

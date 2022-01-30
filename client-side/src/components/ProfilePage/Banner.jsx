@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bannerProfilePadding: {
-    paddingTop: '20px',
+    paddingTop: 130,
   },
   bannerImg: {
     position: 'absolute',
