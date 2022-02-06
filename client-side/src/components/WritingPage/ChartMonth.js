@@ -54,14 +54,14 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 //     }
 //   }));
 
-const BarChart = () => {
+const BarChartMonth = () => {
 
     return <div><Line
         data = {{
-            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            labels: ['6 Jan', '8 Jan', '10 Jan', '12 Jan', '14 Jan', '16 Jan', '18 Jan', '20 Jan','22 Jan','24 Jan','26 Jan','30 Jan'],
         datasets: [{
-            label: 'Total numbers of viewers last week',
-            data: [12, 19, 3, 5, 10, 3, 5],
+            label: 'Total numbers of viewers in the pass 30 days',
+            data: [12, 19, 3, 5, 10, 3, 5, 6,4,5,8,14,20,14,10],
             backgroundColor: [
                 'rgba(102, 0, 204, 0.2)',
                 'rgba(102, 0, 204, 0.2)',
@@ -89,4 +89,4 @@ const BarChart = () => {
 
 }
 
-export default BarChart
+export default BarChartMonth

@@ -39,7 +39,9 @@ import { Typography } from '@material-ui/core';
 
 
 //Chart
-import BarChart from './Chart';
+import BarChartYear from './ChartYear';
+import BarChartWeek from './ChartWeek';
+import BarChartMonth from './ChartMonth';
 // Page
 import { NavLink } from 'react-router-dom';
 
@@ -61,6 +63,26 @@ function TabPanel(props) {
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function TabPanel2(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel2-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
@@ -124,6 +146,12 @@ const useStyles = makeStyles((theme) => ({
     "& > div": {
       padding: 0,
     }
+  },
+  tabPanel2: {
+    paddingTop: theme.spacing(10),
+    "& > div": {
+      padding: 0,
+    },
   },
   bookList: {
     display: "flex",
@@ -288,9 +316,14 @@ export default function Body() {
   }
 
   const [TopBarvalue, setTopBarValue] = React.useState(0);
+  const [TimeSelectionVal, setTopBarValue2] = React.useState(0);
 
   const handleTopBar = (event, newValue) => {
     setTopBarValue(newValue);
+  };
+
+  const handleTopBar2 = (event, newValue2) => {
+    setTopBarValue2(newValue2);
   };
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -360,10 +393,35 @@ export default function Body() {
 
         {/* Display Readinglist + Master class carousels if on Statistics tab */}
       <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel}>
+        
+      <Tabs
+          value={TimeSelectionVal}
+          centered
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={handleTopBar2}
+        >
+          <Tab label="1w"  {...a11yProps(0)} />
+          <Tab label="1m"  {...a11yProps(1)} />
+          <Tab label="12m"  {...a11yProps(2)} />
+        </Tabs>
+        <TabPanel2 value={TimeSelectionVal} index={0} className={classes.tabPanel2}>
           <div >
-            <BarChart/>
+            <BarChartWeek/>
           </div>
+          </TabPanel2>
+          <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
+          <div >
+            <BarChartMonth/>
+          </div>
+          </TabPanel2>
+          <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
+          <div >
+            <BarChartYear/>
+          </div>
+          </TabPanel2>
           </TabPanel>
+         
       </Container>
     </>
   );
