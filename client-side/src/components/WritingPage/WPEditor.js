@@ -68,6 +68,9 @@ import { writingNoteData } from './WritingNoteData';
 import { BookLib } from '../BookLib';
 import RgbaInterpolate from '../../utilities/RgbaInterpolate';
 import hexToRgb from '../../utilities/HexToRgb';
+import StickyNote from './stickyNote';
+import { NoteLib } from './NoteLib';
+import Add from '@material-ui/icons/Add';
 
 // HELP from https://docs.slatejs.org/walkthroughs/01-installing-slate
 // HELP from https://github.com/ianstormtaylor/slate/blob/main/site/examples/richtext.tsx
@@ -379,8 +382,34 @@ export default function WPEditor({ theme }) {
 
   // Side Notes Column Resizing Part(3/4)
   document.onmouseup = function (e) {
-    setTimeout(function () { setSideNotesResizing(false); }, 100)
+    setTimeout(function () { setSideNotesResizing(false); }, 0)
     // console.log(sideNotesResizing);
+  }
+
+  const [NotesList, setNotesList] = useState(NoteLib);
+
+  const handleAddStickyNote = () => {
+    let tempList = NotesList;
+    tempList.push({p:"New Note"});
+    setNotesList(tempList);
+    setSideNotesResizing(true);
+    setTimeout(function() {setSideNotesResizing(false); }, 0);
+  }
+
+  const handleDelStickyNote = (index) => {
+    let tempList = NotesList;
+    tempList.splice(index, 1);
+    setNotesList(tempList);
+    setSideNotesResizing(true);
+    setTimeout(function() {setSideNotesResizing(false); }, 0);
+  }
+
+  const handleChangeStickyNoteP = (index, newP) => {
+    let tempList = NotesList;
+    tempList.at(index).p = newP;
+    setNotesList(tempList);
+    setSideNotesResizing(true);
+    setTimeout(function() {setSideNotesResizing(false); }, 0);
   }
 
   const [isSaved, setSaved] = useState(false);
@@ -902,8 +931,13 @@ export default function WPEditor({ theme }) {
                   </Button>
                   <textarea></textarea>
                   <textarea></textarea> */}
-                  <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>Note Section</Typography>
+                  <div style={{ width: "100%", height: "100%", overflowY: "scroll" }}>
+                    <div style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}}>
+                    <Button onClick={() => handleAddStickyNote()} startIcon={<Add />}>Add Sticky</Button>
+                    </div>
+                    {NotesList.map((item, index) => (
+                      <StickyNote p={item.p} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} key={index}/>
+                    ))}
                   </div>
                 </div>
               </div>
