@@ -341,20 +341,25 @@ export default function WPEditor({ theme }) {
 
   const [sideNotesOn, setSideNotes] = useState(true);
   const toggleSideNotes = () => setSideNotes(!sideNotesOn);
+  
+  // Force Re-render
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
 
   // Side Notes Column Resizing Part(1/4)
   const [sideNotesResizing, setSideNotesResizing] = useState(false);
-
+  // Side Notes Column Resizing Part(2/4)
+  const [sideNoteWidth, setSideNoteWidth] = useState(400);
+  const SN = document.getElementById("SideNotes");
+  document.onmousemove = function (e) {
+    if (sideNotesResizing) {
+      let newSideNotesWidth = e.clientX;
+      SN.style.width = newSideNotesWidth - 5 + "px";
+      // setSideNoteWidth(newSideNotesWidth - 5 + "px")
+    }
+  }
   useEffect(
     () => {
-      // Side Notes Column Resizing Part(2/4)
-      const SN = document.getElementById("SideNotes");
-      document.onmousemove = function (e) {
-        if (sideNotesResizing) {
-          let newSideNotesWidth = e.clientX;
-          SN.style.width = newSideNotesWidth - 5 + "px";
-        }
-      }
 
       // Update Toggle SideNotes
       if (sideNotesOn) {
@@ -379,7 +384,6 @@ export default function WPEditor({ theme }) {
     }
   )
 
-
   // Side Notes Column Resizing Part(3/4)
   document.onmouseup = function (e) {
     setTimeout(function () { setSideNotesResizing(false); }, 0)
@@ -390,26 +394,23 @@ export default function WPEditor({ theme }) {
 
   const handleAddStickyNote = () => {
     let tempList = NotesList;
-    tempList.push({p:"New Note"});
+    tempList.push({ p: "New Note" });
     setNotesList(tempList);
-    setSideNotesResizing(true);
-    setTimeout(function() {setSideNotesResizing(false); }, 0);
+    forceUpdate();
   }
 
   const handleDelStickyNote = (index) => {
     let tempList = NotesList;
     tempList.splice(index, 1);
     setNotesList(tempList);
-    setSideNotesResizing(true);
-    setTimeout(function() {setSideNotesResizing(false); }, 0);
+    forceUpdate();
   }
 
   const handleChangeStickyNoteP = (index, newP) => {
     let tempList = NotesList;
     tempList.at(index).p = newP;
     setNotesList(tempList);
-    setSideNotesResizing(true);
-    setTimeout(function() {setSideNotesResizing(false); }, 0);
+    forceUpdate();
   }
 
   const [isSaved, setSaved] = useState(false);
@@ -890,7 +891,7 @@ export default function WPEditor({ theme }) {
           {/* Double Divs are used for Toggling SideNote: Change inner div's width to move SideNote out of viewport */}
           <div style={{ display: 'flex', float: 'right', transition: 'width .2s cubic-bezier(0.21, 0.73, 0.3, 1)' }} id={"NotesAndEditorContainer"}>
 
-            <div className={classes.sideNotes} id={"SideNotes"}>
+            <div className={classes.sideNotes} id={"SideNotes"} style={{width: sideNoteWidth}}>
 
               <div style={{ display: "flex", height: "100%" }}>
                 <div className={classes.notesTree} id="notesTreeContainer">
@@ -932,11 +933,11 @@ export default function WPEditor({ theme }) {
                   <textarea></textarea>
                   <textarea></textarea> */}
                   <div style={{ width: "100%", height: "100%", overflowY: "scroll" }}>
-                    <div style={{display: "flex", justifyContent: "center", paddingTop: "1rem"}}>
-                    <Button onClick={() => handleAddStickyNote()} startIcon={<Add />}>Add Sticky</Button>
+                    <div style={{ display: "flex", justifyContent: "center", paddingTop: "1rem" }}>
+                      <Button onClick={() => handleAddStickyNote()} startIcon={<Add />}>Add Sticky</Button>
                     </div>
                     {NotesList.map((item, index) => (
-                      <StickyNote p={item.p} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} key={index}/>
+                      <StickyNote p={item.p} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} key={index} />
                     ))}
                   </div>
                 </div>
