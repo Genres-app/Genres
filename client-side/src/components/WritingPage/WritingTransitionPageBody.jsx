@@ -129,7 +129,6 @@ const StyledMenuItem = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 250,
     width: 1266, // 6 in a row
     "@media (max-width: 1688px)": { // 5 in a row
       width: 1063,
@@ -148,7 +147,8 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   tabPanel2: {
-    paddingTop: theme.spacing(10),
+    
+    width: "100%",
     "& > div": {
       padding: 0,
     },
@@ -392,36 +392,41 @@ export default function Body() {
 
 
         {/* Display Readinglist + Master class carousels if on Statistics tab */}
-      <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel}>
-        
+
+      <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel} >
+        <div style = {{ position:"absolute", marginLeft:"52vw", marginTop:"20vh", marginBottom:"0",marginRight:"0",padding:"0"}}>
       <Tabs
           value={TimeSelectionVal}
-          centered
+          orientation="vertical"
           indicatorColor="primary"
           textColor="primary"
           onChange={handleTopBar2}
+          
         >
           <Tab label="1w"  {...a11yProps(0)} />
           <Tab label="1m"  {...a11yProps(1)} />
           <Tab label="12m"  {...a11yProps(2)} />
         </Tabs>
+        </div>
+        <div >
         <TabPanel2 value={TimeSelectionVal} index={0} className={classes.tabPanel2}>
-          <div >
-            <BarChartWeek/>
-          </div>
-          </TabPanel2>
-          <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
-          <div >
-            <BarChartMonth/>
-          </div>
-          </TabPanel2>
-          <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
-          <div >
-            <BarChartYear/>
-          </div>
-          </TabPanel2>
-          </TabPanel>
-         
+        <div>
+          <BarChartWeek/>
+        </div>
+      </TabPanel2>
+      <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
+      <div >
+        <BarChartMonth/>
+      </div>
+      </TabPanel2>
+      <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
+      <div >
+        <BarChartYear/>
+      </div>
+      </TabPanel2>
+      </div>
+        </TabPanel>
+
       </Container>
     </>
   );
