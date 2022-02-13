@@ -1,12 +1,17 @@
+import React, { useState } from "react";
 import { Button, IconButton, makeStyles, TextField, Typography } from "@material-ui/core";
+// Icons
 import Delete from "@material-ui/icons/Delete";
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
-import React, { useState } from "react";
+import PaletteIcon from '@material-ui/icons/Palette';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 
 const useStyles = makeStyles((theme) => ({
   main: {
     display: "flex",
+    position: "relative",
     flexDirection: "column",
     width: "calc(100% - 2rem)",
     height: "max-content",
@@ -28,14 +33,40 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       opacity: 1
     }
+  },
+  colorSelectorContainer: {
+    display: "flex",
+    position: "absolute",
+    width: "100%",
+    bottom: 0,
+    overflowX: "scroll",
   }
 }))
 
-export default function StickyNote({ p, index, funcDeleteSelf, funcChangeSelf }) {
-  const [Editing, setEditing] = useState(false)
+export default function StickyNote({ p, color, index, funcDeleteSelf, funcChangeSelf, funcChangeColor }) {
+  const [Editing, setEditing] = useState(false);
+  const [ColorSetting, setColorSetting] = useState(false);
   const classes = useStyles();
+  
+  const noteColor = {
+    "red": "#e53935",
+    "blue": "#2196f3",
+    "purple": "#673ab7",
+  };
+
+  const noteColorList = ["red", "blue", "purple"];
+
+  const cycleColor = () => {
+    let i = noteColorList.indexOf(color);
+    if (i < noteColorList.length - 1) {
+      funcChangeColor(index, noteColorList[i+1])
+    } else {
+      funcChangeColor(index, noteColorList[0])
+    }
+  }
+
   return (
-    <div className={classes.main}>
+    <div className={classes.main} style={{ borderTopColor: noteColor[color] }}>
       {Editing ?
         <TextField className={classes.textfield} id={`list ${index}`} label="" variant="outlined" defaultValue={p} multiline />
         :
@@ -43,7 +74,10 @@ export default function StickyNote({ p, index, funcDeleteSelf, funcChangeSelf })
           <Typography>{p}</Typography>
         </div>
       }
-      <div className={classes.stickyNoteButtonContainer}>
+      <div className={classes.stickyNoteButtonContainer} 
+      // style={ColorSetting ? {opacity: 0} : {}}
+      >
+        <IconButton onClick={() => cycleColor()} size="medium"><PaletteIcon fontSize="inherit" /></IconButton>
         {Editing ?
           <IconButton onClick={() => {
             funcChangeSelf(index, document.getElementById(`list ${index}`).value);
@@ -56,6 +90,14 @@ export default function StickyNote({ p, index, funcDeleteSelf, funcChangeSelf })
         }
         <IconButton onClick={() => funcDeleteSelf(index)} size="medium"><Delete fontSize="inherit" /></IconButton>
       </div>
+      {/* <div className={classes.colorSelectorContainer} style={ColorSetting ? { visibility: "visible" } : { visibility: "hidden" }}>
+        <IconButton onClick={() => setColorSetting(false)} size="medium"><ArrowBackIcon fontSize="inherit" /></IconButton>
+        {
+          noteColorList.map((key, index) => (
+            <IconButton onClick={() => setColorSetting(false)} size="medium" style={{color: noteColor[key]}}><FiberManualRecordIcon fontSize="inherit" /></IconButton>
+          ))
+        }
+      </div> */}
     </div>
   )
 }

@@ -413,6 +413,13 @@ export default function WPEditor({ theme }) {
     forceUpdate();
   }
 
+  const handleNoteChangeColor = (index, color) => {
+    let tempList = NotesList;
+    tempList.at(index).color = color;
+    setNotesList(tempList);
+    forceUpdate();
+  }
+
   const [isSaved, setSaved] = useState(false);
 
   // Create a Slate editor object that won't change across renders.
@@ -937,7 +944,7 @@ export default function WPEditor({ theme }) {
                       <Button onClick={() => handleAddStickyNote()} startIcon={<Add />}>Add Sticky</Button>
                     </div>
                     {NotesList.map((item, index) => (
-                      <StickyNote p={item.p} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} key={index} />
+                      <StickyNote p={item.p} color={item.color} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} funcChangeColor={handleNoteChangeColor}key={index} />
                     ))}
                   </div>
                 </div>
