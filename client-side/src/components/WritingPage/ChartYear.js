@@ -54,8 +54,21 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 //     }
 //   }));
 
-const BarChartYear = () => {
+const App = () => {
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+  
+    return (
+      <div className="App">
+        <h1>Current date is {date}</h1>
+      </div>
+    );
+  }
 
+
+
+const BarChartYear = () => {
+    
     return <div><Line
         data = {{
             labels: ['Jan 6 2022', 'Dec 6 2021', 'Nov 6 2021', 'Oct 6 2021', 'Sep 6 2021', 'Aug 6 2021', 'Jul 6 2021', 'Jun 6 2021', 'May 6 2021', 'Apr 6 2021', 'March 6 2021', 'Feb 6 2021'],
