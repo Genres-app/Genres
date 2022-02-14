@@ -281,7 +281,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
 
     "&:hover": {
-      backgroundColor: "#d7caf4",
+      backgroundColor: theme.palette.divider,
     }
   },
 

@@ -47,19 +47,33 @@ export default function StickyNote({ p, color, index, funcDeleteSelf, funcChange
   const [Editing, setEditing] = useState(false);
   const [ColorSetting, setColorSetting] = useState(false);
   const classes = useStyles();
-  
+
   const noteColor = {
+    "purple": "#855cde",
     "red": "#e53935",
+    "orange": "#ff9800",
+    "yellow": "#ffc107",
+    "green": "#4caf50",
+    "teal": "#009688",
     "blue": "#2196f3",
-    "purple": "#673ab7",
+    "grey": "#9e9e9e",
   };
 
-  const noteColorList = ["red", "blue", "purple"];
+  const noteColorList = [
+    "purple",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "teal",
+    "blue",
+    "grey"
+  ];
 
   const cycleColor = () => {
-    let i = noteColorList.indexOf(color);
+    let i = color ? noteColorList.indexOf(color) : 0;
     if (i < noteColorList.length - 1) {
-      funcChangeColor(index, noteColorList[i+1])
+      funcChangeColor(index, noteColorList[i + 1])
     } else {
       funcChangeColor(index, noteColorList[0])
     }
@@ -74,7 +88,7 @@ export default function StickyNote({ p, color, index, funcDeleteSelf, funcChange
           <Typography>{p}</Typography>
         </div>
       }
-      <div className={classes.stickyNoteButtonContainer} 
+      <div className={classes.stickyNoteButtonContainer}
       // style={ColorSetting ? {opacity: 0} : {}}
       >
         <IconButton onClick={() => cycleColor()} size="medium"><PaletteIcon fontSize="inherit" /></IconButton>
