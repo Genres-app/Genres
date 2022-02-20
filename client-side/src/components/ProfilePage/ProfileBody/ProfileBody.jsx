@@ -254,6 +254,7 @@ const ProfileBody = (props) => {
                   total={pagesTotal}
                   pagesRead={true}
                   label={'Pages Read'}
+                  rotate={135}
                 ></RadialCharts>
                 {/*FIXME:  if an ongoing event exists, fetch values from db */}
                 <RadialCharts
@@ -261,6 +262,7 @@ const ProfileBody = (props) => {
                   total={chartEvent ? eventTotal : 100}
                   eventUnit={chartEvent ? eventUnit : false}
                   label={'Current Event'}
+                  rotate={180}
                 ></RadialCharts>
               </div>
 
