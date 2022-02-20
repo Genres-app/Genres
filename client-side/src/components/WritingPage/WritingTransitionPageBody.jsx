@@ -47,6 +47,15 @@ import { NavLink } from 'react-router-dom';
 
 import Box from '@material-ui/core/Box';
 
+//copyright
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
+
 
 function a11yProps(index) {
   return {
@@ -257,7 +266,24 @@ export default function Body() {
 
     const handleClose = () => {
       setAnchorEl(null);
+      //handleClickOpen();
     };
+
+    const [open, setOpen] = React.useState(false);
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  
+    const handleClickOpen = () => {
+      setOpen(true);
+      handleClose();
+    };
+  
+    const handleClickClose = () => {
+      setOpen(false);
+      handleClose();
+    };
+
+    //console.log(bookId)
 
     return (
       <Card variant="outlined" className={classes.cardRoot}>
@@ -288,8 +314,10 @@ export default function Body() {
             onClick={handleClick}
             size="small"
           >
-            <MoreVertIcon />
+          <MoreVertIcon />
           </IconButton>
+
+
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorEl}
@@ -297,13 +325,37 @@ export default function Body() {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <StyledMenuItem>
+            <StyledMenuItem onClick={() => handleClickOpen()} >
               <ListItemIcon>
                 <PublishIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary="Publish" />
             </StyledMenuItem>
-            <StyledMenuItem>
+
+            <Dialog
+              fullScreen={fullScreen}
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="responsive-dialog-title"
+            >
+              <DialogTitle >{"Do you really want to publish the book?"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Please read and agree the copyright agreement before publishing the book
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button autoFocus onClick={handleClickClose} color="primary">
+                  Disagree
+                </Button>
+                <Button onClick={handleClickClose} color="primary" autoFocus>
+                  Agree
+                </Button>
+              </DialogActions>
+            </Dialog>
+
+
+            <StyledMenuItem onClick={() => handleClose()}>
               <ListItemIcon>
                 <DeleteForeverIcon fontSize="small" />
               </ListItemIcon>
@@ -314,6 +366,10 @@ export default function Body() {
       </Card>
     );
   }
+
+
+
+
 
   const [TopBarvalue, setTopBarValue] = React.useState(0);
   const [TimeSelectionVal, setTopBarValue2] = React.useState(0);
@@ -353,9 +409,6 @@ export default function Body() {
           <Tab label="Statistics"  {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-
-      
-
 
       <Container className={classes.root}>
         <TabPanel value={TopBarvalue} index={0} className={classes.tabPanel}>
