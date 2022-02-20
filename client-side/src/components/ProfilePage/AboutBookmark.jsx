@@ -34,9 +34,17 @@ const useStyles = makeStyles((theme) => ({
         height: 260,
         objectFit: 'cover',
       },
-      aboutLabel: {
-        marginBottom: '10px',
-        fontSize: '12px',
+      userName: {
+        fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+      },
+      btnSectionUnderUserName: {
+        margin: "1rem 0 1rem 0",
+        display: "flex",
+        justifyContent: "center",
+
+        "& > button:not(:last-child)": {
+          marginRight: "1rem",
+        }
       },
       divider: {
         marginTop: '15px',
@@ -54,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
         }
       },
       followButton: {
-        position: 'absolute',
         width: '135px',
         color: 'white',
         letterSpacing: '2px',
@@ -63,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundImage: 'linear-gradient(101deg, #A1A6FF, #63FFE6)',
         borderRadius: '50px',
         padding: '6px 40px 6px 40px',  
-        margin: '280px 0px 0px 10px',
+        margin: 0,
         zIndex: 2,
         transition: 'all 0.3s ease 0s',
         boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
@@ -110,10 +117,9 @@ const useStyles = makeStyles((theme) => ({
         }
       },
       editPicButton: {
-        position: 'absolute',
         borderRadius: '50px',
         height: '32px',
-        margin: '280px 0px 0px 185px',
+        margin: 0,
         boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
         zIndex: 2,
         backgroundColor: theme.palette.background.paper,
@@ -179,6 +185,8 @@ const AboutBookmark = (props) => {
     const [oldBio, setOldBio] = React.useState(bio);
     const [isEditting, setIsEditting] = React.useState(false);
 
+    const [isSelf, setIsSelf] = React.useState(true); // FIXME: Change to real detection.
+
     const dispatch = useDispatch();
 
     const handleProfilePicChange = ({ target }) => {
@@ -211,10 +219,7 @@ const AboutBookmark = (props) => {
         <div className = {classes.aboutContainer}> 
             <img className={classes.bookmarkString} src={BookmarkString} alt='bookmark string'></img>
             <div className = {classes.bio}>
-              {/* FIXME: Include actual functionality for button to follow/unfollow user*/}
-              { isFollowing? <Button disableRipple className = {classes.unfollowButton} onClick={handleFollowChange}size='medium'>Unfollow</Button> 
-              : <Button disableRipple className = {classes.followButton} onClick={handleFollowChange} size='medium'>Follow</Button>
-              }
+              
 
               <input
                   accept="image/*"
@@ -223,15 +228,30 @@ const AboutBookmark = (props) => {
                   type="file"
                   onChange={handleProfilePicChange}
               />
-              <label htmlFor="profileImage">
-                  <Button component="span" className = {classes.editPicButton} size='medium'><PhotoCameraIcon></PhotoCameraIcon></Button>
-              </label>
 
               {/* Profile picture to be changed by user */}
               <img className = {classes.aboutImg} src={profilePic} alt='profile picture'></img>
               <div style={{padding: '10px 15px',}}>
-                  <Typography className={classes.aboutLabel} variant="h6">ABOUT</Typography>
+                <Typography className={classes.userName} variant="h5">{props.user.result.name}</Typography>
+              <div className={classes.btnSectionUnderUserName}>
+                {
+                  isSelf?                  
+                  <label htmlFor="profileImage">
+                      <Button component="span" className = {classes.editPicButton} size='medium'><PhotoCameraIcon></PhotoCameraIcon></Button>
+                  </label>
+                  :
+                  <>
                   
+                {/* FIXME: Include actual functionality for button to follow/unfollow user*/
+                 isFollowing? 
+                  <Button disableRipple className = {classes.unfollowButton} onClick={handleFollowChange}size='medium'>Unfollow</Button> 
+                  : 
+                  <Button disableRipple className = {classes.followButton} onClick={handleFollowChange} size='medium'>Follow</Button>}
+                  
+                <Button disableRipple className = {classes.followButton}>Donate</Button>
+                </>
+                }
+              </div>
                   
                   {/* About biography/description to be changed by user */}
                   { isEditting ? <TextField className={classes.textField} 
