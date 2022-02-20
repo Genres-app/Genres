@@ -341,7 +341,7 @@ export default function Body() {
               <DialogTitle >{"Do you really want to publish the book?"}</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Please read and agree the copyright agreement before publishing the book
+                  Please read and agree with the copyright agreement before publishing the book
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
