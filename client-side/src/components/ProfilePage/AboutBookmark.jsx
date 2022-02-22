@@ -1,19 +1,28 @@
 import React from 'react'
 import { Typography, Button, TextField, } from '@material-ui/core';
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+
 import BookmarkString from '../Assets/bookmark_string.svg'
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { changeProfilePic, changeBio } from '../../actions/profile'
 
+// Icons
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import EditIcon from '@material-ui/icons/Edit';
+import CloseIcon from '@material-ui/icons/Close';
+import SaveIcon from '@material-ui/icons/Save';
+import PortraitIcon from '@material-ui/icons/Portrait';
+
 //ABOUT: The bookmark containing the user's profile picture and bio that is displayed when viewport width > 1024.
 const useStyles = makeStyles((theme) => ({
   //Changes to aboutContainer width should be reflected in placeHolder width in Banner.jsx
   aboutContainer: {
-    position: 'absolute',
+    position: 'sticky',
+    float: "left",
+    top: 80,
     backgroundColor: 'none',
-    height: '650px',
+    height: 'auto',
     width: '286px',
     '@media (max-width:1024px)': {
       display: 'none',
@@ -34,23 +43,18 @@ const useStyles = makeStyles((theme) => ({
     height: 260,
     objectFit: 'cover',
   },
-  userName: {
+  profileName: {
     fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontWeight: "bold",
   },
-  btnSectionUnderUserName: {
+  buttonSections: {
     margin: "1rem 0 1rem 0",
     display: "flex",
     justifyContent: "center",
 
-    "& > button:not(:last-child)": {
+    "& > *:not(:last-child)": {
       marginRight: "1rem",
     }
-  },
-  divider: {
-    marginTop: '15px',
-    height: '1px',
-    width: '100%',
-    borderTop: '1px solid #C0C0C0',
   },
   aboutStats: {
     padding: '12px 10px 0px 10px',
@@ -89,7 +93,6 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   unfollowButton: {
-    position: 'absolute',
     width: '135px',
     color: 'white',
     letterSpacing: '2px',
@@ -98,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'linear-gradient(101deg, #A1A6FF, #A1A6FF)',
     borderRadius: '50px',
     padding: '6px 40px 6px 40px',
-    margin: '280px 0px 0px 10px',
+    margin: 0,
     zIndex: 2,
     transition: 'all 0.3s ease 0s',
     boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.1)',
@@ -116,18 +119,20 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'none',
     }
   },
-  editPicButton: {
-    borderRadius: '50px',
-    height: '32px',
-    margin: 0,
-    boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
-    zIndex: 2,
-    backgroundColor: theme.palette.background.paper,
-    "&:hover": {
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.3)',
-    },
-
+  // editPicButton: {
+  //   borderRadius: '50px',
+  //   height: '32px',
+  //   margin: 0,
+  //   boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)',
+  //   zIndex: 2,
+  //   backgroundColor: theme.palette.background.paper,
+  //   "&:hover": {
+  //     backgroundColor: theme.palette.background.paper,
+  //     boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.3)',
+  //   },
+  // },
+  btnBigRoundedCorner: {
+    borderRadius: 90,
   },
   editAbtButton: {
     display: 'block',
@@ -232,14 +237,64 @@ const AboutBookmark = (props) => {
         {/* Profile picture to be changed by user */}
         <img className={classes.aboutImg} src={profilePic} alt='profile picture'></img>
         <div style={{ padding: '10px 15px', }}>
-          <Typography className={classes.userName} variant="h5">{props.user.result.name}</Typography>
-          <div className={classes.btnSectionUnderUserName}>
+          <Typography className={classes.profileName} variant="h5">{props.user.result.name}</Typography>
+          <Typography className={classes.userName} variant="subtitle1" color="primary">@{props.user.result.username}</Typography>
+
+          {/* About biography/description to be changed by user */}
+          {isEditting ?
+            <TextField className={classes.textField}
+              InputProps={{
+                classes: { input: classes.resize, },
+                disableUnderline: true,
+              }}
+              inputProps={{
+                maxLength: 150,
+              }}
+              value={bio}
+              autoFocus
+              fullWidth
+              multiline
+              rows={5}
+              rowsMax={5}
+              variant="standard"
+              onChange={(event) => dispatch(changeBio(event.target.value))}
+            />
+            :
+            <div style={{ height: 'auto', }}>
+              <Typography className={classes.bioText} variant="body1" color="textSecondary">
+                {bio ? bio : `${props.user.result.name} hasn't added a bio yet.`}
+              </Typography>
+            </div>
+          }
+
+          {
+            isEditting ?
+              <div style={{ display: 'flex', justifyContent: 'space-between', }}>
+                <Typography className={classes.bioLength}>{bio.length}/150</Typography>
+              </div>
+              :
+              <></>
+          }
+
+          <div className={classes.buttonSections}>
             {
               isSelf ?
-                <label htmlFor="profileImage">
-                  <Button component="span" className={classes.editPicButton} size='medium'><PhotoCameraIcon></PhotoCameraIcon></Button>
-                </label>
+
+                isEditting ?
+                  <>
+                    <Button onClick={cancelEdit} className={classes.btnBigRoundedCorner} variant="outlined" color="primary" endIcon={<CloseIcon />}>Cancel</Button>
+                    <Button onClick={saveEdit} className={classes.btnBigRoundedCorner} variant="outlined" color="primary" endIcon={<SaveIcon />}>Save</Button>
+                  </>
+                  :
+                  <>
+                    <label htmlFor="profileImage">
+                      <Button component="span" className={classes.btnBigRoundedCorner} variant="outlined" color="primary">Edit Pic</Button>
+                    </label>
+                    <Button onClick={enterEditMode} className={classes.btnBigRoundedCorner} variant="outlined" color="primary" endIcon={<EditIcon />}>Edit Bio</Button>
+                  </>
+
                 :
+
                 <>
                   {/* FIXME: Include actual functionality for button to follow/unfollow user*/
                     isFollowing ?
@@ -251,43 +306,6 @@ const AboutBookmark = (props) => {
                 </>
             }
           </div>
-
-          {/* About biography/description to be changed by user */}
-          {isEditting ? <TextField className={classes.textField}
-            InputProps={{
-              classes: { input: classes.resize, },
-              disableUnderline: true,
-            }}
-            inputProps={{
-              maxLength: 150,
-            }}
-            value={bio}
-            autoFocus
-            fullWidth
-            multiline
-            rows={5}
-            rowsMax={5}
-            variant="standard"
-            onChange={(event) => dispatch(changeBio(event.target.value))}
-          />
-            : <div style={{ height: '110px', }}>
-              <Typography className={classes.bioText} variant="body1" color="textSecondary">
-                {bio ? bio : `${props.user.result.name} hasn't added a bio yet.`}
-              </Typography>
-            </div>
-          }
-
-          {isEditting ? <div style={{ display: 'flex', justifyContent: 'space-between', }}>
-            <Typography className={classes.bioLength}>{bio.length}/150</Typography>
-            <div style={{ display: 'flex' }}>
-              <Button className={classes.editCancelButton} variant='text' size='small' onClick={cancelEdit}>Cancel</Button>
-              <Button className={classes.editCancelButton} variant='text' size='small' onClick={saveEdit}>Save</Button>
-            </div>
-          </div>
-            : <Button className={classes.editAbtButton} variant='text' size='small' onClick={enterEditMode}>Edit bio</Button>
-          }
-
-          <div className={classes.divider}></div>
 
           {/*FIXME: Numbers should be fetched from database */}
           <div className={classes.aboutStats}>

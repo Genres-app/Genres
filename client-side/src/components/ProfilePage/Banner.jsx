@@ -4,7 +4,6 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 
-import AboutBookmark from './AboutBookmark.jsx';
 import AboutBanner from './AboutBanner.jsx';
 import RadialCharts from './RadialCharts.jsx';
 import BarCharts from './BarCharts.jsx';
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   },
   bannerItems: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
     flexWrap: 'wrap',
@@ -112,16 +111,16 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: '500',
   },
   bannerButtonArea: {
-    paddingTop: '15%',
-    '@media (max-width:1200px)': {
-      paddingTop: '8%',
-    },
-    '@media (max-width:1024px)': {
-      paddingTop: '4%',
-    },
-    '@media (max-width:480px)': {
-      paddingTop: '10%',
-    },
+    paddingTop: 100,
+    // '@media (max-width:1200px)': {
+    //   paddingTop: '8%',
+    // },
+    // '@media (max-width:1024px)': {
+    //   paddingTop: '4%',
+    // },
+    // '@media (max-width:480px)': {
+    //   paddingTop: '10%',
+    // },
   },
   ribbonContainer: {
     position: 'relative',
@@ -184,9 +183,7 @@ const Banner = (props) => {
       <img className={classes.bannerImg} src={bannerPic} alt='banner'></img>
       <Container className={classes.container} maxWidth="xl">
         <div className={`${classes.banner} ${props.selectedTab === 0 ? classes.bannerProfilePadding : classes.bannerProfilePadding}`}>
-
-          {/* About/bookmark */}
-          <AboutBookmark user={props.user}></AboutBookmark>
+          
           {/* Container to organize banner items if width > 1024 */}
 
           <div className={classes.bannerContainer}>
@@ -195,20 +192,20 @@ const Banner = (props) => {
 
             <div className={classes.bannerItems}>
 
-              <div className={classes.ribbonContainer}>
-                <div className={classes.ribbonTail}></div>
+              {/* <div className={classes.ribbonContainer}>
+                <div className={classes.ribbonTail}></div> */}
 
-                <div className={classes.nameContainer}>
+                {/* <div className={classes.nameContainer}>
                   <div style={{ display: 'flex' }}>
                     {/*FIXME: change code to get user's name based on appropriate db schema of passed in user prop*/}
-                    <Typography className={classes.profileName} variant="h4" align="left">{props.user.result.name}</Typography>
+                    {/* <Typography className={classes.profileName} variant="h4" align="left">{props.user.result.name}</Typography> */}
                     {/*FIXME:  dynamically display pro tag if user is a pro user, based on isPro bool in passed in user prop*/}
-                    <div className={classes.proTag}>PRO</div>
-                  </div>
+                    {/* <div className={classes.proTag}>PRO</div>
+                  </div> */}
                   {/*FIXME: change code to get username based on appropriate db schema of passed in user prop*/}
-                  <Typography className={classes.userName} variant="h6" align="left">@{props.user.result.username}</Typography>
+                  {/* <Typography className={classes.userName} variant="h6" align="left">@{props.user.result.username}</Typography>
                 </div>
-              </div>
+              </div> */}
 
               <div className={classes.bannerButtonArea}>
                 <Grid container spacing={2} justify="center">

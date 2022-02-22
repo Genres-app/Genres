@@ -12,6 +12,7 @@ import BarCharts from './../BarCharts.jsx';
 import RadialCharts from './../RadialCharts.jsx';
 import Paper from '@material-ui/core/Paper';
 import BarChart from './Chart';
+import AboutBookmark from '../AboutBookmark.jsx';
 
 //placeholders. Remove after implementing backend.
 import bookcover1 from '../../Assets/bookcover1.jpg';
@@ -200,121 +201,117 @@ const ProfileBody = (props) => {
         pagesTotal={pagesTotal}
       ></Banner>
 
+
       <div className={classes.mainContainer}>
-        {/* Tabs */}
-        <Tabs
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-          variant="fullWidth"
-          value={selectedTab}
-          onChange={handleChange}
-          className={classes.profileTabStyles}
-        >
-          <Tab label="Profile" />
-          <Tab label="Activity" />
-        </Tabs>
 
-        {/* Display AuthorShowcase carousel + comments if on Profile tab */}
-        {selectedTab === 0 &&
-          <Container className={`${classes.container} ${classes.profileBodyContainer}`}>
+        <AboutBookmark user={props.user}></AboutBookmark>
 
-            {/* Bio will be displayed inside body rather than banner if width <= 1024 */}
-            <AboutBody user={props.user}></AboutBody>
+        <Container className={`${classes.container} ${classes.profileBodyContainer}`}>
 
-            <ProfileCarouselContainer
-              title={'Author Showcase'}
-              subtitle={`${showCase.length} Published Stories - 1 Draft (only visible to you)`}
-              books={showCase}
-            ></ProfileCarouselContainer>
+          <Tabs
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+            variant="fullWidth"
+            value={selectedTab}
+            onChange={handleChange}
+            className={classes.profileTabStyles}
+            style={{ fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif" }}
+          >
+            <Tab style={{ fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif" }} label="Profile" />
+            <Tab style={{ fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif" }} label="Activity" />
+          </Tabs>
 
-            <CommentBox comments={comments}></CommentBox>
-
-          </Container>
-        }
-
-        {/* Display Readinglist + Master class carousels if on Activity tab */}
-        {selectedTab === 1 &&
-          <Container className={`${classes.container} ${classes.profileBodyContainer}`}>
-
-
-            <div>
-              {/* Display radial charts if width > 1024 */}
-              <div className={classes.radialCharts}>
-                {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
-                <RadialCharts
-                  value={readTime}
-                  total={readTotal}
-                  readTime={true}
-                  label={'Weekly Read Time'}
-                ></RadialCharts>
-                {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
-                <RadialCharts
-                  value={pagesRead}
-                  total={pagesTotal}
-                  pagesRead={true}
-                  label={'Pages Read'}
-                  rotate={135}
-                ></RadialCharts>
-                {/*FIXME:  if an ongoing event exists, fetch values from db */}
-                <RadialCharts
-                  value={chartEvent ? eventValue : 0}
-                  total={chartEvent ? eventTotal : 100}
-                  eventUnit={chartEvent ? eventUnit : false}
-                  label={'Current Event'}
-                  rotate={180}
-                ></RadialCharts>
-              </div>
-
-              {/* Display bar charts if width <= 1024 */}
-              <div className={classes.barCharts}>
-                {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
-                <BarCharts
-                  value={readTime}
-                  total={readTotal}
-                  readTime={true}
-                  label={'Weekly Read Time'}
-                ></BarCharts>
-                {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
-                <BarCharts
-                  value={pagesRead}
-                  total={pagesTotal}
-                  pagesRead={true}
-                  label={'Pages Read'}
-                ></BarCharts>
-                {/*FIXME:  if an ongoing event exists, fetch values from db */}
-                <BarCharts
-                  value={chartEvent ? eventValue : 0}
-                  total={chartEvent ? eventTotal : 100}
-                  eventUnit={chartEvent ? eventUnit : false}
-                  label={'Current Event'}
-                ></BarCharts>
-              </div>
-            </div>
-
-
-
-
-            <div className={classes.flexColumn}>
-              <ProfileCarouselContainer
-                title={'Reading List'}
-                subtitle={`${readingList.length} Books`}
-                books={readingList}
-              ></ProfileCarouselContainer>
+          {/* Display AuthorShowcase carousel + comments if on Profile tab */}
+          {selectedTab === 0 &&
+            <>
+              {/* Bio will be displayed inside body rather than banner if width <= 1024 */}
+              <AboutBody user={props.user}></AboutBody>
 
               <ProfileCarouselContainer
-                title={'Followed Masterclasses'}
-                subtitle={`${masterClasses.length} Classes`}
-                books={masterClasses}
+                title={'Author Showcase'}
+                subtitle={`${showCase.length} Published Stories - 1 Draft (only visible to you)`}
+                books={showCase}
               ></ProfileCarouselContainer>
-            </div>
 
+              <CommentBox comments={comments}></CommentBox>
+            </>
+          }
 
+          {/* Display Readinglist + Master class carousels if on Activity tab */}
+          {selectedTab === 1 &&
+            <>
+              <div>
+                {/* Display radial charts if width > 1024 */}
+                <div className={classes.radialCharts}>
+                  {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
+                  <RadialCharts
+                    value={readTime}
+                    total={readTotal}
+                    readTime={true}
+                    label={'Weekly Read Time'}
+                  ></RadialCharts>
+                  {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
+                  <RadialCharts
+                    value={pagesRead}
+                    total={pagesTotal}
+                    pagesRead={true}
+                    label={'Pages Read'}
+                    rotate={135}
+                  ></RadialCharts>
+                  {/*FIXME:  if an ongoing event exists, fetch values from db */}
+                  <RadialCharts
+                    value={chartEvent ? eventValue : 0}
+                    total={chartEvent ? eventTotal : 100}
+                    eventUnit={chartEvent ? eventUnit : false}
+                    label={'Current Event'}
+                    rotate={180}
+                  ></RadialCharts>
+                </div>
 
+                {/* Display bar charts if width <= 1024 */}
+                <div className={classes.barCharts}>
+                  {/*FIXME:  fetch readTime and readTotal from user's recorded values in db */}
+                  <BarCharts
+                    value={readTime}
+                    total={readTotal}
+                    readTime={true}
+                    label={'Weekly Read Time'}
+                  ></BarCharts>
+                  {/*FIXME:  fetch pagesRead and pagesTotal from user's recorded values in db */}
+                  <BarCharts
+                    value={pagesRead}
+                    total={pagesTotal}
+                    pagesRead={true}
+                    label={'Pages Read'}
+                  ></BarCharts>
+                  {/*FIXME:  if an ongoing event exists, fetch values from db */}
+                  <BarCharts
+                    value={chartEvent ? eventValue : 0}
+                    total={chartEvent ? eventTotal : 100}
+                    eventUnit={chartEvent ? eventUnit : false}
+                    label={'Current Event'}
+                  ></BarCharts>
+                </div>
+              </div>
 
-          </Container>
-        }
+              <div className={classes.flexColumn}>
+                <ProfileCarouselContainer
+                  title={'Reading List'}
+                  subtitle={`${readingList.length} Books`}
+                  books={readingList}
+                ></ProfileCarouselContainer>
 
+                <ProfileCarouselContainer
+                  title={'Followed Masterclasses'}
+                  subtitle={`${masterClasses.length} Classes`}
+                  books={masterClasses}
+                ></ProfileCarouselContainer>
+              </div>
+            </>
+          }
+
+        </Container>
 
         {/* {selectedTab === 2 && 
             <Container className = {`${classes.container} ${classes.profileBodyContainer}`}>

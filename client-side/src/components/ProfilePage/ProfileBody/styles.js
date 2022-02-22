@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
 
   radialCharts: {
+    paddingTop: "2rem",
     display: 'flex',
     justifyContent: 'center',
     '@media (max-width:1024px)': {
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     // width: '60%',
     // marginLeft: 'clamp(410px, 32%, 32%)',
     // marginRight: '2%',
+    marginTop: '10px',
     paddingLeft: "calc(286px + 1.5rem)",
     '@media (max-width:1024px)': {
       width: '100%',
@@ -62,8 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
   profileTabStyles: {
     maxWidth: '800px',
-    marginTop: '10px',
-    paddingLeft: "calc(260px + 3rem)",
+    // paddingLeft: "calc(260px + 3rem)",
     // marginLeft: 'clamp(410px, 32%, 32%)',
     '@media (max-width:1024px)': {
       maxWidth: '100%',
