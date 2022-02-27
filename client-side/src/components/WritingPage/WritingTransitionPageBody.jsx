@@ -430,7 +430,7 @@ export default function Body() {
 
           <div className={classes.bookList} >
 
-            <Card variant="outlined" className={classes.cardRoot} >
+            <Card variant="outlined" className={classes.cardRoot} onClick={() => routeChange(`/writing`)}>
               <CardActionArea className={classes.addNewCard}>
                 <div className={classes.customPlusIcon}>
                   <div style={{ left: 0 }}></div>
