@@ -654,6 +654,8 @@ export default function WPEditor({ theme }) {
     [5, 'ChapterE']
   ]
 
+  document.body.style.margin = "0 0 0 0";
+
   return (
     <>
       {/* BELOW: Top Appbar */}

@@ -227,6 +227,9 @@ const useStyles = makeStyles((theme) => ({
     // paddingTop: '4rem',
     borderRadius: theme.shape.borderRadius,
     overflow: "hidden",
+    "& *": {
+      fontFamily: theme.typography.fontFamilyTitle,
+    }
   },
   avatarOfDrawer: {
     position: 'relative',
@@ -366,10 +369,6 @@ export default function Body() {
     );
   }
 
-
-
-
-
   const [TopBarvalue, setTopBarValue] = React.useState(0);
   const [TimeSelectionVal, setTopBarValue2] = React.useState(0);
 
@@ -422,7 +421,7 @@ export default function Body() {
 
           <div className={classes.bookList} >
 
-            <Card variant="outlined" className={classes.cardRoot} >
+            <Card variant="outlined" className={classes.cardRoot} onClick={() => routeChange(`/writing`)}>
               <CardActionArea className={classes.addNewCard}>
                 <div className={classes.customPlusIcon}>
                   <div style={{ left: 0 }}></div>
