@@ -1,4 +1,4 @@
-import React,  { useState }from 'react';
+import React, { useState } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -156,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   tabPanel2: {
-    
+
     width: "100%",
     "& > div": {
       padding: 0,
@@ -272,12 +272,12 @@ export default function Body() {
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  
+
     const handleClickOpen = () => {
       setOpen(true);
       handleClose();
     };
-  
+
     const handleClickClose = () => {
       setOpen(false);
       handleClose();
@@ -314,7 +314,7 @@ export default function Body() {
             onClick={handleClick}
             size="small"
           >
-          <MoreVertIcon />
+            <MoreVertIcon />
           </IconButton>
 
 
@@ -386,14 +386,14 @@ export default function Body() {
   const dispatch = useDispatch();
   const history = useHistory();
   const routeChange = (path) => {
-      history.push(path);
+    history.push(path);
   }
   return (
     <>
-      <div style={{  backgroundColor: "#855cde", margin: '0 0 0 0', paddding: 0, paddingTop: '0vh'}}>
-      <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
-            <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
-            </div>
+      <div style={{ backgroundColor: "#855cde", margin: '0 0 0 0', paddding: 0, paddingTop: '0vh' }}>
+        <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
+        <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
+      </div>
 
 
       <AppBar className={classes.publishStateTabs}>
@@ -446,38 +446,38 @@ export default function Body() {
 
         {/* Display Readinglist + Master class carousels if on Statistics tab */}
 
-      <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel} >
-        <div style = {{ position:"absolute", marginLeft:"52vw", marginTop:"20vh", marginBottom:"0",marginRight:"0",padding:"0"}}>
-      <Tabs
-          value={TimeSelectionVal}
-          orientation="vertical"
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={handleTopBar2}
-          
-        >
-          <Tab label="1w"  {...a11yProps(0)} />
-          <Tab label="1m"  {...a11yProps(1)} />
-          <Tab label="12m"  {...a11yProps(2)} />
-        </Tabs>
-        </div>
-        <div >
-        <TabPanel2 value={TimeSelectionVal} index={0} className={classes.tabPanel2}>
-        <div>
-          <BarChartWeek/>
-        </div>
-      </TabPanel2>
-      <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
-      <div >
-        <BarChartMonth/>
-      </div>
-      </TabPanel2>
-      <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
-      <div >
-        <BarChartYear/>
-      </div>
-      </TabPanel2>
-      </div>
+        <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel} >
+          <div style={{ position: "absolute", marginLeft: "52vw", marginTop: "20vh", marginBottom: "0", marginRight: "0", padding: "0" }}>
+            <Tabs
+              value={TimeSelectionVal}
+              orientation="vertical"
+              indicatorColor="primary"
+              textColor="primary"
+              onChange={handleTopBar2}
+
+            >
+              <Tab label="1w"  {...a11yProps(0)} />
+              <Tab label="1m"  {...a11yProps(1)} />
+              <Tab label="12m"  {...a11yProps(2)} />
+            </Tabs>
+          </div>
+          <div >
+            <TabPanel2 value={TimeSelectionVal} index={0} className={classes.tabPanel2}>
+              <div>
+                <BarChartWeek />
+              </div>
+            </TabPanel2>
+            <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
+              <div >
+                <BarChartMonth />
+              </div>
+            </TabPanel2>
+            <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
+              <div >
+                <BarChartYear />
+              </div>
+            </TabPanel2>
+          </div>
         </TabPanel>
 
       </Container>
