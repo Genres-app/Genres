@@ -10,6 +10,9 @@ export const lightTheme = {
       main: '#ff1744',
     }
   },
+  typography: {
+    fontFamilyTitle: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+  },
   shape: {
     borderRadius: 8,
   },
@@ -27,6 +30,9 @@ export const darkTheme = {
     warning: {
       main: '#ff1744',
     }
+  },
+  typography: {
+    fontFamilyTitle: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
   },
   shape: {
     borderRadius: 8,

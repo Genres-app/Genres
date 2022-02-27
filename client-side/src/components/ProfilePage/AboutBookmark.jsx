@@ -1,11 +1,21 @@
 import React from 'react'
-import { Typography, Button, TextField, } from '@material-ui/core';
+import { Typography, Button, TextField, IconButton, } from '@material-ui/core';
 
-import BookmarkString from '../Assets/bookmark_string.svg'
+import BookmarkString from '../Assets/bookmark_string.svg';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { changeProfilePic, changeBio } from '../../actions/profile'
+import { changeProfilePic, changeBio } from '../../actions/profile';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
 
 // Icons
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
@@ -13,6 +23,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import PortraitIcon from '@material-ui/icons/Portrait';
+import PersonIcon from '@material-ui/icons/Person';
 
 //ABOUT: The bookmark containing the user's profile picture and bio that is displayed when viewport width > 1024.
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
   },
   profileName: {
-    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: theme.typography.fontFamilyTitle,
     fontWeight: "bold",
   },
   buttonSections: {
@@ -147,13 +158,20 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '12px',
     color: '#666666'
   },
+  followStatsTitle: {
+    cursor: 'pointer',
+    "&:hover": {
+      color: theme.palette.primary.main,
+    }
+  },
   statsLabel: {
-    fontSize: '13px',
-    fontWeight: '100',
+    fontSize: '1rem',
+    fontFamily: theme.typography.fontFamilyTitle,
   },
   statsNumber: {
-    fontSize: '13px',
-    fontWeight: '500',
+    fontSize: '1rem',
+    fontFamily: theme.typography.fontFamilyTitle,
+    fontWeight: '600',
   },
   bookmarkString: {
     position: 'absolute',
@@ -176,6 +194,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10px',
     fontWeight: 100,
     color: '#757575',
+  },
+
+  FollowerDialogTitle: {
+    color: theme.palette.primary.main,
+    "& > h2": {
+      fontFamily: theme.typography.fontFamilyTitle,
+    }
   }
 }));
 
@@ -190,7 +215,49 @@ const AboutBookmark = (props) => {
   const [oldBio, setOldBio] = React.useState(bio);
   const [isEditting, setIsEditting] = React.useState(false);
 
-  const [isSelf, setIsSelf] = React.useState(true); // FIXME: Change to real detection.
+  const [isSelf, setIsSelf] = React.useState(true); // FIXME: Change to actual detection.
+
+  var followNums = [114, 514, 233]; // FIXME: Change to actual data
+
+  const [followDialogState, setFollowDialog] = React.useState(0);
+
+  const FollowDialog = ({ state }) => {
+    let userList = [];
+    for (let i = 0; i < followNums[state - 1]; i++) {
+      userList.push(i + 1);
+    }
+
+    return (
+      <Dialog
+        open={state}
+        onClose={() => setFollowDialog(0)}
+        aria-labelledby="dialog-title"
+        aria-describedby="dialog-description"
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingRight: ".5rem" }}>
+          <DialogTitle id="simple-dialog-title" className={classes.FollowerDialogTitle}>
+            {followNums[state - 1]} {state == 1? "Followers": state == 2? "Following" : "Friends"}
+            </DialogTitle>
+          <IconButton color="primary" onClick={() => setFollowDialog(0)}><CloseIcon /></IconButton>
+        </div>
+        <div style={{padding: "0 1rem 1rem 1rem", display: "flex", justifyContent: "stretch"}}>
+        <TextField label="Search..." variant="filled" size="small" style={{width: "100%"}}/>
+        </div>
+        <List style={{ overflowX: "scroll", width: '20rem' }}>
+          {userList.map((item, i) => (
+            <ListItem button onClick={() => setFollowDialog(0)} key={i}>
+              <ListItemAvatar>
+                <Avatar className={classes.avatar}>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={`User ${item}`} />
+            </ListItem>
+          ))}
+        </List>
+      </Dialog>
+    )
+  }
 
   const dispatch = useDispatch();
 
@@ -309,19 +376,21 @@ const AboutBookmark = (props) => {
 
           {/*FIXME: Numbers should be fetched from database */}
           <div className={classes.aboutStats}>
-            <div>
-              <Typography className={classes.statsLabel} variant="subtitle1" >FOLLOWERS</Typography>
-              <Typography className={classes.statsNumber} variant="subtitle1">100</Typography>
+            <div onClick={() => setFollowDialog(1)} className={classes.followStatsTitle}>
+              <Typography className={classes.statsLabel} variant="subtitle1" >Followers</Typography>
+              <Typography className={classes.statsNumber} variant="subtitle1">{followNums[0]}</Typography>
             </div>
-            <div>
-              <Typography className={classes.statsLabel} variant="subtitle1">FOLLOWING</Typography>
-              <Typography className={classes.statsNumber} variant="subtitle1">100</Typography>
+            <div onClick={() => setFollowDialog(2)} className={classes.followStatsTitle}>
+              <Typography className={classes.statsLabel} variant="subtitle1">Following</Typography>
+              <Typography className={classes.statsNumber} variant="subtitle1">{followNums[1]}</Typography>
             </div>
-            <div>
-              <Typography className={classes.statsLabel} variant="subtitle1">FRIENDS</Typography>
-              <Typography className={classes.statsNumber} variant="subtitle1">100</Typography>
+            <div onClick={() => setFollowDialog(3)} className={classes.followStatsTitle}>
+              <Typography className={classes.statsLabel} variant="subtitle1">Friends</Typography>
+              <Typography className={classes.statsNumber} variant="subtitle1">{followNums[2]}</Typography>
             </div>
           </div>
+
+          <FollowDialog state={followDialogState}/>
         </div>
       </div>
     </div>
