@@ -12,6 +12,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
+  appBar: {
+    backgroundColor: theme.palette.background.paper,
+    color: theme.palette.text.primary,
+  },
+
+  noShadow: {
+    boxShadow: 'none',
+  },
+
   appBarLogo: {
     height: "100%",
     display: "flex",
@@ -72,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
-  
+
   hideWhenWidLessThan900: {
     "@media (max-width: 899px)": {
       display: "none",

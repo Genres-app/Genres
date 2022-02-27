@@ -67,9 +67,16 @@ function App() {
               <Footer />
             </Route>
 
+            <Route exact path='/'>
+              <Dashboard passTheme={handlePassedTheme} noShadowAtTop={true} />
+              <Homepage />
+              <BackgroundDecoration />
+              <Footer />
+            </Route>
+
             <div>
               <Dashboard passTheme={handlePassedTheme} />
-              <Route exact path='/' component={Homepage} />
+              {/* <Route exact path='/' component={Homepage} /> */}
               <Route exact path="/search" component={SearchResults} />
               <Route exact path='/novel' component={NovelLandingPage} />
               <Route exact path='/profile' component={ProfilePage} />
