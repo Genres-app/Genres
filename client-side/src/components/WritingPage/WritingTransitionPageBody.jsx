@@ -221,25 +221,27 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     zIndex: 999,
-    paddingTop: '3.5vh',
+    paddingTop: '4rem',
   },
   avatarOfDrawer: {
     position: 'relative',
     width: theme.spacing(12),
     height: theme.spacing(12),
     margin: '0 0 0 400px',
-    marginTop: '0vh',
+    marginTop: 0,
     marginBottom: theme.spacing(1),
     fontSize: '3rem',
-    border: '3.5px solid white',
+    border: `3.5px solid ${theme.palette.background.paper}`,
     zIndex: 1000,
     transform: 'translateY(50%)',
+    fontFamily: theme.typography.fontFamilyTitle,
   },
   userName: {
     position: 'relative',
     margin: '0 0 0 525px',
-    marginTop: '0vh',
+    marginTop: 0,
     marginBottom: theme.spacing(1),
+    fontFamily: theme.typography.fontFamilyTitle,
     zIndex: 1000,
   },
   widerBtn: {
@@ -447,7 +449,8 @@ export default function Body() {
         {/* Display Readinglist + Master class carousels if on Statistics tab */}
 
         <TabPanel value={TopBarvalue} index={2} className={classes.tabPanel} >
-          <div style={{ position: "absolute", marginLeft: "52vw", marginTop: "20vh", marginBottom: "0", marginRight: "0", padding: "0" }}>
+          <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+
             <Tabs
               value={TimeSelectionVal}
               orientation="vertical"
@@ -456,27 +459,28 @@ export default function Body() {
               onChange={handleTopBar2}
 
             >
-              <Tab label="1w"  {...a11yProps(0)} />
-              <Tab label="1m"  {...a11yProps(1)} />
-              <Tab label="12m"  {...a11yProps(2)} />
+              <Tab label="7 Days"  {...a11yProps(0)} />
+              <Tab label="1 Month"  {...a11yProps(1)} />
+              <Tab label="1 Year"  {...a11yProps(2)} />
             </Tabs>
-          </div>
-          <div >
-            <TabPanel2 value={TimeSelectionVal} index={0} className={classes.tabPanel2}>
-              <div>
-                <BarChartWeek />
-              </div>
-            </TabPanel2>
-            <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
-              <div >
-                <BarChartMonth />
-              </div>
-            </TabPanel2>
-            <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
-              <div >
-                <BarChartYear />
-              </div>
-            </TabPanel2>
+
+            <div style={{ height: "auto", width: "100%", marginLeft: "2rem" }} >
+              <TabPanel2 value={TimeSelectionVal} index={0} className={classes.tabPanel2}>
+                <div>
+                  <BarChartWeek />
+                </div>
+              </TabPanel2>
+              <TabPanel2 value={TimeSelectionVal} index={1} className={classes.tabPanel2}>
+                <div >
+                  <BarChartMonth />
+                </div>
+              </TabPanel2>
+              <TabPanel2 value={TimeSelectionVal} index={2} className={classes.tabPanel2}>
+                <div >
+                  <BarChartYear />
+                </div>
+              </TabPanel2>
+            </div>
           </div>
         </TabPanel>
 
