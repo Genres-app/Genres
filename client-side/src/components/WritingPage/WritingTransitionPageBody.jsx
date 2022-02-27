@@ -55,7 +55,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
+import CopyrightDialog from './AgreeWithCopyright';
 
 function a11yProps(index) {
   return {
@@ -273,12 +273,10 @@ export default function Body() {
 
     const handleClose = () => {
       setAnchorEl(null);
-      //handleClickOpen();
     };
 
     const [open, setOpen] = React.useState(false);
     const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -293,6 +291,17 @@ export default function Body() {
     //console.log(bookId)
 
     return (
+      <div>
+      <div
+        open={open}
+      >
+        {open ?
+        <div onClick={handleClickClose}>
+          <CopyrightDialog/>
+        </div> : " "}
+      </div>
+
+      
       <Card variant="outlined" className={classes.cardRoot}>
 
         <CardActionArea onClick={() => routeChange(`/book/${bookId}`)}>
@@ -325,12 +334,14 @@ export default function Body() {
           </IconButton>
 
 
+          
+
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
-            onClose={handleClose}
+            onClose={handleClickClose}
           >
             <StyledMenuItem onClick={() => handleClickOpen()} >
               <ListItemIcon>
@@ -339,30 +350,10 @@ export default function Body() {
               <ListItemText primary="Publish" />
             </StyledMenuItem>
 
-            <Dialog
-              fullScreen={fullScreen}
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="responsive-dialog-title"
-            >
-              <DialogTitle >{"Do you really want to publish the book?"}</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Please read and agree with the copyright agreement before publishing the book
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button autoFocus onClick={handleClickClose} color="primary">
-                  Disagree
-                </Button>
-                <Button onClick={handleClickClose} color="primary" autoFocus>
-                  Agree
-                </Button>
-              </DialogActions>
-            </Dialog>
+            
 
 
-            <StyledMenuItem onClick={() => handleClose()}>
+            <StyledMenuItem onClick={() => handleClickClose()}>
               <ListItemIcon>
                 <DeleteForeverIcon fontSize="small" />
               </ListItemIcon>
@@ -371,6 +362,7 @@ export default function Body() {
           </StyledMenu>
         </CardActions>
       </Card>
+      </div>
     );
   }
 

@@ -8,22 +8,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
-export default function AgreeWithCopyright() {
-
-  //handleClickOpen();
-
-  const [open, setOpen] = React.useState(false);
+export default function CopyrightDialog() {
+  const [open, setOpen] = React.useState(true);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
   };
-
 
   return (
     <div>
@@ -31,13 +23,11 @@ export default function AgreeWithCopyright() {
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle>{"Do you really want to agree with the copyright agreement?"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Let Google help apps determine location. This means sending anonymous location data to
-            Google, even when no apps are running.
+          Please read and agree with the copyright agreement before publishing the book
           </DialogContentText>
         </DialogContent>
         <DialogActions>
