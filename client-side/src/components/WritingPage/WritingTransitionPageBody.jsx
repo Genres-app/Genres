@@ -227,6 +227,9 @@ const useStyles = makeStyles((theme) => ({
     // paddingTop: '4rem',
     borderRadius: theme.shape.borderRadius,
     overflow: "hidden",
+    "& *": {
+      fontFamily: theme.typography.fontFamilyTitle,
+    }
   },
   avatarOfDrawer: {
     position: 'relative',
@@ -373,10 +376,6 @@ export default function Body() {
       </Card>
     );
   }
-
-
-
-
 
   const [TopBarvalue, setTopBarValue] = React.useState(0);
   const [TimeSelectionVal, setTopBarValue2] = React.useState(0);
