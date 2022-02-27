@@ -72,6 +72,9 @@ import StickyNote from './stickyNote';
 import { NoteLib } from './NoteLib';
 import Add from '@material-ui/icons/Add';
 
+
+import CopyrightDialog from './AgreeWithCopyright';
+
 // HELP from https://docs.slatejs.org/walkthroughs/01-installing-slate
 // HELP from https://github.com/ianstormtaylor/slate/blob/main/site/examples/richtext.tsx
 // The text editor BELOW consists of the Slate.js framework for building
@@ -333,6 +336,17 @@ export default function WPEditor({ theme }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
 
   const classes = useStyles();
+
+  //dialog
+  const [open, setOpen] = React.useState(false);
+  const handleDiaOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDiaClose = () => {
+    setOpen(false);
+  };
+
 
   const colorThief = new ColorThief();
 
@@ -773,10 +787,21 @@ export default function WPEditor({ theme }) {
               variant="text"
               color="primary"
               // className={classes.button}
+              onClick={() => handleDiaOpen()}
               startIcon={<Icon path={mdiPublish} size={1} />}
             >
               Publish
             </Button>
+
+            <div
+              open={open}
+            >
+              {open ?
+              <div onClick={handleDiaClose}>
+                <CopyrightDialog/>
+              </div> : " "}
+            </div>
+
             <Divider orientation="vertical" flexItem className={classes.barDivider} />
             <Typography variant="caption">{
               !isSaved ?
