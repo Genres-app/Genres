@@ -24,7 +24,7 @@ export default function CopyrightDialog() {
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>{"Do you really want to agree with the copyright agreement?"}</DialogTitle>
+        <DialogTitle>{"Do you really want to publish this book?"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
           Please read and agree with the copyright agreement before publishing the book
