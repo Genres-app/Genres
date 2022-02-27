@@ -63,6 +63,7 @@ function App() {
             <Route exact path="/mywriting">
               <Dashboard passTheme={handlePassedTheme} isMywritingPage={true} />
               <WritingTransitionPage />
+              <BackgroundDecoration />
               <Footer />
             </Route>
 

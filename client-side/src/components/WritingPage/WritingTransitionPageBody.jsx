@@ -150,7 +150,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   tabPanel: {
-    paddingTop: theme.spacing(10),
+    paddingTop: 112,
     "& > div": {
       padding: 0,
     }
@@ -215,23 +215,28 @@ const useStyles = makeStyles((theme) => ({
   media: {
   },
   publishStateTabs: {
-    position: 'absolute',
-    margin: '160px 0 0 0',
+    position: 'fixed',
+    top: 96,
+    left: '50%',
+    transform: "translateX(-50%)",
+    margin: 0,
     flexGrow: 1,
-    width: '100%',
+    width: 'max-content',
     backgroundColor: theme.palette.background.paper,
     zIndex: 999,
-    paddingTop: '4rem',
+    // paddingTop: '4rem',
+    borderRadius: theme.shape.borderRadius,
+    overflow: "hidden",
   },
   avatarOfDrawer: {
     position: 'relative',
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-    margin: '0 0 0 400px',
+    // width: theme.spacing(12),
+    // height: theme.spacing(12),
+    // margin: '0 0 0 400px',
     marginTop: 0,
     marginBottom: theme.spacing(1),
-    fontSize: '3rem',
-    border: `3.5px solid ${theme.palette.background.paper}`,
+    // fontSize: '3rem',
+    // border: `3.5px solid ${theme.palette.background.paper}`,
     zIndex: 1000,
     transform: 'translateY(50%)',
     fontFamily: theme.typography.fontFamilyTitle,
@@ -392,10 +397,18 @@ export default function Body() {
   }
   return (
     <>
-      <div style={{ backgroundColor: "#855cde", margin: '0 0 0 0', paddding: 0, paddingTop: '0vh' }}>
-        <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar>
-        <Typography className={classes.userName} variant="h6">{user.result.username}</Typography>
-      </div>
+      {/* <div style={{ backgroundColor: "#855cde", margin: '0 0 0 0', paddding: 0, paddingTop: '0vh' }}>
+        
+      </div> */}
+
+      {/* <div style={{ display: "flex" }}>
+        <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>
+          {user.result.username.charAt(0)}
+        </Avatar>
+        <Typography className={classes.userName} variant="h6">
+          {user.result.username}'s Writing Space
+          </Typography>
+      </div> */}
 
 
       <AppBar className={classes.publishStateTabs}>
