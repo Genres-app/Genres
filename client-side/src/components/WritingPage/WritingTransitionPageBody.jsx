@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useRef, useImperativeHandle  } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import {
   AppBar,
@@ -278,33 +278,24 @@ export default function Body() {
       setAnchorEl(null);
     };
 
-    const [open, setOpen] = React.useState(false);
     const theme = useTheme();
 
     const handleClickOpen = () => {
-      setOpen(true);
       handleClose();
+      childRef.current.handleOpenDia();
     };
 
     const handleClickClose = () => {
-      setOpen(false);
       handleClose();
     };
+
+    const childRef = useRef();
 
     //console.log(bookId)
 
     return (
       <div>
-      <div
-        open={open}
-      >
-        {open ?
-        <div onClick={handleClickClose}>
-          <CopyrightDialog/>
-        </div> : " "}
-      </div>
 
-      
       <Card variant="outlined" className={classes.cardRoot}>
 
         <CardActionArea onClick={() => routeChange(`/book/${bookId}`)}>
@@ -365,6 +356,7 @@ export default function Body() {
           </StyledMenu>
         </CardActions>
       </Card>
+      <CopyrightDialog ref={childRef} />
       </div>
     );
   }

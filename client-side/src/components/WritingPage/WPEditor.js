@@ -1,5 +1,5 @@
 // Import React dependencies.
-import React, { useEffect, useCallback, useMemo, useState } from 'react';
+import React, { useEffect, useCallback, useMemo, useState, useImperativeHandle, forwardRef, useRef } from 'react';
 // Import the Slate editor factory.
 import { createEditor, Editor, Transforms, Element as SlateElement } from 'slate';
 // Import the Slate components and React plugin.
@@ -659,6 +659,8 @@ export default function WPEditor({ theme }) {
     setAnchorEl(null);
   };
 
+  const childRef = useRef();
+
   const chapters = [
     [1, 'ChapterA'],
     [2, 'ChapterB'],
@@ -787,12 +789,13 @@ export default function WPEditor({ theme }) {
               variant="text"
               color="primary"
               // className={classes.button}
-              onClick={() => handleDiaOpen()}
+              onClick={() => childRef.current.handleOpenDia()}
               startIcon={<Icon path={mdiPublish} size={1} />}
             >
               Publish
             </Button>
-
+            <CopyrightDialog ref={childRef} />
+            
             <div
               open={open}
             >
@@ -1044,6 +1047,7 @@ export default function WPEditor({ theme }) {
 
         <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={true} />
       </CssBaseline>
+      
     </>
   );
 }
