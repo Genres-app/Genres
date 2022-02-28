@@ -30,8 +30,8 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: '500px',
-    borderRadius: 0
+    height: 500,
+    borderRadius: 24,
   },
   defaultSidePadding: {
     paddingRight: '10%',
@@ -85,14 +85,17 @@ const Body = () => {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <Carousel>
+      <div style={{
+        width: "calc(100% - 2rem)",
+        margin: "1rem auto",
+      }}>
+        <Carousel animation="slide">
           {
             // items.map( (item, i) => <Item key={i} item={item} /> )
             items.map((item, i) => <Item key={i} item={item} />)
           }
         </Carousel>
-      </Grid>
+      </div>
 
       <Grid item container xs={12}>
         <Grid item xs={12} className={classes.body}>

@@ -128,7 +128,7 @@ function useWindowSize() {
   return size;
 }
 
-const Dashboard = ({ passTheme, isMywritingPage }) => {
+const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -160,8 +160,10 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
     setSidebar(false);
   };
 
+  const [noShadow, setNoShadow] = useState(noShadowAtTop && window.pageYOffset <= 0);
+
   // Theme
-  const [theme, setTheme] = useState(true)
+  const [theme, setTheme] = useState(true);
 
 
   useEffect(() => {
@@ -184,6 +186,21 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
       setTheme(true)
     }
 
+
+    const onScroll = e => {
+      if (noShadowAtTop) {
+        if (window.pageYOffset <= 0) {
+          setNoShadow(true);
+        } else {
+          setNoShadow(false);
+        }
+      }
+      console.log(window.pageYOffset);
+    };
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener("scroll", onScroll);
+
   }, [location]);
 
 
@@ -197,30 +214,30 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
   }
 
 
-  // Remove BoxShadow of AppBar @rankings
-  const setStyleOfAppbar1 = makeStyles((theme) => ({
-    appBar: {
-      backgroundColor: theme.palette.background.paper,
-      color: theme.palette.text.primary,
-      boxShadow: 'none',
-    }
-  }));
-  const setStyleOfAppbar2 = makeStyles((theme) => ({
-    appBar: {
-      backgroundColor: theme.palette.background.paper,
-      color: theme.palette.text.primary,
-      //boxShadow: 'none',
-    }
-  }));
+  // // Remove BoxShadow of AppBar @rankings
+  // const setStyleOfAppbar1 = makeStyles((theme) => ({
+  //   appBar: {
+  //     backgroundColor: theme.palette.background.paper,
+  //     color: theme.palette.text.primary,
+  //     boxShadow: 'none',
+  //   }
+  // }));
+  // const setStyleOfAppbar2 = makeStyles((theme) => ({
+  //   appBar: {
+  //     backgroundColor: theme.palette.background.paper,
+  //     color: theme.palette.text.primary,
+  //     //boxShadow: 'none',
+  //   }
+  // }));
 
-  // Change Style @ /rankings
-  let classOfAppbar;
-  if (window.location.pathname == "/rankings") {
-    classOfAppbar = setStyleOfAppbar1();
-  }
-  else {
-    classOfAppbar = setStyleOfAppbar2();
-  }
+  // // Change Style @ /rankings
+  // let classOfAppbar;
+  // if (window.location.pathname == "/rankings") {
+  //   classOfAppbar = setStyleOfAppbar1();
+  // }
+  // else {
+  //   classOfAppbar = setStyleOfAppbar2();
+  // }
 
 
   // Load Theme when refresh
@@ -264,7 +281,12 @@ const Dashboard = ({ passTheme, isMywritingPage }) => {
         <AppBar
           position="fixed"
           color="secondary"
-          className={classOfAppbar.appBar}
+          className={
+            window.location.pathname == "/rankings" || noShadow?
+            clsx(classes.appBar, classes.noShadow)
+            : 
+            classes.appBar}
+          id="Appbar"
         >
           <Toolbar>
 
