@@ -5,9 +5,12 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 
 const CopyrightDialog = forwardRef((props, ref)  => {  
-
 
   const [open, setOpen] = React.useState(false);
 
@@ -17,6 +20,13 @@ const CopyrightDialog = forwardRef((props, ref)  => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+
+  const [Value, setSelectedValue] = React.useState('long');
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.Value);
   };
 
   useImperativeHandle(
@@ -42,12 +52,31 @@ const CopyrightDialog = forwardRef((props, ref)  => {
           Please read and agree with the copyright agreement before publishing the book
           </DialogContentText>
         </DialogContent>
+
+
+            <DialogContentText style = {{marginLeft: "25px", marginRight: "25px"}}>
+            Do you allow fan works? please note that you can change to "Yes" if you choose "No" at this time, but you can not change to "No" if you choose "Yes" at this time.
+            </DialogContentText>
+            <FormControl component="fieldset">
+            <RadioGroup 
+            onChange={handleChange}
+            //value={this.Value}       
+            row={true}
+
+            /*onChange={this.handleChang}*/>
+              <FormControlLabel  style = {{marginLeft: "350px"}} value="Yes" control={<Radio />} label="Yes" />
+              <FormControlLabel  style = {{marginLeft: "20px"}} value="No" control={<Radio />} label="No" />
+            </RadioGroup>
+            </FormControl>
+
+
+
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Disagree
+            CANCEL
           </Button>
           <Button onClick={handleClose} color="primary" autoFocus>
-            Agree
+            AGREE AND PUBLISH
           </Button>
         </DialogActions>
       </Dialog>
