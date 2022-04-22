@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, forwardRef, useRef, useImperativeHandle  } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import PrevArrow from '@material-ui/icons/ArrowBackIos';
 import NextArrow from '@material-ui/icons/ArrowForwardIos';
@@ -45,7 +45,7 @@ class BetaReadingBookCarousel extends React.Component {
   handleClick = (bId) => {
     this.setState({questId: bId, questOpen: true})
   }
-
+  
 
   myArrow({ type, onClick, isEdge }) {
     const pointer = type === consts.PREV ? <PrevArrow /> : <NextArrow />

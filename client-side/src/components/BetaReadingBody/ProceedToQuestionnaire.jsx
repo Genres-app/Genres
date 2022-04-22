@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, forwardRef, useRef, useImperativeHandle  } from 'react';
 import {
   Button,
   Chip,
@@ -69,7 +69,21 @@ let bottomStylesDisagree = {
 }
 
 const ProceedToQ = ({ open, bookId, handleClkFunc }) => {
-  console.log(bookId);
+
+  const childRef = useRef();
+
+
+  const handleClickOpen = () => {
+    childRef.current.handleOpenDia();
+    console.log(bookId);
+  };
+
+  const handleClose = () => {
+    this.open = false;
+    console.log(bookId);
+  };
+
+  //console.log(bookId);
   return (
     <div>
       <div>
@@ -183,10 +197,10 @@ const ProceedToQ = ({ open, bookId, handleClkFunc }) => {
                   By answering this questionnaire, you acknowledge and agree to keep this story confidential until its official release.
                 </DialogContentText>
                 <DialogActions>
-                  <Button style={bottomStylesDisagree}>
+                  <Button style={bottomStylesDisagree} onClick={handleClose}>
                     Disagree
                   </Button>
-                  <Button style={bottomStylesAgree} >
+                  <Button style={bottomStylesAgree} onClick={handleClickOpen}>
                     Agree and proceed to questionnaire
                     <ArrowForwardIcon style={{ verticalAlign: -7, display: 'inline-flex' }} />
                   </Button>
@@ -197,7 +211,7 @@ const ProceedToQ = ({ open, bookId, handleClkFunc }) => {
           </div>
         </Dialog>
       </div>
-      <Questionnaires />
+      <Questionnaires ref={childRef}/>
     </div>
   );
 

@@ -36,7 +36,7 @@ const CopyrightDialog = forwardRef((props, ref)  => {
         handleOpen();
         }
     }),
-)
+  )
 
   return (
     <div>

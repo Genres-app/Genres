@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef, useRef, useImperativeHandle, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -57,24 +57,33 @@ cursor: 'pointer',
 }
 
 
-export default class Questionnaires extends React.Component {
+const Questionnaires = forwardRef((props, ref)  => {  
 
-  constructor(props) {
-    super(props);
-    this.state = {open: false};
-    
-}
+const [open, setOpen] = React.useState(false);
 
-handleClickOpen = () => this.setState({open: !this.state.open});
 
-handleClose = () => this.setState({open: false});
+const handleClickOpen = () => {
+  setOpen(true);
+};
 
-handleChange = (event) => this.setValue({
+const handleClose = () => {
+  setOpen(false);
+};
+
+const handleChange = (event) => this.setValue({
   setValue: event.value
 });
 
+  useImperativeHandle(
+    ref,
+    () => ({
+      handleOpenDia() {
+        handleClickOpen();
+        }
+    }),
+  )
 
-render() {
+
     return (
       <div>
         <Dialog PaperProps={{
@@ -82,8 +91,8 @@ render() {
                     borderRadius: 16
                 },
               }}
-                open={this.state.open} 
-                onClose={this.handleClose} 
+                open={open} 
+                onClose={handleClose} 
                 aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title" >Questionnaire</DialogTitle>
           <DialogContent>
@@ -91,8 +100,8 @@ render() {
               Do you prefer long novels or short novels?
             </DialogContentText>
             <FormControl component="fieldset">
-            <RadioGroup 
-            value={this.value}       
+            <RadioGroup    
+            //value={this.value}   
             row={true}
             /*onChange={this.handleChang}*/>
               <FormControlLabel value="long" control={<Radio />} label="long novels" />
@@ -106,7 +115,7 @@ render() {
             </DialogContentText>
             <FormControl component="fieldset">
             <RadioGroup 
-            value={this.value}       
+            //value={this.value}       
             row={true}
             /*onChange={this.handleChang}*/>
               <FormControlLabel value="fast" control={<Radio />} label="fast paced" />
@@ -119,7 +128,7 @@ render() {
             </DialogContentText>
             <FormControl component="fieldset">
             <RadioGroup 
-            value={this.value}       
+            //value={this.value}       
             row={true}
             /*onChange={this.handleChang}*/>
               <FormControlLabel value="12" control={<Radio />} label="12 - 18" />
@@ -135,7 +144,7 @@ render() {
             </DialogContentText>
             <FormControl component="fieldset">
             <RadioGroup 
-            value={this.value}       
+            //value={this.value}       
             row={true}
             /*onChange={this.handleChang}*/>
               <FormControlLabel value="true" control={<Radio />} label="True" />
@@ -158,7 +167,7 @@ render() {
             </DialogContentText>
             <FormControl component="fieldset">
             <RadioGroup 
-            value={this.value}       
+            //value={this.value}       
             row={true}
             /*onChange={this.handleChang}*/>
               <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
@@ -168,11 +177,11 @@ render() {
 
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} style = {bottomStylesCancel}>
+            <Button onClick={handleClose} style = {bottomStylesCancel}>
               Cancel
             </Button>
             <a href="/reading" style={{ textDecoration: 'none'}}>
-            <Button onClick={this.handleClose} style = {bottomStylesSubmit}>
+            <Button onClick={handleClose} style = {bottomStylesSubmit}>
               Submit
             </Button>
             </a>
@@ -180,5 +189,8 @@ render() {
         </Dialog>
       </div>
     );
-  }
-}
+  })
+
+
+  export default Questionnaires;
+
