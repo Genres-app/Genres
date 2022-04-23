@@ -180,11 +180,11 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
     setOpenPopup(false);
 
 
-    if (localStorage.getItem('Theme') == 'false') {
-      setTheme(false)
-    } else {
-      setTheme(true)
-    }
+    // if (localStorage.getItem('Theme') == 'false') {
+    //   setTheme(false)
+    // } else {
+    //   setTheme(true)
+    // }
 
 
     const onScroll = e => {
