@@ -104,11 +104,11 @@ function TabPanel2(props) {
   );
 }
 
-const StyledMenu = withStyles({
+const StyledMenu = withStyles((theme) => ({
   paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props) => (
+    backgroundColor: theme.palette.primary.bg,
+  }
+}))((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
@@ -126,12 +126,12 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
+    // '&:focus': {
+    //   backgroundColor: theme.palette.primary.main,
+    //   '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+    //     color: theme.palette.common.white,
+    //   },
+    // },
   },
 }))(MenuItem);
 

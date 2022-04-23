@@ -122,16 +122,6 @@ export default function RankingPage({ theme }) {
   };
 
   const { bookId } = useParams();
-  // Theme
-  // const theme = createMuiTheme({
-  //     palette: {
-  //         primary: {
-  //             main: '#ffffff',
-  //         },
-  //         primary: deepPurple,
-  //         alert: '#ff1744',
-  //     },
-  // });
 
   // Left side bar control
   const [leftOpen, setOpenL] = React.useState(false);
