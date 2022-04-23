@@ -38,6 +38,7 @@ const CopyrightDialog = forwardRef((props, ref) => {
     ref,
     () => ({
       handleOpenDia() {
+        setActiveStep(0);
         handleOpen();
       }
     }),
@@ -47,17 +48,98 @@ const CopyrightDialog = forwardRef((props, ref) => {
   const [activeStep, setActiveStep] = useState(0);
   const steps = ["Select a copyright type", "Read the agreement", "Confirm and publish"];
 
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return (
+          <>
+            <Typography>
+              Please select a copyright type below. <span style={{ color: theme.palette.warning.main }}>Caution! After publishing the book with a copyright license, you can only change it to a looser one.</span>
+            </Typography>
+            <DialogActions style={{ padding: 0 }}>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <div>
+                <Button onClick={() => setActiveStep((prevActiveStep) => prevActiveStep + 1)} color="primary" variant="contained" autoFocus>
+                  Next
+                </Button>
+              </div>
+            </DialogActions>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <Typography style={{paddingBottom: "1rem"}}>
+              Please read and agree with following agreement before publishing the book.
+            </Typography>
+            <Typography variant="body2" style={{paddingBottom: "1rem"}}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla turpis elit, pulvinar vel tellus ut, congue ultricies elit. Fusce tristique velit dolor, eget interdum risus dictum vitae. Nam sapien quam, vestibulum non viverra a, rhoncus id leo. Quisque feugiat est orci, nec mollis eros convallis ac. Aenean varius enim dolor, at consequat libero consequat id. Sed consequat, felis vel faucibus interdum, urna justo lobortis nulla, quis suscipit diam libero id nulla. Duis eu purus ut tellus laoreet sollicitudin. Suspendisse id imperdiet lorem, tempor hendrerit tellus. Donec tincidunt mi quis neque vulputate, quis scelerisque metus rhoncus.
+            </Typography>
+            <DialogActions style={{ padding: 0 }}>
+              <Button onClick={() => setActiveStep((prevActiveStep) => prevActiveStep - 1)} color="primary">
+                Previous step
+              </Button>
+              <Button onClick={handleClose} variant="text" color="primary">
+                Disagree
+              </Button>
+              <div>
+                <Button onClick={() => setActiveStep((prevActiveStep) => prevActiveStep + 1)} color="primary" variant="contained">
+                  Agree
+                </Button>
+              </div>
+            </DialogActions>
+          </>
+        );
+      case 2:
+        return(
+          
+          <>
+            <Typography style={{paddingBottom: "1rem"}}>
+              One step to go. Please confirm you are publishing this book.
+            </Typography>
+            <Typography style={{paddingBottom: "1rem"}}>
+              By clicking the Publish button, you will reveal your works to the public.
+            </Typography>
+            <DialogActions style={{ padding: 0 }}>
+              <Button onClick={() => setActiveStep((prevActiveStep) => prevActiveStep - 1)} color="primary">
+                Previous step
+              </Button>
+              <div>
+                <Button onClick={handleClose} color="primary" variant="contained">
+                  Publish to Genres
+                </Button>
+              </div>
+            </DialogActions>
+          </>
+        );
+      default:
+        return "Unknown step";
+    }
+  }
+
   return (
     <Dialog
       open={open}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      fullWidth={false}
+      fullWidth
       maxWidth="md"
     >
       <div style={{ backgroundColor: theme.palette.primary.bg }}>
-        <Typography variant="h4" color="primary" style={{ fontFamily: theme.typography.fontFamilyTitle, padding: "1.5rem", paddingBottom: 0 }}>Publish Book</Typography>
+        <Typography
+          id="alert-dialog-title"
+          variant="h4"
+          color="primary"
+          style={{
+            fontFamily: theme.typography.fontFamilyTitle,
+            padding: "1.5rem",
+            paddingBottom: 0
+          }}>
+          Publish Book
+        </Typography>
         <Stepper activeStep={activeStep} style={{ backgroundColor: "transparent" }}>
           {steps.map((label, index) => {
             return (
@@ -69,39 +151,9 @@ const CopyrightDialog = forwardRef((props, ref) => {
         </Stepper>
       </div>
 
-      <DialogTitle id="alert-dialog-title">{"Do you really want to publish this book?"}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          Please read and agree with the copyright agreement before publishing the book
-        </DialogContentText>
-      </DialogContent>
-
-
-      <DialogContentText style={{ marginLeft: "25px", marginRight: "25px" }}>
-        Do you allow fan works? please note that you can change to "Yes" if you choose "No" at this time, but you can not change to "No" if you choose "Yes" at this time.
-      </DialogContentText>
-      <FormControl component="fieldset">
-        <RadioGroup
-          onChange={handleChange}
-          //value={this.Value}       
-          row={true}
-
-            /*onChange={this.handleChang}*/>
-          <FormControlLabel style={{ marginLeft: "350px" }} value="Yes" control={<Radio />} label="Yes" />
-          <FormControlLabel style={{ marginLeft: "20px" }} value="No" control={<Radio />} label="No" />
-        </RadioGroup>
-      </FormControl>
-
-
-
-      <DialogActions>
-        <Button onClick={handleClose} color="primary">
-          CANCEL
-        </Button>
-        <Button onClick={handleClose} color="primary" autoFocus>
-          AGREE AND PUBLISH
-        </Button>
-      </DialogActions>
+      <div style={{ padding: "1.5rem" }}>
+        {getStepContent(activeStep)}
+      </div>
     </Dialog>
   );
 })
