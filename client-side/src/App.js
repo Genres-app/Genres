@@ -63,14 +63,14 @@ function App() {
             <Route exact path="/mywriting">
               <Dashboard passTheme={handlePassedTheme} isMywritingPage={true} />
               <WritingTransitionPage />
-              <BackgroundDecoration />
+              {/* <BackgroundDecoration /> */}
               <Footer />
             </Route>
 
             <Route exact path='/'>
               <Dashboard passTheme={handlePassedTheme} noShadowAtTop={true} />
               <Homepage />
-              <BackgroundDecoration />
+              {/* <BackgroundDecoration /> */}
               <Footer />
             </Route>
 
@@ -90,7 +90,7 @@ function App() {
               } />
               <Route exact path='/publit' component={PublitPage} />
               <Route exact path="/book/:bookId" component={NovelPageDistribution} />
-              <BackgroundDecoration />
+              {/* <BackgroundDecoration /> */}
               <Footer />
             </div>
           </Switch>

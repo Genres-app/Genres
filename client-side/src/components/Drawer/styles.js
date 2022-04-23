@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
   drawerPaper: {
     width: 250,
+    backgroundColor: theme.palette.primary.bg,
   },
 
   avatarOfDrawer: {
@@ -23,13 +24,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
     marginBottom: theme.spacing(1),
     fontSize: '3rem',
-    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: theme.typography.fontFamilyTitle,
   },
 
   userName: {
     margin: '0 auto',
     marginBottom: theme.spacing(1),
-    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    fontFamily: theme.typography.fontFamilyTitle,
   },
   userEmail: {
     marginLeft: theme.spacing(2),
@@ -76,8 +77,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '0',
     marginLeft: ".5rem",
     marginBottom: theme.spacing(1),
-    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
-    // width: 'initial',
+    fontFamily: theme.typography.fontFamilyTitle,
     "&:last-child": {
       marginRight: ".5rem",
     }
@@ -89,25 +89,22 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     left: '50%',
     transform: 'translateX(-50%)',
-    color: 'rgb(255, 23, 68)',
-    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    color: theme.palette.warning.main,
+    fontFamily: theme.typography.fontFamilyTitle,
 
     "&:hover": {
-      backgroundColor: 'rgb(255, 23, 68, 0.04)',
+      backgroundColor: theme.palette.warning.main + "0a",
     }
   },
 
-  listItemIcon_light: {
-    color: '#855cde',
-  },
-
-  listItemIcon_dark: {
-    color: '#9e84f5',
+  listItemIcon: {
+    color: theme.palette.primary.main,
   },
 
   listItemText: {
+    color: theme.palette.primary.main,
     "& > span": {
-      fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+      fontFamily: theme.typography.fontFamilyTitle,
     }
   },
 }))

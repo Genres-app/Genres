@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   appBar: {
-    backgroundColor: theme.palette.background.paper,
-    color: theme.palette.text.primary,
+    backgroundColor: theme.palette.primary.bg,
+    color: theme.palette.primary.main,
   },
 
   noShadow: {
@@ -42,13 +42,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
 
-  // appBar: {
-  //   zIndex: theme.zIndex.drawer + 1,
-  //   transition: theme.transitions.create(['width', 'margin'], {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: theme.transitions.duration.leavingScreen,
-  //   }),
-  // },
   drawerToggleBtn: {
     margin: theme.spacing(1),
     marginLeft: theme.spacing(1.5),

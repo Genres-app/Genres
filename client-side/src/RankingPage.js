@@ -35,6 +35,7 @@ import {
   ListItemText,
   Chip,
   Tooltip,
+  useTheme,
 } from '@material-ui/core';
 
 import useStyles from './components/Ranking/styles';
@@ -96,6 +97,7 @@ function a11yProps(index) {
 export default function RankingPage({ theme }) {
 
   const classes = useStyles();
+  const usetheme = useTheme();
   const [width, height] = useWindowSize();
 
   // Top Tab
@@ -112,7 +114,7 @@ export default function RankingPage({ theme }) {
     setValueL(newValue);
   };
 
-  // Left Tab
+  // Right Tab
   const [valueR, setValueR] = React.useState(0);
 
   const handleChangeRight = (event, newValue) => {
@@ -378,7 +380,7 @@ export default function RankingPage({ theme }) {
   return (
 
     <>
-      <AppBar position="relative" className={classes.sortByData}>
+      <AppBar position="relative" className={classes.sortByData} style={{ boxShadow: "none" }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -386,6 +388,7 @@ export default function RankingPage({ theme }) {
           centered
           indicatorColor="primary"
           textColor="primary"
+          style={{ backgroundColor: usetheme.palette.primary.bg }}
         >
           <Tab label="Trending" {...a11yProps(0)} />
           <Tab label="Likes" {...a11yProps(1)} />

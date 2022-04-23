@@ -282,18 +282,15 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
           position="fixed"
           color="secondary"
           className={
-            window.location.pathname == "/rankings" || noShadow?
+            // window.location.pathname == "/rankings" || noShadow?
             clsx(classes.appBar, classes.noShadow)
-            : 
-            classes.appBar}
+            // : 
+            // classes.appBar
+          }
           id="Appbar"
         >
           <Toolbar>
 
-            {/* <Typography variant = "h6" className = {classes.title}>
-            Genres
-          </Typography> */}
-            {/* <Link to="/"> */}
             <div
               onClick={() => routeChange("/")}
               className={clsx(classes.appBarLogo, classes.hideWhenWidLessThan600)}
