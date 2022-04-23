@@ -48,17 +48,17 @@ const CopyrightDialog = forwardRef((props, ref) => {
   const steps = ["Select a copyright type", "Read the agreement", "Confirm and publish"];
 
   return (
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        fullWidth={false}
-        maxWidth="md"
-      >
-        <div style={{ backgroundColor: theme.palette.primary.bg }}>
-          <Typography variant="h4" color="primary" style={{fontFamily: theme.typography.fontFamilyTitle, padding: "1.5rem", paddingBottom: 0}}>Publish Book</Typography>
-          <Stepper activeStep={activeStep} style={{ backgroundColor: "transparent" }}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+      fullWidth={false}
+      maxWidth="md"
+    >
+      <div style={{ backgroundColor: theme.palette.primary.bg }}>
+        <Typography variant="h4" color="primary" style={{ fontFamily: theme.typography.fontFamilyTitle, padding: "1.5rem", paddingBottom: 0 }}>Publish Book</Typography>
+        <Stepper activeStep={activeStep} style={{ backgroundColor: "transparent" }}>
           {steps.map((label, index) => {
             return (
               <Step key={label}>
@@ -67,42 +67,42 @@ const CopyrightDialog = forwardRef((props, ref) => {
             )
           })}
         </Stepper>
-        </div>
-        
-        <DialogTitle id="alert-dialog-title">{"Do you really want to publish this book?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Please read and agree with the copyright agreement before publishing the book
-          </DialogContentText>
-        </DialogContent>
+      </div>
 
-
-        <DialogContentText style={{ marginLeft: "25px", marginRight: "25px" }}>
-          Do you allow fan works? please note that you can change to "Yes" if you choose "No" at this time, but you can not change to "No" if you choose "Yes" at this time.
+      <DialogTitle id="alert-dialog-title">{"Do you really want to publish this book?"}</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          Please read and agree with the copyright agreement before publishing the book
         </DialogContentText>
-        <FormControl component="fieldset">
-          <RadioGroup
-            onChange={handleChange}
-            //value={this.Value}       
-            row={true}
+      </DialogContent>
+
+
+      <DialogContentText style={{ marginLeft: "25px", marginRight: "25px" }}>
+        Do you allow fan works? please note that you can change to "Yes" if you choose "No" at this time, but you can not change to "No" if you choose "Yes" at this time.
+      </DialogContentText>
+      <FormControl component="fieldset">
+        <RadioGroup
+          onChange={handleChange}
+          //value={this.Value}       
+          row={true}
 
             /*onChange={this.handleChang}*/>
-            <FormControlLabel style={{ marginLeft: "350px" }} value="Yes" control={<Radio />} label="Yes" />
-            <FormControlLabel style={{ marginLeft: "20px" }} value="No" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
+          <FormControlLabel style={{ marginLeft: "350px" }} value="Yes" control={<Radio />} label="Yes" />
+          <FormControlLabel style={{ marginLeft: "20px" }} value="No" control={<Radio />} label="No" />
+        </RadioGroup>
+      </FormControl>
 
 
 
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            CANCEL
-          </Button>
-          <Button onClick={handleClose} color="primary" autoFocus>
-            AGREE AND PUBLISH
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          CANCEL
+        </Button>
+        <Button onClick={handleClose} color="primary" autoFocus>
+          AGREE AND PUBLISH
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 })
 
