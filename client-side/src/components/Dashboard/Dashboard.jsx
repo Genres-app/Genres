@@ -386,16 +386,15 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
 
             { // Show Rankings
-              '/' + window.location.pathname.split('/')[1] != ListItems[2].path ?  // Check if current page is the same as shortcuts, if so show 'Browse'
-                ShortcutNavBtn(2)
-                :
-                ShortcutNavBtn(1)
+              // Check if current page is the same as shortcuts, if so show 'Browse'
+              '/' + window.location.pathname.split('/')[1] != ListItems[2].path
+                ? ShortcutNavBtn(2)
+                : ShortcutNavBtn(1)
             }
             { // Show Beta Reading
-              '/' + window.location.pathname.split('/')[1] != ListItems[6].path ?
-                ShortcutNavBtn(6)
-                :
-                ShortcutNavBtn(1)
+              '/' + window.location.pathname.split('/')[1] != ListItems[6].path
+                ? ShortcutNavBtn(6)
+                : ShortcutNavBtn(1)
             }
 
 

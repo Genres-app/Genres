@@ -296,11 +296,11 @@ const useStyles = makeStyles((theme) => ({
     userSelect: "none",
     backgroundColor:
       RgbaInterpolate(
-        hexToRgb(theme.palette.primary.main).r,
-        hexToRgb(theme.palette.primary.main).g,
-        hexToRgb(theme.palette.primary.main).b, 1,
-        .9, 128, 128, 128, 1, true),
-    color: theme.palette.background.paper,
+        hexToRgb(theme.palette.background.paper).r,
+        hexToRgb(theme.palette.background.paper).g,
+        hexToRgb(theme.palette.background.paper).b, 1,
+        .4, 128, 128, 128, 1, true),
+    // color: theme.palette.background.paper,
     transition: 'background-color .2s, color .2s',
   },
   addNewNoteBtn: {
@@ -395,7 +395,7 @@ export default function WPEditor({ theme, passTheme }) {
       }
 
       // Update color of NotesTree's container when bookcover is loaded
-      const img = document.querySelector('#bookCover');
+      /*const img = document.querySelector('#bookCover');
       img.onload = function () {
         let colorOfBookCover = colorThief.getColor(img);
         let eleNotesTreeContainer = document.getElementById("notesTreeContainer")
@@ -405,7 +405,7 @@ export default function WPEditor({ theme, passTheme }) {
         } else {
           eleNotesTreeContainer.style.color = '#fff';
         }
-      }
+      }*/
 
     }
   )
