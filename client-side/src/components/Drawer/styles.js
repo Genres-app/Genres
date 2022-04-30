@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
   drawerPaper: {
     width: 250,
-    backgroundColor: theme.palette.primary.bg,
+    backgroundColor: theme.palette.background.paper,
   },
 
   avatarOfDrawer: {
@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     height: "1rem",
     width: "100%",
-    backgroundColor: "#88888855",
+    backgroundColor: theme.palette.background.paper,
     marginLeft: "1rem",
     borderRadius: ".5rem",
 
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
       width: "calc(66% - 4px)",
       height: "calc(1rem - 4px)",
       marginLeft: 2,
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.secondary.main + "c0",
       borderRadius: "calc((1rem - 4px) / 2)",
     }
   },
@@ -70,6 +70,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
+    marginBottom: ".5rem",
+    marginTop: "1rem",
   },
 
   profileBtnOfDrawer: {
