@@ -25,7 +25,7 @@ import {
 /*Material-UI Icons*/
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import Brightness2Icon from '@material-ui/icons/Brightness2';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import AddIcon from '@material-ui/icons/Add';
@@ -430,7 +430,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
               passTheme(!theme);
               // localStorage.setItem('CurrentTheme', !theme);
             }}>
-              {!theme ? <Brightness7Icon /> : <Brightness2Icon />}
+              {!theme ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
             {
               user ? (

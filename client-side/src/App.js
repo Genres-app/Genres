@@ -57,7 +57,7 @@ function App() {
           <Switch>
             <Route exact path='/reading' component={ReadingPage} />
             <Route exact path='/writing' render={
-              (props) => (<WritingPage {...props} theme={isThemeLight} />)
+              (props) => (<WritingPage {...props} theme={isThemeLight} passTheme={handlePassedTheme} />)
             } />
 
             <Route exact path="/mywriting">

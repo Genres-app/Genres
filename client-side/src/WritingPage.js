@@ -1,10 +1,10 @@
 import React from 'react';
 import WPEditor from './components/WritingPage/WPEditor';
 
-const WritingPage = ({theme}) => {
+const WritingPage = ({theme, passTheme}) => {
   return (
     <div>
-      <WPEditor theme={theme}/>
+      <WPEditor theme={theme} passTheme={passTheme}/>
     </div>
   )
 }

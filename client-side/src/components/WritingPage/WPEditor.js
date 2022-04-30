@@ -21,12 +21,11 @@ import {
   Grow,
   Tooltip,
   Menu,
-  MenuItem
+  MenuItem,
+  useTheme
 } from '@material-ui/core';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
-
-import './WPEditor.css';
 
 import clsx from 'clsx';
 import GenresDrawer from '../Drawer/Drawer';
@@ -46,6 +45,8 @@ import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import AddIcon from '@material-ui/icons/Add';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@material-ui/icons/Brightness7';
 
 /*Mdi Icons*/
 import Icon from '@mdi/react';
@@ -265,7 +266,7 @@ const useStyles = makeStyles((theme) => ({
     height: "calc(100vh - 105px)",
     // transform: "translateX(-100%)",
     transition: 'transform .2s ease-in-out',
-    backgroundColor: "#fff",
+    backgroundColor: theme.palette.background.paper,
     borderRight: "1px solid rgba(0, 0, 0, 0.12)",
   },
 
@@ -320,6 +321,17 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: theme.typography.fontFamily,
     }
   },
+  editor: {
+    backgroundColor: theme.palette.background.paper,
+    border: "1px solid rgba(128, 128, 128, 0.4)",
+    borderRadius: 8,
+    maxWidth: 720,
+    minHeight: "calc(100vh - 152px)",
+    padding: "5em",
+    margin: "128px auto 0 auto",
+    fontFamily: 'Open Sans',
+    fontSize: "90%",
+  }
 }));
 
 // Edit to change Button outline colors BELOW:
@@ -332,11 +344,11 @@ const useStyles = makeStyles((theme) => ({
 //   }
 // });
 
-export default function WPEditor({ theme }) {
+export default function WPEditor({ theme, passTheme }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')))
 
   const classes = useStyles();
-
+  const usedTheme = useTheme();
   //dialog
   const [open, setOpen] = React.useState(false);
   const handleDiaOpen = () => {
@@ -355,7 +367,7 @@ export default function WPEditor({ theme }) {
 
   const [sideNotesOn, setSideNotes] = useState(true);
   const toggleSideNotes = () => setSideNotes(!sideNotesOn);
-  
+
   // Force Re-render
   const [, updateState] = React.useState();
   const forceUpdate = React.useCallback(() => updateState({}), []);
@@ -785,6 +797,11 @@ export default function WPEditor({ theme }) {
 
             <div style={{ flexGrow: 1 }} />
 
+            <IconButton id="ThemeToggle" aria-label="Toggle Theme" color="inherit" onClick={() => passTheme(!theme)}
+              className={classes.appbarIconBtn}>
+              {!theme ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+
             <Button
               variant="text"
               color="primary"
@@ -795,14 +812,14 @@ export default function WPEditor({ theme }) {
               Publish
             </Button>
             <CopyrightDialog ref={childRef} />
-            
+
             <div
               open={open}
             >
               {open ?
-              <div onClick={handleDiaClose}>
-                <CopyrightDialog/>
-              </div> : " "}
+                <div onClick={handleDiaClose}>
+                  <CopyrightDialog />
+                </div> : " "}
             </div>
 
             <Divider orientation="vertical" flexItem className={classes.barDivider} />
@@ -928,7 +945,7 @@ export default function WPEditor({ theme }) {
           {/* Double Divs are used for Toggling SideNote: Change inner div's width to move SideNote out of viewport */}
           <div style={{ display: 'flex', float: 'right', transition: 'width .2s cubic-bezier(0.21, 0.73, 0.3, 1)' }} id={"NotesAndEditorContainer"}>
 
-            <div className={classes.sideNotes} id={"SideNotes"} style={{width: sideNoteWidth}}>
+            <div className={classes.sideNotes} id={"SideNotes"} style={{ width: sideNoteWidth }}>
 
               <div style={{ display: "flex", height: "100%" }}>
                 <div className={classes.notesTree} id="notesTreeContainer">
@@ -974,7 +991,7 @@ export default function WPEditor({ theme }) {
                       <Button onClick={() => handleAddStickyNote()} startIcon={<Add />}>Add Sticky</Button>
                     </div>
                     {NotesList.map((item, index) => (
-                      <StickyNote p={item.p} color={item.color} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} funcChangeColor={handleNoteChangeColor}key={index} />
+                      <StickyNote p={item.p} color={item.color} index={index} funcDeleteSelf={handleDelStickyNote} funcChangeSelf={handleChangeStickyNoteP} funcChangeColor={handleNoteChangeColor} key={index} />
                     ))}
                   </div>
                 </div>
@@ -999,7 +1016,7 @@ export default function WPEditor({ theme }) {
             </div>
 
             {/* BELOW: Actual Slate.js Text Editor */}
-            <div className="editors" style={{ width: 720 }}>
+            <div className={classes.editor} style={{ width: 720 }}>
               <Slate
                 editor={editor}
                 value={value}
@@ -1047,7 +1064,7 @@ export default function WPEditor({ theme }) {
 
         <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={true} />
       </CssBaseline>
-      
+
     </>
   );
 }
