@@ -481,7 +481,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
         </AppBar>
 
 
-        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false} loginFunc={switchPopup} />
+        <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false} loginFunc={switchPopup} activePage={getCurrentPageTitle()} />
       </div>
     </>
   );

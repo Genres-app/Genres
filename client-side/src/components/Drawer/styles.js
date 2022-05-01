@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
     fontSize: '3rem',
     fontFamily: theme.typography.fontFamilyTitle,
+    backgroundColor: theme.palette.secondary.main + "c0",
   },
 
   userName: {
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
   lvl: {
     fontWeight: 'bold',
+    fontFamily: theme.typography.fontFamilyTitle,
   },
 
   expBar: {
@@ -99,12 +101,18 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 
+  listItem: {
+    borderRadius: "2rem",
+    margin: "0 .5rem",
+    width: "auto"
+  },
+
   listItemIcon: {
-    color: theme.palette.primary.main,
+    color: "inherit",
   },
 
   listItemText: {
-    color: theme.palette.primary.main,
+    color: "inherit",
     "& > span": {
       fontFamily: theme.typography.fontFamilyTitle,
     }

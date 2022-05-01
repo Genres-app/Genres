@@ -25,7 +25,7 @@ import { mdiAccountCircleOutline, mdiLogoutVariant, mdiLoginVariant, mdiMessageT
 import { ListItems } from '../Dashboard/listItems';
 
 
-const GenresDrawer = ({ open, theme, toggleFunc, user, isUserConfirmRequired, loginFunc }) => {
+const GenresDrawer = ({ open, theme, toggleFunc, user, isUserConfirmRequired, loginFunc, activePage }) => {
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -122,7 +122,11 @@ const GenresDrawer = ({ open, theme, toggleFunc, user, isUserConfirmRequired, lo
 
       <List>
         {ListItems.map((item, index) => (
-          <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index}>
+          <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index} style={!activePage && item.title === "Home" || activePage === item.title
+            ? {
+              backgroundColor: usedTheme.palette.primary.bg,
+              color: usedTheme.palette.primary.main
+            } : null}>
             <ListItemIcon className={classes.listItemIcon}>{item.icon}</ListItemIcon>
             <ListItemText className={classes.listItemText} primary={item.title} />
           </ListItem>
