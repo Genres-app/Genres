@@ -19,8 +19,6 @@
     "chart.js": "^3.2.1",
     "clsx": "^1.1.1",
     "colorthief": "^2.3.2",
-    "draft-js": "^0.11.7",
-    "immutable": "^4.0.0-rc.12",
     "jwt-decode": "^3.1.2",
     "react": "^17.0.2",
     "react-alice-carousel": "^2.5.1",
@@ -28,7 +26,6 @@
     "react-chartjs-2": "^3.0.3",
     "react-dom": "^17.0.2",
     "react-elastic-carousel": "^0.11.5",
-    "react-google-login": "^5.2.2",
     "react-infinite-scroll-component": "^6.1.0",
     "react-material-ui-carousel": "^2.2.4",
     "react-redux": "^7.2.3",
@@ -37,15 +34,12 @@
     "react-scripts": "4.0.3",
     "react-show-more-text": "^1.4.6",
     "react-smooth-scrollbar": "^8.0.6",
-    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "slate": "^0.63.0",
     "slate-history": "^0.62.0",
-    "slate-plain-serializer": "^0.7.13",
     "slate-react": "^0.65.0",
     "smooth-scrollbar": "^8.6.2",
-    "styled-components": "^5.2.3",
-    "web-vitals": "^1.1.1"
+    "styled-components": "^5.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
