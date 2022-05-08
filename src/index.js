@@ -5,9 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { reducers } from './reducers';
 import App from './App';
-import { Amplify } from 'aws-amplify';
-import awsExports from './aws-exports';
-Amplify.configure(awsExports);
+import Amplify, {Auth} from 'aws-amplify';
+import awsConfig from './aws-exports';
+Amplify.configure(awsConfig);
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));

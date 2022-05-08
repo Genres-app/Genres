@@ -14,7 +14,7 @@ export default function HomePage() {
   
   return (
     <>
-    {user? <Body/> : <WelcomePageBody/>}
+    {user ? <Body/> : <WelcomePageBody/>}
     
     </>
   )
