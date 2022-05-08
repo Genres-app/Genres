@@ -5,6 +5,7 @@ import {useHistory, Link} from 'react-router-dom';
 import {Button, Paper, Grid, Typography, Container} from '@material-ui/core'
 import useStyles from './styles';
 import Input from './Input';
+import { Authenticator } from '@aws-amplify/ui-react';
 
 import {AUTH} from '../../constants/actionTypes';
 import * as api from '../../api/index'
@@ -76,7 +77,7 @@ const Auth = (props) => {
         setShowPassword(false);
         setError(null);
     };
-    
+    return  <Authenticator></Authenticator>
     return (
         
         <Container component = "main" maxWidth = "xs">

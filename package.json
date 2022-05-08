@@ -37,9 +37,17 @@
     "redux-thunk": "^2.3.0",
     "slate": "^0.78.0",
     "slate-history": "^0.66.0",
+<<<<<<< Updated upstream
     "slate-react": "^0.65.0",
     "smooth-scrollbar": "^8.6.2",
     "styled-components": "^5.2.3"
+=======
+    "slate-plain-serializer": "^0.7.13",
+    "slate-react": "^0.65.0",
+    "smooth-scrollbar": "^8.7.4",
+    "styled-components": "^5.2.3",
+    "web-vitals": "^1.1.1"
+>>>>>>> Stashed changes
   },
   "scripts": {
     "start": "react-scripts start",
