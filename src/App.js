@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Amplify } from 'aws-amplify';
 
 
 import { Authenticator } from '@aws-amplify/ui-react';
@@ -27,7 +26,9 @@ import MessagePage from './MessagePage';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from './themes';
 import BackgroundDecoration from './components/Widgets/BackgroundDeco';
-
+import {Amplify} from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 function App() {
   const [isThemeLight, setTheme] = useState(true);
   const handlePassedTheme = (t) => {

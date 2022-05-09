@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import useStyles from './styles';
+import { Authenticator,useAuthenticator } from '@aws-amplify/ui-react';
 
 /*Material-UI Components*/
 import { makeStyles } from '@material-ui/core/styles';
@@ -129,6 +130,7 @@ function useWindowSize() {
 }
 
 const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
+  const { user:mUser, signOut } = useAuthenticator((context) => [context.user]); 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -139,7 +141,11 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   const history = useHistory();
   const location = useLocation();
   const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
-
+  useEffect(()=>{
+    if(mUser&&mUser.username){
+      setOpenPopup(false)
+    }
+  },[mUser])
   const [width, height] = useWindowSize();
   if (width >= 600) {
     document.body.style.margin = "64px 0 0 0";
@@ -432,7 +438,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
               {!theme ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
             {
-              user ? (
+              mUser&&mUser.username ? (
                 !isMywritingPage ? (
                   <>
                     <Button
@@ -452,9 +458,9 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                       <CreateOutlinedIcon />
                     </IconButton>
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
-                      <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar}>
-                        {user.result.username.charAt(0)}
-                      </Avatar>
+                      {/* <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar}> */}
+                        {mUser.username.charAt(0)}
+                      {/* </Avatar> */}
                     </div>
                   </>
                 ) : (
@@ -475,7 +481,8 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
             }
 
             <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
-              <Auth value={openPopup} onChange={switchPopup} />
+              {/* <Auth value={openPopup} onChange={switchPopup} /> */}
+              <Authenticator/>
             </Popup>
           </Toolbar>
         </AppBar>
