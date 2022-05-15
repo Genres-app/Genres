@@ -286,7 +286,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
         <AppBar
           position="fixed"
-          color="secondary"
+          
           className={
             // window.location.pathname == "/rankings" || noShadow?
             clsx(classes.appBar, classes.noShadow)
