@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import useStyles from './styles';
-import { Authenticator,useAuthenticator } from '@aws-amplify/ui-react';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 
 /*Material-UI Components*/
-import { makeStyles } from '@material-ui/core/styles';
 import {
   Typography,
   AppBar,
-  Avatar,
   Button,
   CssBaseline,
   Toolbar,
-  Drawer,
-  List,
   Divider,
   IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  InputBase
+  InputBase,
+  StylesProvider
 } from '@material-ui/core';
 
 /*Material-UI Icons*/
@@ -29,91 +23,22 @@ import SearchIcon from '@material-ui/icons/Search';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
-import AddIcon from '@material-ui/icons/Add';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 //Icons
 import Icon from '@mdi/react';
-import { mdiAccountCircleOutline, mdiLoginVariant, mdiLogoutVariant } from '@mdi/js';
+import { mdiLoginVariant } from '@mdi/js';
 
-import GenresLogo from '../Assets/logos/Genres_iconOnly_480x.png';
 import GenresLogo_new from '../Assets/logos/Genres_Redesign.png';
 import GenresLogo_new_dark from '../Assets/logos/Genres_Redesign_dark.png';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
-import styled from 'styled-components';
 import Popup from '../Auth/Popup';
 import Auth from '../Auth/Auth';
 import Searchbar from '../Searchbar/Searchbar'
 
 import GenresDrawer from '../Drawer/Drawer';
 import { ListItems } from './listItems';
-import { useLayoutEffect } from 'react';
-
-/* */
-// const SidebarLink = styled(Link)`
-//   display: flex;
-//   color: black;
-//   justify-content: left;
-//   align-items: center;
-//   padding: 15px;
-//   list-style: none;
-//   height: 55px;
-//   text-decoration: none;
-//   font-size: 16px;
-//   &:hover {
-//     background: lavender;
-//     border-left: 4px solid #55fccf;
-//     cursor: pointer;
-//   }
-// `;
-
-// const SidebarLabel = styled.span`
-//   margin-left: 40px;
-// `;
-
-// const SidebarIcon = styled.span`
-//   margin-top: 3px;
-//   margin-left: 10.5px;
-// `;
-
-// const NavIcon = styled(Link)`
-//   color: black;
-//   font-size: 2rem;
-//   margin-right: 15px;
-//   height: 80px;
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-// `;
-
-// const CloseIcon = styled(Link)`
-//   color: black;
-//   margin-left: 1.6rem;
-//   font-size: 2rem;
-//   height: 80px;
-//   display: flex;
-//   justify-content: flex-start;
-//   align-items: center;
-// `;
-
-// const SidebarNav = styled.nav`
-//   background: white;
-//   width: 240px;
-//   height: 100vh;
-//   display: flex;
-//   justify-content: center;
-//   position: fixed;
-//   top: 0;
-//   left: ${({ sidebar }) => (sidebar ? '0' : '-100%')};
-//   transition: 250ms;
-//   z-index: 10;
-//   filter: drop-shadow(0 0 5px #9999);
-// `;
-
-// const SidebarWrap = styled.div`
-//   width: 100%;
-// `;
 
 
 function useWindowSize() {
@@ -130,7 +55,7 @@ function useWindowSize() {
 }
 
 const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
-  const { user:mUser, signOut } = useAuthenticator((context) => [context.user]); 
+  const { user: mUser, signOut } = useAuthenticator((context) => [context.user]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
 
@@ -141,11 +66,11 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   const history = useHistory();
   const location = useLocation();
   const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
-  useEffect(()=>{
-    if(mUser&&mUser.username){
+  useEffect(() => {
+    if (mUser && mUser.username) {
       setOpenPopup(false)
     }
-  },[mUser])
+  }, [mUser])
   const [width, height] = useWindowSize();
   if (width >= 600) {
     document.body.style.margin = "64px 0 0 0";
@@ -280,13 +205,13 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   }
 
   return (
-    <>
+    <StylesProvider injectFirst>
       <CssBaseline />
       <div className={classes.root}>
 
         <AppBar
           position="fixed"
-          
+
           className={
             // window.location.pathname == "/rankings" || noShadow?
             clsx(classes.appBar, classes.noShadow)
@@ -438,7 +363,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
               {!theme ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
             {
-              mUser&&mUser.username ? (
+              mUser && mUser.username ? (
                 !isMywritingPage ? (
                   <>
                     <Button
@@ -459,7 +384,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                     </IconButton>
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
                       {/* <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar}> */}
-                        {mUser.username.charAt(0)}
+                      {mUser.username.charAt(0)}
                       {/* </Avatar> */}
                     </div>
                   </>
@@ -482,7 +407,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
             <Popup openPopup={openPopup} setOpenPopup={setOpenPopup}>
               {/* <Auth value={openPopup} onChange={switchPopup} /> */}
-              <Authenticator/>
+              <Authenticator />
             </Popup>
           </Toolbar>
         </AppBar>
@@ -490,8 +415,9 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
         <GenresDrawer open={sidebar} theme={theme} toggleFunc={toggleSidebar} user={user} isUserConfirmRequired={false} loginFunc={switchPopup} activePage={getCurrentPageTitle()} />
       </div>
-    </>
+
+    </StylesProvider>
   );
 }
 
-export default Dashboard
+export default Dashboard;
