@@ -55,6 +55,7 @@ function useWindowSize() {
 }
 
 const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
+  // useAuthenticator easy Sign Out method learned from AUTH documentation - Yining 
   const { user: mUser, signOut } = useAuthenticator((context) => [context.user]);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const [openPopup, setOpenPopup] = useState(false);
@@ -66,6 +67,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   const history = useHistory();
   const location = useLocation();
   const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
+  // If a user is logged in, disable the popup for login - Yining
   useEffect(() => {
     if (mUser && mUser.username) {
       setOpenPopup(false)
@@ -384,7 +386,8 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                     </IconButton>
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
                       {/* <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar}> */}
-                      {mUser.username.charAt(0)}
+                      {mUser.attributes.name.charAt(0)}
+                      {/* I don't know how to have user choose a profile pic yet, so I just display the 1st name char right now - Yining */}
                       {/* </Avatar> */}
                     </div>
                   </>
