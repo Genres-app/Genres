@@ -5,16 +5,16 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { reducers } from './reducers';
 import App from './App';
-import { Amplify } from 'aws-amplify';
-import awsExports from './aws-exports';
-Amplify.configure(awsExports);
+import { Authenticator } from '@aws-amplify/ui-react';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)));
 
 ReactDOM.render(
   <Provider store = {store}>
+    <Authenticator.Provider>
     <App />
+    </Authenticator.Provider>
   </Provider>
   ,
   document.getElementById('root')

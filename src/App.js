@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
+
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+
 import Footer from './components/Footer/Footer';
 import Dashboard from './components/Dashboard/Dashboard';
 import SearchResults from './components/Search/SearchResults';
@@ -22,7 +26,9 @@ import MessagePage from './MessagePage';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from './themes';
 import BackgroundDecoration from './components/Widgets/BackgroundDeco';
-
+import {Amplify} from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
 function App() {
   const [isThemeLight, setTheme] = useState(true);
   const handlePassedTheme = (t) => {
@@ -48,7 +54,7 @@ function App() {
 
   const appliedTheme = createMuiTheme(isThemeLight ? lightTheme : darkTheme)
   return (
-    <>
+      <>
       <ThemeProvider theme={appliedTheme}>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -96,7 +102,7 @@ function App() {
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
-    </>
+      </>
   );
 }
 

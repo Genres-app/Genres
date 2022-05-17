@@ -76,7 +76,6 @@ const Auth = (props) => {
         setShowPassword(false);
         setError(null);
     };
-    
     return (
         
         <Container component = "main" maxWidth = "xs">

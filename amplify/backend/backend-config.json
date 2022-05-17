@@ -1,6 +1,6 @@
 {
   "auth": {
-    "Genres": {
+    "genres1fdb8be2": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -11,19 +11,13 @@
           "EMAIL"
         ],
         "signupAttributes": [
+          "BIRTHDATE",
           "EMAIL",
-          "NAME",
-          "PHONE_NUMBER",
-          "PREFERRED_USERNAME"
+          "NAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
-          "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS",
-            "REQUIRES_UPPERCASE"
-          ]
+          "passwordPolicyCharacters": []
         },
         "mfaConfiguration": "OFF",
         "mfaTypes": [
