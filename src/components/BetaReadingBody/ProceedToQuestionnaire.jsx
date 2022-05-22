@@ -74,7 +74,7 @@ const ProceedToQ = forwardRef((props, ref) => {
   const childRef = useRef();
   const [open, setOpen] = React.useState(false);
   const [bookId, setID] = useState(0);
-
+  const [step, setStep] = useState(0);
 
   const handleClickOpen = () => {
     setOpen(true);
