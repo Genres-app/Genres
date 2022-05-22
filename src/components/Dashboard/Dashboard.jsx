@@ -175,7 +175,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
 
   // Load Theme when refresh
-  if (localStorage.getItem('Theme') == 'false') {
+  if (localStorage.getItem('Theme') === 'false') {
     passTheme(false);
   } else { }
 
@@ -184,7 +184,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
     let pathName = window.location.pathname;
     let majorPathName = "/" + pathName.split('/')[1];
     for (let i = 1; i < ListItems.length; i++) { // Ignore /Home
-      if (majorPathName == ListItems[i].path) {
+      if (majorPathName === ListItems[i].path) {
         return ListItems[i].title
       }
     }
@@ -321,12 +321,12 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
             { // Show Rankings
               // Check if current page is the same as shortcuts, if so show 'Browse'
-              '/' + window.location.pathname.split('/')[1] != ListItems[2].path
+              '/' + window.location.pathname.split('/')[1] !== ListItems[2].path
                 ? ShortcutNavBtn(2)
                 : ShortcutNavBtn(1)
             }
             { // Show Beta Reading
-              '/' + window.location.pathname.split('/')[1] != ListItems[6].path
+              '/' + window.location.pathname.split('/')[1] !== ListItems[6].path
                 ? ShortcutNavBtn(6)
                 : ShortcutNavBtn(1)
             }
