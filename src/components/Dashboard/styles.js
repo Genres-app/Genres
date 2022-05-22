@@ -261,6 +261,8 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(4.5),
     height: theme.spacing(4.5),
     border: `${theme.spacing(.25)}px solid ${theme.palette.background.paper}`,
+    fontFamily: theme.typography.fontFamilyTitle,
+    backgroundColor: theme.palette.secondary.main + "c0",
   }
 
 }));

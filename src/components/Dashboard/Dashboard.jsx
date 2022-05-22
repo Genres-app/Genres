@@ -6,6 +6,7 @@ import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 
 /*Material-UI Components*/
 import {
+  Avatar,
   Typography,
   AppBar,
   Button,
@@ -385,10 +386,10 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                       <CreateOutlinedIcon />
                     </IconButton>
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
-                      {/* <Avatar alt={user.result.username} src={user.result.imageUrl} className={classes.appbarAvatar}> */}
-                      {mUser.attributes.name.charAt(0)}
+                      <Avatar alt={mUser.attributes.name} src={mUser.attributes.avatar} className={classes.appbarAvatar}>
+                        {mUser.attributes.name.charAt(0)}
                       {/* I don't know how to have user choose a profile pic yet, so I just display the 1st name char right now - Yining */}
-                      {/* </Avatar> */}
+                      </Avatar>
                     </div>
                   </>
                 ) : (
