@@ -15,7 +15,8 @@ import {
   Divider,
   IconButton,
   InputBase,
-  StylesProvider
+  StylesProvider,
+  useTheme
 } from '@material-ui/core';
 
 /*Material-UI Icons*/
@@ -35,8 +36,8 @@ import GenresLogo_new_dark from '../Assets/logos/Genres_Redesign_dark.png';
 import { useHistory, useLocation } from 'react-router-dom';
 import decode from 'jwt-decode';
 import Popup from '../Auth/Popup';
-import Auth from '../Auth/Auth';
-import Searchbar from '../Searchbar/Searchbar'
+// import Auth from '../Auth/Auth';
+// import Searchbar from '../Searchbar/Searchbar'
 
 import GenresDrawer from '../Drawer/Drawer';
 import { ListItems } from './listItems';
@@ -67,14 +68,14 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
+  // const genres = ["Action", "Fantasy", "Science-Fiction", "Romance", "Mystery", "Horror", "Thriller", "Fiction", "Dystopian"];
   // If a user is logged in, disable the popup for login - Yining
   useEffect(() => {
     if (mUser && mUser.username) {
       setOpenPopup(false)
     }
   }, [mUser])
-  const [width, height] = useWindowSize();
+  const [width,] = useWindowSize();
   if (width >= 600) {
     document.body.style.margin = "64px 0 0 0";
   } else {
@@ -94,7 +95,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
     setSidebar(false);
   };
 
-  const [noShadow, setNoShadow] = useState(noShadowAtTop && window.pageYOffset <= 0);
+  // const [noShadow, setNoShadow] = useState(noShadowAtTop && window.pageYOffset <= 0);
 
   // Theme
   const [theme, setTheme] = useState(true);
@@ -114,31 +115,32 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
     setOpenPopup(false);
 
 
-    // if (localStorage.getItem('Theme') == 'false') {
-    //   setTheme(false)
-    // } else {
-    //   setTheme(true)
-    // }
+    if (localStorage.getItem('Theme') == 'false') {
+      setTheme(false)
+    } else {
+      setTheme(true)
+    }
 
 
-    const onScroll = e => {
-      if (noShadowAtTop) {
-        if (window.pageYOffset <= 0) {
-          setNoShadow(true);
-        } else {
-          setNoShadow(false);
-        }
-      }
-      console.log(window.pageYOffset);
-    };
-    window.addEventListener("scroll", onScroll);
+    // const onScroll = e => {
+    //   if (noShadowAtTop) {
+    //     if (window.pageYOffset <= 0) {
+    //       setNoShadow(true);
+    //     } else {
+    //       setNoShadow(false);
+    //     }
+    //   }
+    //   console.log(window.pageYOffset);
+    // };
+    // window.addEventListener("scroll", onScroll);
 
-    return () => window.removeEventListener("scroll", onScroll);
+    // return () => window.removeEventListener("scroll", onScroll);
 
   }, [location]);
 
 
   const classes = useStyles();
+  const themeStyle = useTheme();
 
 
   // Route to render new content
@@ -146,32 +148,6 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
     history.push(path);
     setSidebar(false);
   }
-
-
-  // // Remove BoxShadow of AppBar @rankings
-  // const setStyleOfAppbar1 = makeStyles((theme) => ({
-  //   appBar: {
-  //     backgroundColor: theme.palette.background.paper,
-  //     color: theme.palette.text.primary,
-  //     boxShadow: 'none',
-  //   }
-  // }));
-  // const setStyleOfAppbar2 = makeStyles((theme) => ({
-  //   appBar: {
-  //     backgroundColor: theme.palette.background.paper,
-  //     color: theme.palette.text.primary,
-  //     //boxShadow: 'none',
-  //   }
-  // }));
-
-  // // Change Style @ /rankings
-  // let classOfAppbar;
-  // if (window.location.pathname == "/rankings") {
-  //   classOfAppbar = setStyleOfAppbar1();
-  // }
-  // else {
-  //   classOfAppbar = setStyleOfAppbar2();
-  // }
 
 
   // Load Theme when refresh
@@ -214,13 +190,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
         <AppBar
           position="fixed"
-
-          className={
-            // window.location.pathname == "/rankings" || noShadow?
-            clsx(classes.appBar, classes.noShadow)
-            // : 
-            // classes.appBar
-          }
+          className={clsx(classes.appBar, classes.noShadow)}
           id="Appbar"
         >
           <Toolbar>
@@ -254,10 +224,8 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                   style={{
                     textDecorationLine: "none",
                     fontWeight: 600,
-                    // opacity: .9,
                     userSelect: "none",
-                    fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
-
+                    fontFamily: themeStyle.typography.fontFamilyTitle,
                     transform: 'translateY(-.5rem)',
                   }}>
                   Genres
@@ -388,7 +356,7 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                     <div className={classes.appbarAvatarContainer} onClick={() => routeChange("/profile")}>
                       <Avatar alt={mUser.attributes.name} src={mUser.attributes.avatar} className={classes.appbarAvatar}>
                         {mUser.attributes.name.charAt(0)}
-                      {/* I don't know how to have user choose a profile pic yet, so I just display the 1st name char right now - Yining */}
+                        {/* I don't know how to have user choose a profile pic yet, so I just display the 1st name char right now - Yining */}
                       </Avatar>
                     </div>
                   </>
