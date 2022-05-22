@@ -104,6 +104,7 @@ const ProceedToQ = forwardRef((props, ref) => {
       <div>
         <Dialog
           open={open}
+          onClose={handleClose}
           //TransitionComponent={Transition}
           keepMounted
           aria-labelledby="alert-dialog-slide-title"
