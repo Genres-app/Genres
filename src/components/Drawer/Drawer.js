@@ -128,7 +128,7 @@ const GenresDrawer = ({ open, theme, user, toggleFunc, isUserConfirmRequired, lo
 
         <List>
           {ListItems.map((item, index) => (
-            <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index} style={!activePage && item.title === "Home" || activePage === item.title
+            <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index} style={(!activePage && item.title === "Home") || activePage === item.title
               ? {
                 backgroundColor: usedTheme.palette.primary.bg,
                 color: usedTheme.palette.primary.main
