@@ -40,7 +40,7 @@ function App() {
       localStorage.setItem("Theme", t);
     }
     setTheme(t);
-    // console.log(t);
+    console.log(t);
     // let lt = localStorage.getItem("Theme");
     // if (lt) {
     //   setTheme(true);
