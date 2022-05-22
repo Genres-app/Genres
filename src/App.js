@@ -23,7 +23,7 @@ import NovelEditingPage from './NovelEditingPage';
 import NovelPageDistribution from './NovelPageDistribution';
 import MessagePage from './MessagePage';
 
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { lightTheme, darkTheme } from './themes';
 import BackgroundDecoration from './components/Widgets/BackgroundDeco';
 import {Amplify} from 'aws-amplify';
@@ -52,7 +52,7 @@ function App() {
   }
   // setTime(() => {localStorage.getItem("Theme");
 
-  const appliedTheme = createMuiTheme(isThemeLight ? lightTheme : darkTheme)
+  const appliedTheme = createTheme(isThemeLight ? lightTheme : darkTheme)
   return (
       <>
       <ThemeProvider theme={appliedTheme}>
