@@ -1,8 +1,8 @@
 import React, { useState, forwardRef, useRef, useImperativeHandle  } from 'react';
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles,makeStyles } from '@material-ui/core/styles'
 import PrevArrow from '@material-ui/icons/ArrowBackIos';
 import NextArrow from '@material-ui/icons/ArrowForwardIos';
-import { Button, Dialog } from '@material-ui/core/';
+import { Button, Dialog,  } from '@material-ui/core/';
 import Carousel, { consts } from 'react-elastic-carousel';
 import cover1 from '../Assets/bookcover1.jpg';
 import cover2 from '../Assets/bookcover2.jpg';
@@ -17,7 +17,7 @@ import { ButtonBase } from '@material-ui/core';
 <link href="../BookCarousel/blur.css" type="text/css" rel="stylesheet" />
 
 
-const useStyles = theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: 'auto',
   },
@@ -26,26 +26,13 @@ const useStyles = theme => ({
     width: '275px',
     padding: '20px',
   },
-});
+}));
 
 
 const BetaReadingBookCarousel = () => {
 
-  /*constructor(props) {
-    super(props);
-    child = React.createRef();
-  }
-*/
-  let state = {
-    questOpen: false,
-    questId: "0001",
-  }
-
-
   const handleClick = (bId) => {
     childRef.current.handleOpenDia(bId);
-    //console.log(bId);
-    //setState({questId: bId, questOpen: true})
   }
   
 
@@ -57,12 +44,6 @@ const BetaReadingBookCarousel = () => {
       </Button>
     )
   }
-
-  state = {
-    showBox: false
-  };
-  // const handleBoxToggle = () => setState({ showBox: !state.showBox });
-
 
     const childRef = useRef();
     const classes = useStyles();
