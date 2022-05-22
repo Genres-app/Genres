@@ -104,15 +104,15 @@ const useStyles = makeStyles((theme) => ({
   listItem: {
     borderRadius: "2rem",
     margin: "0 .5rem",
-    width: "auto"
+    width: "auto !important"
   },
 
   listItemIcon: {
-    color: "inherit",
+    color: "inherit !important",
   },
 
   listItemText: {
-    color: "inherit",
+    color: "inherit !important",
     "& > span": {
       fontFamily: theme.typography.fontFamilyTitle,
     }
