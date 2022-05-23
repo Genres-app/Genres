@@ -28,7 +28,7 @@ import { ListItems } from '../Dashboard/listItems';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 const GenresDrawer = ({ open, theme, user, toggleFunc, isUserConfirmRequired, loginFunc, activePage }) => {
-  const { user:mUser, signOut } = useAuthenticator((context) => [context.user]);
+  const { user: mUser, signOut } = useAuthenticator((context) => [context.user]);
   // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const history = useHistory();
@@ -81,7 +81,7 @@ const GenresDrawer = ({ open, theme, user, toggleFunc, isUserConfirmRequired, lo
           {
             mUser ? (
               <>
-                {/* <Avatar alt={user.result.username} className={classes.avatarOfDrawer} src={user.result.imageUrl}>{user.result.username.charAt(0)}</Avatar> */}
+                <Avatar alt={mUser.attributes.name} src={mUser.attributes.avatar} className={classes.avatarOfDrawer}>{mUser.attributes.name.charAt(0)}</Avatar>
                 <Typography className={classes.userName} variant="h6" align="center">{mUser.attributes.name}</Typography>
                 <div className={classes.LevelContainer}>
                   <Typography className={classes.lvl}>Lv.6</Typography>
@@ -128,7 +128,7 @@ const GenresDrawer = ({ open, theme, user, toggleFunc, isUserConfirmRequired, lo
 
         <List>
           {ListItems.map((item, index) => (
-            <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index} style={!activePage && item.title === "Home" || activePage === item.title
+            <ListItem className={classes.listItem} button onClick={() => routeChange(item.path)} key={index} style={(!activePage && item.title === "Home") || activePage === item.title
               ? {
                 backgroundColor: usedTheme.palette.primary.bg,
                 color: usedTheme.palette.primary.main
@@ -139,7 +139,7 @@ const GenresDrawer = ({ open, theme, user, toggleFunc, isUserConfirmRequired, lo
           ))}
         </List>
 
-       {mUser&& <Button
+        {mUser && <Button
           className={clsx(classes.widerBtn, classes.logoutBtnOfDrawer)}
           onClick={logout}
           variant='text'

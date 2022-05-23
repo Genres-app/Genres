@@ -1,8 +1,8 @@
 import React, { useState, forwardRef, useRef, useImperativeHandle  } from 'react';
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles,makeStyles } from '@material-ui/core/styles'
 import PrevArrow from '@material-ui/icons/ArrowBackIos';
 import NextArrow from '@material-ui/icons/ArrowForwardIos';
-import { Button, Dialog } from '@material-ui/core/';
+import { Button, Dialog,  } from '@material-ui/core/';
 import Carousel, { consts } from 'react-elastic-carousel';
 import cover1 from '../Assets/bookcover1.jpg';
 import cover2 from '../Assets/bookcover2.jpg';
@@ -17,7 +17,7 @@ import { ButtonBase } from '@material-ui/core';
 <link href="../BookCarousel/blur.css" type="text/css" rel="stylesheet" />
 
 
-const useStyles = theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: 'auto',
   },
@@ -26,28 +26,17 @@ const useStyles = theme => ({
     width: '275px',
     padding: '20px',
   },
-});
+}));
 
 
-class BetaReadingBookCarousel extends React.Component {
+const BetaReadingBookCarousel = () => {
 
-  constructor(props) {
-    super(props);
-    this.child = React.createRef();
-  }
-
-  state = {
-    questOpen: false,
-    questId: "0001",
-  }
-
-
-  handleClick = (bId) => {
-    this.setState({questId: bId, questOpen: true})
+  const handleClick = (bId) => {
+    childRef.current.handleOpenDia(bId);
   }
   
 
-  myArrow({ type, onClick, isEdge }) {
+  function myArrow({ type, onClick, isEdge }) {
     const pointer = type === consts.PREV ? <PrevArrow /> : <NextArrow />
     return (
       <Button disableRipple onClick={onClick} disabled={isEdge} style={{ background: 'transparent' }}>
@@ -56,14 +45,8 @@ class BetaReadingBookCarousel extends React.Component {
     )
   }
 
-  state = {
-    showBox: false
-  };
-  handleBoxToggle = () => this.setState({ showBox: !this.state.showBox });
-
-  render() {
-
-    const { classes } = this.props;
+    const childRef = useRef();
+    const classes = useStyles();
     const breakpoints = [
       { width: 1, itemsToShow: 1, pagination: false },
       { width: 500, itemsToShow: 2, pagination: false },
@@ -75,23 +58,23 @@ class BetaReadingBookCarousel extends React.Component {
     ];
 
     const handleDragStart = (e) => e.preventDefault();
+    
 
     return (
       <div>
-        <Carousel breakPoints={breakpoints} renderArrow={this.myArrow}>
-          <img onClick={() => { this.handleClick('0001'); }} src={cover1} className={classes.media} onDragStart={handleDragStart} />
-          <img onClick={() => { this.handleClick('0002'); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
-          <img onClick={() => { this.handleClick('0003'); }} src={cover3} className={classes.media} onDragStart={handleDragStart} />
-          <img onClick={() => { this.handleClick('0004'); }} src={cover4} className={classes.media} onDragStart={handleDragStart} />
-          <img onClick={() => { this.handleClick('0005'); }} src={cover5} className={classes.media} onDragStart={handleDragStart} />
-          <img onClick={() => { this.handleClick('0006'); }} src={cover6} className={classes.media} onDragStart={handleDragStart} />
-          <img onClick={() => { this.handleClick('0007'); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
+        <Carousel breakPoints={breakpoints} renderArrow={myArrow}>
+          <img onClick={() => { handleClick('0001'); }} src={cover1} className={classes.media} onDragStart={handleDragStart} />
+          <img onClick={() => { handleClick('0002'); }} src={cover2} className={classes.media} onDragStart={handleDragStart} />
+          <img onClick={() => { handleClick('0003'); }} src={cover3} className={classes.media} onDragStart={handleDragStart} />
+          <img onClick={() => { handleClick('0004'); }} src={cover4} className={classes.media} onDragStart={handleDragStart} />
+          <img onClick={() => { handleClick('0005'); }} src={cover5} className={classes.media} onDragStart={handleDragStart} />
+          <img onClick={() => { handleClick('0006'); }} src={cover6} className={classes.media} onDragStart={handleDragStart} />
+          <img onClick={() => { handleClick('0007'); }} src={cover7} className={classes.media} onDragStart={handleDragStart} />
         </Carousel>
 
-        <ProceedToQ open={this.state.questOpen} bookId={this.state.questId} handleClkFunc={this.handleClick}/>
+        <ProceedToQ ref={childRef} />
       </div>
     )
   }
-}
 
-export default withStyles(useStyles)(BetaReadingBookCarousel);
+export default BetaReadingBookCarousel;
