@@ -13,8 +13,17 @@
     },
     "categories": {
       "auth": {
-        "genres1fdb8be2": {}
+        "genres1fdb8be2": {},
+        "true": {}
       }
     }
+  },
+  "dev": {
+    "categories": {
+      "auth": {
+        "true": {}
+      }
+    },
+    "awscloudformation": {}
   }
 }

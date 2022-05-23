@@ -28,5 +28,11 @@
         ]
       }
     }
+  },
+  "analytics": {
+    "genres": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }

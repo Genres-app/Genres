@@ -304,8 +304,8 @@ const AboutBookmark = (props) => {
         {/* Profile picture to be changed by user */}
         <img className={classes.aboutImg} src={profilePic} alt='profile picture'></img>
         <div style={{ padding: '10px 15px', }}>
-          <Typography className={classes.profileName} variant="h5">{props.user.result.name}</Typography>
-          <Typography className={classes.userName} variant="subtitle1" color="primary">@{props.user.result.username}</Typography>
+          <Typography className={classes.profileName} variant="h5">{props.user.attributes.name}</Typography>
+          {/* <Typography className={classes.userName} variant="subtitle1" color="primary">@{props.user.result.username}</Typography> */}
 
           {/* About biography/description to be changed by user */}
           {isEditting ?
@@ -329,7 +329,7 @@ const AboutBookmark = (props) => {
             :
             <div style={{ height: 'auto', }}>
               <Typography className={classes.bioText} variant="body1" color="textSecondary">
-                {bio ? bio : `${props.user.result.name} hasn't added a bio yet.`}
+                {bio ? bio : `${props.user.attributes.name} hasn't added a bio yet.`}
               </Typography>
             </div>
           }

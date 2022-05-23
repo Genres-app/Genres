@@ -97,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AboutBody = (props) => {
+  console.log(props.user)
     const classes = useStyles();
 
     const bio = useSelector(state => state.profileBio);
@@ -145,7 +146,7 @@ const AboutBody = (props) => {
                               />
               : <div style={{ height: '100px',}}>
                   <Typography className={classes.bioText} variant = "body1" color = "textSecondary">
-                      { bio? bio: `${props.user.result.name} hasn't added a bio yet.`}
+                      { bio? bio: `${props.user.attributes.name} hasn't added a bio yet.`}
                   </Typography>
               </div> 
               }
