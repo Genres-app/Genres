@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useStyles from './styles';
 import {Button,ButtonBase, Paper, Grid, Typography, Container} from '@material-ui/core'
 import bookcover1 from '../Assets/bookcover1.jpg'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import Pagination from '@material-ui/lab/Pagination';
-
+import { API } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
 
 const SearchResults = () => {
-    const results = [1,2,3,4,5,6,7,8,9,10]
+    const [results,setResults] = useState([])
     const classes = useStyles();
 
+    // Fetch Data from DB
+    useEffect(()=>{
+        API.graphql({ query: queries.listNovels }).then(allNovels=>{
+            console.log(allNovels);
+            setResults(allNovels.data.listNovels.items)
+        })
+    },[])
 
     return (
         <div className = {classes.root}>
@@ -43,7 +51,7 @@ const SearchResults = () => {
                                     <Grid item xs>
                                     <span></span>
                                     <Typography display = "inline" variant="h6">
-                                         Hungry Bird
+                                         {result.title}
                                         
                                          <Button className={classes.likeButton}>
                                             <ThumbUpAltIcon className={classes.icon}/>

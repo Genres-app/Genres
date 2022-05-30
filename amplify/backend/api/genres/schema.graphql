@@ -1,0 +1,107 @@
+type BetaQuestionnaire @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  participant_id: ID
+  participant_username: ID
+  timestamp: AWSDateTime
+  response: AWSURL
+}
+
+type UserHistory @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  user_id: ID
+  action: String
+  start_timestamp: AWSTime
+  end_timestamp: AWSTime
+  
+}
+
+enum RW {
+  READONLY
+  READWRITE
+}
+
+type VideoMarkers @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  video_id: String
+  timestamp: AWSTime
+  title: String
+}
+
+type Video @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  poster_id: ID
+  video_title: String
+  time_posted: AWSDateTime
+}
+
+type Comments @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  novel_id: ID!
+  commentor_id: String!
+  content: AWSURL!
+  timestamp: AWSDateTime
+}
+
+type Saves @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  novel_id: ID
+  saver_id: ID
+  timestamp: AWSDateTime
+}
+
+type Likes @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  novel_id: ID
+  liker_id: ID
+  timestamp: AWSDateTime
+  section: AWSJSON
+}
+
+type NovelTags @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  novel_id: String
+  tag: String
+}
+
+type Authors @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  novel_id: ID!
+  author_id: ID!
+  author_username: String
+}
+
+type NovelGenres @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  novel_id: ID
+  genre: String
+}
+
+type Novel @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String
+  is_published: Boolean
+  publication_timestamp: AWSDateTime
+  num_likes: Int
+  num_saves: Int
+  num_comments: Int
+  content: AWSURL
+}
+
+type Users @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  birthday: AWSDate
+  is_beta: Boolean
+  readwrite: RW
+  password: String
+  email: String
+  is_admin: Boolean
+  profile_pic: AWSURL
+  banner_pic: AWSURL
+  bio: String
+  followers: [String]
+  following: [String]
+  first_name: String
+  last_name: String
+}
+ 

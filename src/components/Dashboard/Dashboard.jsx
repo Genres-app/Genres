@@ -26,7 +26,8 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import CreateOutlinedIcon from '@material-ui/icons/CreateOutlined';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
+import { API } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
 //Icons
 import Icon from '@mdi/react';
 import { mdiLoginVariant } from '@mdi/js';
@@ -99,8 +100,17 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
 
   // Theme
   const [theme, setTheme] = useState(true);
-
-
+  const [search,setSearch] = useState('')
+  useEffect(()=>{
+    const l = async (key)=>{
+      if(key.keyCode === 13){
+        const allNovels = await API.graphql({ query: queries.listNovels });
+        console.log(allNovels);
+      }
+    }
+    document.addEventListener('keydown',l)
+    return ()=>document.removeEventListener('keydown',l)
+  },[])
   useEffect(() => {
     const token = user?.token;
     //JWT
@@ -311,6 +321,10 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
                   input: classes.inputInput,
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                onChange={e=>{
+                  setSearch(e.target.value)
+                }}
+                
               />
             </div>
             {/* <Searchbar items={genres} /> */}
