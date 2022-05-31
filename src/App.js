@@ -84,6 +84,7 @@ function App() {
               <Dashboard passTheme={handlePassedTheme} />
               {/* <Route exact path='/' component={Homepage} /> */}
               <Route exact path="/search" component={SearchResults} />
+              <Route exact path="/search/:search" component={SearchResults} />
               <Route exact path='/novel' component={NovelLandingPage} />
               <Route exact path='/profile' component={ProfilePage} />
               <Route exact path='/message' component={MessagePage} />

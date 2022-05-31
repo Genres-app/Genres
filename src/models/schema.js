@@ -761,17 +761,17 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "is_published": {
-                    "name": "is_published",
+                "status": {
+                    "name": "status",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
                 "publication_timestamp": {
                     "name": "publication_timestamp",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "AWSDate",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -800,6 +800,20 @@ export const schema = {
                     "name": "content",
                     "isArray": false,
                     "type": "AWSURL",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "description": {
+                    "name": "description",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "author": {
+                    "name": "author",
+                    "isArray": false,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -1010,5 +1024,5 @@ export const schema = {
         }
     },
     "nonModels": {},
-    "version": "3b5cb25557106c3551a7bb5fb236840c"
+    "version": "f537bfca11006ef83692aad53fc3c5a5"
 };

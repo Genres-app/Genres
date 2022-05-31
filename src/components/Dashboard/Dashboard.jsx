@@ -102,15 +102,14 @@ const Dashboard = ({ passTheme, isMywritingPage, noShadowAtTop }) => {
   const [theme, setTheme] = useState(true);
   const [search,setSearch] = useState('')
   useEffect(()=>{
-    const l = async (key)=>{
+    const l = (key)=>{
       if(key.keyCode === 13){
-        const allNovels = await API.graphql({ query: queries.listNovels });
-        console.log(allNovels);
+        history.push(`/search/${search}`)
       }
     }
     document.addEventListener('keydown',l)
     return ()=>document.removeEventListener('keydown',l)
-  },[])
+  },[search])
   useEffect(() => {
     const token = user?.token;
     //JWT

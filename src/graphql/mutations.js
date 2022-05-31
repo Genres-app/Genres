@@ -555,12 +555,14 @@ export const createNovel = /* GraphQL */ `
     createNovel(input: $input, condition: $condition) {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version
@@ -577,12 +579,14 @@ export const updateNovel = /* GraphQL */ `
     updateNovel(input: $input, condition: $condition) {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version
@@ -599,12 +603,14 @@ export const deleteNovel = /* GraphQL */ `
     deleteNovel(input: $input, condition: $condition) {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version

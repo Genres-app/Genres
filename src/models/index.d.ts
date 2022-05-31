@@ -170,12 +170,14 @@ export declare class NovelGenres {
 export declare class Novel {
   readonly id: string;
   readonly title?: string | null;
-  readonly is_published?: boolean | null;
+  readonly status?: string | null;
   readonly publication_timestamp?: string | null;
   readonly num_likes?: number | null;
   readonly num_saves?: number | null;
   readonly num_comments?: number | null;
   readonly content?: string | null;
+  readonly description?: string | null;
+  readonly author?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Novel, NovelMetaData>);

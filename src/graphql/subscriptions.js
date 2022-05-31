@@ -462,12 +462,14 @@ export const onCreateNovel = /* GraphQL */ `
     onCreateNovel {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version
@@ -481,12 +483,14 @@ export const onUpdateNovel = /* GraphQL */ `
     onUpdateNovel {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version
@@ -500,12 +504,14 @@ export const onDeleteNovel = /* GraphQL */ `
     onDeleteNovel {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version

@@ -686,12 +686,14 @@ export const getNovel = /* GraphQL */ `
     getNovel(id: $id) {
       id
       title
-      is_published
+      status
       publication_timestamp
       num_likes
       num_saves
       num_comments
       content
+      description
+      author
       createdAt
       updatedAt
       _version
@@ -710,12 +712,14 @@ export const listNovels = /* GraphQL */ `
       items {
         id
         title
-        is_published
+        status
         publication_timestamp
         num_likes
         num_saves
         num_comments
         content
+        description
+        author
         createdAt
         updatedAt
         _version
@@ -743,12 +747,14 @@ export const syncNovels = /* GraphQL */ `
       items {
         id
         title
-        is_published
+        status
         publication_timestamp
         num_likes
         num_saves
         num_comments
         content
+        description
+        author
         createdAt
         updatedAt
         _version

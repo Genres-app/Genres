@@ -12,7 +12,6 @@ type UserHistory @model @auth(rules: [{allow: public}]) {
   action: String
   start_timestamp: AWSTime
   end_timestamp: AWSTime
-  
 }
 
 enum RW {
@@ -79,12 +78,14 @@ type NovelGenres @model @auth(rules: [{allow: public}]) {
 type Novel @model @auth(rules: [{allow: public}]) {
   id: ID!
   title: String
-  is_published: Boolean
-  publication_timestamp: AWSDateTime
+  status: String
+  publication_timestamp: AWSDate
   num_likes: Int
   num_saves: Int
   num_comments: Int
   content: AWSURL
+  description: String
+  author: String
 }
 
 type Users @model @auth(rules: [{allow: public}]) {
