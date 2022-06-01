@@ -33,6 +33,9 @@ const GenresTag = (item, key, isEditing) => {
       variant="outlined"
       color="primary"
       clickable
+      onClick={()=>{
+        console.log("Need to Replace this will Analytics Call")
+      }}
     />
   )
 }

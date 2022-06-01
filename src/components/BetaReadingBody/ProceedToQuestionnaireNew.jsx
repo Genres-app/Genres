@@ -15,12 +15,12 @@ import StepLabel from '@material-ui/core/StepLabel';
 import { Slider, Typography, useTheme } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 
-// const CopyrightSlider = withStyles({
-//   root: {
-//     // color: '#52af77',
-//     height: 8,
-//   }
-// })(Slider);
+const CopyrightSlider = withStyles({
+  root: {
+    // color: '#52af77',
+    height: 8,
+  }
+})(Slider);
 
 const CopyrightDialog = forwardRef((props, ref) => {
 
@@ -80,7 +80,7 @@ const CopyrightDialog = forwardRef((props, ref) => {
     }
   ];
   const handleCopyrightSelect = (e) => {
-    setCopyright(parseInt(e.target.value));
+    setCopyright(e.target.value);
   }
 
   function getStepContent(step) {
@@ -94,7 +94,17 @@ const CopyrightDialog = forwardRef((props, ref) => {
             <div
               style={{ padding: "0", height: "10rem", paddingTop: "2rem", display: "flex" }}
             >
-              <FormControl component="fieldset" style={{ flexShrink: 0 }}>
+              {/* <CopyrightSlider
+                orientation="vertical"
+                defaultValue={0}
+                step={null}
+                marks={copyrightsList}
+                valueLabelDisplay="off"
+                max={copyrightsList.length - 1}
+                track={false}
+                onChange={handleCopyrightSelect}
+              /> */}
+              <FormControl component="fieldset">
                 <RadioGroup name="copyrightSel" value={selectedCopyright} onChange={handleCopyrightSelect}>
                   {copyrightsList.map(item => (
                     <FormControlLabel value={item.value} control={<Radio />} label={item.label} />
@@ -192,7 +202,7 @@ const CopyrightDialog = forwardRef((props, ref) => {
           Publish
         </Typography>
         <Stepper activeStep={activeStep} style={{ backgroundColor: "transparent" }}>
-          {steps.map(label => {
+          {steps.map((label, index) => {
             return (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>

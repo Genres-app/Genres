@@ -1,0 +1,21 @@
+{
+    "appName": "genres",
+    "roleName": "pinpointLambdaRole98f033bf",
+    "cloudformationPolicyName": "cloudformationPolicy98f033bf",
+    "cloudWatchPolicyName": "cloudWatchPolicy98f033bf",
+    "pinpointPolicyName": "pinpointPolicy98f033bf",
+    "authPolicyName": "pinpoint_amplify_98f033bf",
+    "unauthPolicyName": "pinpoint_amplify_98f033bf",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

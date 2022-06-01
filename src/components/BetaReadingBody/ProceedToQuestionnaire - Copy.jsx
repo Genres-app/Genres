@@ -68,33 +68,18 @@ let bottomStylesDisagree = {
   }
 }
 
-
-const ProceedToQ = forwardRef((props, ref) => {
+const ProceedToQ = ({ open, bookId, handleClkFunc }) => {
 
   const childRef = useRef();
-  const [open, setOpen] = React.useState(false);
-  const [bookId, setID] = useState(0);
 
 
   const handleClickOpen = () => {
-    setOpen(true);
-    //childRef.current.handleOpenDia();
+    childRef.current.handleOpenDia();
     console.log(bookId);
   };
 
-  useImperativeHandle(
-    ref,
-    () => ({
-      handleOpenDia(ID) {
-        setID(ID);
-        handleClickOpen();
-      }
-    }),
-  )
-
-
   const handleClose = () => {
-    setOpen(false);
+    this.open = false;
     console.log(bookId);
   };
 
@@ -104,7 +89,6 @@ const ProceedToQ = forwardRef((props, ref) => {
       <div>
         <Dialog
           open={open}
-          onClose={handleClose}
           //TransitionComponent={Transition}
           keepMounted
           aria-labelledby="alert-dialog-slide-title"
@@ -231,6 +215,6 @@ const ProceedToQ = forwardRef((props, ref) => {
     </div>
   );
 
-})
+}
 
 export default ProceedToQ;

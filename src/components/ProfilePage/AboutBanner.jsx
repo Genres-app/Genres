@@ -250,12 +250,12 @@ const AboutBanner = (props) => {
       <div className={classes.nameContainer}>
         <div style={{ display: 'flex' }}>
           {/*FIXME: change code to get user's name based on appropriate db schema of passed in user prop*/}
-          <Typography className={classes.profileName} variant="h4" align="left">{props.user.result.name}</Typography>
+          <Typography className={classes.profileName} variant="h4" align="left">{props.user.attributes.name}</Typography>
           {/*FIXME:  dynamically display pro tag if user is a pro user, based on isPro bool in passed in user prop*/}
           <div className={classes.proTag}>PRO</div>
         </div>
         {/*FIXME: change code to get username based on appropriate db schema of passed in user prop*/}
-        <Typography className={classes.userName} variant="h6" align="left">@{props.user.result.username}</Typography>
+        <Typography className={classes.userName} variant="h6" align="left">@{props.user.attributes.email}</Typography>
       </div>
     </div>
   )

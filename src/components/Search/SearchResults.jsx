@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import useStyles from './styles';
 import {Button,ButtonBase, Paper, Grid, Typography, Container} from '@material-ui/core'
 import bookcover1 from '../Assets/bookcover1.jpg'
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import Pagination from '@material-ui/lab/Pagination';
-
+import { API } from 'aws-amplify';
+import * as queries from '../../graphql/queries';
+import { useParams } from 'react-router-dom';
 
 const SearchResults = () => {
-    const results = [1,2,3,4,5,6,7,8,9,10]
+    const params = useParams()
+    const [results,setResults] = useState([])
     const classes = useStyles();
 
+    // Fetch Data from DB
+    useEffect(()=>{
+        let filter = {
+            title: {
+                eq: params.search
+            }
+        };
+        API.graphql({ query: queries.listNovels ,variables:{ filter } }).then(allNovels=>{
+            console.log(allNovels);
+            setResults(allNovels.data.listNovels.items)
+        })
+    },[params.search])
 
     return (
         <div className = {classes.root}>
@@ -18,7 +33,7 @@ const SearchResults = () => {
             <Grid container spacing={2} direction="column" alignItems="center" justify="center">
 
                 <Grid item xs={3}>        
-                <Typography className = {classes.searchResults}>Search results for "Hungry Bird"</Typography>
+                <Typography className = {classes.searchResults}>Search results for "{params.search}"</Typography>
                 </Grid>   
 
             </Grid> 
@@ -43,23 +58,23 @@ const SearchResults = () => {
                                     <Grid item xs>
                                     <span></span>
                                     <Typography display = "inline" variant="h6">
-                                         Hungry Bird
+                                         {result.title}
                                         
                                          <Button className={classes.likeButton}>
                                             <ThumbUpAltIcon className={classes.icon}/>
-                                             99%
+                                             {result.num_likes}%
                                          </Button>
                                         
                                     </Typography>
                                     <Typography display = "inline" className = {classes.upvotes}>of 100 votes</Typography>
                                     <Typography className = {classes.author}>
-                                        Authors: Peter Anteater, Howard Gilman
+                                        Authors: {result.author}
                                     </Typography>
                                     <Typography className = {classes.status}>
-                                        Status: Ongoing Last Updated: April 12, 2021
+                                        Concluded: {result.status} Last Updated: {result.publication_timestamp}
                                     </Typography>
                                     <Typography>
-                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    {result.description}
                                     </Typography>
                                     </Grid>
                                 </Grid>
