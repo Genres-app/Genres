@@ -141,14 +141,14 @@ const RadialCharts = (props) => {
               color: theme.palette.primary.main,
               fontSize: "13px",
               // fontWeight: 'bold',
-              fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+              fontFamily: theme.typography.fontFamilyTitle,
             },
             value: {
               offsetY: 6,
               color: theme.palette.primary.main,
               fontSize: "28px",
               fontWeight: 'bold',
-              fontFamily: "'Readex Pro', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+              fontFamily: theme.typography.fontFamilyTitle,
               show: true,
               formatter: function (val) {
                 if (props.readTime) {
@@ -181,7 +181,7 @@ const RadialCharts = (props) => {
   };
 
   return (
-    <div style={{ display: "relative", height: 250, display: "flex", alignItems: 'center' }}>
+    <div style={{ position: "relative", height: 250, display: "flex", alignItems: 'center' }}>
       <div className={classes.radialBg} style={{transform: `rotate(${props.rotate}deg)`}}></div>
       <Chart options={state.options} series={state.series} type="radialBar" height="250px" width="250px" />
     </div>
